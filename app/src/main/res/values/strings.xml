@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Project KP</string>
+    <string name="main_name">Temp App</string>
+    <string name="second_name">Aplikasi Project KP</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="forget">Forget Password?</string>
+    <string name="signup">Sign Up</string>
+    <string name="welcome_login">Welcome User!<br>Please login to continue</br></string>
+    <string name="register">Welcome User!<br>Please input your identity below</br></string>
+    <string name="fullname">Full Name</string>
+    <string name="phone">Phone Number</string>
+    <string name="email">Email</string>
+    <string name="login_again">Already have account? Login here</string>
+</resources>
