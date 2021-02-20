@@ -7,10 +7,12 @@
     <string name="login">Login</string>
     <string name="forget">Forget Password?</string>
     <string name="signup">Sign Up</string>
-    <string name="welcome_login">Welcome User!<br>Please login to continue</br></string>
+    <string name="welcome_login">Please login to continue</string>
     <string name="register">Welcome User!<br>Please input your identity below</br></string>
     <string name="fullname">Full Name</string>
     <string name="phone">Phone Number</string>
     <string name="email">Email</string>
     <string name="login_again">Already have account? Login here</string>
+    <string name="welcome">Welcome User</string>
+    <string name="welcome_register">Please Input your data below</string>
 </resources>
