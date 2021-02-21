@@ -38,60 +38,128 @@ public class RegisterActivity extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                registerUser(v);
+            }
+        });
 
-                String fullname = fullNameReg.getEditText().getText().toString();
-                if (fullname.isEmpty()) {
-                    fullNameReg.setError("Can't be empty");
-                    return;
-                }
+        loginAgain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                finish();
+            }
+        });
+    }
 
-                String username = userNameReg.getEditText().getText().toString();
-                if (username.isEmpty()) {
-                    userNameReg.setError("Can't be empty");
-                    return;
-                }
+    private Boolean validateFullName(){
+        String val = fullNameReg.getEditText().getText().toString();
 
-                String phone = phoneReg.getEditText().getText().toString();
-                if (phone.isEmpty()) {
-                    phoneReg.setError("Can't be empty");
-                    return;
-                }
+        if (val.isEmpty()) {
+            fullNameReg.setError("Can't be empty");
+            return false;
+        }
+        else {
+            fullNameReg.setError(null);
+            fullNameReg.setEnabled(false);
+            return true;
+        }
+    }
 
-                String email = emailReg.getEditText().getText().toString();
-                if (email.isEmpty()) {
-                    emailReg.setError("Can't be empty");
-                    return;
-                }
+    private Boolean validateUserName(){
+        String val = userNameReg.getEditText().getText().toString();
+        String noWhiteSpace = "\\A\\w{4,20}\\z";
 
-                String password = passwordReg.getEditText().getText().toString();
-                if (password.isEmpty()) {
-                    passwordReg.setError("Can't be empty");
-                    return;
-                }
+        if (val.isEmpty()) {
+            userNameReg.setError("Can't be empty");
+            return false;
+        }
+        else if (val.length()>=12){
+            userNameReg.setError("Username too long");
+            return false;
+        }
+        else if (!val.matches(noWhiteSpace)){
+            userNameReg.setError("White space are not allowed");
+            return false;
+        }
+        else {
+            userNameReg.setError(null);
+            userNameReg.setEnabled(false);
+            return true;
+        }
+    }
 
-                firebaseAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+    private Boolean validateEmail(){
+        String val = emailReg.getEditText().getText().toString();
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-                        Toast.makeText(getApplicationContext(), "Sign Up Successfully", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                        finish();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+        if (val.isEmpty()) {
+            emailReg.setError("Can't be empty");
+            return false;
+        }
+        else if(!val.matches(emailPattern)){
+            emailReg.setError("Invalid email address");
+            return false;
+        }
+        else {
+            emailReg.setError(null);
+            return true;
+        }
+    }
 
-                loginAgain.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
-                        startActivity(loginIntent);
-                    }
-                });
+    private Boolean validatePhone(){
+        String val = phoneReg.getEditText().getText().toString();
+
+        if (val.isEmpty()) {
+            phoneReg.setError("Can't be empty");
+            return false;
+        }
+        else {
+            phoneReg.setError(null);
+            return true;
+        }
+    }
+
+    private Boolean validatePassword(){
+        String val = passwordReg.getEditText().getText().toString();
+        String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$";
+
+        if (val.isEmpty()) {
+            passwordReg.setError("Can't be empty");
+            return false;
+        }
+        else if(!val.matches(passwordPattern)){
+            passwordReg.setError("Password too weak");
+            return false;
+        }
+        else {
+            passwordReg.setError(null);
+            return true;
+        }
+    }
+
+    public void registerUser(View view){
+
+        if(!validateFullName() | !validateUserName() | !validateEmail() | !validatePhone() | !validatePassword()){
+            return;
+        }
+
+        String email = emailReg.getEditText().getText().toString();
+        String password = passwordReg.getEditText().getText().toString();
+
+        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+
+            @Override
+            public void onSuccess(AuthResult authResult) {
+                Toast.makeText(getApplicationContext(), "Sign Up Successfully", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                finish();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 }
+
