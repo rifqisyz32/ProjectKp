@@ -62,15 +62,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/welcome"
+                android:fontFamily="@font/poppins_medium"
                 android:textColor="@color/black"
                 android:textAlignment="center"
+                android:textSize="14sp"
                 android:layout_marginTop="20dp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/welcome_register"
+                android:fontFamily="@font/poppins_medium"
                 android:textColor="@color/black"
+                android:textSize="14sp"
                 android:textAlignment="center"/>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -82,6 +86,8 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/colorSubtitle"
                 android:hint="@string/fullname">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -89,6 +95,9 @@
                     android:layout_height="wrap_content"
                     android:inputType="text"
                     android:fontFamily="@font/poppins_light"
+                    android:drawableStart="@drawable/ic_baseline_edit_24"
+                    android:drawableTint="@color/colorSubtitle"
+                    android:drawablePadding="8dp"
                     android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -100,6 +109,8 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 android:layout_gravity="center"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/colorSubtitle"
                 android:hint="@string/username"
                 app:counterEnabled="true"
                 app:counterMaxLength="12">
@@ -109,6 +120,9 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_light"
                     android:textSize="12sp"
+                    android:drawableStart="@drawable/ic_baseline_person_24"
+                    android:drawableTint="@color/colorSubtitle"
+                    android:drawablePadding="8dp"
                     android:inputType="text"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -120,13 +134,16 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 android:layout_gravity="center"
-
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/colorSubtitle"
                 android:hint="@string/phone">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
+                    android:drawableStart="@drawable/ic_baseline_phone_24"
+                    android:drawableTint="@color/colorSubtitle"
+                    android:drawablePadding="8dp"
                     android:fontFamily="@font/poppins_light"
                     android:textSize="12sp"
                     android:inputType="number"/>
@@ -140,13 +157,16 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 android:layout_gravity="center"
-
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/colorSubtitle"
                 android:hint="@string/email">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
+                    android:drawableStart="@drawable/ic_outline_email_24"
+                    android:drawableTint="@color/colorSubtitle"
+                    android:drawablePadding="8dp"
                     android:fontFamily="@font/poppins_light"
                     android:textSize="12sp"
                     android:inputType="textEmailAddress"/>
@@ -160,14 +180,16 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 android:layout_gravity="center"
-
                 android:hint="@string/password"
-                app:passwordToggleEnabled="true">
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/colorSubtitle">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
+                    android:drawableStart="@drawable/ic_outline_lock_24"
+                    android:drawableTint="@color/colorSubtitle"
+                    android:drawablePadding="8dp"
                     android:fontFamily="@font/poppins_light"
                     android:textSize="12sp"
                     android:inputType="textPassword"/>
@@ -185,22 +207,39 @@
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="@string/signup"
-                android:textColor="@color/black"
+                android:textColor="#000000"
                 android:textSize="16sp" />
 
-            <Button
-                android:id="@+id/login_again"
-                style="@style/SecondTheme"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:layout_gravity="center"
-                android:background="#00000000"
-                android:elevation="0dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="@string/login_again"
-                android:textColor="@color/black"
-                android:layout_marginBottom="20dp"
-                android:textSize="12sp" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/login_again_text"
+                    android:fontFamily="@font/poppins_light"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    />
+
+                <Button
+                    android:id="@+id/login_again"
+                    style="@style/SecondTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="#00000000"
+                    android:elevation="0dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="@string/login_again"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="12sp" />
+            </LinearLayout>
 
         </LinearLayout>
 

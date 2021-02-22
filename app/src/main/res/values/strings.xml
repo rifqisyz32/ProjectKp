@@ -11,7 +11,8 @@
     <string name="signmeup">Sign Up Here</string>
     <string name="forget">Forget Password?</string>
     <string name="fullname">Full Name</string>
-    <string name="login_again">Already have account? Login here</string>
+    <string name="login_again">Login here</string>
+    <string name="login_again_text">Already have account?</string>
     <string name="welcome">Welcome User</string>
     <string name="welcome_login">Please login to continue</string>
     <string name="welcome_register">Please Input your data below</string>

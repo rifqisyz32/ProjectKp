@@ -14,6 +14,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
     TextInputLayout fullNameReg, userNameReg, phoneReg, emailReg, passwordReg;
@@ -38,7 +40,8 @@ public class RegisterActivity extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registerUser(v);
+                storeUserData();
+//                registerUser(v);
             }
         });
 
@@ -60,7 +63,6 @@ public class RegisterActivity extends AppCompatActivity {
         }
         else {
             fullNameReg.setError(null);
-            fullNameReg.setEnabled(false);
             return true;
         }
     }
@@ -83,7 +85,6 @@ public class RegisterActivity extends AppCompatActivity {
         }
         else {
             userNameReg.setError(null);
-            userNameReg.setEnabled(false);
             return true;
         }
     }
@@ -160,6 +161,28 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void storeUserData(){
+
+        if(!validateFullName() | !validateUserName() | !validateEmail() | !validatePhone() | !validatePassword()){
+            return;
+        }
+
+        String fullName = fullNameReg.getEditText().getText().toString();
+        String username = userNameReg.getEditText().getText().toString();
+        String phone = phoneReg.getEditText().getText().toString();
+        String email = emailReg.getEditText().getText().toString();
+        String password = passwordReg.getEditText().getText().toString();
+
+        FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
+        DatabaseReference reference = rootNode.getReference("users");
+
+        UserHelper storeData = new UserHelper(fullName,username,phone,email,password);
+        reference.child(username).setValue(storeData);
+        Toast.makeText(getApplicationContext(), "Sign Up Successfully", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        finish();
     }
 }
 
