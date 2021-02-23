@@ -13,7 +13,6 @@
     <string name="fullname">Full Name</string>
     <string name="login_again">Login here</string>
     <string name="login_again_text">Already have account?</string>
-    <string name="welcome">Welcome User</string>
-    <string name="welcome_login">Please login to continue</string>
-    <string name="welcome_register">Please Input your data below</string>
+    <string name="welcome_login">Welcome User\nPlease login to continue</string>
+    <string name="welcome_register">Welcome User\nPlease Input your data below</string>
 </resources>

@@ -34,7 +34,6 @@ public class RegisterActivity extends AppCompatActivity {
         passwordReg = findViewById(R.id.password_reg);
         loginAgain = findViewById(R.id.login_again);
         signUp = findViewById(R.id.sign_up);
-
         firebaseAuth = FirebaseAuth.getInstance();
 
         signUp.setOnClickListener(new View.OnClickListener() {
@@ -138,7 +137,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    public void registerUser(View view){
+    /*public void registerUser(View view){
 
         if(!validateFullName() | !validateUserName() | !validateEmail() | !validatePhone() | !validatePassword()){
             return;
@@ -161,7 +160,7 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-    }
+    }*/
 
     private void storeUserData(){
 
@@ -169,7 +168,7 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        String fullName = fullNameReg.getEditText().getText().toString();
+        String fullname = fullNameReg.getEditText().getText().toString();
         String username = userNameReg.getEditText().getText().toString();
         String phone = phoneReg.getEditText().getText().toString();
         String email = emailReg.getEditText().getText().toString();
@@ -178,7 +177,7 @@ public class RegisterActivity extends AppCompatActivity {
         FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
         DatabaseReference reference = rootNode.getReference("users");
 
-        UserHelper storeData = new UserHelper(fullName,username,phone,email,password);
+        UserHelper storeData = new UserHelper(fullname,username,phone,email,password);
         reference.child(username).setValue(storeData);
         Toast.makeText(getApplicationContext(), "Sign Up Successfully", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(getApplicationContext(), LoginActivity.class));

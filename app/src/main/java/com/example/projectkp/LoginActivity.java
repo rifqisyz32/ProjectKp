@@ -22,7 +22,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
-    TextInputLayout usernameLog, emailLog, passwordLog;
+    TextInputLayout usernameLog, passwordLog;
     Button login, signUp;
 //    FirebaseAuth firebaseAuth;
 
@@ -32,12 +32,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         usernameLog = findViewById(R.id.username_log);
-//        emailLog = findViewById(R.id.email_log);
         passwordLog = findViewById(R.id.password_log);
         login = findViewById(R.id.login);
         signUp = findViewById(R.id.to_sign_up);
-
-//        firebaseAuth = FirebaseAuth.getInstance();
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +68,6 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         final String username = usernameLog.getEditText().getText().toString().trim();
-//        String email = emailLog.getEditText().getText().toString().trim();
         final String password = passwordLog.getEditText().getText().toString().trim();
 
         Query checkUser = FirebaseDatabase.getInstance().getReference("users").orderByChild("username").equalTo(username);
@@ -88,12 +84,14 @@ public class LoginActivity extends AppCompatActivity {
                         passwordLog.setError(null);
                         passwordLog.setErrorEnabled(false);
 
-                        String databaseUserName = snapshot.child(username).child("userName").getValue(String.class);
-                        /*String databaseFullName = snapshot.child(email).child("fullName").getValue(String.class);
-                        String databasePhoneNumber = snapshot.child(email).child("phone").getValue(String.class);*/
+                        String databaseUserName = snapshot.child(username).child("username").getValue(String.class);
+                        String databaseFullName = snapshot.child(username).child("fullname").getValue(String.class);
+                        String databasePhone = snapshot.child(username).child("phone").getValue(String.class);
+                        String databaseEmail = snapshot.child(username).child("email").getValue(String.class);
 
-                        Toast.makeText(getApplicationContext(), "Welcome" + databaseUserName, Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+                        Intent dataUser = new Intent(getApplicationContext(),OTPActivity.class);
+                        dataUser.putExtra("phone", databasePhone);
+                        startActivity(dataUser);
                         finish();
 
                     } else {
@@ -109,21 +107,6 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
-        /*firebaseAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-
-            @Override
-            public void onSuccess(AuthResult authResult) {
-                Toast.makeText(getApplicationContext(), "Login Successfully", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
-                finish();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });*/
     }
 
     private Boolean validateUserName(){
@@ -139,22 +122,6 @@ public class LoginActivity extends AppCompatActivity {
             return true;
         }
     }
-
-    /*private Boolean validateEmail() {
-        String val = emailLog.getEditText().getText().toString();
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-
-        if (val.isEmpty()) {
-            emailLog.setError("Can't be empty");
-            return false;
-        } else if (!val.matches(emailPattern)) {
-            emailLog.setError("Invalid email address");
-            return false;
-        } else {
-            emailLog.setError(null);
-            return true;
-        }
-    }*/
 
     private Boolean validatePassword() {
         String val = passwordLog.getEditText().getText().toString();

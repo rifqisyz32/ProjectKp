@@ -14,7 +14,9 @@
 
         <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="200dp">
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
 
         <ImageView
             android:id="@+id/main_logo_log"
@@ -53,32 +55,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:background="@drawable/round_shape_red">
+            android:background="@drawable/round_shape_log">
 
         <TextView
-            android:id="@+id/welcome1"
+            android:id="@+id/welcome_log"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="20sp"
             android:fontFamily="@font/poppins_medium"
-            android:text="@string/welcome"
-            android:textAlignment="center"
-            android:textSize="14sp"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/welcome2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_below="@+id/welcome1"
-            android:layout_centerHorizontal="true"
-            android:fontFamily="@font/poppins_medium"
             android:text="@string/welcome_login"
-            android:textSize="14sp"
             android:textAlignment="center"
+            android:textSize="14sp"
             android:textColor="@color/white" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -86,7 +75,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/welcome2"
+                android:layout_below="@+id/welcome_log"
                 android:layout_centerHorizontal="true"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
@@ -160,7 +149,6 @@
 
         <Button
             android:id="@+id/login"
-            style="@style/SecondTheme"
             android:background="@drawable/round_shape_white"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
@@ -170,7 +158,8 @@
             android:textAlignment="center"
             android:fontFamily="@font/poppins_semibold"
             android:text="@string/login"
-            android:textColor="#000"
+            android:textAllCaps="false"
+            android:textColor="#FFF"
             android:textSize="16sp" />
 
         <Button

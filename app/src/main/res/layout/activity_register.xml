@@ -15,7 +15,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:paddingStart="16dp"
             android:paddingEnd="16dp">
 
@@ -61,21 +61,12 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/welcome"
+                android:text="@string/welcome_register"
                 android:fontFamily="@font/poppins_medium"
                 android:textColor="@color/black"
                 android:textAlignment="center"
                 android:textSize="14sp"
                 android:layout_marginTop="20dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/welcome_register"
-                android:fontFamily="@font/poppins_medium"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:textAlignment="center"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/fullname_reg"
@@ -207,7 +198,7 @@
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="@string/signup"
-                android:textColor="#000000"
+                android:textColor="#FFF"
                 android:textSize="16sp" />
 
             <LinearLayout
