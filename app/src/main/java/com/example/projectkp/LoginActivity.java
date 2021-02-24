@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
     TextInputLayout usernameLog, passwordLog;
-    Button login, signUp;
+    Button login, forget, signUp;
 //    FirebaseAuth firebaseAuth;
 
     @Override
@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
 
         usernameLog = findViewById(R.id.username_log);
         passwordLog = findViewById(R.id.password_log);
+        forget = findViewById(R.id.forget_log);
         login = findViewById(R.id.login);
         signUp = findViewById(R.id.to_sign_up);
 
@@ -43,16 +44,22 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        forget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), ForgetActivity.class));
+            }
+        });
+
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
-                finish();
             }
         });
     }
 
-   /*@Override
+   @Override
     protected void onStart() {
         super.onStart();
 
@@ -60,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
             finish();
         }
-    }*/
+    }
 
     public void loginUser(View view) {
         if (!validateUserName() | !validatePassword()) {
@@ -89,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
                         String databasePhone = snapshot.child(username).child("phone").getValue(String.class);
                         String databaseEmail = snapshot.child(username).child("email").getValue(String.class);
 
-                        Intent dataUser = new Intent(getApplicationContext(),OTPActivity.class);
+                        Intent dataUser = new Intent(getApplicationContext(), OTPActivity.class);
                         dataUser.putExtra("phone", databasePhone);
                         startActivity(dataUser);
                         finish();
@@ -109,29 +116,29 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private Boolean validateUserName(){
-        String val = usernameLog.getEditText().getText().toString();
-        String noWhiteSpace = "\\A\\w{4,20}\\z";
+    private Boolean validateUserName() {
+        String val = usernameLog.getEditText().getText().toString().trim();
 
         if (val.isEmpty()) {
             usernameLog.setError("Can't be empty");
             return false;
-        }
-        else {
+        } else {
             usernameLog.setError(null);
+            usernameLog.setErrorEnabled(false);
             return true;
         }
     }
 
     private Boolean validatePassword() {
-        String val = passwordLog.getEditText().getText().toString();
-        String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$";
+        String val = passwordLog.getEditText().getText().toString().trim();
 
         if (val.isEmpty()) {
             passwordLog.setError("Can't be empty");
+            passwordLog.requestFocus();
             return false;
         } else {
             passwordLog.setError(null);
+            passwordLog.setErrorEnabled(false);
             return true;
         }
     }

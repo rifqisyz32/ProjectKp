@@ -62,19 +62,20 @@ public class RegisterActivity extends AppCompatActivity {
         }
         else {
             fullNameReg.setError(null);
+            fullNameReg.setErrorEnabled(false);
             return true;
         }
     }
 
     private Boolean validateUserName(){
         String val = userNameReg.getEditText().getText().toString();
-        String noWhiteSpace = "\\A\\w{4,20}\\z";
+        String noWhiteSpace = "\\A\\w{4,12}\\z";
 
         if (val.isEmpty()) {
             userNameReg.setError("Can't be empty");
             return false;
         }
-        else if (val.length()>=12){
+        else if (val.length()>12){
             userNameReg.setError("Username too long");
             return false;
         }
@@ -84,6 +85,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
         else {
             userNameReg.setError(null);
+            userNameReg.setErrorEnabled(false);
             return true;
         }
     }
@@ -102,6 +104,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
         else {
             emailReg.setError(null);
+            emailReg.setErrorEnabled(false);
             return true;
         }
     }
@@ -115,6 +118,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
         else {
             phoneReg.setError(null);
+            phoneReg.setErrorEnabled(false);
             return true;
         }
     }
@@ -133,6 +137,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
         else {
             passwordReg.setError(null);
+            passwordReg.setErrorEnabled(false);
             return true;
         }
     }
@@ -179,7 +184,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         UserHelper storeData = new UserHelper(fullname,username,phone,email,password);
         reference.child(username).setValue(storeData);
-        Toast.makeText(getApplicationContext(), "Sign Up Successfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Sign up Success", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(getApplicationContext(), LoginActivity.class));
         finish();
     }
