@@ -80,7 +80,6 @@ public class LoginActivity extends AppCompatActivity {
         final String password = passwordLog.getEditText().getText().toString().trim();
 
         Query checkUser = FirebaseDatabase.getInstance().getReference("users").orderByChild("username").equalTo(username);
-
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

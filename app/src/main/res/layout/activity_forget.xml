@@ -59,7 +59,7 @@
                 android:paddingEnd="32dp"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/forget_title"
-                android:fontFamily="@font/poppins_medium"
+                android:fontFamily="@font/poppins_light"
                 android:text="@string/forget_desc"
                 android:textAlignment="center"
                 android:textSize="14sp"

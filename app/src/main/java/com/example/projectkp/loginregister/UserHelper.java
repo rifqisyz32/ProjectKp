@@ -1,4 +1,4 @@
-package com.example.projectkp;
+package com.example.projectkp.loginregister;
 
 public class UserHelper {
     String fullname, username, phone, email, password;

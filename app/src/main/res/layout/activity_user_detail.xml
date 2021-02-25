@@ -7,9 +7,6 @@
     android:background="@drawable/ctr_bg"
     tools:context=".UserDetail">
 
-
-
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
@@ -18,16 +15,14 @@
         android:theme="@style/AppTheme">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/ctr_bg"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
-            app:title="Username"
-            android:id="@+id/collapsing_toolbar"
-            android:background="@drawable/ctr_bg">
-
-
+            app:title="Username">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -38,13 +33,14 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/layout_bg"
-            android:padding="35dp"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-                 <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/layout_bg"
+        android:padding="35dp"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -52,73 +48,78 @@
                 android:id="@+id/detail_fullname"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
                 android:text="Full Name"
                 android:textSize="30dp"
                 android:textStyle="bold"
-                android:layout_marginTop="10dp"
-                app:layout_constraintVertical_bias="0"
-                app:layout_constraintStart_toStartOf="parent"/>
-                     <TextView
-                         android:id="@+id/detail_fullname_name"
-                         android:layout_width="match_parent"
-                         android:layout_height="match_parent"
-                         android:text="Username"
-                         android:textSize="20dp"
-                         android:layout_marginTop="5dp"
-                         app:layout_constraintVertical_bias="0"
-                         app:layout_constraintStart_toStartOf="parent"
-                         app:layout_constraintTop_toBottomOf="@+id/detail_fullname"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintVertical_bias="0" />
+
+            <TextView
+                android:id="@+id/detail_fullname_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:text="Username"
+                android:textSize="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detail_fullname"
+                app:layout_constraintVertical_bias="0" />
+
             <TextView
                 android:id="@+id/detail_email"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="70dp"
                 android:text="Email"
                 android:textSize="30dp"
                 android:textStyle="bold"
-                android:layout_marginTop="70dp"
-                app:layout_constraintVertical_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/detail_fullname" />
-                     <TextView
-                         android:id="@+id/detail_email_email"
-                         android:layout_width="match_parent"
-                         android:layout_height="match_parent"
-                         android:text="username@gmail.com"
-                         android:textSize="20dp"
-                         android:layout_marginTop="5dp"
-                         app:layout_constraintVertical_bias="0"
-                         app:layout_constraintStart_toStartOf="parent"
-                         app:layout_constraintTop_toBottomOf="@+id/detail_email"/>
+                app:layout_constraintTop_toBottomOf="@+id/detail_fullname"
+                app:layout_constraintVertical_bias="0" />
+
+            <TextView
+                android:id="@+id/detail_email_email"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:text="username@gmail.com"
+                android:textSize="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detail_email"
+                app:layout_constraintVertical_bias="0" />
+
             <TextView
                 android:id="@+id/detail_number"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="70dp"
                 android:text="Number"
                 android:textSize="30dp"
                 android:textStyle="bold"
-                android:layout_marginTop="70dp"
-                app:layout_constraintVertical_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/detail_email"/>
-                     <TextView
-                         android:id="@+id/detail_number_number"
-                         android:layout_width="match_parent"
-                         android:layout_height="match_parent"
-                         android:text="082282875147"
-                         android:textSize="20dp"
-                         android:layout_marginTop="5dp"
-                         app:layout_constraintVertical_bias="0"
-                         app:layout_constraintStart_toStartOf="parent"
-                         app:layout_constraintTop_toBottomOf="@+id/detail_number"/>
+                app:layout_constraintTop_toBottomOf="@+id/detail_email"
+                app:layout_constraintVertical_bias="0" />
 
+            <TextView
+                android:id="@+id/detail_number_number"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:text="082282875147"
+                android:textSize="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detail_number"
+                app:layout_constraintVertical_bias="0" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.core.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
         android:baselineAlignBottom="false"
         android:clickable="true"
         android:src="@drawable/ic_baseline_edit_24"
@@ -126,9 +127,7 @@
         app:elevation="16dp"
         app:fabSize="normal"
         app:layout_anchor="@id/appbar"
-        app:layout_anchorGravity="end|bottom"
-        android:layout_marginRight="20dp"/>
-
+        app:layout_anchorGravity="end|bottom" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
