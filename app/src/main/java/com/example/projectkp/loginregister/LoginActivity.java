@@ -67,8 +67,7 @@ public class LoginActivity extends AppCompatActivity {
             if (FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()) {
                 startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
                 finish();
-            } else
-                startActivity(new Intent(getApplicationContext(), EmailVerifyActivity.class));
+            }
         }
     }
 
@@ -100,10 +99,17 @@ public class LoginActivity extends AppCompatActivity {
                         String databaseEmail = snapshot.child(username).child("email").getValue(String.class);
 
                         FirebaseAuth.getInstance().signInWithEmailAndPassword(databaseEmail, databasePassword);
-                        Intent dataUser = new Intent(getApplicationContext(), EmailVerifyActivity.class);
-                        dataUser.putExtra("username", databaseUserName);
-                        startActivity(dataUser);
-                        finish();
+                        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                            if (FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()) {
+                                startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+                            } else {
+                                Intent dataUser = new Intent(getApplicationContext(), EmailVerifyActivity.class);
+                                dataUser.putExtra("username", databaseUserName);
+                                startActivity(dataUser);
+                            }
+                            finish();
+                        }
+
 
                     } else {
                         Toast.makeText(getApplicationContext(), "Wrong Password", Toast.LENGTH_SHORT).show();

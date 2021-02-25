@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.projectkp.loginregister.LoginActivity;
+import com.example.projectkp.verification.EmailVerifyActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class DashboardActivity extends AppCompatActivity {
@@ -28,6 +29,5 @@ public class DashboardActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 }

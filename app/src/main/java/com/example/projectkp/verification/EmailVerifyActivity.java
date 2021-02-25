@@ -21,7 +21,7 @@ public class EmailVerifyActivity extends AppCompatActivity {
 
     TextView usernameEmail;
     FirebaseAuth eAuth;
-    Button goBack, verifyEmail;
+    Button goBack, changeAcc, verifyEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,7 @@ public class EmailVerifyActivity extends AppCompatActivity {
 
         eAuth = FirebaseAuth.getInstance();
         verifyEmail = findViewById(R.id.verify_email);
+        changeAcc = findViewById(R.id.change_account);
         goBack = findViewById(R.id.go_back_email_verify);
         usernameEmail = findViewById(R.id.email_verify_username);
 
@@ -50,18 +51,41 @@ public class EmailVerifyActivity extends AppCompatActivity {
                 eAuth.getCurrentUser().sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(EmailVerifyActivity.this, "Verification email sent", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(EmailVerifyActivity.this, EmailVerify2Activity.class));
-                        finish();
+                        Toast.makeText(getApplicationContext(), "Verification email sent", Toast.LENGTH_SHORT).show();
+                        if (FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()) {
+                            startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+                            finish();
+                        } else
+                            Toast.makeText(getApplicationContext(), "Please check your email to verify", Toast.LENGTH_SHORT).show();
                     }
                 });
                 eAuth.getCurrentUser().sendEmailVerification().addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(EmailVerifyActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
         });
+
+        changeAcc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                finish();
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (eAuth.getCurrentUser() != null) {
+            if (eAuth.getCurrentUser().isEmailVerified()) {
+                startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+                finish();
+            }
+        }
     }
 }

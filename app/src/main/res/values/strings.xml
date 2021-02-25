@@ -31,4 +31,5 @@
     <string name="email_verify_desc">Please verify your email address by clicking button below</string>
     <string name="verify">Verify</string>
     <string name="email_verified">Email Verified!</string>
+    <string name="change_acc">Change Account</string>
 </resources>
