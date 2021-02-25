@@ -3,7 +3,7 @@
 
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#CD4B4B</item>
+        <item name="colorPrimary">#FFEB3B</item>
         <item name="colorPrimaryDark">#9E3535</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowContentTransitions">true</item>

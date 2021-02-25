@@ -1,6 +1,5 @@
 package com.example.projectkp;
 
-import android.app.DownloadManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,131 +14,63 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
-    TextInputLayout usernameLog, passwordLog;
-    Button login, forget, signUp;
-//    FirebaseAuth firebaseAuth;
+    TextInputLayout emailLog, passwordLog;
+    Button login, signUp;
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        usernameLog = findViewById(R.id.username_log);
+        emailLog = findViewById(R.id.email_log);
         passwordLog = findViewById(R.id.password_log);
-        forget = findViewById(R.id.forget_log);
         login = findViewById(R.id.login);
         signUp = findViewById(R.id.to_sign_up);
+
+        firebaseAuth = FirebaseAuth.getInstance();
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginUser(v);
-            }
-        });
 
-        forget.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), ForgetActivity.class));
-            }
-        });
-
-        signUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
-            }
-        });
-    }
-
-   @Override
-    protected void onStart() {
-        super.onStart();
-
-        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
-            finish();
-        }
-    }
-
-    public void loginUser(View view) {
-        if (!validateUserName() | !validatePassword()) {
-            return;
-        }
-
-        final String username = usernameLog.getEditText().getText().toString().trim();
-        final String password = passwordLog.getEditText().getText().toString().trim();
-
-        Query checkUser = FirebaseDatabase.getInstance().getReference("users").orderByChild("username").equalTo(username);
-
-        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    usernameLog.setError(null);
-                    usernameLog.setErrorEnabled(false);
-
-                    String databasePassword = snapshot.child(username).child("password").getValue(String.class);
-                    if (databasePassword.equals(password)) {
-                        passwordLog.setError(null);
-                        passwordLog.setErrorEnabled(false);
-
-                        String databaseUserName = snapshot.child(username).child("username").getValue(String.class);
-                        String databaseFullName = snapshot.child(username).child("fullname").getValue(String.class);
-                        String databasePhone = snapshot.child(username).child("phone").getValue(String.class);
-                        String databaseEmail = snapshot.child(username).child("email").getValue(String.class);
-
-                        Intent dataUser = new Intent(getApplicationContext(), OTPActivity.class);
-                        dataUser.putExtra("phone", databasePhone);
-                        startActivity(dataUser);
-                        finish();
-
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Wrong Password", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(getApplicationContext(), "User Not Found!", Toast.LENGTH_SHORT).show();
+                String email = emailLog.getEditText().getText().toString();
+                if (email.isEmpty()) {
+                    emailLog.setError("Can't be empty");
+                    return;
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                String password = passwordLog.getEditText().getText().toString();
+                if (password.isEmpty()) {
+                    passwordLog.setError("Can't be empty");
+                    return;
+                }
+
+                firebaseAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        Toast.makeText(getApplicationContext(), "Login Successfully", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+                        finish();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                signUp.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent registIntent = new Intent(LoginActivity.this, RegisterActivity.class);
+                        startActivity(registIntent);
+                    }
+                });
             }
         });
-    }
-
-    private Boolean validateUserName() {
-        String val = usernameLog.getEditText().getText().toString().trim();
-
-        if (val.isEmpty()) {
-            usernameLog.setError("Can't be empty");
-            return false;
-        } else {
-            usernameLog.setError(null);
-            usernameLog.setErrorEnabled(false);
-            return true;
-        }
-    }
-
-    private Boolean validatePassword() {
-        String val = passwordLog.getEditText().getText().toString().trim();
-
-        if (val.isEmpty()) {
-            passwordLog.setError("Can't be empty");
-            passwordLog.requestFocus();
-            return false;
-        } else {
-            passwordLog.setError(null);
-            passwordLog.setErrorEnabled(false);
-            return true;
-        }
     }
 }

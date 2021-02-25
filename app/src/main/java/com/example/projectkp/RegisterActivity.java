@@ -14,8 +14,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
     TextInputLayout fullNameReg, userNameReg, phoneReg, emailReg, passwordReg;
@@ -34,159 +32,66 @@ public class RegisterActivity extends AppCompatActivity {
         passwordReg = findViewById(R.id.password_reg);
         loginAgain = findViewById(R.id.login_again);
         signUp = findViewById(R.id.sign_up);
+
         firebaseAuth = FirebaseAuth.getInstance();
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                storeUserData();
-//                registerUser(v);
+
+                String fullname = fullNameReg.getEditText().getText().toString();
+                if (fullname.isEmpty()) {
+                    fullNameReg.setError("Can't be empty");
+                    return;
+                }
+
+                String username = userNameReg.getEditText().getText().toString();
+                if (username.isEmpty()) {
+                    userNameReg.setError("Can't be empty");
+                    return;
+                }
+
+                String phone = phoneReg.getEditText().getText().toString();
+                if (phone.isEmpty()) {
+                    phoneReg.setError("Can't be empty");
+                    return;
+                }
+
+                String email = emailReg.getEditText().getText().toString();
+                if (email.isEmpty()) {
+                    emailReg.setError("Can't be empty");
+                    return;
+                }
+
+                String password = passwordReg.getEditText().getText().toString();
+                if (password.isEmpty()) {
+                    passwordReg.setError("Can't be empty");
+                    return;
+                }
+
+                firebaseAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        Toast.makeText(getApplicationContext(), "Sign Up Successfully", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                        finish();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                loginAgain.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+                        startActivity(loginIntent);
+                    }
+                });
             }
         });
-
-        loginAgain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),LoginActivity.class));
-                finish();
-            }
-        });
-    }
-
-    private Boolean validateFullName(){
-        String val = fullNameReg.getEditText().getText().toString();
-
-        if (val.isEmpty()) {
-            fullNameReg.setError("Can't be empty");
-            return false;
-        }
-        else {
-            fullNameReg.setError(null);
-            fullNameReg.setErrorEnabled(false);
-            return true;
-        }
-    }
-
-    private Boolean validateUserName(){
-        String val = userNameReg.getEditText().getText().toString();
-        String noWhiteSpace = "\\A\\w{4,12}\\z";
-
-        if (val.isEmpty()) {
-            userNameReg.setError("Can't be empty");
-            return false;
-        }
-        else if (val.length()>12){
-            userNameReg.setError("Username too long");
-            return false;
-        }
-        else if (!val.matches(noWhiteSpace)){
-            userNameReg.setError("White space are not allowed");
-            return false;
-        }
-        else {
-            userNameReg.setError(null);
-            userNameReg.setErrorEnabled(false);
-            return true;
-        }
-    }
-
-    private Boolean validateEmail(){
-        String val = emailReg.getEditText().getText().toString();
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-
-        if (val.isEmpty()) {
-            emailReg.setError("Can't be empty");
-            return false;
-        }
-        else if(!val.matches(emailPattern)){
-            emailReg.setError("Invalid email address");
-            return false;
-        }
-        else {
-            emailReg.setError(null);
-            emailReg.setErrorEnabled(false);
-            return true;
-        }
-    }
-
-    private Boolean validatePhone(){
-        String val = phoneReg.getEditText().getText().toString();
-
-        if (val.isEmpty()) {
-            phoneReg.setError("Can't be empty");
-            return false;
-        }
-        else {
-            phoneReg.setError(null);
-            phoneReg.setErrorEnabled(false);
-            return true;
-        }
-    }
-
-    private Boolean validatePassword(){
-        String val = passwordReg.getEditText().getText().toString();
-        String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$";
-
-        if (val.isEmpty()) {
-            passwordReg.setError("Can't be empty");
-            return false;
-        }
-        else if(!val.matches(passwordPattern)){
-            passwordReg.setError("Password too weak");
-            return false;
-        }
-        else {
-            passwordReg.setError(null);
-            passwordReg.setErrorEnabled(false);
-            return true;
-        }
-    }
-
-    /*public void registerUser(View view){
-
-        if(!validateFullName() | !validateUserName() | !validateEmail() | !validatePhone() | !validatePassword()){
-            return;
-        }
-
-        String email = emailReg.getEditText().getText().toString();
-        String password = passwordReg.getEditText().getText().toString();
-
-        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-
-            @Override
-            public void onSuccess(AuthResult authResult) {
-                Toast.makeText(getApplicationContext(), "Sign Up Successfully", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                finish();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }*/
-
-    private void storeUserData(){
-
-        if(!validateFullName() | !validateUserName() | !validateEmail() | !validatePhone() | !validatePassword()){
-            return;
-        }
-
-        String fullname = fullNameReg.getEditText().getText().toString();
-        String username = userNameReg.getEditText().getText().toString();
-        String phone = phoneReg.getEditText().getText().toString();
-        String email = emailReg.getEditText().getText().toString();
-        String password = passwordReg.getEditText().getText().toString();
-
-        FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
-        DatabaseReference reference = rootNode.getReference("users");
-
-        UserHelper storeData = new UserHelper(fullname,username,phone,email,password);
-        reference.child(username).setValue(storeData);
-        Toast.makeText(getApplicationContext(), "Sign up Success", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-        finish();
     }
 }
-
