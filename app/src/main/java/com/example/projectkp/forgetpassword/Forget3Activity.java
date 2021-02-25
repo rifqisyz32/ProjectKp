@@ -1,4 +1,4 @@
-package com.example.projectkp;
+package com.example.projectkp.forgetpassword;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,27 +7,25 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.projectkp.R;
 import com.example.projectkp.loginregister.LoginActivity;
-import com.google.firebase.auth.FirebaseAuth;
 
-public class DashboardActivity extends AppCompatActivity {
-    Button logout;
+public class Forget3Activity extends AppCompatActivity {
+    Button resetLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
+        setContentView(R.layout.activity_forget3);
 
-        logout = findViewById(R.id.logout);
+        resetLogin = findViewById(R.id.reset_success_login);
 
-        logout.setOnClickListener(new View.OnClickListener() {
+        resetLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 finish();
             }
         });
-
     }
 }

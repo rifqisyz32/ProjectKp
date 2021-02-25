@@ -7,6 +7,7 @@
     <string name="phone">Phone Number</string>
     <string name="email">Email</string>
     <string name="login">Login</string>
+    <string name="continue_inside">Continue</string>
     <string name="signup">Sign Up</string>
     <string name="signmeup">Sign Up Here</string>
     <string name="forget">Forget Password?</string>
@@ -24,4 +25,10 @@
     <string name="email_desc">via email:</string>
     <string name="reset_password">Password Reset Successful</string>
     <string name="reset_success_desc">You have successfully reset your password. Please use your new password when logging in.</string>
+    <string name="email_success_desc">You have successfully verify your email. Please login by clicking button below.</string>
+    <string name="verify_email">Verify your email address</string>
+    <string name="hey">Hi</string>
+    <string name="email_verify_desc">Please verify your email address by clicking button below</string>
+    <string name="verify">Verify</string>
+    <string name="email_verified">Email Verified!</string>
 </resources>
