@@ -2,9 +2,9 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".loginregister.LoginActivity"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".loginregister.LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,41 +13,41 @@
         android:padding="16dp">
 
         <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp">
-
-        <ImageView
-            android:id="@+id/main_logo_log"
-            android:transitionName="main_logo"
-            android:layout_width="150dp"
-            android:layout_height="100dp"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/telkom_logo" />
-
-        <TextView
-            android:id="@+id/main_title_log"
-            android:transitionName="main_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/main_logo_log"
-            android:fontFamily="@font/poppins_bold"
-            android:text="@string/main_name"
-            android:includeFontPadding="false"
-            android:textColor="@color/colorPrimary"
-            android:textSize="30sp" />
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
 
-        <TextView
-            android:id="@+id/second_title_log"
-            android:transitionName="second_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/main_title_log"
-            android:fontFamily="@font/poppins_medium"
-            android:text="@string/second_name"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="12sp" />
+            <ImageView
+                android:id="@+id/main_logo_log"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/telkom_logo"
+                android:transitionName="main_logo" />
+
+            <TextView
+                android:id="@+id/main_title_log"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/main_logo_log"
+                android:fontFamily="@font/poppins_bold"
+                android:includeFontPadding="false"
+                android:text="@string/main_name"
+                android:textColor="@color/colorPrimary"
+                android:textSize="30sp"
+                android:transitionName="main_title" />
+
+            <TextView
+                android:id="@+id/second_title_log"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/main_title_log"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/second_name"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="12sp"
+                android:transitionName="second_title" />
 
         </RelativeLayout>
 
@@ -55,20 +55,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:background="@drawable/round_shape_log">
+            android:background="@drawable/round_shape_log"
+            android:padding="16dp">
 
-        <TextView
-            android:id="@+id/welcome_log"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="20sp"
-            android:fontFamily="@font/poppins_light"
-            android:text="@string/welcome_login"
-            android:textAlignment="center"
-            android:textSize="14sp"
-            android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/welcome_log"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20sp"
+                android:fontFamily="@font/poppins_light"
+                android:text="@string/welcome_login"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/username_log"
@@ -78,8 +79,8 @@
                 android:layout_below="@+id/welcome_log"
                 android:layout_centerHorizontal="true"
                 android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
                 android:layout_marginTop="32dp"
+                android:layout_marginEnd="32dp"
                 android:background="@drawable/round_shape_white"
                 android:hint="@string/username"
                 android:textColorHint="@color/colorSubtitle"
@@ -91,14 +92,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/round_shape_white"
+                    android:drawableStart="@drawable/ic_baseline_person_24"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="@color/colorSubtitle"
                     android:fontFamily="@font/poppins_light"
                     android:includeFontPadding="false"
                     android:inputType="textEmailAddress"
-                    android:drawableStart="@drawable/ic_baseline_person_24"
-                    android:drawableTint="@color/colorSubtitle"
-                    android:drawablePadding="8dp"
-                    android:textSize="12sp"
-                    android:textColor="@color/colorSubtitle"/>
+                    android:textColor="@color/colorSubtitle"
+                    android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -107,78 +108,93 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/username_log"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginTop="16dp"
                 android:layout_centerHorizontal="true"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
                 android:background="@drawable/round_shape_white"
-                app:passwordToggleEnabled="true"
-                app:passwordToggleTint="@color/colorSubtitle"
-                app:hintTextColor="@color/colorSubtitle"
                 android:hint="@string/password"
-                android:textColorHint="@color/colorSubtitle">
+                android:textColorHint="@color/colorSubtitle"
+                app:hintTextColor="@color/colorSubtitle"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/colorSubtitle">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_light"
-                    android:textSize="12sp"
-                    android:textColor="@color/colorSubtitle"
                     android:background="@drawable/round_shape_white"
                     android:drawableStart="@drawable/ic_outline_lock_24"
-                    android:drawableTint="@color/colorSubtitle"
                     android:drawablePadding="8dp"
-                    android:inputType="textPassword"/>
+                    android:drawableTint="@color/colorSubtitle"
+                    android:fontFamily="@font/poppins_light"
+                    android:inputType="textPassword"
+                    android:textColor="@color/colorSubtitle"
+                    android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/forget_log"
-            style="@style/SecondTheme"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:text="@string/forget"
-            android:textColor="@color/black"
-            android:fontFamily="@font/poppins_semibold"
-            android:layout_below="@+id/password_log"
-            android:layout_marginTop="8dp"
-            android:textSize="12sp"
-            android:textAlignment="center"
-            android:layout_marginStart="32dp"
-            android:elevation="0dp"/>
+            <Button
+                android:id="@+id/forget_log"
+                style="@style/SecondTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/password_log"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
+                android:background="#00000000"
+                android:elevation="0dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/forget"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
 
-        <Button
-            android:id="@+id/login"
-            android:background="@drawable/round_shape_white"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/forget_log"
-            android:layout_marginTop="8dp"
-            android:textAlignment="center"
-            android:fontFamily="@font/poppins_semibold"
-            android:text="@string/login"
-            android:textAllCaps="false"
-            android:textColor="#FFF"
-            android:textSize="16sp" />
+            <Button
+                android:id="@+id/login"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_below="@id/forget_log"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/round_shape_white"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/login"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="#FFF"
+                android:textSize="16sp" />
 
-        <Button
-            android:id="@+id/to_sign_up"
-            style="@style/SecondTheme"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:text="@string/signmeup"
-            android:textColor="@color/black"
-            android:fontFamily="@font/poppins_semibold"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/login"
-            android:layout_marginTop="8dp"
-            android:textSize="12sp"
-            android:textAlignment="center"
-            android:elevation="0dp"/>
+            <Button
+                android:id="@+id/to_sign_up"
+                style="@style/SecondTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/login"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:background="#00000000"
+                android:elevation="0dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/signmeup"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
 
-    </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/forget_log"
+                android:layout_centerHorizontal="true"
+                android:elevation="8dp"
+                android:padding="16dp">
+
+                <ProgressBar
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_centerInParent="true" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
 
     </LinearLayout>
 

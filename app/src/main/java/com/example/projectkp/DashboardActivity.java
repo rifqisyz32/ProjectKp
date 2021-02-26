@@ -12,21 +12,16 @@ import com.example.projectkp.verification.EmailVerifyActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class DashboardActivity extends AppCompatActivity {
-    Button logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        logout = findViewById(R.id.logout);
-
-        logout.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.to_user_detail).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(getApplicationContext(), UserDetail.class));
-//                finish();
             }
         });
     }

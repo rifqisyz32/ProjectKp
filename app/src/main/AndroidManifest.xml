@@ -13,7 +13,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".verification.EmailVerify2Activity"></activity>
         <activity android:name=".verification.EmailVerifyActivity" />
-        <activity android:name=".forgetpassword.Forget3Activity" />
         <activity android:name=".forgetpassword.Forget2Activity" />
         <activity android:name=".forgetpassword.ForgetActivity" />
         <activity android:name=".DashboardActivity" />

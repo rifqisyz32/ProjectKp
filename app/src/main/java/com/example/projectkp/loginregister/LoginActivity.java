@@ -24,18 +24,14 @@ import com.google.firebase.database.ValueEventListener;
 public class LoginActivity extends AppCompatActivity {
     TextInputLayout usernameLog, passwordLog;
     Button login, forget, signUp;
-//    FirebaseAuth firebaseAuth;
+    FirebaseAuth lgAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        usernameLog = findViewById(R.id.username_log);
-        passwordLog = findViewById(R.id.password_log);
-        forget = findViewById(R.id.forget_log);
-        login = findViewById(R.id.login);
-        signUp = findViewById(R.id.to_sign_up);
+        storeId();
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,12 +55,21 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    private void storeId() {
+        usernameLog = findViewById(R.id.username_log);
+        passwordLog = findViewById(R.id.password_log);
+        forget = findViewById(R.id.forget_log);
+        login = findViewById(R.id.login);
+        signUp = findViewById(R.id.to_sign_up);
+        lgAuth = FirebaseAuth.getInstance();
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
 
-        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            if (FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()) {
+        if (lgAuth.getCurrentUser() != null) {
+            if (lgAuth.getCurrentUser().isEmailVerified()) {
                 startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
                 finish();
             }
@@ -93,13 +98,11 @@ public class LoginActivity extends AppCompatActivity {
                         passwordLog.setErrorEnabled(false);
 
                         String databaseUserName = snapshot.child(username).child("username").getValue(String.class);
-                        String databaseFullName = snapshot.child(username).child("fullname").getValue(String.class);
-                        String databasePhone = snapshot.child(username).child("phone").getValue(String.class);
                         String databaseEmail = snapshot.child(username).child("email").getValue(String.class);
 
-                        FirebaseAuth.getInstance().signInWithEmailAndPassword(databaseEmail, databasePassword);
-                        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-                            if (FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()) {
+                        lgAuth.signInWithEmailAndPassword(databaseEmail, databasePassword);
+                        if (lgAuth.getCurrentUser() != null) {
+                            if (lgAuth.getCurrentUser().isEmailVerified()) {
                                 startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
                             } else {
                                 Intent dataUser = new Intent(getApplicationContext(), EmailVerifyActivity.class);
@@ -109,12 +112,11 @@ public class LoginActivity extends AppCompatActivity {
                             finish();
                         }
 
-
                     } else {
-                        Toast.makeText(getApplicationContext(), "Wrong Password", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), R.string.wrong_password, Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(getApplicationContext(), "User Not Found!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.no_user, Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -129,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
         String val = usernameLog.getEditText().getText().toString().trim();
 
         if (val.isEmpty()) {
-            usernameLog.setError("Can't be empty");
+            usernameLog.setError(getString(R.string.cantEmpty));
             return false;
         } else {
             usernameLog.setError(null);
@@ -142,7 +144,7 @@ public class LoginActivity extends AppCompatActivity {
         String val = passwordLog.getEditText().getText().toString().trim();
 
         if (val.isEmpty()) {
-            passwordLog.setError("Can't be empty");
+            passwordLog.setError(getString(R.string.cantEmpty));
             passwordLog.requestFocus();
             return false;
         } else {

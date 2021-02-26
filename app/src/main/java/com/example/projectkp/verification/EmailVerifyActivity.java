@@ -83,7 +83,7 @@ public class EmailVerifyActivity extends AppCompatActivity {
 
         if (eAuth.getCurrentUser() != null) {
             if (eAuth.getCurrentUser().isEmailVerified()) {
-                startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+                startActivity(new Intent(getApplicationContext(), EmailVerify2Activity.class));
                 finish();
             }
         }
