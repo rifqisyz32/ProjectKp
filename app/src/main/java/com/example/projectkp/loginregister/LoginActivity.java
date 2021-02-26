@@ -10,10 +10,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.projectkp.DashboardActivity;
+import com.example.projectkp.R;
 import com.example.projectkp.forgetpassword.ForgetActivity;
 import com.example.projectkp.verification.EmailVerifyActivity;
-import com.example.projectkp.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -92,29 +95,30 @@ public class LoginActivity extends AppCompatActivity {
                     usernameLog.setError(null);
                     usernameLog.setErrorEnabled(false);
 
-                    String databasePassword = snapshot.child(username).child("password").getValue(String.class);
-                    if (databasePassword.equals(password)) {
-                        passwordLog.setError(null);
-                        passwordLog.setErrorEnabled(false);
+                    String databaseUserName = snapshot.child(username).child("username").getValue(String.class);
+                    String databaseEmail = snapshot.child(username).child("email").getValue(String.class);
 
-                        String databaseUserName = snapshot.child(username).child("username").getValue(String.class);
-                        String databaseEmail = snapshot.child(username).child("email").getValue(String.class);
-
-                        lgAuth.signInWithEmailAndPassword(databaseEmail, databasePassword);
-                        if (lgAuth.getCurrentUser() != null) {
-                            if (lgAuth.getCurrentUser().isEmailVerified()) {
-                                startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
-                            } else {
-                                Intent dataUser = new Intent(getApplicationContext(), EmailVerifyActivity.class);
-                                dataUser.putExtra("username", databaseUserName);
-                                startActivity(dataUser);
+                    lgAuth.signInWithEmailAndPassword(databaseEmail, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                        @Override
+                        public void onSuccess(AuthResult authResult) {
+                            if (lgAuth.getCurrentUser() != null) {
+                                if (lgAuth.getCurrentUser().isEmailVerified()) {
+                                    startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+                                } else {
+                                    Intent dataUser = new Intent(getApplicationContext(), EmailVerifyActivity.class);
+                                    dataUser.putExtra("username", databaseUserName);
+                                    startActivity(dataUser);
+                                }
+                                finish();
                             }
-                            finish();
                         }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
-                    } else {
-                        Toast.makeText(getApplicationContext(), R.string.wrong_password, Toast.LENGTH_SHORT).show();
-                    }
                 } else {
                     Toast.makeText(getApplicationContext(), R.string.no_user, Toast.LENGTH_SHORT).show();
                 }

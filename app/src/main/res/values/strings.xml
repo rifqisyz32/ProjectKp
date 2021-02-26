@@ -44,4 +44,6 @@
     <string name="no_user">User Not Found!</string>
     <string name="logout">Logout</string>
     <string name="sent_verify_email">Email verification sent!</string>
+    <string name="user_exist">This username is already taken</string>
+    <string name="register_success">Sign Up Successfully</string>
 </resources>

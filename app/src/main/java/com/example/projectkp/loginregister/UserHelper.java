@@ -1,17 +1,16 @@
 package com.example.projectkp.loginregister;
 
 public class UserHelper {
-    String fullname, username, phone, email, password;
+    String fullname, username, phone, email;
 
     public UserHelper() {
     }
 
-    public UserHelper(String fullname, String username, String phone, String email, String password) {
+    public UserHelper(String fullname, String username, String phone, String email) {
         this.fullname = fullname;
         this.username = username;
         this.phone = phone;
         this.email = email;
-        this.password = password;
     }
 
     public String getFullname() {
@@ -44,13 +43,5 @@ public class UserHelper {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }
