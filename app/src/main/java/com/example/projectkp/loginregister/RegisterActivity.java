@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,9 +24,10 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class RegisterActivity extends AppCompatActivity {
-    TextInputLayout fullNameReg, userNameReg, phoneReg, emailReg, passwordReg;
+    TextInputLayout fullnameReg, usernameReg, phoneReg, emailReg, passwordReg;
     Button signUp, loginAgain;
-    FirebaseAuth firebaseAuth;
+    FirebaseAuth regAuth;
+    ProgressBar regProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                regProgress.setVisibility(View.VISIBLE);
                 storeUserData();
             }
         });
@@ -51,24 +54,26 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void storeId() {
-        fullNameReg = findViewById(R.id.fullname_reg);
-        userNameReg = findViewById(R.id.username_reg);
+        fullnameReg = findViewById(R.id.fullname_reg);
+        usernameReg = findViewById(R.id.username_reg);
         phoneReg = findViewById(R.id.phone_reg);
         emailReg = findViewById(R.id.email_reg);
         passwordReg = findViewById(R.id.password_reg);
+        regProgress = findViewById(R.id.reg_prog);
         loginAgain = findViewById(R.id.login_again);
         signUp = findViewById(R.id.sign_up);
-        firebaseAuth = FirebaseAuth.getInstance();
+        regAuth = FirebaseAuth.getInstance();
     }
 
     private void storeUserData() {
 
         if (!validateFullName() | !validateUserName() | !validateEmail() | !validatePhone() | !validatePassword()) {
+            regProgress.setVisibility(View.GONE);
             return;
         }
 
-        String fullname = fullNameReg.getEditText().getText().toString();
-        String username = userNameReg.getEditText().getText().toString();
+        String fullname = fullnameReg.getEditText().getText().toString();
+        String username = usernameReg.getEditText().getText().toString();
         String phone = phoneReg.getEditText().getText().toString();
         String email = emailReg.getEditText().getText().toString();
         String password = passwordReg.getEditText().getText().toString();
@@ -80,13 +85,17 @@ public class RegisterActivity extends AppCompatActivity {
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (!snapshot.exists()) {
-                    UserHelper storeData = new UserHelper(fullname, username, phone, email);
-                    reference.child(username).setValue(storeData);
 
-                    firebaseAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                if (!snapshot.exists()) {
+                    usernameReg.setErrorEnabled(false);
+
+                    regAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
+                            UserHelper storeData = new UserHelper(fullname, username, phone, email);
+                            reference.child(username).setValue(storeData);
+
+                            regProgress.setVisibility(View.GONE);
                             Toast.makeText(getApplicationContext(), R.string.register_success, Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                             finish();
@@ -94,50 +103,53 @@ public class RegisterActivity extends AppCompatActivity {
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
+                            regProgress.setVisibility(View.GONE);
                             Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else {
-                    userNameReg.setError(getString(R.string.user_exist));
+                    regProgress.setVisibility(View.GONE);
+                    usernameReg.setError(getString(R.string.user_exist));
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                regProgress.setVisibility(View.GONE);
                 Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private Boolean validateFullName() {
-        String val = fullNameReg.getEditText().getText().toString();
+        String val = fullnameReg.getEditText().getText().toString();
 
         if (val.isEmpty()) {
-            fullNameReg.setError(getString(R.string.cantEmpty));
+            fullnameReg.setError(getString(R.string.cantEmpty));
             return false;
         } else {
-            fullNameReg.setError(null);
-            fullNameReg.setErrorEnabled(false);
+            fullnameReg.setError(null);
+            fullnameReg.setErrorEnabled(false);
             return true;
         }
     }
 
     private Boolean validateUserName() {
-        String val = userNameReg.getEditText().getText().toString();
+        String val = usernameReg.getEditText().getText().toString();
         String noWhiteSpace = "\\A\\w{4,12}\\z";
 
         if (val.isEmpty()) {
-            userNameReg.setError(getString(R.string.cantEmpty));
+            usernameReg.setError(getString(R.string.cantEmpty));
             return false;
         } else if (val.length() > 12) {
-            userNameReg.setError(getString(R.string.max_name));
+            usernameReg.setError(getString(R.string.max_name));
             return false;
         } else if (!val.matches(noWhiteSpace)) {
-            userNameReg.setError(getString(R.string.no_space));
+            usernameReg.setError(getString(R.string.no_space));
             return false;
         } else {
-            userNameReg.setError(null);
-            userNameReg.setErrorEnabled(false);
+            usernameReg.setError(null);
+            usernameReg.setErrorEnabled(false);
             return true;
         }
     }

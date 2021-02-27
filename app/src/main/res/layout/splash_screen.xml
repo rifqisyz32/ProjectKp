@@ -20,8 +20,8 @@
             android:layout_height="150dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/telkom_logo"
             android:elevation="24dp"
+            android:src="@drawable/telkom_logo"
             android:transitionName="main_logo" />
 
         <TextView

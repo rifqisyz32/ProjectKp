@@ -12,8 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.projectkp.loginregister.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.EnumMap;
-
 public class UserDetail extends AppCompatActivity {
 
     TextView fullNameUser, usernameUser, emailUser, phoneUser;

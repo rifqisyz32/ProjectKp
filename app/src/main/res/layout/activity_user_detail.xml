@@ -61,8 +61,8 @@
         android:layout_height="match_parent"
         android:background="@drawable/layout_bg"
         android:paddingStart="32dp"
-        android:paddingEnd="32dp"
         android:paddingTop="16dp"
+        android:paddingEnd="32dp"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <LinearLayout
@@ -87,7 +87,7 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_centerInParent="true"
-                    android:background="#00000000"/>
+                    android:background="#00000000" />
 
             </RelativeLayout>
 
@@ -171,8 +171,8 @@
                     android:textSize="20sp" />
 
                 <Button
-                    style="@style/SecondTheme"
                     android:id="@+id/user_detail_logout"
+                    style="@style/SecondTheme"
                     android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:layout_below="@+id/user_detail_number_field"
@@ -181,7 +181,7 @@
                     android:background="@drawable/round_shape_white"
                     android:fontFamily="@font/poppins_semibold"
                     android:text="@string/logout"
-                    android:textColor="#fff"/>
+                    android:textColor="#fff" />
 
             </RelativeLayout>
 

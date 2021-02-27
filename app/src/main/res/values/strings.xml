@@ -19,8 +19,6 @@
     <string name="forget_password">Forget your Password?</string>
     <string name="forget_desc">Please type your email below\nto reset the password</string>
     <string name="reset">Reset</string>
-    <string name="forget_password2">Forget\nPassword</string>
-    <string name="forget_desc2">Select which contact detail\nshould we use to reset your password</string>
     <string name="sms_desc">via sms:</string>
     <string name="email_desc">via email:</string>
     <string name="reset_password">Password Reset Sent!</string>

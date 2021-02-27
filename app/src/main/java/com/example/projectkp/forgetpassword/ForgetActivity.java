@@ -1,13 +1,14 @@
 package com.example.projectkp.forgetpassword;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.projectkp.R;
 import com.example.projectkp.loginregister.LoginActivity;
@@ -21,6 +22,7 @@ public class ForgetActivity extends AppCompatActivity {
     Button reset, backLogin;
     TextInputLayout emailForget;
     FirebaseAuth forgetAuth;
+    ProgressBar forgetProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +32,14 @@ public class ForgetActivity extends AppCompatActivity {
         reset = findViewById(R.id.reset);
         backLogin = findViewById(R.id.go_back_forget);
         emailForget = findViewById(R.id.email_forget);
+        forgetProgress = findViewById(R.id.forget_prog);
 
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                forgetProgress.setVisibility(View.VISIBLE);
                 if (!validateEmail()) {
+                    forgetProgress.setVisibility(View.GONE);
                     return;
                 }
 
@@ -44,6 +49,7 @@ public class ForgetActivity extends AppCompatActivity {
                 forgetAuth.sendPasswordResetEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
+                        forgetProgress.setVisibility(View.GONE);
                         Toast.makeText(getApplicationContext(), R.string.reset_sent, Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(getApplicationContext(), Forget2Activity.class));
                         finish();
@@ -51,6 +57,7 @@ public class ForgetActivity extends AppCompatActivity {
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
+                        forgetProgress.setVisibility(View.GONE);
                         Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });

@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,7 +30,9 @@ import com.google.firebase.database.ValueEventListener;
 public class LoginActivity extends AppCompatActivity {
     TextInputLayout usernameLog, passwordLog;
     Button login, forget, signUp;
-    FirebaseAuth lgAuth;
+    FirebaseAuth logAuth;
+    ProgressBar logProgress;
+
     SharedPreferences sharedPreferences;
     public static final String MyPREFERENCES = "MyPrefs";
     public static final String FullName = "fullname";
@@ -43,12 +46,12 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         storeId();
-        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginUser(v);
+                logProgress.setVisibility(View.VISIBLE);
+                loginUser();
             }
         });
 
@@ -73,23 +76,26 @@ public class LoginActivity extends AppCompatActivity {
         forget = findViewById(R.id.forget_log);
         login = findViewById(R.id.login);
         signUp = findViewById(R.id.to_sign_up);
-        lgAuth = FirebaseAuth.getInstance();
+        logProgress = findViewById(R.id.log_prog);
+        logAuth = FirebaseAuth.getInstance();
+        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        if (lgAuth.getCurrentUser() != null) {
-            if (lgAuth.getCurrentUser().isEmailVerified()) {
+        if (logAuth.getCurrentUser() != null) {
+            if (logAuth.getCurrentUser().isEmailVerified()) {
                 startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
                 finish();
             }
         }
     }
 
-    public void loginUser(View view) {
+    public void loginUser() {
         if (!validateUserName() | !validatePassword()) {
+            logProgress.setVisibility(View.GONE);
             return;
         }
 
@@ -100,6 +106,7 @@ public class LoginActivity extends AppCompatActivity {
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                 if (snapshot.exists()) {
                     usernameLog.setError(null);
                     usernameLog.setErrorEnabled(false);
@@ -117,13 +124,15 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString(Email, databaseEmail);
                     editor.apply();
 
-                    lgAuth.signInWithEmailAndPassword(databaseEmail, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    logAuth.signInWithEmailAndPassword(databaseEmail, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
-                            if (lgAuth.getCurrentUser() != null) {
-                                if (lgAuth.getCurrentUser().isEmailVerified()) {
+                            if (logAuth.getCurrentUser() != null) {
+                                if (logAuth.getCurrentUser().isEmailVerified()) {
+                                    logProgress.setVisibility(View.GONE);
                                     startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
                                 } else {
+                                    logProgress.setVisibility(View.GONE);
                                     Intent dataUser = new Intent(getApplicationContext(), EmailVerifyActivity.class);
                                     dataUser.putExtra("username", databaseUserName);
                                     startActivity(dataUser);
@@ -134,17 +143,20 @@ public class LoginActivity extends AppCompatActivity {
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
+                            logProgress.setVisibility(View.GONE);
                             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
 
                 } else {
+                    logProgress.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), R.string.no_user, Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                logProgress.setVisibility(View.GONE);
                 Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
