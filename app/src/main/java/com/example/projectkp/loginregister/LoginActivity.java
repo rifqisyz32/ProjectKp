@@ -1,6 +1,8 @@
 package com.example.projectkp.loginregister;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +30,12 @@ public class LoginActivity extends AppCompatActivity {
     TextInputLayout usernameLog, passwordLog;
     Button login, forget, signUp;
     FirebaseAuth lgAuth;
+    SharedPreferences sharedPreferences;
+    public static final String MyPREFERENCES = "MyPrefs";
+    public static final String FullName = "fullname";
+    public static final String UserName = "username";
+    public static final String Phone = "phone";
+    public static final String Email = "email";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         storeId();
+        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,8 +93,8 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        final String username = usernameLog.getEditText().getText().toString().trim();
-        final String password = passwordLog.getEditText().getText().toString().trim();
+        String username = usernameLog.getEditText().getText().toString().trim();
+        String password = passwordLog.getEditText().getText().toString().trim();
 
         Query checkUser = FirebaseDatabase.getInstance().getReference("users").orderByChild("username").equalTo(username);
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -95,8 +104,18 @@ public class LoginActivity extends AppCompatActivity {
                     usernameLog.setError(null);
                     usernameLog.setErrorEnabled(false);
 
+                    String databaseFullName = snapshot.child(username).child("fullname").getValue(String.class);
                     String databaseUserName = snapshot.child(username).child("username").getValue(String.class);
+                    String databasePhone = snapshot.child(username).child("phone").getValue(String.class);
                     String databaseEmail = snapshot.child(username).child("email").getValue(String.class);
+
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                    editor.putString(FullName, databaseFullName);
+                    editor.putString(UserName, databaseUserName);
+                    editor.putString(Phone, databasePhone);
+                    editor.putString(Email, databaseEmail);
+                    editor.apply();
 
                     lgAuth.signInWithEmailAndPassword(databaseEmail, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
