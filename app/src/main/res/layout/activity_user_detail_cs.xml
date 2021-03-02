@@ -7,10 +7,6 @@
     android:background="@drawable/round_shape_user_profile_cs"
     tools:context=".CS.UserDetailCS">
 
-<<<<<<< HEAD
-
-=======
->>>>>>> f8bb7d6a88eb02fe302430e9f23c0dee29201da7
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/user_detail_appbar_cs"
         android:layout_width="match_parent"

@@ -45,10 +45,17 @@
     <string name="sent_verify_email">Email Verifikasi Terkirim!</string>
     <string name="user_exist">Nama pengguna ini sudah digunakan</string>
     <string name="register_success">Pendaftaran Berhasil</string>
-<<<<<<< HEAD
     <string name="track_order">Kawal Order</string>
-    <string name="input_sc">Masukkan SC</string>
+    <string name="input_myir">Masukkan MYIR</string>
     <string name="product">Produk</string>
-=======
->>>>>>> f8bb7d6a88eb02fe302430e9f23c0dee29201da7
+    <string name="detail">Detail</string>
+    <string name="minipack">Minipack</string>
+    <string name="upgrade">Upgrade</string>
+    <string name="stb">2nd STB</string>
+    <string name="duap">2P - 3P</string>
+    <string name="Hu_2p">Hu - 2P</string>
+    <string name="welcome_dashboard">Selamat Datang</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
+    <string name="search_myir">Cari MYIR</string>
+
 </resources>
