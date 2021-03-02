@@ -18,7 +18,11 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:layout_alignParentEnd="false"
+=======
+                android:layout_alignParentEnd="true"
+>>>>>>> f8bb7d6a88eb02fe302430e9f23c0dee29201da7
                 android:layout_centerVertical="true"
                 android:background="@drawable/ic_baseline_account_circle_24"
                 android:backgroundTint="@color/colorPrimary" />
@@ -30,6 +34,26 @@
                 android:layout_alignParentEnd="false"
                 android:layout_centerVertical="true"
                 android:background="#00000000" />
+<<<<<<< HEAD
+=======
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/ic_baseline_menu_24"
+                android:backgroundTint="@color/colorPrimary" />
+
+            <Button
+                android:id="@+id/to_menu"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:background="#00000000" />
+
+>>>>>>> f8bb7d6a88eb02fe302430e9f23c0dee29201da7
         </RelativeLayout>
         <LinearLayout
             android:clipToPadding="false"

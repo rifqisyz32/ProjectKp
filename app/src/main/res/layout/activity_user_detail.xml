@@ -7,7 +7,10 @@
     android:background="@drawable/ctr_bg"
     tools:context=".UserDetail">
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f8bb7d6a88eb02fe302430e9f23c0dee29201da7
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/user_detail_appbar"
         android:layout_width="match_parent"

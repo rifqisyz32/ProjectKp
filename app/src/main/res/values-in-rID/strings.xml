@@ -45,7 +45,10 @@
     <string name="sent_verify_email">Email Verifikasi Terkirim!</string>
     <string name="user_exist">Nama pengguna ini sudah digunakan</string>
     <string name="register_success">Pendaftaran Berhasil</string>
+<<<<<<< HEAD
     <string name="track_order">Kawal Order</string>
     <string name="input_sc">Masukkan SC</string>
     <string name="product">Produk</string>
+=======
+>>>>>>> f8bb7d6a88eb02fe302430e9f23c0dee29201da7
 </resources>

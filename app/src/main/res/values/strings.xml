@@ -44,7 +44,10 @@
     <string name="sent_verify_email">Email verification sent!</string>
     <string name="user_exist">This username is already taken</string>
     <string name="register_success">Sign Up Successfully</string>
+<<<<<<< HEAD
     <string name="track_order">Track Order</string>
     <string name="input_sc">Input SC</string>
     <string name="product">Product</string>
+=======
+>>>>>>> f8bb7d6a88eb02fe302430e9f23c0dee29201da7
 </resources>
