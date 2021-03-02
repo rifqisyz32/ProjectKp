@@ -4,53 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ctr_bg"
-    tools:context=".UserDetail">
+    android:background="@drawable/round_shape_user_profile_cs"
+    tools:context=".CS.UserDetailCS">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/user_detail_appbar"
+        android:id="@+id/user_detail_appbar_cs"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="240dp"
         android:fitsSystemWindows="true"
-        android:theme="@style/AppTheme">
+        app:elevation="0dp">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/user_detail_collapsing_toolbar"
+            android:id="@+id/user_detail_collapsing_toolbar_cs"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/ctr_bg"
+            android:background="@drawable/round_shape_user_profile_cs"
             android:fitsSystemWindows="true"
-            app:collapsedTitleGravity="center"
-            app:contentScrim="?attr/colorPrimary"
+            app:collapsedTitleGravity="start"
+            app:contentScrim="?attr/colorPrimaryDark"
+            app:elevation="0dp"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
             app:title="Account">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/user_detail_toolbar"
+                android:id="@+id/user_detail_toolbar_cs"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin" />
+                android:background="@drawable/round_shape_user_profile_cs"
+                app:elevation="0dp"
+                app:layout_collapseMode="pin"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_ios_new_24">
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp">
-
-                <ImageView
-                    android:id="@+id/User_detail_icon_back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/ic_baseline_arrow_back_ios_new_24" />
-
-                <Button
-                    android:id="@+id/user_detail_arrow_back"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_centerInParent="true"
-                    android:background="#00000000" />
-
-            </RelativeLayout>
+            </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -59,7 +44,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/layout_bg"
+        android:background="@drawable/user_detail_layout_bg"
         android:paddingStart="32dp"
         android:paddingTop="16dp"
         android:paddingEnd="32dp"
@@ -68,14 +53,14 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
             <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_gravity="end"
-                android:background="@drawable/ic_baseline_brightness_1_64"
-                android:elevation="16dp">
+                android:background="@drawable/round_shape_gr_small">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -87,7 +72,8 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_centerInParent="true"
-                    android:background="#00000000" />
+                    android:background="#00000000"
+                    app:elevation="16dp" />
 
             </RelativeLayout>
 
@@ -96,7 +82,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/user_detail_fullname"
+                    android:id="@+id/user_detail_fullname_cs"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="32dp"
@@ -105,83 +91,107 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/user_detail_fullname_field"
+                    android:id="@+id/user_detail_fullname_field_cs"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@+id/user_detail_fullname"
+                    android:layout_below="@+id/user_detail_fullname_cs"
                     android:fontFamily="@font/poppins_semibold"
                     android:text="Fullname"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/user_detail_username"
+                    android:id="@+id/user_detail_username_cs"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@+id/user_detail_fullname_field"
+                    android:layout_below="@+id/user_detail_fullname_field_cs"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/poppins_light"
                     android:text="@string/username"
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/user_detail_username_field"
+                    android:id="@+id/user_detail_username_field_cs"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@+id/user_detail_username"
+                    android:layout_below="@+id/user_detail_username_cs"
                     android:fontFamily="@font/poppins_semibold"
                     android:text="Username"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/user_detail_email"
+                    android:id="@+id/user_detail_email_cs"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@+id/user_detail_username_field"
+                    android:layout_below="@+id/user_detail_username_field_cs"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/poppins_light"
                     android:text="@string/email"
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/user_detail_email_field"
+                    android:id="@+id/user_detail_email_field_cs"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@+id/user_detail_email"
+                    android:layout_below="@+id/user_detail_email_cs"
                     android:fontFamily="@font/poppins_semibold"
                     android:text="username@gmail.com"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/user_detail_number"
+                    android:id="@+id/user_detail_number_cs"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@+id/user_detail_email_field"
+                    android:layout_below="@+id/user_detail_email_field_cs"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/poppins_light"
                     android:text="@string/phone"
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/user_detail_number_field"
+                    android:id="@+id/user_detail_number_field_cs"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@+id/user_detail_number"
+                    android:layout_below="@+id/user_detail_number_cs"
                     android:fontFamily="@font/poppins_semibold"
-                    android:text="082282875147"
-                    android:textSize="20sp" />
+                    android:text="0123456789"
+                    android:textSize="16sp" />
 
                 <Button
-                    android:id="@+id/user_detail_logout"
+                    android:id="@+id/user_detail_logout_cs"
                     style="@style/SecondTheme"
                     android:layout_width="150dp"
                     android:layout_height="50dp"
-                    android:layout_below="@+id/user_detail_number_field"
+                    android:layout_below="@+id/user_detail_number_field_cs"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="280dp"
-                    android:background="@drawable/round_shape_white"
+                    android:background="@drawable/round_shape_gr"
                     android:fontFamily="@font/poppins_semibold"
                     android:text="@string/logout"
-                    android:textColor="#fff" />
+                    android:textAllCaps="false"
+                    android:textColor="#fff"
+                    app:backgroundTint="@color/button_temp"
+                    app:elevation="8dp" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/user_detail_number_field_cs"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="280dp"
+                    android:elevation="8dp">
+
+                    <ProgressBar
+                        android:id="@+id/user_detail_prog_cs"
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/round_shape_gr"
+                        android:indeterminate="true"
+                        android:indeterminateTint="@color/white"
+                        android:padding="8dp"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
 
             </RelativeLayout>
 

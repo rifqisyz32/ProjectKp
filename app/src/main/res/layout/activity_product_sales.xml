@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Sales.ProductSales">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@drawable/ic_baseline_arrow_back_ios_new_24"
+                android:backgroundTint="@color/black" />
+
+            <Button
+                android:id="@+id/go_back_product_sales"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="100dp"
+                android:background="#00000000" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semibold"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="@string/product"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="16dp"
+            android:background="@drawable/round_shape_gr_red">
+
+            <ImageView
+                android:id="@+id/product_icon1_sales"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="16dp"
+                android:background="@drawable/round_shape_white"
+                android:padding="8dp"
+                android:src="@drawable/ic_baseline_shopping_cart_24" />
+
+            <TextView
+                android:id="@+id/product_name1_sales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/product_icon1_sales"
+                android:fontFamily="@font/poppins_semibold"
+                android:paddingTop="24dp"
+                android:text="@string/minipack"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/product_name1_sales"
+                android:layout_toEndOf="@+id/product_icon1_sales"
+                android:fontFamily="@font/poppins_light"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:text="@string/lorem"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/product_detail1_sales"
+                style="@style/SecondTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:background="#00000000"
+                android:fontFamily="@font/poppins_medium"
+                android:paddingStart="32dp"
+                android:paddingEnd="32dp"
+                android:text="@string/detail"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="16dp"
+            android:background="@drawable/round_shape_gr_red">
+
+            <ImageView
+                android:id="@+id/product_icon2_sales"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="16dp"
+                android:background="@drawable/round_shape_white"
+                android:padding="8dp"
+                android:src="@drawable/ic_baseline_shopping_cart_24" />
+
+            <TextView
+                android:id="@+id/product_name2_sales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/product_icon2_sales"
+                android:fontFamily="@font/poppins_semibold"
+                android:paddingTop="24dp"
+                android:text="@string/upgrade"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/product_name2_sales"
+                android:layout_toEndOf="@+id/product_icon2_sales"
+                android:fontFamily="@font/poppins_light"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:text="@string/lorem"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/product_detail2_sales"
+                style="@style/SecondTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:background="#00000000"
+                android:fontFamily="@font/poppins_medium"
+                android:paddingStart="32dp"
+                android:paddingEnd="32dp"
+                android:text="@string/detail"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="16dp"
+            android:background="@drawable/round_shape_gr_red">
+
+            <ImageView
+                android:id="@+id/product_icon3_sales"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="16dp"
+                android:background="@drawable/round_shape_white"
+                android:padding="8dp"
+                android:src="@drawable/ic_baseline_shopping_cart_24" />
+
+            <TextView
+                android:id="@+id/product_name3_sales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/product_icon3_sales"
+                android:fontFamily="@font/poppins_semibold"
+                android:paddingTop="24dp"
+                android:text="@string/stb"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/product_name3_sales"
+                android:layout_toEndOf="@+id/product_icon3_sales"
+                android:fontFamily="@font/poppins_light"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:text="@string/lorem"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/product_detail3_sales"
+                style="@style/SecondTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:background="#00000000"
+                android:fontFamily="@font/poppins_medium"
+                android:paddingStart="32dp"
+                android:paddingEnd="32dp"
+                android:text="@string/detail"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="16dp"
+            android:background="@drawable/round_shape_gr_red">
+
+            <ImageView
+                android:id="@+id/product_icon4_sales"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="16dp"
+                android:background="@drawable/round_shape_white"
+                android:padding="8dp"
+                android:src="@drawable/ic_baseline_shopping_cart_24" />
+
+            <TextView
+                android:id="@+id/product_name4_sales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/product_icon4_sales"
+                android:fontFamily="@font/poppins_semibold"
+                android:paddingTop="24dp"
+                android:text="@string/duap"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/product_name4_sales"
+                android:layout_toEndOf="@+id/product_icon4_sales"
+                android:fontFamily="@font/poppins_light"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:text="@string/lorem"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/product_detail4_sales"
+                style="@style/SecondTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:background="#00000000"
+                android:fontFamily="@font/poppins_medium"
+                android:paddingStart="32dp"
+                android:paddingEnd="32dp"
+                android:text="@string/detail"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="16dp"
+            android:background="@drawable/round_shape_gr_red">
+
+            <ImageView
+                android:id="@+id/product_icon5_sales"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="16dp"
+                android:background="@drawable/round_shape_white"
+                android:padding="8dp"
+                android:src="@drawable/ic_baseline_shopping_cart_24" />
+
+            <TextView
+                android:id="@+id/product_name5_sales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/product_icon5_sales"
+                android:fontFamily="@font/poppins_semibold"
+                android:paddingTop="24dp"
+                android:text="@string/Hu_2p"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/product_name5_sales"
+                android:layout_toEndOf="@+id/product_icon5_sales"
+                android:fontFamily="@font/poppins_light"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:text="@string/lorem"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/product_detail5_sales"
+                style="@style/SecondTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:background="#00000000"
+                android:fontFamily="@font/poppins_medium"
+                android:paddingStart="32dp"
+                android:paddingEnd="32dp"
+                android:text="@string/detail"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</ScrollView>

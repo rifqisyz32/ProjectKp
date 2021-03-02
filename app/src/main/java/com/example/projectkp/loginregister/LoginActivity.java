@@ -12,8 +12,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.projectkp.DashboardActivity;
+import com.example.projectkp.CS.DashboardCS;
 import com.example.projectkp.R;
+import com.example.projectkp.Sales.DashboardSales;
 import com.example.projectkp.forgetpassword.ForgetActivity;
 import com.example.projectkp.verification.EmailVerifyActivity;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -87,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (logAuth.getCurrentUser() != null) {
             if (logAuth.getCurrentUser().isEmailVerified()) {
-                startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+                startActivity(new Intent(getApplicationContext(), DashboardSales.class));
                 finish();
             }
         }
@@ -130,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
                             if (logAuth.getCurrentUser() != null) {
                                 if (logAuth.getCurrentUser().isEmailVerified()) {
                                     logProgress.setVisibility(View.GONE);
-                                    startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+                                    startActivity(new Intent(getApplicationContext(), DashboardSales.class));
                                 } else {
                                     logProgress.setVisibility(View.GONE);
                                     Intent dataUser = new Intent(getApplicationContext(), EmailVerifyActivity.class);
