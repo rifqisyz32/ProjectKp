@@ -1,21 +1,20 @@
 package com.example.projectkp;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityOptionsCompat;
-
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Pair;
 import android.view.View;
-import android.view.WindowInsets;
-import android.view.WindowInsetsController;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.projectkp.loginregister.LoginActivity;
 
 public class SplashScreen extends AppCompatActivity {
     public static int SPLASH_SCREEN = 3000;
@@ -27,10 +26,10 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        first_anim = AnimationUtils.loadAnimation(this,R.anim.first_animation);
-        second_anim = AnimationUtils.loadAnimation(this,R.anim.second_animation);
+        first_anim = AnimationUtils.loadAnimation(this, R.anim.first_animation);
+        second_anim = AnimationUtils.loadAnimation(this, R.anim.second_animation);
 
         main_logo = findViewById(R.id.main_logo);
         main_title = findViewById(R.id.main_title);
@@ -47,10 +46,10 @@ public class SplashScreen extends AppCompatActivity {
                 Pair[] pairs = new Pair[2];
                 pairs[0] = new Pair<View, String>(main_logo, "main_logo");
                 pairs[1] = new Pair<View, String>(main_title, "main_title");
-                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(SplashScreen.this,pairs);
-                startActivity(loginIntent,options.toBundle());
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(SplashScreen.this, pairs);
+                startActivity(loginIntent, options.toBundle());
                 finish();
             }
-        },SPLASH_SCREEN);
+        }, SPLASH_SCREEN);
     }
 }
