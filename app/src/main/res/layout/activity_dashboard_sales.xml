@@ -19,14 +19,15 @@
             android:paddingEnd="36dp"
             android:paddingBottom="8dp">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/user_detail_photo_sales"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="28dp"
                 android:background="@drawable/ic_baseline_account_circle_32"
                 android:backgroundTint="@color/colorPrimary"
-                app:elevation="16dp" />
+                app:elevation="4dp" />
 
             <Button
                 android:id="@+id/to_user_detail_sales"

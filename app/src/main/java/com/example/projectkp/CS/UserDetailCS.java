@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -22,6 +23,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.bumptech.glide.Glide;
 import com.example.projectkp.R;
 import com.example.projectkp.loginregister.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -37,6 +39,9 @@ import com.google.firebase.storage.UploadTask;
 
 public class UserDetailCS extends AppCompatActivity {
 
+    Window window;
+    FirebaseAuth userCSAuth;
+    FirebaseUser userCSId;
     RelativeLayout savePhotoLayout;
     ImageView savePhoto, userPhoto;
     ProgressBar savePhotoProgress;
@@ -60,19 +65,25 @@ public class UserDetailCS extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_detail_cs);
+        if (Build.VERSION.SDK_INT >= 21) {
+            window = this.getWindow();
+            window.setStatusBarColor(this.getResources().getColor(R.color.status_bar_cs));
+        }
 
-        fullNameUser        = findViewById(R.id.user_detail_fullname_field_cs);
-        usernameUser        = findViewById(R.id.user_detail_username_field_cs);
-        emailUser           = findViewById(R.id.user_detail_email_field_cs);
-        phoneUser           = findViewById(R.id.user_detail_number_field_cs);
-        userPhoto           = findViewById(R.id.user_photo_cs);
-        savePhotoLayout     = findViewById(R.id.img_updated_cs);
-        savePhoto           = findViewById(R.id.img_updated_bg_cs);
-        savePhotoProgress   = findViewById(R.id.img_updated_prog_cs);
+        fullNameUser = findViewById(R.id.user_detail_fullname_field_cs);
+        usernameUser = findViewById(R.id.user_detail_username_field_cs);
+        emailUser = findViewById(R.id.user_detail_email_field_cs);
+        phoneUser = findViewById(R.id.user_detail_number_field_cs);
+        userPhoto = findViewById(R.id.user_photo_cs);
+        savePhotoLayout = findViewById(R.id.img_updated_cs);
+        savePhoto = findViewById(R.id.img_updated_bg_cs);
+        savePhotoProgress = findViewById(R.id.img_updated_prog_cs);
+        userCSAuth = FirebaseAuth.getInstance();
+        userCSId = userCSAuth.getCurrentUser();
 
         getUserDataPreferences();
 //        getPhotoSharedPreference();
-//        getUserPhoto();
+
 
         Toolbar toolbar = findViewById(R.id.user_detail_toolbar_cs);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -112,7 +123,7 @@ public class UserDetailCS extends AppCompatActivity {
                 savePhoto.setVisibility(View.GONE);
                 savePhotoProgress.setVisibility(View.VISIBLE);
 //                deletePhotoDatabase();
-                storePhotoDatabase(userPhotoUriCS, FirebaseAuth.getInstance().getCurrentUser());
+                storePhotoDatabase(userPhotoUriCS, userCSId);
             }
         });
     }
@@ -145,8 +156,10 @@ public class UserDetailCS extends AppCompatActivity {
     }
 
     private void getUserDataPreferences() {
-        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
+        Glide.with(this).load(userCSId.getPhotoUrl()).into(userPhoto);
+
+        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         if (sharedPreferences.contains(FullName)) {
             fullNameUser.setText(sharedPreferences.getString(FullName, ""));
         }
@@ -206,20 +219,6 @@ public class UserDetailCS extends AppCompatActivity {
         imgPath.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }*/
-
-   /* private void getUserPhoto() {
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("cs_photo").child(myUsernameCS);
-        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

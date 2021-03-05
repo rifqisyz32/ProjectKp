@@ -21,24 +21,24 @@
             android:background="@drawable/round_shape_user_profile_sales"
             android:fitsSystemWindows="true"
             app:collapsedTitleGravity="start"
-            app:contentScrim="@color/pick_photo_sales"
+            app:contentScrim="#CD4B4B"
             app:elevation="0dp"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:padding="16dp">
+                android:layout_gravity="center">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/user_photo_sales"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
-                    android:layout_centerInParent="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="32dp"
                     android:background="@drawable/ic_baseline_account_circle_120"
-                    android:padding="16dp"
-                    app:elevation="16dp" />
+                    android:elevation="8dp" />
 
                 <RelativeLayout
                     android:id="@+id/update_img_sales"
@@ -46,14 +46,15 @@
                     android:layout_height="36dp"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
+                    android:layout_margin="8dp"
                     android:background="@drawable/round_shape_gr_red_small"
-                    android:backgroundTint="@color/white">
+                    android:backgroundTint="@color/white"
+                    android:elevation="4dp">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:elevation="16dp"
                         android:src="@drawable/ic_baseline_photo_camera_24"
                         app:tint="@color/pick_photo_sales" />
 
@@ -62,8 +63,7 @@
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:layout_centerInParent="true"
-                        android:background="#00000000"
-                        app:elevation="16dp" />
+                        android:background="#00000000" />
 
                 </RelativeLayout>
 
@@ -73,9 +73,11 @@
                     android:layout_height="36dp"
                     android:layout_above="@+id/update_img_sales"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
                     android:background="@drawable/round_shape_gr_red_small"
                     android:backgroundTint="@color/white"
+                    android:elevation="4dp"
                     android:visibility="gone">
 
                     <ImageView
@@ -83,7 +85,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:elevation="16dp"
                         android:src="@drawable/ic_baseline_check_24"
                         app:tint="@color/pick_photo_sales" />
 
@@ -92,8 +93,7 @@
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:layout_centerInParent="true"
-                        android:background="#00000000"
-                        app:elevation="16dp" />
+                        android:background="#00000000" />
 
                     <ProgressBar
                         android:id="@+id/img_updated_prog_sales"
@@ -128,21 +128,46 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/user_detail_layout_bg"
-        android:paddingStart="32dp"
-        android:paddingTop="32dp"
-        android:paddingEnd="32dp"
+        android:padding="16dp"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-            <RelativeLayout
+        <RelativeLayout
+            android:id="@+id/acc_sales"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:paddingTop="32dp"
+            android:paddingBottom="16dp">
+
+            <TextView
+                android:id="@+id/account_title_sales"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:paddingStart="32dp"
+                android:paddingEnd="32dp"
+                android:text="@string/account"
+                android:textColor="@color/pick_photo_sales"
+                android:textSize="20sp" />
+
+            <RelativeLayout
+                android:id="@+id/acc_desc_bg_sales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/account_title_sales"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/round_shape_acc"
+                android:backgroundTint="@color/user_detail_layout_sales"
+                android:elevation="4dp"
                 android:padding="16dp">
 
                 <TextView
                     android:id="@+id/user_detail_fullname_sales"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="32dp"
                     android:fontFamily="@font/poppins_light"
                     android:text="@string/fullname"
                     android:textSize="12sp" />
@@ -213,24 +238,109 @@
                     android:text="0123456789"
                     android:textSize="16sp" />
 
-                <Button
-                    android:id="@+id/user_detail_logout_sales"
-                    style="@style/SecondTheme"
-                    android:layout_width="150dp"
-                    android:layout_height="50dp"
-                    android:layout_below="@+id/user_detail_number_field_sales"
-                    android:layout_centerHorizontal="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginTop="280dp"
-                    android:background="@drawable/round_shape_gr_red"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="@string/logout"
-                    android:textAllCaps="false"
-                    android:textColor="#fff"
-                    app:backgroundTint="@color/colorPrimary"
-                    app:elevation="8dp" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/theme_title_sales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/acc_desc_bg_sales"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:paddingStart="32dp"
+                android:paddingEnd="32dp"
+                android:text="@string/theme"
+                android:textColor="@color/pick_photo_sales"
+                android:textSize="20sp" />
+
+            <RelativeLayout
+                android:id="@+id/theme_desc_bg_sales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/theme_title_sales"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/round_shape_acc"
+                android:backgroundTint="@color/user_detail_layout_sales"
+                android:elevation="4dp"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/theme_light_desc_sales"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/light_mode"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/theme_dark_desc_sales"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/dark_mode"
+                    android:textSize="14sp"
+                    android:visibility="gone" />
 
             </RelativeLayout>
+
+            <TextView
+                android:id="@+id/language_title_sales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/theme_desc_bg_sales"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:paddingStart="32dp"
+                android:paddingEnd="32dp"
+                android:text="@string/language"
+                android:textColor="@color/pick_photo_sales"
+                android:textSize="20sp" />
+
+            <RelativeLayout
+                android:id="@+id/language_desc_bg_sales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/language_title_sales"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/round_shape_acc"
+                android:backgroundTint="@color/user_detail_layout_sales"
+                android:elevation="4dp"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/language_en_desc_sales"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/english"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/user_detail_logout_sales"
+                style="@style/SecondTheme"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/language_desc_bg_sales"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/round_shape_gr_red"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/logout"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                app:backgroundTint="#CD4B4B"
+                app:elevation="8dp" />
+
+        </RelativeLayout>
 
     </androidx.core.widget.NestedScrollView>
 

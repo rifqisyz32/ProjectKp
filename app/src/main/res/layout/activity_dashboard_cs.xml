@@ -5,7 +5,7 @@
     style="CSTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Sales.DashboardSales">
+    tools:context=".CS.DashboardCS">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,14 +20,15 @@
             android:paddingEnd="36dp"
             android:paddingBottom="8dp">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/user_detail_photo_cs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="28dp"
                 android:background="@drawable/ic_baseline_account_circle_32"
-                android:backgroundTint="@color/action_temp" />
+                android:backgroundTint="@color/action_temp"
+                app:elevation="4dp" />
 
             <Button
                 android:id="@+id/to_user_detail_cs"
@@ -98,7 +99,8 @@
                 android:layout_width="160dp"
                 android:layout_height="160dp"
                 android:layout_margin="8dp"
-                app:cardCornerRadius="16dp">
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"

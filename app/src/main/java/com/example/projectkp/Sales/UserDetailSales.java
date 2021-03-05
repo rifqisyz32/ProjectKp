@@ -22,6 +22,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.bumptech.glide.Glide;
 import com.example.projectkp.R;
 import com.example.projectkp.loginregister.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -37,6 +38,8 @@ import com.google.firebase.storage.UploadTask;
 
 public class UserDetailSales extends AppCompatActivity {
 
+    FirebaseAuth userSalesAuth;
+    FirebaseUser userSalesId;
     RelativeLayout savePhotoLayout;
     ProgressBar savePhotoProgress;
     TextView fullNameUser, usernameUser, emailUser, phoneUser;
@@ -61,18 +64,19 @@ public class UserDetailSales extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_detail_sales);
 
-        fullNameUser        = findViewById(R.id.user_detail_fullname_field_sales);
-        usernameUser        = findViewById(R.id.user_detail_username_field_sales);
-        emailUser           = findViewById(R.id.user_detail_email_field_sales);
-        phoneUser           = findViewById(R.id.user_detail_number_field_sales);
-        userPhoto           = findViewById(R.id.user_photo_sales);
-        savePhotoLayout     = findViewById(R.id.img_updated_sales);
-        savePhoto           = findViewById(R.id.img_updated_bg_sales);
-        savePhotoProgress   = findViewById(R.id.img_updated_prog_sales);
+        fullNameUser = findViewById(R.id.user_detail_fullname_field_sales);
+        usernameUser = findViewById(R.id.user_detail_username_field_sales);
+        emailUser = findViewById(R.id.user_detail_email_field_sales);
+        phoneUser = findViewById(R.id.user_detail_number_field_sales);
+        userPhoto = findViewById(R.id.user_photo_sales);
+        savePhotoLayout = findViewById(R.id.img_updated_sales);
+        savePhoto = findViewById(R.id.img_updated_bg_sales);
+        savePhotoProgress = findViewById(R.id.img_updated_prog_sales);
+        userSalesAuth = FirebaseAuth.getInstance();
+        userSalesId = userSalesAuth.getCurrentUser();
 
         getUserDataPreferences();
 //        getPhotoSharedPreference();
-//        getUserPhoto();
 
         Toolbar toolbar = findViewById(R.id.user_detail_toolbar_sales);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -112,7 +116,7 @@ public class UserDetailSales extends AppCompatActivity {
                 savePhoto.setVisibility(View.GONE);
                 savePhotoProgress.setVisibility(View.VISIBLE);
 //                deletePhotoDatabase();
-                storePhotoDatabase(userPhotoUriSales, FirebaseAuth.getInstance().getCurrentUser());
+                storePhotoDatabase(userPhotoUriSales, userSalesId);
             }
         });
     }
@@ -145,8 +149,10 @@ public class UserDetailSales extends AppCompatActivity {
     }
 
     private void getUserDataPreferences() {
-        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
+        Glide.with(this).load(userSalesId.getPhotoUrl()).into(userPhoto);
+
+        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         if (sharedPreferences.contains(FullName)) {
             fullNameUser.setText(sharedPreferences.getString(FullName, ""));
         }

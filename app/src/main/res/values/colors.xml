@@ -5,7 +5,10 @@
     <color name="colorAccent">#CD4B4B</color>
     <color name="colorSubtitle">#757575</color>
 
+    <color name="user_detail_layout_cs">#FFFFFF</color>
+    <color name="user_detail_layout_sales">#FFFFFF</color>
     <color name="action_temp">#893abc</color>
+    <color name="status_bar_cs">#601880</color>
     <color name="pick_photo_cs">#893abc</color>
     <color name="pick_photo_sales">#CD4B4B</color>
     <color name="button_temp">#9744ff</color>
