@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/splash_screen_bg"
+    android:orientation="vertical"
     android:padding="32dp"
     tools:context=".SplashScreen">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:padding="32dp">
 
 
@@ -20,6 +20,7 @@
             android:layout_height="150dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+            android:layout_marginBottom="16dp"
             android:elevation="24dp"
             android:src="@drawable/telkom_logo"
             android:transitionName="main_logo" />
@@ -28,11 +29,12 @@
             android:id="@+id/main_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/main_logo"
+            android:layout_above="@id/second_title"
+            android:layout_marginTop="16dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="256dp"
             android:fontFamily="@font/poppins_bold"
             android:text="@string/main_name"
+            android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="48sp"
             android:transitionName="main_title" />
@@ -41,14 +43,16 @@
             android:id="@+id/second_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/main_title"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:fontFamily="@font/poppins_medium"
             android:text="@string/second_name"
+            android:layout_marginBottom="16dp"
+            android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:transitionName="second_title" />
 
     </RelativeLayout>
 
-</RelativeLayout>
+</LinearLayout>

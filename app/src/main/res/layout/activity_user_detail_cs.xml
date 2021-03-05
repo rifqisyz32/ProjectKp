@@ -2,6 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="CSTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/round_shape_user_profile_cs"
@@ -21,10 +22,93 @@
             android:background="@drawable/round_shape_user_profile_cs"
             android:fitsSystemWindows="true"
             app:collapsedTitleGravity="start"
-            app:contentScrim="?attr/colorPrimaryDark"
+            app:contentScrim="@color/pick_photo_cs"
             app:elevation="0dp"
-            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
-            app:title="Account">
+            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:padding="16dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/user_photo_cs"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/ic_baseline_account_circle_120"
+                    android:padding="16dp"
+                    app:elevation="16dp" />
+
+                <RelativeLayout
+                    android:id="@+id/update_img_cs"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/round_shape_gr_small"
+                    android:backgroundTint="@color/white">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:elevation="16dp"
+                        android:src="@drawable/ic_baseline_photo_camera_24"
+                        app:tint="@color/pick_photo_cs" />
+
+                    <Button
+                        android:id="@+id/update_img_button_cs"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_centerInParent="true"
+                        android:background="#00000000"
+                        app:elevation="16dp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/img_updated_cs"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_above="@+id/update_img_cs"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/round_shape_gr_small"
+                    android:backgroundTint="@color/white"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/img_updated_bg_cs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:elevation="16dp"
+                        android:src="@drawable/ic_baseline_check_24"
+                        app:tint="@color/pick_photo_cs" />
+
+                    <Button
+                        android:id="@+id/img_updated_button_cs"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_centerInParent="true"
+                        android:background="#00000000"
+                        app:elevation="16dp" />
+
+                    <ProgressBar
+                        android:id="@+id/img_updated_prog_cs"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_centerInParent="true"
+                        android:indeterminate="true"
+                        android:indeterminateTint="@color/pick_photo_cs"
+                        android:padding="8dp"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/user_detail_toolbar_cs"
@@ -46,40 +130,14 @@
         android:layout_height="match_parent"
         android:background="@drawable/user_detail_layout_bg"
         android:paddingStart="32dp"
-        android:paddingTop="16dp"
+        android:paddingTop="32dp"
         android:paddingEnd="32dp"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <RelativeLayout
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="end"
-                android:background="@drawable/round_shape_gr_small">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/ic_baseline_edit_24" />
-
-                <Button
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_centerInParent="true"
-                    android:background="#00000000"
-                    app:elevation="16dp" />
-
-            </RelativeLayout>
-
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:padding="16dp">
 
                 <TextView
                     android:id="@+id/user_detail_fullname_cs"
@@ -163,6 +221,7 @@
                     android:layout_height="50dp"
                     android:layout_below="@+id/user_detail_number_field_cs"
                     android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
                     android:layout_marginTop="280dp"
                     android:background="@drawable/round_shape_gr"
                     android:fontFamily="@font/poppins_semibold"
@@ -172,32 +231,8 @@
                     app:backgroundTint="@color/button_temp"
                     app:elevation="8dp" />
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/user_detail_number_field_cs"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="280dp"
-                    android:elevation="8dp">
-
-                    <ProgressBar
-                        android:id="@+id/user_detail_prog_cs"
-                        android:layout_width="150dp"
-                        android:layout_height="50dp"
-                        android:layout_centerInParent="true"
-                        android:background="@drawable/round_shape_gr"
-                        android:indeterminate="true"
-                        android:indeterminateTint="@color/white"
-                        android:padding="8dp"
-                        android:visibility="gone" />
-
-                </RelativeLayout>
-
             </RelativeLayout>
 
-        </LinearLayout>
-
     </androidx.core.widget.NestedScrollView>
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

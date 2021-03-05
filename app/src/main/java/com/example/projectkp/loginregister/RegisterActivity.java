@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatRadioButton;
 
 import com.example.projectkp.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -28,6 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
     Button signUp, loginAgain;
     FirebaseAuth regAuth;
     ProgressBar regProgress;
+    AppCompatRadioButton csReg, salesReg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void storeId() {
+        regAuth = FirebaseAuth.getInstance();
         fullnameReg = findViewById(R.id.fullname_reg);
         usernameReg = findViewById(R.id.username_reg);
         phoneReg = findViewById(R.id.phone_reg);
@@ -62,24 +66,27 @@ public class RegisterActivity extends AppCompatActivity {
         regProgress = findViewById(R.id.reg_prog);
         loginAgain = findViewById(R.id.login_again);
         signUp = findViewById(R.id.sign_up);
-        regAuth = FirebaseAuth.getInstance();
+        csReg = findViewById(R.id.cs_reg);
+        salesReg = findViewById(R.id.sales_reg);
     }
 
     private void storeUserData() {
 
-        if (!validateFullName() | !validateUserName() | !validateEmail() | !validatePhone() | !validatePassword()) {
+        if (!validateFullName() | !validateUserName() | !validateEmail() | !validatePhone() | !validatePassword() | !validateRadioButton()) {
             regProgress.setVisibility(View.GONE);
             return;
         }
+
+        FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
+        DatabaseReference reference = rootNode.getReference("users");
 
         String fullname = fullnameReg.getEditText().getText().toString();
         String username = usernameReg.getEditText().getText().toString();
         String phone = phoneReg.getEditText().getText().toString();
         String email = emailReg.getEditText().getText().toString();
         String password = passwordReg.getEditText().getText().toString();
-
-        FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
-        DatabaseReference reference = rootNode.getReference("users");
+        String roleCS = csReg.getText().toString();
+        String roleSales = salesReg.getText().toString();
 
         Query checkUser = rootNode.getReference("users").orderByChild("username").equalTo(username);
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -92,7 +99,15 @@ public class RegisterActivity extends AppCompatActivity {
                     regAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
-                            UserHelper storeData = new UserHelper(fullname, username, phone, email);
+                            UserHelper storeData = new UserHelper(fullname, username, phone, email,roleCS);
+
+                            if(csReg.isChecked()){
+                                storeData.setRole(roleCS);
+                            }
+                            else{
+                                storeData.setRole(roleSales);
+                            }
+
                             reference.child(username).setValue(storeData);
 
                             regProgress.setVisibility(View.GONE);
@@ -130,6 +145,17 @@ public class RegisterActivity extends AppCompatActivity {
         } else {
             fullnameReg.setError(null);
             fullnameReg.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private Boolean validateRadioButton() {
+        RadioGroup radioGroup;
+        radioGroup = findViewById(R.id.role_reg);
+        if (radioGroup.getCheckedRadioButtonId() == -1) {
+            Toast.makeText(getApplicationContext(), getString(R.string.pick_role), Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
             return true;
         }
     }

@@ -51,14 +51,11 @@ public class EmailVerifyActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         verifyProgress.setVisibility(View.GONE);
-                        Toast.makeText(getApplicationContext(), "Verification email sent", Toast.LENGTH_SHORT).show();
-                        if (FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()) {
-                            startActivity(new Intent(getApplicationContext(), EmailVerify2Activity.class));
-                            finish();
-                        } else
-                            Toast.makeText(getApplicationContext(), "Please check your email to verify", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), EmailVerify2Activity.class));
+                        finish();
                     }
                 });
+
                 verifyAuth.getCurrentUser().sendEmailVerification().addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
