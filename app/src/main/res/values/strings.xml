@@ -12,8 +12,7 @@
     <string name="signmeup">Sign Up Here</string>
     <string name="forget">Forget Password?</string>
     <string name="fullname">Full Name</string>
-    <string name="login_again">Login Again</string>
-    <string name="login_here">Login Here</string>
+    <string name="login_again">Login here</string>
     <string name="login_again_text">Already have account?</string>
     <string name="welcome_login">Welcome User\nPlease login to continue</string>
     <string name="welcome_register">Welcome User\nPlease Input your data below</string>
@@ -59,17 +58,8 @@
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
     <string name="search_myir">Search MYIR</string>
     <string name="role">Register as:</string>
-    <string name="check_email">Please check your email to verify</string>
-    <string name="acc_permission">Please accept for required permission</string>
     <string name="pick_role">Have to choose a role</string>
+    <string name="check_email">Please check your email to verify</string>
     <string name="retry">Retry</string>
-    <string name="photo_updated">Profile Photo Updated</string>
-    <string name="profile">Profile</string>
-    <string name="account">Account</string>
-    <string name="theme">Theme</string>
-    <string name="language">Language</string>
-    <string name="light_mode">Light Mode</string>
-    <string name="dark_mode">Dark Mode</string>
-    <string name="english">English</string>
 
 </resources>

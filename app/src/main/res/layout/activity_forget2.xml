@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".forgetpassword.Forget2Activity">
+    tools:context=".forgetpassword.ForgetActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             android:layout_height="200dp"
             android:layout_centerHorizontal="true"
             android:src="@drawable/ic_baseline_check_circle_200"
-            app:tint="#03DAC5" />
+            app:tint="@color/complete" />
 
         <TextView
             android:id="@+id/reset_title"
@@ -44,7 +44,7 @@
             android:paddingEnd="32dp"
             android:text="@string/reset_success_desc"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/colorSubtitle"
             android:textSize="14sp" />
 
         <Button
@@ -56,13 +56,14 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:layout_marginTop="40dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/round_shape_white"
+            android:backgroundTint="@color/complete"
             android:elevation="16dp"
             android:fontFamily="@font/poppins_semibold"
             android:text="@string/login_again"
             android:textAlignment="center"
-            android:textColor="@color/white"
+            android:textColor="#FFF"
             android:textSize="16sp" />
 
         <RelativeLayout

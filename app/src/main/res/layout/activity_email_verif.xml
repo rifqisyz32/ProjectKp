@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".verification.EmailVerifyActivity">
+    tools:context=".forgetpassword.ForgetActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -65,7 +65,7 @@
                 android:fontFamily="@font/poppins_light"
                 android:text="@string/hey"
                 android:textAlignment="center"
-                android:textColor="@color/black"
+                android:textColor="@color/colorSubtitle"
                 android:textSize="14sp" />
 
             <TextView
@@ -79,7 +79,7 @@
                 android:fontFamily="@font/poppins_semibold"
                 android:text="@string/username"
                 android:textAlignment="center"
-                android:textColor="@color/black"
+                android:textColor="@color/colorSubtitle"
                 android:textSize="14sp" />
 
             <TextView
@@ -93,7 +93,7 @@
                 android:fontFamily="@font/poppins_light"
                 android:text="@string/email_verify_desc"
                 android:textAlignment="center"
-                android:textColor="@color/black"
+                android:textColor="@color/colorSubtitle"
                 android:textSize="14sp" />
 
             <Button
@@ -110,7 +110,7 @@
                 android:fontFamily="@font/poppins_semibold"
                 android:text="@string/verify"
                 android:textAlignment="center"
-                android:textColor="@color/white"
+                android:textColor="#FFF"
                 android:textSize="16sp" />
 
             <Button

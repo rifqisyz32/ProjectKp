@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".verification.EmailVerify2Activity">
+    tools:context=".forgetpassword.ForgetActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
             android:layout_height="200dp"
             android:layout_centerHorizontal="true"
             android:src="@drawable/ic_baseline_check_circle_200"
-            app:tint="#03DAC5" />
+            app:tint="@color/complete" />
 
         <TextView
             android:id="@+id/email_verif_title2"
@@ -43,7 +43,7 @@
             android:paddingEnd="32dp"
             android:text="@string/email_success_desc"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/colorSubtitle"
             android:textSize="14sp" />
 
         <Button
@@ -59,9 +59,9 @@
             android:layout_toEndOf="@id/retry_verif"
             android:background="@drawable/round_shape_white"
             android:fontFamily="@font/poppins_semibold"
-            android:text="@string/login"
+            android:text="@string/continue_inside"
             android:textAlignment="center"
-            android:textColor="@color/white"
+            android:textColor="#FFF"
             android:textSize="16sp" />
 
         <Button
