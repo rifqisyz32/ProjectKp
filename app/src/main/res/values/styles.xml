@@ -15,4 +15,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="CSTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/button_temp</item>
+        <item name="colorPrimaryDark">@color/action_temp</item>
+        <item name="colorAccent">@color/complete</item>
+    </style>
+
 </resources>

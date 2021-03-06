@@ -2,6 +2,10 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+<<<<<<< HEAD
+=======
+    style="CSTheme"
+>>>>>>> 37593b8125fc315649330f86b582071b87d37a62
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Sales.DashboardSales">
@@ -20,6 +24,10 @@
             android:paddingBottom="8dp">
 
             <ImageView
+<<<<<<< HEAD
+=======
+                android:id="@+id/user_detail_photo_cs"
+>>>>>>> 37593b8125fc315649330f86b582071b87d37a62
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -111,7 +119,11 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="16dp"
                         android:background="@drawable/circle_shape_white"
+<<<<<<< HEAD
                         android:elevation="16dp"
+=======
+                        android:elevation="8dp"
+>>>>>>> 37593b8125fc315649330f86b582071b87d37a62
                         android:padding="16dp"
                         android:src="@drawable/ic_baseline_search_24" />
 
@@ -121,7 +133,12 @@
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/poppins_semibold"
                         android:text="@string/search_myir"
+<<<<<<< HEAD
                         android:textColor="@color/white" />
+=======
+                        android:textColor="#fff"
+                        android:textSize="14sp" />
+>>>>>>> 37593b8125fc315649330f86b582071b87d37a62
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -147,7 +164,11 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="16dp"
                         android:background="@drawable/circle_shape_white"
+<<<<<<< HEAD
                         android:elevation="16dp"
+=======
+                        android:elevation="8dp"
+>>>>>>> 37593b8125fc315649330f86b582071b87d37a62
                         android:padding="16dp"
                         android:src="@drawable/ic_baseline_note_add_24" />
 
@@ -157,7 +178,12 @@
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/poppins_semibold"
                         android:text="@string/track_order"
+<<<<<<< HEAD
                         android:textColor="@color/white" />
+=======
+                        android:textColor="#fff"
+                        android:textSize="14sp" />
+>>>>>>> 37593b8125fc315649330f86b582071b87d37a62
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -191,7 +217,11 @@
                         android:layout_height="64dp"
                         android:layout_marginTop="16dp"
                         android:background="@drawable/circle_shape_white"
+<<<<<<< HEAD
                         android:elevation="16dp"
+=======
+                        android:elevation="8dp"
+>>>>>>> 37593b8125fc315649330f86b582071b87d37a62
                         android:padding="16dp"
                         android:src="@drawable/ic_baseline_add_shopping_cart_24" />
 
@@ -201,7 +231,12 @@
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/poppins_semibold"
                         android:text="@string/product"
+<<<<<<< HEAD
                         android:textColor="@color/white" />
+=======
+                        android:textColor="#fff"
+                        android:textSize="14sp" />
+>>>>>>> 37593b8125fc315649330f86b582071b87d37a62
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
