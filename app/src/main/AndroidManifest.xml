@@ -6,17 +6,21 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/app_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/app_logo"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/SecondTheme">
+        <activity android:name=".Sales.ProductSales"></activity>
+        <activity android:name=".Sales.UserDetailSales" />
+        <activity android:name=".Sales.DashboardSales" />
+        <activity android:name=".CS.ProductCS" />
+        <activity android:name=".CS.UserDetailCS" />
+        <activity android:name=".CS.DashboardCS" />
         <activity android:name=".verification.EmailVerify2Activity" />
         <activity android:name=".verification.EmailVerifyActivity" />
         <activity android:name=".forgetpassword.Forget2Activity" />
         <activity android:name=".forgetpassword.ForgetActivity" />
-        <activity android:name=".DashboardActivity" />
-        <activity android:name=".UserDetail" />
         <activity android:name=".loginregister.RegisterActivity" />
         <activity android:name=".loginregister.LoginActivity" />
         <activity android:name=".SplashScreen">

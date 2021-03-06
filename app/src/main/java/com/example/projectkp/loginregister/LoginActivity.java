@@ -12,9 +12,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.projectkp.DashboardActivity;
+import com.example.projectkp.CS.DashboardCS;
 import com.example.projectkp.R;
+import com.example.projectkp.Sales.DashboardSales;
 import com.example.projectkp.forgetpassword.ForgetActivity;
+import com.example.projectkp.verification.EmailVerify2Activity;
 import com.example.projectkp.verification.EmailVerifyActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -39,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
     public static final String UserName = "username";
     public static final String Phone = "phone";
     public static final String Email = "email";
+    public static final String Role = "role";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,10 +90,48 @@ public class LoginActivity extends AppCompatActivity {
 
         if (logAuth.getCurrentUser() != null) {
             if (logAuth.getCurrentUser().isEmailVerified()) {
-                startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
-                finish();
+                checkRole();
             }
         }
+    }
+
+    private void checkRole() {
+        String username = "default";
+
+        sharedPreferences = getSharedPreferences(MyPREFERENCES,
+                Context.MODE_PRIVATE);
+
+        if (sharedPreferences.contains(UserName)) {
+            username = sharedPreferences.getString(UserName, "");
+        }
+
+        String finalUsername = username;
+        Query checkRole = FirebaseDatabase.getInstance().getReference("users").orderByChild("username").equalTo(username);
+        checkRole.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+
+                    String databaseRole = snapshot.child(finalUsername).child("role").getValue(String.class);
+
+                    if (databaseRole.matches("Sales")) {
+                        logProgress.setVisibility(View.GONE);
+                        startActivity(new Intent(getApplicationContext(), DashboardSales.class));
+                        finish();
+                    } else {
+                        logProgress.setVisibility(View.GONE);
+                        startActivity(new Intent(getApplicationContext(), DashboardCS.class));
+                        finish();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                logProgress.setVisibility(View.GONE);
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void loginUser() {
@@ -115,6 +156,7 @@ public class LoginActivity extends AppCompatActivity {
                     String databaseUserName = snapshot.child(username).child("username").getValue(String.class);
                     String databasePhone = snapshot.child(username).child("phone").getValue(String.class);
                     String databaseEmail = snapshot.child(username).child("email").getValue(String.class);
+                    String databaseRole = snapshot.child(username).child("role").getValue(String.class);
 
                     SharedPreferences.Editor editor = sharedPreferences.edit();
 
@@ -122,6 +164,7 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString(UserName, databaseUserName);
                     editor.putString(Phone, databasePhone);
                     editor.putString(Email, databaseEmail);
+                    editor.putString(Role, databaseRole);
                     editor.apply();
 
                     logAuth.signInWithEmailAndPassword(databaseEmail, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
@@ -130,7 +173,12 @@ public class LoginActivity extends AppCompatActivity {
                             if (logAuth.getCurrentUser() != null) {
                                 if (logAuth.getCurrentUser().isEmailVerified()) {
                                     logProgress.setVisibility(View.GONE);
-                                    startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+                                    if (databaseRole.matches("Sales")) {
+                                        startActivity(new Intent(getApplicationContext(), DashboardSales.class));
+                                    } else {
+                                        startActivity(new Intent(getApplicationContext(), DashboardCS.class));
+                                    }
+
                                 } else {
                                     logProgress.setVisibility(View.GONE);
                                     Intent dataUser = new Intent(getApplicationContext(), EmailVerifyActivity.class);

@@ -11,7 +11,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.projectkp.DashboardActivity;
 import com.example.projectkp.R;
 import com.example.projectkp.loginregister.LoginActivity;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -38,7 +37,7 @@ public class EmailVerifyActivity extends AppCompatActivity {
         goBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(EmailVerifyActivity.this, LoginActivity.class));
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 finish();
             }
         });
@@ -52,14 +51,11 @@ public class EmailVerifyActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         verifyProgress.setVisibility(View.GONE);
-                        Toast.makeText(getApplicationContext(), "Verification email sent", Toast.LENGTH_SHORT).show();
-                        if (FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()) {
-                            startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
-                            finish();
-                        } else
-                            Toast.makeText(getApplicationContext(), "Please check your email to verify", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), EmailVerify2Activity.class));
+                        finish();
                     }
                 });
+
                 verifyAuth.getCurrentUser().sendEmailVerification().addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
@@ -99,4 +95,5 @@ public class EmailVerifyActivity extends AppCompatActivity {
             }
         }
     }
+
 }

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/round_shape_user_profile_sales"
+    tools:context=".CS.UserDetailCS">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/user_detail_appbar_sales"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:fitsSystemWindows="true"
+        app:elevation="0dp">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/user_detail_collapsing_toolbar_sales"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/round_shape_user_profile_sales"
+            android:fitsSystemWindows="true"
+            app:collapsedTitleGravity="start"
+            app:contentScrim="?attr/colorPrimaryDark"
+            app:elevation="0dp"
+            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
+            app:title="Account">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/user_detail_toolbar_sales"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/round_shape_user_profile_sales"
+                app:elevation="0dp"
+                app:layout_collapseMode="pin"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_ios_new_24">
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/user_detail_layout_bg"
+        android:paddingStart="32dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="32dp"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <RelativeLayout
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="end"
+                android:background="@drawable/round_shape_gr_red_small">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_baseline_edit_24" />
+
+                <Button
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_centerVertical="true"
+                    android:background="#00000000"
+                    app:elevation="16dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/user_detail_fullname_sales"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="32dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:text="@string/fullname"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/user_detail_fullname_field_sales"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/user_detail_fullname_sales"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Fullname"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/user_detail_username_sales"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/user_detail_fullname_field_sales"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:text="@string/username"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/user_detail_username_field_sales"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/user_detail_username_sales"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Username"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/user_detail_email_sales"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/user_detail_username_field_sales"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:text="@string/email"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/user_detail_email_field_sales"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/user_detail_email_sales"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="username@gmail.com"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/user_detail_number_sales"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/user_detail_email_field_sales"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:text="@string/phone"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/user_detail_number_field_sales"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/user_detail_number_sales"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="0123456789"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/user_detail_logout_sales"
+                    style="@style/SecondTheme"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/user_detail_number_field_sales"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="280dp"
+                    android:background="@drawable/round_shape_gr_red"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="@string/logout"
+                    android:textAllCaps="false"
+                    android:textColor="#fff"
+                    app:backgroundTint="@color/colorPrimary"
+                    app:elevation="8dp" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/user_detail_number_field_sales"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="280dp"
+                    android:elevation="8dp">
+
+                    <ProgressBar
+                        android:id="@+id/user_detail_prog_sales"
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/round_shape_gr"
+                        android:indeterminate="true"
+                        android:indeterminateTint="@color/white"
+                        android:padding="8dp"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

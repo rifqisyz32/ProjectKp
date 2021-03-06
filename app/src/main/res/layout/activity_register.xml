@@ -183,12 +183,60 @@
                     android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:id="@+id/role_text_reg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/password_reg"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="@string/role"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <RadioGroup
+                android:id="@+id/role_reg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/role_text_reg"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="56dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/cs_reg"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rb_cs_selector"
+                    android:button="@android:color/transparent"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center"
+                    android:text="CS"
+                    android:textColor="@drawable/text_color_selector_cs" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/sales_reg"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="1dp"
+                    android:background="@drawable/rb_sales_selector"
+                    android:button="@android:color/transparent"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center"
+                    android:text="Sales"
+                    android:textColor="@drawable/text_color_selector_sales" />
+
+            </RadioGroup>
+
             <Button
                 android:id="@+id/sign_up"
                 style="@style/SecondTheme"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
-                android:layout_below="@+id/password_reg"
+                android:layout_below="@+id/role_reg"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/round_shape_white"
@@ -201,7 +249,7 @@
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/password_reg"
+                android:layout_below="@id/role_reg"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
@@ -212,7 +260,8 @@
                     android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:layout_centerInParent="true"
-                    android:background="@drawable/round_shape_red"
+                    android:background="@drawable/round_shape_white"
+                    android:backgroundTint="@color/colorPrimary"
                     android:indeterminate="true"
                     android:indeterminateTint="@color/white"
                     android:padding="8dp"
@@ -220,43 +269,38 @@
 
             </RelativeLayout>
 
-            <RelativeLayout
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp">
+
+            <TextView
+                android:id="@+id/login_again_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/sign_up"
-                android:layout_marginTop="8dp"
-                android:paddingStart="36dp"
-                android:paddingEnd="36dp">
+                android:fontFamily="@font/poppins_light"
+                android:text="@string/login_again_text"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/login_again_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerInParent="true"
-                    android:fontFamily="@font/poppins_light"
-                    android:text="@string/login_again_text"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
+            <Button
+                android:id="@+id/login_again"
+                style="@style/SecondTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:elevation="0dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/login_again"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
 
-                <Button
-                    android:id="@+id/login_again"
-                    style="@style/SecondTheme"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_gravity="center_vertical"
-                    android:background="#00000000"
-                    android:elevation="0dp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="@string/login_again"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-
-            </RelativeLayout>
-
-        </RelativeLayout>
+        </LinearLayout>
 
     </LinearLayout>
 

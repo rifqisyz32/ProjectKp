@@ -5,10 +5,12 @@
     <color name="colorAccent">#CD4B4B</color>
     <color name="colorSubtitle">#757575</color>
 
+    <color name="action_temp">#893abc</color>
+    <color name="button_temp">#9744ff</color>
     <color name="shapeLogin">#F0F0F0</color>
     <color name="complete">#19C820</color>
     <color name="yellow">#FFEB3B</color>
-    <color name="white" >#FFFFFF</color>
-    <color name="black" >#000000</color>
-    <color name="colorOverlay" >#ff0000ff</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="colorOverlay">#ff0000ff</color>
 </resources>
