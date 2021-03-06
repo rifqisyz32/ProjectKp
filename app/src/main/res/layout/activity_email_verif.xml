@@ -49,6 +49,7 @@
                 android:fontFamily="@font/poppins_semibold"
                 android:text="@string/verify_email"
                 android:textColor="@color/black"
+                android:textAlignment="center"
                 android:textSize="24sp" />
 
             <TextView

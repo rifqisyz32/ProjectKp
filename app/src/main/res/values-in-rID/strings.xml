@@ -60,6 +60,16 @@
     <string name="search_myir">Cari MYIR</string>
     <string name="role">Daftar sebagai:</string>
     <string name="check_email">Silahkan periksa email Anda untuk melakukan verifikasi</string>
-    <string name="acc_permission">Please accept for required permission</string>
+    <string name="acc_permission">Silahkan terima izin terlebih dahulu</string>
+    <string name="pick_role">Pilih role terlebih dahulu</string>
+    <string name="retry">Coba lagi</string>
+    <string name="photo_updated">Foto Profil berhasil diubah</string>
+    <string name="profile">Profil</string>
+    <string name="account">Akun</string>
+    <string name="theme">Tema</string>
+    <string name="language">Bahasa</string>
+    <string name="light_mode">Light Mode</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="english">English</string>
 
 </resources>

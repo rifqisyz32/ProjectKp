@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -42,8 +45,9 @@ public class UserDetailSales extends AppCompatActivity {
     FirebaseUser userSalesId;
     RelativeLayout savePhotoLayout;
     ProgressBar savePhotoProgress;
-    TextView fullNameUser, usernameUser, emailUser, phoneUser;
-    ImageView savePhoto, userPhoto;
+    SwitchCompat changeTheme;
+    TextView fullNameUser, usernameUser, emailUser, phoneUser, changeThemeText;
+    ImageView savePhoto, userPhoto, changeThemeBG;
     Uri userPhotoUriSales;
     String myUsernameSales;
     static int PReqCode = 1;
@@ -72,10 +76,15 @@ public class UserDetailSales extends AppCompatActivity {
         savePhotoLayout = findViewById(R.id.img_updated_sales);
         savePhoto = findViewById(R.id.img_updated_bg_sales);
         savePhotoProgress = findViewById(R.id.img_updated_prog_sales);
+        changeTheme = findViewById(R.id.switch_theme_sales);
+        changeThemeBG = findViewById(R.id.light_mode_icon_sales);
+        changeThemeText = findViewById(R.id.theme_light_desc_sales);
         userSalesAuth = FirebaseAuth.getInstance();
         userSalesId = userSalesAuth.getCurrentUser();
 
         getUserDataPreferences();
+        changeMyTheme();
+//        checkMyTheme();
 //        getPhotoSharedPreference();
 
         Toolbar toolbar = findViewById(R.id.user_detail_toolbar_sales);
@@ -117,6 +126,49 @@ public class UserDetailSales extends AppCompatActivity {
                 savePhotoProgress.setVisibility(View.VISIBLE);
 //                deletePhotoDatabase();
                 storePhotoDatabase(userPhotoUriSales, userSalesId);
+            }
+        });
+    }
+
+    /*
+    private void checkMyTheme() {
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
+        final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
+
+        if (isDarkModeOn) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+    }
+    */
+
+    private void changeMyTheme() {
+        int nightModeFlags = changeTheme.getContext().getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        switch (nightModeFlags) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                changeThemeBG.setImageResource(R.drawable.ic_baseline_dark_mode_24);
+                changeThemeText.setText(R.string.dark_mode);
+                break;
+
+            case Configuration.UI_MODE_NIGHT_NO:
+                changeThemeBG.setImageResource(R.drawable.ic_baseline_light_mode_24);
+                changeThemeText.setText(R.string.light_mode);
+                break;
+
+            case Configuration.UI_MODE_NIGHT_UNDEFINED:
+                Toast.makeText(getApplicationContext(), "Something wrong\nPlease contact us to fix this", Toast.LENGTH_SHORT).show();
+                break;
+        }
+
+        changeTheme.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (changeTheme.isChecked()) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                }
             }
         });
     }
@@ -205,51 +257,5 @@ public class UserDetailSales extends AppCompatActivity {
             }
         });
     }
-
-    /*private void deletePhotoDatabase() {
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("sales_photo").child(myUsernameSales);
-        StorageReference imgPath = storageReference.child(userPhotoUriSales.getLastPathSegment());
-        imgPath.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }*/
-
-   /* private void getUserPhoto() {
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("sales_photo").child(myUsernameSales);
-        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }*/
-
-    /*
-    private void savePhotoSharedPreference(Uri uri) {
-        SharedPreferences.Editor editor = sharedPhotoPreferences.edit();
-        editor.putString(Photo, uri.toString());
-        editor.apply();
-    }
-
-    private void getPhotoSharedPreference() {
-        sharedPhotoPreferences = getSharedPreferences(MyPhotoPREFERENCES, Context.MODE_PRIVATE);
-        if (sharedPhotoPreferences.contains(Photo)) {
-            String imageUriString = sharedPhotoPreferences.getString(Photo, "");
-            Uri imageUri = Uri.parse(imageUriString);
-            userPhoto.setImageURI(imageUri);
-        }
-    }
-    */
 
 }

@@ -26,7 +26,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="28dp"
                 android:background="@drawable/ic_baseline_account_circle_32"
-                android:backgroundTint="@color/colorPrimary"
+                android:backgroundTint="@color/pick_photo_sales"
                 app:elevation="4dp" />
 
             <Button
@@ -43,8 +43,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins_light"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
                 android:text="@string/hey"
                 android:textColor="@color/black"
                 android:textSize="24sp" />
@@ -54,10 +52,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:layout_marginStart="8dp"
                 android:layout_toEndOf="@+id/hi_dashboard_sales"
                 android:fontFamily="@font/poppins_medium"
                 android:text="@string/username"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/pick_photo_sales"
                 android:textSize="24sp" />
 
             <TextView
@@ -66,8 +65,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/hi_dashboard_sales"
                 android:fontFamily="@font/poppins_light"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
                 android:text="@string/welcome_dashboard"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
@@ -81,7 +78,7 @@
                 android:fontFamily="@font/poppins_bold"
                 android:gravity="center"
                 android:text="@string/app_name"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/pick_photo_sales"
                 android:textSize="24sp" />
 
         </RelativeLayout>
@@ -116,7 +113,7 @@
                         android:background="@drawable/circle_shape_white"
                         android:elevation="8dp"
                         android:padding="12dp"
-                        android:src="@drawable/ic_baseline_post_add2_24" />
+                        android:src="@drawable/ic_baseline_post_add_sales_24" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -198,7 +195,7 @@
                         android:background="@drawable/circle_shape_white"
                         android:elevation="8dp"
                         android:padding="12dp"
-                        android:src="@drawable/ic_baseline_shopping_cart_24" />
+                        android:src="@drawable/ic_baseline_shopping_cart_sales_24" />
 
                     <TextView
                         android:layout_width="wrap_content"

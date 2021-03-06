@@ -56,7 +56,7 @@
                 android:layout_margin="16dp"
                 android:background="@drawable/round_shape_white"
                 android:padding="8dp"
-                android:src="@drawable/ic_baseline_shopping_cart_24" />
+                android:src="@drawable/ic_baseline_shopping_cart_sales_24" />
 
             <TextView
                 android:id="@+id/product_name1_sales"
@@ -111,7 +111,7 @@
                 android:layout_margin="16dp"
                 android:background="@drawable/round_shape_white"
                 android:padding="8dp"
-                android:src="@drawable/ic_baseline_shopping_cart_24" />
+                android:src="@drawable/ic_baseline_shopping_cart_sales_24" />
 
             <TextView
                 android:id="@+id/product_name2_sales"
@@ -166,7 +166,7 @@
                 android:layout_margin="16dp"
                 android:background="@drawable/round_shape_white"
                 android:padding="8dp"
-                android:src="@drawable/ic_baseline_shopping_cart_24" />
+                android:src="@drawable/ic_baseline_shopping_cart_sales_24" />
 
             <TextView
                 android:id="@+id/product_name3_sales"
@@ -221,7 +221,7 @@
                 android:layout_margin="16dp"
                 android:background="@drawable/round_shape_white"
                 android:padding="8dp"
-                android:src="@drawable/ic_baseline_shopping_cart_24" />
+                android:src="@drawable/ic_baseline_shopping_cart_sales_24" />
 
             <TextView
                 android:id="@+id/product_name4_sales"
@@ -276,7 +276,7 @@
                 android:layout_margin="16dp"
                 android:background="@drawable/round_shape_white"
                 android:padding="8dp"
-                android:src="@drawable/ic_baseline_shopping_cart_24" />
+                android:src="@drawable/ic_baseline_shopping_cart_sales_24" />
 
             <TextView
                 android:id="@+id/product_name5_sales"

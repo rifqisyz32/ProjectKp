@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,6 +20,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -43,9 +46,10 @@ public class UserDetailCS extends AppCompatActivity {
     FirebaseAuth userCSAuth;
     FirebaseUser userCSId;
     RelativeLayout savePhotoLayout;
-    ImageView savePhoto, userPhoto;
+    ImageView savePhoto, userPhoto, changeThemeBG;
     ProgressBar savePhotoProgress;
-    TextView fullNameUser, usernameUser, emailUser, phoneUser;
+    SwitchCompat changeTheme;
+    TextView fullNameUser, usernameUser, emailUser, phoneUser, changeThemeText;
     String myUsernameCS;
     Uri userPhotoUriCS;
     static int PReqCode = 1;
@@ -78,10 +82,14 @@ public class UserDetailCS extends AppCompatActivity {
         savePhotoLayout = findViewById(R.id.img_updated_cs);
         savePhoto = findViewById(R.id.img_updated_bg_cs);
         savePhotoProgress = findViewById(R.id.img_updated_prog_cs);
+        changeTheme = findViewById(R.id.switch_theme_cs);
+        changeThemeBG = findViewById(R.id.light_mode_icon_cs);
+        changeThemeText = findViewById(R.id.theme_light_desc_cs);
         userCSAuth = FirebaseAuth.getInstance();
         userCSId = userCSAuth.getCurrentUser();
 
         getUserDataPreferences();
+        changeMyTheme();
 //        getPhotoSharedPreference();
 
 
@@ -124,6 +132,36 @@ public class UserDetailCS extends AppCompatActivity {
                 savePhotoProgress.setVisibility(View.VISIBLE);
 //                deletePhotoDatabase();
                 storePhotoDatabase(userPhotoUriCS, userCSId);
+            }
+        });
+    }
+
+    private void changeMyTheme() {
+        int nightModeFlags = changeTheme.getContext().getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        switch (nightModeFlags) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                changeThemeBG.setImageResource(R.drawable.ic_baseline_dark_mode_24);
+                changeThemeText.setText(R.string.dark_mode);
+                break;
+
+            case Configuration.UI_MODE_NIGHT_NO:
+                changeThemeBG.setImageResource(R.drawable.ic_baseline_light_mode_24);
+                changeThemeText.setText(R.string.light_mode);
+                break;
+
+            case Configuration.UI_MODE_NIGHT_UNDEFINED:
+                Toast.makeText(getApplicationContext(), "Something wrong\nPlease contact us to fix this", Toast.LENGTH_SHORT).show();
+                break;
+        }
+
+        changeTheme.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (changeTheme.isChecked()) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                }
             }
         });
     }

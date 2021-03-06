@@ -59,10 +59,10 @@
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
     <string name="search_myir">Search MYIR</string>
     <string name="role">Register as:</string>
-    <string name="pick_role">Have to choose a role</string>
     <string name="check_email">Please check your email to verify</string>
-    <string name="retry">Retry</string>
     <string name="acc_permission">Please accept for required permission</string>
+    <string name="pick_role">Have to choose a role</string>
+    <string name="retry">Retry</string>
     <string name="photo_updated">Profile Photo Updated</string>
     <string name="profile">Profile</string>
     <string name="account">Account</string>

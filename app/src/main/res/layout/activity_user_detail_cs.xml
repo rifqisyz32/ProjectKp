@@ -104,7 +104,7 @@
                         android:indeterminate="true"
                         android:indeterminateTint="@color/pick_photo_cs"
                         android:padding="8dp"
-                        android:visibility="gone"/>
+                        android:visibility="gone" />
 
                 </RelativeLayout>
 
@@ -251,7 +251,7 @@
                 android:paddingStart="32dp"
                 android:paddingEnd="32dp"
                 android:text="@string/theme"
-                android:textColor="@color/action_temp"
+                android:textColor="@color/pick_photo_cs"
                 android:textSize="20sp" />
 
             <RelativeLayout
@@ -266,24 +266,44 @@
                 android:background="@drawable/round_shape_acc"
                 android:backgroundTint="@color/user_detail_layout_cs"
                 android:elevation="4dp"
-                android:padding="16dp">
+                android:padding="8dp">
+
+                <ImageView
+                    android:id="@+id/light_mode_icon_cs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/round_shape_gr_small"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_baseline_light_mode_24" />
 
                 <TextView
                     android:id="@+id/theme_light_desc_cs"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_toStartOf="@+id/switch_theme_cs"
+                    android:layout_toEndOf="@+id/light_mode_icon_cs"
                     android:fontFamily="@font/poppins_medium"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
                     android:text="@string/light_mode"
                     android:textSize="14sp" />
 
-                <TextView
-                    android:id="@+id/theme_dark_desc_cs"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="@string/dark_mode"
-                    android:textSize="14sp"
-                    android:visibility="gone" />
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_theme_cs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/switch_cs_selector_bg"
+                    android:checked="true"
+                    android:padding="8dp"
+                    android:thumb="@drawable/switch_cs_selector"
+                    app:track="@android:color/transparent" />
 
             </RelativeLayout>
 
@@ -297,7 +317,7 @@
                 android:paddingStart="32dp"
                 android:paddingEnd="32dp"
                 android:text="@string/language"
-                android:textColor="@color/action_temp"
+                android:textColor="@color/pick_photo_cs"
                 android:textSize="20sp" />
 
             <RelativeLayout
@@ -312,14 +332,28 @@
                 android:background="@drawable/round_shape_acc"
                 android:backgroundTint="@color/user_detail_layout_cs"
                 android:elevation="4dp"
-                android:padding="16dp">
+                android:padding="8dp">
+
+                <ImageView
+                    android:id="@+id/language_icon_cs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/round_shape_gr_small"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_baseline_g_translate_24" />
 
                 <TextView
-                    android:id="@+id/language_en_desc_cs"
+                    android:id="@+id/language_icon_desc_cs"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_toEndOf="@+id/language_icon_cs"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="@string/english"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:text="@string/language"
                     android:textSize="14sp" />
 
             </RelativeLayout>
