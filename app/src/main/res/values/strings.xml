@@ -12,8 +12,7 @@
     <string name="signmeup">Sign Up Here</string>
     <string name="forget">Forget Password?</string>
     <string name="fullname">Full Name</string>
-    <string name="login_again">Login Again</string>
-    <string name="login_here">Login Here</string>
+    <string name="login_again">Login here</string>
     <string name="login_again_text">Already have account?</string>
     <string name="welcome_login">Welcome User\nPlease login to continue</string>
     <string name="welcome_register">Welcome User\nPlease Input your data below</string>
@@ -62,7 +61,5 @@
     <string name="pick_role">Have to choose a role</string>
     <string name="check_email">Please check your email to verify</string>
     <string name="retry">Retry</string>
-    <string name="acc_permission">Please accept for required permission</string>
-    <string name="photo_updated">Profile Photo Updated</string>
 
 </resources>

@@ -30,7 +30,6 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
-
     TextInputLayout usernameLog, passwordLog;
     Button login, forget, signUp;
     FirebaseAuth logAuth;
@@ -160,6 +159,7 @@ public class LoginActivity extends AppCompatActivity {
                     String databaseRole = snapshot.child(username).child("role").getValue(String.class);
 
                     SharedPreferences.Editor editor = sharedPreferences.edit();
+
                     editor.putString(FullName, databaseFullName);
                     editor.putString(UserName, databaseUserName);
                     editor.putString(Phone, databasePhone);

@@ -5,11 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/round_shape_user_profile_sales"
-<<<<<<< HEAD
     tools:context=".CS.UserDetailCS">
-=======
-    tools:context=".Sales.UserDetailSales">
->>>>>>> 37593b8125fc315649330f86b582071b87d37a62
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/user_detail_appbar_sales"
@@ -25,100 +21,10 @@
             android:background="@drawable/round_shape_user_profile_sales"
             android:fitsSystemWindows="true"
             app:collapsedTitleGravity="start"
-<<<<<<< HEAD
             app:contentScrim="?attr/colorPrimaryDark"
             app:elevation="0dp"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
             app:title="Account">
-=======
-            app:contentScrim="@color/pick_photo_sales"
-            app:elevation="0dp"
-            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:padding="16dp">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/user_photo_sales"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/ic_baseline_account_circle_120"
-                    android:padding="16dp"
-                    app:elevation="16dp" />
-
-                <RelativeLayout
-                    android:id="@+id/update_img_sales"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:background="@drawable/round_shape_gr_red_small"
-                    android:backgroundTint="@color/white">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:elevation="16dp"
-                        android:src="@drawable/ic_baseline_photo_camera_24"
-                        app:tint="@color/pick_photo_sales" />
-
-                    <Button
-                        android:id="@+id/update_img_button_sales"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_centerInParent="true"
-                        android:background="#00000000"
-                        app:elevation="16dp" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/img_updated_sales"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_above="@+id/update_img_sales"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/round_shape_gr_red_small"
-                    android:backgroundTint="@color/white"
-                    android:visibility="gone">
-
-                    <ImageView
-                        android:id="@+id/img_updated_bg_sales"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:elevation="16dp"
-                        android:src="@drawable/ic_baseline_check_24"
-                        app:tint="@color/pick_photo_sales" />
-
-                    <Button
-                        android:id="@+id/img_updated_button_sales"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_centerInParent="true"
-                        android:background="#00000000"
-                        app:elevation="16dp" />
-
-                    <ProgressBar
-                        android:id="@+id/img_updated_prog_sales"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:layout_centerInParent="true"
-                        android:indeterminate="true"
-                        android:indeterminateTint="@color/pick_photo_sales"
-                        android:padding="8dp"
-                        android:visibility="gone" />
-
-                </RelativeLayout>
-
-            </RelativeLayout>
->>>>>>> 37593b8125fc315649330f86b582071b87d37a62
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/user_detail_toolbar_sales"
@@ -140,7 +46,6 @@
         android:layout_height="match_parent"
         android:background="@drawable/user_detail_layout_bg"
         android:paddingStart="32dp"
-<<<<<<< HEAD
         android:paddingTop="16dp"
         android:paddingEnd="32dp"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
@@ -175,16 +80,6 @@
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-=======
-        android:paddingTop="32dp"
-        android:paddingEnd="32dp"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="16dp">
->>>>>>> 37593b8125fc315649330f86b582071b87d37a62
 
                 <TextView
                     android:id="@+id/user_detail_fullname_sales"
@@ -268,10 +163,6 @@
                     android:layout_height="50dp"
                     android:layout_below="@+id/user_detail_number_field_sales"
                     android:layout_centerHorizontal="true"
-<<<<<<< HEAD
-=======
-                    android:layout_alignParentBottom="true"
->>>>>>> 37593b8125fc315649330f86b582071b87d37a62
                     android:layout_marginTop="280dp"
                     android:background="@drawable/round_shape_gr_red"
                     android:fontFamily="@font/poppins_semibold"
@@ -281,7 +172,6 @@
                     app:backgroundTint="@color/colorPrimary"
                     app:elevation="8dp" />
 
-<<<<<<< HEAD
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -310,10 +200,4 @@
     </androidx.core.widget.NestedScrollView>
 
 
-=======
-            </RelativeLayout>
-
-    </androidx.core.widget.NestedScrollView>
-
->>>>>>> 37593b8125fc315649330f86b582071b87d37a62
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
