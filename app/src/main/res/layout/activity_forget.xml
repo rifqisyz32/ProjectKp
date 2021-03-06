@@ -62,7 +62,7 @@
                 android:paddingEnd="32dp"
                 android:text="@string/forget_desc"
                 android:textAlignment="center"
-                android:textColor="@color/colorSubtitle"
+                android:textColor="@color/black"
                 android:textSize="14sp" />
 
             <com.google.android.material.textfield.TextInputLayout
