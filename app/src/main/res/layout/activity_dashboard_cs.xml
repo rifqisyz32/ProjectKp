@@ -5,92 +5,90 @@
     style="CSTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/cs_layout_bg"
     tools:context=".CS.DashboardCS">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="16dp"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="36dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="36dp"
-            android:paddingBottom="8dp">
+            android:padding="16dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/user_detail_photo_cs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="28dp"
-                android:background="@drawable/ic_baseline_account_circle_32"
-                android:backgroundTint="@color/action_temp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/user_photo_dashboard_cs"
+                android:src="@drawable/ic_baseline_account_circle_40"
+                android:padding="2dp"
                 app:elevation="4dp" />
 
-            <Button
-                android:id="@+id/to_user_detail_cs"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="28dp"
-                android:background="#00000000" />
-
-            <TextView
-                android:id="@+id/hi_dashboard_cs"
+            <RelativeLayout
+                android:id="@+id/dashboard_text_cs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/poppins_light"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:text="@string/hey"
-                android:textColor="@color/black"
-                android:textSize="24sp" />
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/user_detail_photo_cs">
 
-            <TextView
-                android:id="@+id/username_dashboard_cs"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_toEndOf="@+id/hi_dashboard_cs"
-                android:fontFamily="@font/poppins_medium"
-                android:text="@string/username"
-                android:textColor="@color/action_temp"
-                android:textSize="24sp" />
+                <TextView
+                    android:id="@+id/hi_dashboard_cs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:fontFamily="@font/poppins_light"
+                    android:paddingEnd="4dp"
+                    android:text="@string/hey"
+                    android:textColor="@color/black"
+                    android:textSize="24sp" />
 
-            <TextView
-                android:id="@+id/welcome_dashboard_cs"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/hi_dashboard_cs"
-                android:fontFamily="@font/poppins_light"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:text="@string/welcome_dashboard"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
+                <TextView
+                    android:id="@+id/username_dashboard_cs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/hi_dashboard_cs"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/username"
+                    android:textColor="#9b6fee"
+                    android:textSize="24sp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/welcome_dashboard_cs"
-                android:layout_marginTop="80dp"
-                android:layout_marginBottom="16dp"
-                android:fontFamily="@font/poppins_bold"
-                android:gravity="center"
-                android:text="@string/app_name"
-                android:textColor="@color/action_temp"
-                android:textSize="24sp" />
+                <TextView
+                    android:id="@+id/welcome_dashboard_cs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/hi_dashboard_cs"
+                    android:fontFamily="@font/poppins_light"
+                    android:text="@string/welcome_dashboard"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+            </RelativeLayout>
 
         </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="#9b6fee"
+            android:textSize="24sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -105,7 +103,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/round_shape_gr"
+                    android:background="@drawable/round_shape_gr_cs_16"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -114,7 +112,8 @@
                         android:layout_height="64dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="16dp"
-                        android:background="@drawable/circle_shape_white"
+                        android:background="@drawable/dashboard_item_gr_cs"
+                        android:backgroundTint="#9b6fee"
                         android:elevation="8dp"
                         android:padding="16dp"
                         android:src="@drawable/ic_baseline_search_24" />
@@ -123,9 +122,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:fontFamily="@font/poppins_semibold"
+                        android:fontFamily="@font/poppins_medium"
                         android:text="@string/search_myir"
-                        android:textColor="#fff"
+                        android:textColor="@color/black"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -142,7 +141,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/round_shape_gr"
+                    android:background="@drawable/round_shape_gr_cs_16"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -151,7 +150,8 @@
                         android:layout_height="64dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="16dp"
-                        android:background="@drawable/circle_shape_white"
+                        android:background="@drawable/dashboard_item_gr_cs"
+                        android:backgroundTint="#18b2de"
                         android:elevation="8dp"
                         android:padding="16dp"
                         android:src="@drawable/ic_baseline_note_add_24" />
@@ -160,9 +160,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:fontFamily="@font/poppins_semibold"
+                        android:fontFamily="@font/poppins_medium"
                         android:text="@string/track_order"
-                        android:textColor="#fff"
+                        android:textColor="@color/black"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -174,6 +174,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -188,7 +190,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/round_shape_gr"
+                    android:background="@drawable/round_shape_gr_cs_24"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -196,7 +198,8 @@
                         android:layout_width="64dp"
                         android:layout_height="64dp"
                         android:layout_marginTop="16dp"
-                        android:background="@drawable/circle_shape_white"
+                        android:background="@drawable/dashboard_item_gr_cs"
+                        android:backgroundTint="#fb37ff"
                         android:elevation="8dp"
                         android:padding="16dp"
                         android:src="@drawable/ic_baseline_add_shopping_cart_24" />
@@ -205,9 +208,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:fontFamily="@font/poppins_semibold"
+                        android:fontFamily="@font/poppins_medium"
                         android:text="@string/product"
-                        android:textColor="#fff"
+                        android:textColor="@color/black"
                         android:textSize="14sp" />
                 </LinearLayout>
 

@@ -43,6 +43,7 @@ import com.google.firebase.storage.UploadTask;
 public class UserDetailCS extends AppCompatActivity {
 
     Window window;
+    Toolbar toolbar;
     FirebaseAuth userCSAuth;
     FirebaseUser userCSId;
     RelativeLayout savePhotoLayout;
@@ -74,26 +75,10 @@ public class UserDetailCS extends AppCompatActivity {
             window.setStatusBarColor(this.getResources().getColor(R.color.status_bar_cs));
         }
 
-        fullNameUser = findViewById(R.id.user_detail_fullname_field_cs);
-        usernameUser = findViewById(R.id.user_detail_username_field_cs);
-        emailUser = findViewById(R.id.user_detail_email_field_cs);
-        phoneUser = findViewById(R.id.user_detail_number_field_cs);
-        userPhoto = findViewById(R.id.user_photo_cs);
-        savePhotoLayout = findViewById(R.id.img_updated_cs);
-        savePhoto = findViewById(R.id.img_updated_bg_cs);
-        savePhotoProgress = findViewById(R.id.img_updated_prog_cs);
-        changeTheme = findViewById(R.id.switch_theme_cs);
-        changeThemeBG = findViewById(R.id.light_mode_icon_cs);
-        changeThemeText = findViewById(R.id.theme_light_desc_cs);
-        userCSAuth = FirebaseAuth.getInstance();
-        userCSId = userCSAuth.getCurrentUser();
-
+        storeId();
         getUserDataPreferences();
         changeMyTheme();
-//        getPhotoSharedPreference();
 
-
-        Toolbar toolbar = findViewById(R.id.user_detail_toolbar_cs);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,16 +121,35 @@ public class UserDetailCS extends AppCompatActivity {
         });
     }
 
+    private void storeId() {
+        toolbar = findViewById(R.id.user_detail_toolbar_cs);
+        fullNameUser = findViewById(R.id.user_detail_fullname_field_cs);
+        usernameUser = findViewById(R.id.user_detail_username_field_cs);
+        emailUser = findViewById(R.id.user_detail_email_field_cs);
+        phoneUser = findViewById(R.id.user_detail_number_field_cs);
+        userPhoto = findViewById(R.id.user_photo_cs);
+        savePhotoLayout = findViewById(R.id.img_updated_cs);
+        savePhoto = findViewById(R.id.img_updated_bg_cs);
+        savePhotoProgress = findViewById(R.id.img_updated_prog_cs);
+        changeTheme = findViewById(R.id.switch_theme_cs);
+        changeThemeBG = findViewById(R.id.light_mode_icon_cs);
+        changeThemeText = findViewById(R.id.theme_light_desc_cs);
+        userCSAuth = FirebaseAuth.getInstance();
+        userCSId = userCSAuth.getCurrentUser();
+    }
+
     private void changeMyTheme() {
         int nightModeFlags = changeTheme.getContext().getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
         switch (nightModeFlags) {
             case Configuration.UI_MODE_NIGHT_YES:
                 changeThemeBG.setImageResource(R.drawable.ic_baseline_dark_mode_24);
+                changeTheme.setChecked(false);
                 changeThemeText.setText(R.string.dark_mode);
                 break;
 
             case Configuration.UI_MODE_NIGHT_NO:
                 changeThemeBG.setImageResource(R.drawable.ic_baseline_light_mode_24);
+                changeTheme.setChecked(true);
                 changeThemeText.setText(R.string.light_mode);
                 break;
 
@@ -228,7 +232,6 @@ public class UserDetailCS extends AppCompatActivity {
                                 .setDisplayName(myUsernameCS)
                                 .setPhotoUri(uri)
                                 .build();
-//                        savePhotoSharedPreference(uri);
                         savePhotoLayout.setVisibility(View.GONE);
 
                         currentUser.updateProfile(profileUpdate)
@@ -241,6 +244,7 @@ public class UserDetailCS extends AppCompatActivity {
                                     }
                                 });
                     }
+
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
@@ -250,37 +254,4 @@ public class UserDetailCS extends AppCompatActivity {
             }
         });
     }
-
-    /*private void deletePhotoDatabase() {
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("cs_photo").child(myUsernameCS);
-        StorageReference imgPath = storageReference.child(userPhotoUriCS.getLastPathSegment());
-        imgPath.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }*/
-
-    /*
-    private void savePhotoSharedPreference(Uri uri) {
-        SharedPreferences.Editor editor = sharedPhotoPreferences.edit();
-        editor.putString(Photo, uri.toString());
-        editor.apply();
-    }
-
-    private void getPhotoSharedPreference() {
-        sharedPhotoPreferences = getSharedPreferences(MyPhotoPREFERENCES, Context.MODE_PRIVATE);
-        if (sharedPhotoPreferences.contains(Photo)) {
-            String imageUriString = sharedPhotoPreferences.getString(Photo, "");
-            Uri imageUri = Uri.parse(imageUriString);
-            userPhoto.setImageURI(imageUri);
-        }
-    }
-    */
-
 }

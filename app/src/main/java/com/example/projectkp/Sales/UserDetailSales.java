@@ -41,6 +41,7 @@ import com.google.firebase.storage.UploadTask;
 
 public class UserDetailSales extends AppCompatActivity {
 
+    Toolbar toolbar;
     FirebaseAuth userSalesAuth;
     FirebaseUser userSalesId;
     RelativeLayout savePhotoLayout;
@@ -68,26 +69,10 @@ public class UserDetailSales extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_detail_sales);
 
-        fullNameUser = findViewById(R.id.user_detail_fullname_field_sales);
-        usernameUser = findViewById(R.id.user_detail_username_field_sales);
-        emailUser = findViewById(R.id.user_detail_email_field_sales);
-        phoneUser = findViewById(R.id.user_detail_number_field_sales);
-        userPhoto = findViewById(R.id.user_photo_sales);
-        savePhotoLayout = findViewById(R.id.img_updated_sales);
-        savePhoto = findViewById(R.id.img_updated_bg_sales);
-        savePhotoProgress = findViewById(R.id.img_updated_prog_sales);
-        changeTheme = findViewById(R.id.switch_theme_sales);
-        changeThemeBG = findViewById(R.id.light_mode_icon_sales);
-        changeThemeText = findViewById(R.id.theme_light_desc_sales);
-        userSalesAuth = FirebaseAuth.getInstance();
-        userSalesId = userSalesAuth.getCurrentUser();
-
+        storeId();
         getUserDataPreferences();
         changeMyTheme();
-//        checkMyTheme();
-//        getPhotoSharedPreference();
 
-        Toolbar toolbar = findViewById(R.id.user_detail_toolbar_sales);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,29 +115,35 @@ public class UserDetailSales extends AppCompatActivity {
         });
     }
 
-    /*
-    private void checkMyTheme() {
-        final SharedPreferences.Editor editor = sharedPreferences.edit();
-        final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
-
-        if (isDarkModeOn) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        }
+    private void storeId() {
+        toolbar = findViewById(R.id.user_detail_toolbar_sales);
+        fullNameUser = findViewById(R.id.user_detail_fullname_field_sales);
+        usernameUser = findViewById(R.id.user_detail_username_field_sales);
+        emailUser = findViewById(R.id.user_detail_email_field_sales);
+        phoneUser = findViewById(R.id.user_detail_number_field_sales);
+        userPhoto = findViewById(R.id.user_photo_sales);
+        savePhotoLayout = findViewById(R.id.img_updated_sales);
+        savePhoto = findViewById(R.id.img_updated_bg_sales);
+        savePhotoProgress = findViewById(R.id.img_updated_prog_sales);
+        changeTheme = findViewById(R.id.switch_theme_sales);
+        changeThemeBG = findViewById(R.id.light_mode_icon_sales);
+        changeThemeText = findViewById(R.id.theme_light_desc_sales);
+        userSalesAuth = FirebaseAuth.getInstance();
+        userSalesId = userSalesAuth.getCurrentUser();
     }
-    */
 
     private void changeMyTheme() {
         int nightModeFlags = changeTheme.getContext().getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
         switch (nightModeFlags) {
             case Configuration.UI_MODE_NIGHT_YES:
                 changeThemeBG.setImageResource(R.drawable.ic_baseline_dark_mode_24);
+                changeTheme.setChecked(false);
                 changeThemeText.setText(R.string.dark_mode);
                 break;
 
             case Configuration.UI_MODE_NIGHT_NO:
                 changeThemeBG.setImageResource(R.drawable.ic_baseline_light_mode_24);
+                changeTheme.setChecked(true);
                 changeThemeText.setText(R.string.light_mode);
                 break;
 
@@ -235,7 +226,6 @@ public class UserDetailSales extends AppCompatActivity {
                                 .setDisplayName(myUsernameSales)
                                 .setPhotoUri(uri)
                                 .build();
-//                        savePhotoSharedPreference(uri);
                         savePhotoLayout.setVisibility(View.GONE);
 
                         currentUser.updateProfile(profileUpdate)
@@ -257,5 +247,4 @@ public class UserDetailSales extends AppCompatActivity {
             }
         });
     }
-
 }

@@ -29,7 +29,7 @@ public class DashboardSales extends AppCompatActivity {
         userPhoto = findViewById(R.id.user_detail_photo_sales);
         Glide.with(this).load(userSalesId.getPhotoUrl()).into(userPhoto);
 
-        findViewById(R.id.to_user_detail_sales).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.user_detail_photo_sales).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), UserDetailSales.class));

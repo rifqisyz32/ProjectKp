@@ -70,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_margin="16dp"
-            android:background="@drawable/round_shape_gr">
+            android:background="@drawable/round_shape_gr_cs_16">
 
             <ImageView
                 android:id="@+id/product_icon1_cs"
@@ -125,7 +125,7 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_margin="16dp"
-            android:background="@drawable/round_shape_gr">
+            android:background="@drawable/round_shape_gr_cs_16">
 
             <ImageView
                 android:id="@+id/product_icon2_cs"
@@ -180,7 +180,7 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_margin="16dp"
-            android:background="@drawable/round_shape_gr">
+            android:background="@drawable/round_shape_gr_cs_16">
 
             <ImageView
                 android:id="@+id/product_icon3_cs"
@@ -235,7 +235,7 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_margin="16dp"
-            android:background="@drawable/round_shape_gr">
+            android:background="@drawable/round_shape_gr_cs_16">
 
             <ImageView
                 android:id="@+id/product_icon4_cs"
@@ -290,7 +290,7 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_margin="16dp"
-            android:background="@drawable/round_shape_gr">
+            android:background="@drawable/round_shape_gr_cs_16">
 
             <ImageView
                 android:id="@+id/product_icon5_cs"

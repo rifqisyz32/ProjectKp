@@ -36,7 +36,7 @@ public class DashboardCS extends AppCompatActivity {
         userPhoto = findViewById(R.id.user_detail_photo_cs);
         Glide.with(this).load(userCSId.getPhotoUrl()).into(userPhoto);
 
-        findViewById(R.id.to_user_detail_cs).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.user_detail_photo_cs).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), UserDetailCS.class));

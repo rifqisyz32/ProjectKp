@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item>
+        <!-- create gradient you want to use with the angle you want to use -->
+        <shape android:shape="oval" >
+            <gradient
+                android:angle="45"
+                android:endColor="#ff5669"
+                android:startColor="#e83259" />
+        </shape>
+    </item>
+    <!-- create the stroke for top, left, bottom and right with the dp you want -->
+    <item
+        
+        android:drawable="@drawable/ic_baseline_account_circle_40">
+    </item>
+
+</layer-list>
