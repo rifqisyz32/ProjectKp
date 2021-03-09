@@ -115,9 +115,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@drawable/round_shape_user_profile_cs"
+                android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
                 app:elevation="0dp"
                 app:layout_collapseMode="pin"
-                app:navigationIcon="@drawable/ic_baseline_arrow_back_ios_new_24">
+                app:menu="@menu/menu_user_profile_cs"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_ios_new_24"
+                app:popupTheme="@style/SecondTheme">
 
             </androidx.appcompat.widget.Toolbar>
 

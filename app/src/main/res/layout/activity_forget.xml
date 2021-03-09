@@ -103,7 +103,7 @@
                 android:fontFamily="@font/poppins_semibold"
                 android:text="@string/reset"
                 android:textAlignment="center"
-                android:textColor="#FFF"
+                android:textColor="@color/white"
                 android:textSize="16sp" />
 
             <RelativeLayout

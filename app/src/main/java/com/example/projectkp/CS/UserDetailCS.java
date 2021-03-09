@@ -9,6 +9,8 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -119,6 +121,28 @@ public class UserDetailCS extends AppCompatActivity {
                 storePhotoDatabase(userPhotoUriCS, userCSId);
             }
         });
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_user_profile_cs, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        setMode(item.getItemId());
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void setMode(int selectedMode) {
+        switch (selectedMode) {
+            case R.id.edit_profile_cs:
+                startActivity(new Intent(getApplicationContext(), EditProfileCS.class));
+                finish();
+                break;
+
+            case R.id.delete_acc_cs:
+                break;
+        }
     }
 
     private void storeId() {

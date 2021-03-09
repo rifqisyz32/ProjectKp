@@ -35,11 +35,12 @@
     <string name="reset_sent">Kata sandi baru sudah terkirim</string>
     <string name="email_verify_sent">Email verifikasi sudah terkirim</string>
     <string name="email_verify_not_sent">Silahkan periksa email Anda untuk verifikasi</string>
-    <string name="cantEmpty">Tidak boleh kosong</string>
+    <string name="cant_empty">Tidak boleh kosong</string>
     <string name="weak_password">Kata sandi terlalu lemah</string>
     <string name="invalid_email">Alamat email tidak valid</string>
     <string name="max_name">Nama pengguna terlalu panjang</string>
-    <string name="no_space">Penggunaan spasi tidak diperbolehkan</string>
+    <string name="min_name">Butuh setidaknya 4 karakter</string>
+    <string name="alphanum">Hanya boleh menggunakan huruf dan angka</string>
     <string name="wrong_password">Kata Sandi Salah</string>
     <string name="no_user">Pengguna Tidak Ditemukan!</string>
     <string name="logout">Keluar</string>

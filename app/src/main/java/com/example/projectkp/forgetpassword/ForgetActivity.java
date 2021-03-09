@@ -76,7 +76,7 @@ public class ForgetActivity extends AppCompatActivity {
         String val = emailForget.getEditText().getText().toString();
 
         if (val.isEmpty()) {
-            emailForget.setError(getString(R.string.cantEmpty));
+            emailForget.setError(getString(R.string.cant_empty));
             return false;
         } else {
             emailForget.setError(null);

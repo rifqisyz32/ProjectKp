@@ -34,11 +34,12 @@
     <string name="reset_sent">Reset password is sent</string>
     <string name="email_verify_sent">Verification email is sent</string>
     <string name="email_verify_not_sent">Please check your email to verify</string>
-    <string name="cantEmpty">Can\'t be empty</string>
+    <string name="cant_empty">Can\'t be empty</string>
     <string name="weak_password">Password too weak</string>
     <string name="invalid_email">Invalid email address</string>
     <string name="max_name">Username too long</string>
-    <string name="no_space">White space are not allowed</string>
+    <string name="min_name">Require at least 4 characters</string>
+    <string name="alphanum">Only Alphabetic and numeric are allowed</string>
     <string name="wrong_password">Wrong Password</string>
     <string name="no_user">User Not Found!</string>
     <string name="logout">Logout</string>
@@ -54,7 +55,6 @@
     <string name="stb">2nd STB</string>
     <string name="duap">2P - 3P</string>
     <string name="Hu_2p">Hu - 2P</string>
-
     <string name="welcome_dashboard">Welcome back</string>
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
     <string name="search_myir">Search MYIR</string>
@@ -71,5 +71,12 @@
     <string name="light_mode">Light Mode</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="english">English</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="delete_acc">Delete Account</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="edit_success">Profile Updated</string>
+    <string name="update_photo_error">Error when updating photo profile</string>
+
 
 </resources>

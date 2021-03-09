@@ -3,15 +3,19 @@
     package="com.example.projectkp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
+        android:grantUriPermissions="true"
         android:icon="@mipmap/app_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/app_logo"
+        android:roundIcon="@mipmap/app_logo_round"
         android:supportsRtl="true"
         android:theme="@style/SecondTheme">
-        <activity android:name=".Sales.ProductSales"></activity>
+        <activity android:name=".Sales.EditProfileSales" />
+        <activity android:name=".CS.EditProfileCS" />
+        <activity android:name=".Sales.ProductSales" />
         <activity android:name=".Sales.UserDetailSales" />
         <activity android:name=".Sales.DashboardSales" />
         <activity android:name=".CS.ProductCS" />

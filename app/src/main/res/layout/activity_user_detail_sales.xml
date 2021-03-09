@@ -41,33 +41,6 @@
                     android:elevation="8dp" />
 
                 <RelativeLayout
-                    android:id="@+id/update_img_sales"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/round_shape_gr_red_small"
-                    android:backgroundTint="@color/white"
-                    android:elevation="4dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:src="@drawable/ic_baseline_photo_camera_24"
-                        app:tint="@color/pick_photo_sales" />
-
-                    <Button
-                        android:id="@+id/update_img_button_sales"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_centerInParent="true"
-                        android:background="#00000000" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
                     android:id="@+id/img_updated_sales"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
@@ -114,9 +87,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@drawable/round_shape_user_profile_sales"
+                android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
                 app:elevation="0dp"
                 app:layout_collapseMode="pin"
-                app:navigationIcon="@drawable/ic_baseline_arrow_back_ios_new_24">
+                app:menu="@menu/menu_user_profile_cs"
+                app:title=" "
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_ios_new_24"
+                app:popupTheme="@style/SecondTheme">
 
             </androidx.appcompat.widget.Toolbar>
 
@@ -135,8 +112,7 @@
             android:id="@+id/acc_sales"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:paddingTop="32dp"
+            android:paddingTop="16dp"
             android:paddingBottom="16dp">
 
             <TextView
@@ -165,28 +141,9 @@
                 android:padding="16dp">
 
                 <TextView
-                    android:id="@+id/user_detail_fullname_sales"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/poppins_light"
-                    android:text="@string/fullname"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/user_detail_fullname_field_sales"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/user_detail_fullname_sales"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="Fullname"
-                    android:textSize="16sp" />
-
-                <TextView
                     android:id="@+id/user_detail_username_sales"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@+id/user_detail_fullname_field_sales"
-                    android:layout_marginTop="16dp"
                     android:fontFamily="@font/poppins_light"
                     android:text="@string/username"
                     android:textSize="12sp" />
@@ -196,15 +153,34 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/user_detail_username_sales"
-                    android:fontFamily="@font/poppins_semibold"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="Username"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/user_detail_fullname_sales"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/user_detail_username_field_sales"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:text="@string/fullname"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/user_detail_fullname_field_sales"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/user_detail_fullname_sales"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Fullname"
                     android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/user_detail_email_sales"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@+id/user_detail_username_field_sales"
+                    android:layout_below="@+id/user_detail_fullname_field_sales"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/poppins_light"
                     android:text="@string/email"
@@ -215,7 +191,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/user_detail_email_sales"
-                    android:fontFamily="@font/poppins_semibold"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="username@gmail.com"
                     android:textSize="16sp" />
 
@@ -234,7 +210,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/user_detail_number_sales"
-                    android:fontFamily="@font/poppins_semibold"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="0123456789"
                     android:textSize="16sp" />
 
@@ -370,6 +346,7 @@
                 android:fontFamily="@font/poppins_semibold"
                 android:text="@string/logout"
                 android:textAllCaps="false"
+                android:textSize="16dp"
                 android:textColor="#fff"
                 app:backgroundTint="#ff5669"
                 app:elevation="8dp" />

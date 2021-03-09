@@ -2,8 +2,10 @@ package com.example.projectkp.CS;
 
 public class CSHelper {
     String JenisProduct, DeskripsiProduct;
-    CSHelper(){
+
+    CSHelper() {
     }
+
     public CSHelper(String jenisProduct, String deskripsiProduct) {
         JenisProduct = jenisProduct;
         DeskripsiProduct = deskripsiProduct;

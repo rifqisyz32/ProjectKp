@@ -24,6 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerInParent="true"
+                android:clickable="true"
                 android:background="@drawable/user_photo_dashboard_sales"
                 android:src="@drawable/ic_baseline_account_circle_40"
                 android:padding="2dp"

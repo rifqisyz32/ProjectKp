@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_margin="16dp"
-        android:background="@drawable/round_shape_gr"
+        android:background="@drawable/round_shape_white"
+        android:backgroundTint="@color/pick_photo_cs"
         tools:ignore="MissingConstraints">
 
         <ImageView
@@ -19,7 +20,7 @@
             android:layout_margin="16dp"
             android:background="@drawable/round_shape_white"
             android:padding="8dp"
-            android:src="@drawable/ic_baseline_shopping_cart2_24" />
+            android:src="@drawable/ic_baseline_input_24" />
 
         <TextView
             android:id="@+id/product_cs"

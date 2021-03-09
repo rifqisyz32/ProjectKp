@@ -16,15 +16,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_product_sales"/>
+        app:layout_constraintTop_toBottomOf="@+id/text_product_sales" />
 
     <RelativeLayout
+        android:id="@+id/back_product_sales"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        tools:ignore="MissingConstraints"
-        android:id="@+id/back_product_sales">
+        tools:ignore="MissingConstraints">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -43,13 +43,14 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/text_product_sales"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        tools:ignore="MissingConstraints"
-        android:id="@+id/text_product_sales"
-        app:layout_constraintTop_toBottomOf="@+id/back_product_sales">
+        app:layout_constraintTop_toBottomOf="@+id/back_product_sales"
+        tools:ignore="MissingConstraints">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

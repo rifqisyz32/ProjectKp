@@ -1,15 +1,12 @@
 package com.example.projectkp.Sales;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.appwidget.AppWidgetHost;
-import android.content.Intent;
-import android.content.ServiceConnection;
-import android.os.Bundle;
-import android.os.UserHandle;
-import android.view.View;
 
 import com.example.projectkp.R;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -18,6 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class ProductSales extends AppCompatActivity {
     RecyclerView recview;
     AdapterProduct adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,16 +25,17 @@ public class ProductSales extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), DashboardSales.class));
+                finish();
             }
         });
 
-        recview=(RecyclerView)findViewById(R.id.recview_cs);
+        recview = findViewById(R.id.recview_sales);
         recview.setLayoutManager(new LinearLayoutManager(this));
 
-        FirebaseRecyclerOptions<SalesHelper> options=
+        FirebaseRecyclerOptions<SalesHelper> options =
                 new FirebaseRecyclerOptions.Builder<SalesHelper>()
-                    .setQuery(FirebaseDatabase.getInstance().getReference().child("Product"), SalesHelper.class)
-                    .build();
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Product"), SalesHelper.class)
+                        .build();
         adapter = new AdapterProduct(options);
         recview.setAdapter(adapter);
     }
@@ -48,7 +47,7 @@ public class ProductSales extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop(){
+    protected void onStop() {
         super.onStop();
         adapter.stopListening();
     }

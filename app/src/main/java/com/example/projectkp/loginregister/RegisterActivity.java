@@ -136,19 +136,6 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private Boolean validateFullName() {
-        String val = fullnameReg.getEditText().getText().toString();
-
-        if (val.isEmpty()) {
-            fullnameReg.setError(getString(R.string.cantEmpty));
-            return false;
-        } else {
-            fullnameReg.setError(null);
-            fullnameReg.setErrorEnabled(false);
-            return true;
-        }
-    }
-
     private Boolean validateRadioButton() {
         RadioGroup radioGroup;
         radioGroup = findViewById(R.id.role_reg);
@@ -160,18 +147,34 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    private Boolean validateUserName() {
-        String val = usernameReg.getEditText().getText().toString();
-        String noWhiteSpace = "\\A\\w{4,12}\\z";
+    private Boolean validateFullName() {
+        String val = fullnameReg.getEditText().getText().toString();
 
         if (val.isEmpty()) {
-            usernameReg.setError(getString(R.string.cantEmpty));
+            fullnameReg.setError(getString(R.string.cant_empty));
+            return false;
+        } else {
+            fullnameReg.setError(null);
+            fullnameReg.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private Boolean validateUserName() {
+        String val = usernameReg.getEditText().getText().toString();
+        String alphanum = "\\A\\w{4,12}\\z";
+
+        if (val.isEmpty()) {
+            usernameReg.setError(getString(R.string.cant_empty));
             return false;
         } else if (val.length() > 12) {
             usernameReg.setError(getString(R.string.max_name));
             return false;
-        } else if (!val.matches(noWhiteSpace)) {
-            usernameReg.setError(getString(R.string.no_space));
+        } else if (val.length() < 4) {
+            usernameReg.setError(getString(R.string.min_name));
+            return false;
+        } else if (!val.matches(alphanum)) {
+            usernameReg.setError(getString(R.string.alphanum));
             return false;
         } else {
             usernameReg.setError(null);
@@ -185,7 +188,7 @@ public class RegisterActivity extends AppCompatActivity {
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
         if (val.isEmpty()) {
-            emailReg.setError(getString(R.string.cantEmpty));
+            emailReg.setError(getString(R.string.cant_empty));
             return false;
         } else if (!val.matches(emailPattern)) {
             emailReg.setError(getString(R.string.invalid_email));
@@ -201,7 +204,7 @@ public class RegisterActivity extends AppCompatActivity {
         String val = phoneReg.getEditText().getText().toString();
 
         if (val.isEmpty()) {
-            phoneReg.setError(getString(R.string.cantEmpty));
+            phoneReg.setError(getString(R.string.cant_empty));
             return false;
         } else {
             phoneReg.setError(null);
@@ -215,7 +218,7 @@ public class RegisterActivity extends AppCompatActivity {
         String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$";
 
         if (val.isEmpty()) {
-            passwordReg.setError(getString(R.string.cantEmpty));
+            passwordReg.setError(getString(R.string.cant_empty));
             return false;
         } else if (!val.matches(passwordPattern)) {
             passwordReg.setError(getString(R.string.weak_password));

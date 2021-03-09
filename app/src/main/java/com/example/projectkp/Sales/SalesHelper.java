@@ -2,8 +2,10 @@ package com.example.projectkp.Sales;
 
 public class SalesHelper {
     String JenisProduct, DeskripsiProduct;
-    SalesHelper(){
+
+    SalesHelper() {
     }
+
     public SalesHelper(String jenisProduct, String deskripsiProduct) {
         JenisProduct = jenisProduct;
         DeskripsiProduct = deskripsiProduct;

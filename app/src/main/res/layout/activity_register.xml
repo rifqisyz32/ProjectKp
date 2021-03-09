@@ -97,7 +97,11 @@
                     android:drawableTint="@color/colorSubtitle"
                     android:fontFamily="@font/poppins_light"
                     android:inputType="text"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -125,7 +129,11 @@
                     android:drawableTint="@color/colorSubtitle"
                     android:fontFamily="@font/poppins_light"
                     android:inputType="text"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -150,7 +158,11 @@
                     android:drawableTint="@color/colorSubtitle"
                     android:fontFamily="@font/poppins_light"
                     android:inputType="number"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -175,7 +187,11 @@
                     android:drawableTint="@color/colorSubtitle"
                     android:fontFamily="@font/poppins_light"
                     android:inputType="textEmailAddress"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -200,7 +216,11 @@
                     android:drawableTint="@color/colorSubtitle"
                     android:fontFamily="@font/poppins_light"
                     android:inputType="textPassword"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
