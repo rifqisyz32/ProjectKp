@@ -14,7 +14,9 @@
     <color name="pick_photo_cs">#F0F0F0</color>
     <color name="pick_photo_sales">#F0F0F0</color>
     <color name="dark_mode_switch">#ff5669</color>
-    <color name="yellow">#FFEB3B</color>
+    <color name="complete">#03DAC5</color>
     <color name="black">#FFFFFF</color>
+    <color name="black_temp">#80FFFFFF</color>
     <color name="white">#000000</color>
+    <color name="white_temp">#80000000</color>
 </resources>

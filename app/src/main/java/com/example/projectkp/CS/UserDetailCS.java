@@ -1,86 +1,80 @@
 package com.example.projectkp.CS;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.example.projectkp.CS.DashboardCS;
 import com.example.projectkp.R;
 import com.example.projectkp.loginregister.LoginActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.example.projectkp.verification.EmailVerifyActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class UserDetailCS extends AppCompatActivity {
 
+    FirebaseAuth csAuth = FirebaseAuth.getInstance();
+    FirebaseUser csUser = csAuth.getCurrentUser();
+    FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
+    DatabaseReference reference = rootNode.getReference("users");
+
     Window window;
     Toolbar toolbar;
-    FirebaseAuth userCSAuth;
-    FirebaseUser userCSId;
-    RelativeLayout savePhotoLayout;
-    ImageView savePhoto, userPhoto, changeThemeBG;
-    ProgressBar savePhotoProgress;
-    SwitchCompat changeTheme;
-    TextView fullNameUser, usernameUser, emailUser, phoneUser, changeThemeText;
-    String myUsernameCS;
-    Uri userPhotoUriCS;
-    static int PReqCode = 1;
-    static int REQUESTCODE = 1;
+    Button logoutCS;
+    SwitchCompat changeThemeSwitch;
+    TextView fullNameCS, usernameCS, emailCS, phoneCS, changeThemeText;
+    ImageView photoCS, changeThemeBG;
+    String myUsername, myEmail, databaseFullname, databasePhone;
 
     SharedPreferences sharedPreferences;
     public static final String MyPREFERENCES = "MyPrefs";
-    public static final String FullName = "fullname";
-    public static final String UserName = "username";
-    public static final String Phone = "phone";
-    public static final String Email = "email";
-    public static final String Photo = "photo";
-    public static final String Role = "role";
+    public static final String sharedUsername = "username";
+    public static final String sharedEmail = "email";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_detail_cs);
+
         if (Build.VERSION.SDK_INT >= 21) {
             window = this.getWindow();
             window.setStatusBarColor(this.getResources().getColor(R.color.status_bar_cs));
         }
 
         storeId();
-        getUserDataPreferences();
+        getUserData();
         changeMyTheme();
 
+        setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,7 +83,7 @@ public class UserDetailCS extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.user_detail_logout_cs).setOnClickListener(new View.OnClickListener() {
+        logoutCS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
@@ -97,36 +91,25 @@ public class UserDetailCS extends AppCompatActivity {
                 finish();
             }
         });
+    }
 
-        findViewById(R.id.update_img_button_cs).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Build.VERSION.SDK_INT >= 22) {
-                    checkAndRequestForPermission();
-                } else {
-                    openGallery();
-                }
-                savePhotoLayout.setVisibility(View.VISIBLE);
-                savePhoto.setVisibility(View.VISIBLE);
-                savePhotoProgress.setVisibility(View.GONE);
-            }
-        });
-
-        findViewById(R.id.img_updated_button_cs).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                savePhoto.setVisibility(View.GONE);
-                savePhotoProgress.setVisibility(View.VISIBLE);
-//                deletePhotoDatabase();
-                storePhotoDatabase(userPhotoUriCS, userCSId);
-            }
-        });
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getUserData();
+        Glide.with(this).applyDefaultRequestOptions(new RequestOptions()
+                .placeholder(R.drawable.ic_baseline_account_circle_40)
+                .error(R.drawable.ic_baseline_account_circle_40))
+                .load(csUser.getPhotoUrl())
+                .centerCrop()
+                .into(photoCS);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_user_profile_cs, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         setMode(item.getItemId());
@@ -147,33 +130,30 @@ public class UserDetailCS extends AppCompatActivity {
 
     private void storeId() {
         toolbar = findViewById(R.id.user_detail_toolbar_cs);
-        fullNameUser = findViewById(R.id.user_detail_fullname_field_cs);
-        usernameUser = findViewById(R.id.user_detail_username_field_cs);
-        emailUser = findViewById(R.id.user_detail_email_field_cs);
-        phoneUser = findViewById(R.id.user_detail_number_field_cs);
-        userPhoto = findViewById(R.id.user_photo_cs);
-        savePhotoLayout = findViewById(R.id.img_updated_cs);
-        savePhoto = findViewById(R.id.img_updated_bg_cs);
-        savePhotoProgress = findViewById(R.id.img_updated_prog_cs);
-        changeTheme = findViewById(R.id.switch_theme_cs);
+        fullNameCS = findViewById(R.id.user_detail_fullname_field_cs);
+        usernameCS = findViewById(R.id.user_detail_username_field_cs);
+        emailCS = findViewById(R.id.user_detail_email_field_cs);
+        phoneCS = findViewById(R.id.user_detail_number_field_cs);
+        photoCS = findViewById(R.id.user_photo_cs);
+        logoutCS = findViewById(R.id.user_detail_logout_cs);
+        changeThemeSwitch = findViewById(R.id.switch_theme_cs);
         changeThemeBG = findViewById(R.id.light_mode_icon_cs);
         changeThemeText = findViewById(R.id.theme_light_desc_cs);
-        userCSAuth = FirebaseAuth.getInstance();
-        userCSId = userCSAuth.getCurrentUser();
+        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
     }
 
     private void changeMyTheme() {
-        int nightModeFlags = changeTheme.getContext().getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        int nightModeFlags = changeThemeSwitch.getContext().getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
         switch (nightModeFlags) {
             case Configuration.UI_MODE_NIGHT_YES:
                 changeThemeBG.setImageResource(R.drawable.ic_baseline_dark_mode_24);
-                changeTheme.setChecked(false);
+                changeThemeSwitch.setChecked(false);
                 changeThemeText.setText(R.string.dark_mode);
                 break;
 
             case Configuration.UI_MODE_NIGHT_NO:
                 changeThemeBG.setImageResource(R.drawable.ic_baseline_light_mode_24);
-                changeTheme.setChecked(true);
+                changeThemeSwitch.setChecked(true);
                 changeThemeText.setText(R.string.light_mode);
                 break;
 
@@ -182,10 +162,10 @@ public class UserDetailCS extends AppCompatActivity {
                 break;
         }
 
-        changeTheme.setOnClickListener(new View.OnClickListener() {
+        changeThemeSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (changeTheme.isChecked()) {
+                if (changeThemeSwitch.isChecked()) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 } else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
@@ -194,88 +174,53 @@ public class UserDetailCS extends AppCompatActivity {
         });
     }
 
-    private void checkAndRequestForPermission() {
-        if (ContextCompat.checkSelfPermission(UserDetailCS.this, Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(UserDetailCS.this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                Toast.makeText(getApplicationContext(), R.string.acc_permission, Toast.LENGTH_SHORT).show();
-            } else {
-                ActivityCompat.requestPermissions(UserDetailCS.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PReqCode);
-            }
-        } else
-            openGallery();
-    }
+    private void getUserData() {
 
-    private void openGallery() {
-        Intent galleryCS = new Intent((Intent.ACTION_GET_CONTENT));
-        galleryCS.setType("image/*");
-        startActivityForResult(galleryCS, REQUESTCODE);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == REQUESTCODE && data != null) {
-            userPhotoUriCS = data.getData();
-            userPhoto.setImageURI(userPhotoUriCS);
-        }
-    }
-
-    private void getUserDataPreferences() {
-
-        Glide.with(this).load(userCSId.getPhotoUrl()).into(userPhoto);
+        Glide.with(this)
+                .applyDefaultRequestOptions(
+                        new RequestOptions()
+                                .placeholder(R.drawable.ic_baseline_account_circle_120)
+                                .error(R.drawable.ic_baseline_account_circle_120))
+                .load(csUser.getPhotoUrl())
+                .centerCrop()
+                .into(photoCS);
 
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        if (sharedPreferences.contains(FullName)) {
-            fullNameUser.setText(sharedPreferences.getString(FullName, ""));
-        }
-        if (sharedPreferences.contains(UserName)) {
-            myUsernameCS = sharedPreferences.getString(UserName, "");
-            usernameUser.setText(sharedPreferences.getString(UserName, ""));
-        }
-        if (sharedPreferences.contains(Phone)) {
-            phoneUser.setText(sharedPreferences.getString(Phone, ""));
-        }
-        if (sharedPreferences.contains(Email)) {
-            emailUser.setText(sharedPreferences.getString(Email, ""));
-        }
-    }
 
-    private void storePhotoDatabase(Uri userPhotoUriCS, FirebaseUser currentUser) {
+        if (sharedPreferences.contains(sharedUsername)) {
+            myUsername = sharedPreferences.getString(sharedUsername, "");
+            usernameCS.setText(sharedPreferences.getString(sharedUsername, ""));
+        }
 
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("cs_photo").child(myUsernameCS);
-        StorageReference imgPath = storageReference.child(userPhotoUriCS.getLastPathSegment());
+        if (sharedPreferences.contains(sharedEmail)) {
+            myEmail = sharedPreferences.getString(sharedEmail, "");
+            emailCS.setText(sharedPreferences.getString(sharedEmail, ""));
+        }
 
-        imgPath.putFile(userPhotoUriCS).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+        Query checkUser = reference.orderByChild("username").equalTo(myUsername);
+        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                imgPath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder()
-                                .setDisplayName(myUsernameCS)
-                                .setPhotoUri(uri)
-                                .build();
-                        savePhotoLayout.setVisibility(View.GONE);
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                        currentUser.updateProfile(profileUpdate)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            Toast.makeText(getApplicationContext(), R.string.photo_updated, Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
-                    }
+                if (snapshot.exists()) {
 
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+                    databaseFullname = snapshot.child(myUsername).child("fullname").getValue(String.class);
+                    databasePhone = snapshot.child(myUsername).child("phone").getValue(String.class);
+                    fullNameCS.setText(databaseFullname);
+                    phoneCS.setText(databasePhone);
+
+                } else {
+                    Toast.makeText(getApplicationContext(), R.string.no_user, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+        emailCS.setText(myEmail);
+        usernameCS.setText(myUsername);
     }
 }

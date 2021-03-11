@@ -16,7 +16,6 @@ import com.example.projectkp.CS.DashboardCS;
 import com.example.projectkp.R;
 import com.example.projectkp.Sales.DashboardSales;
 import com.example.projectkp.forgetpassword.ForgetActivity;
-import com.example.projectkp.verification.EmailVerify2Activity;
 import com.example.projectkp.verification.EmailVerifyActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -36,17 +35,14 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseUser logUser = logAuth.getCurrentUser();
     TextInputLayout usernameLog, passwordLog;
     Button login, forget, signUp;
-    String username, email;
+    String username, password, myUsername, databaseEmail, databaseRole;
     ProgressBar logProgress;
 
     SharedPreferences sharedPreferences;
     public static final String MyPREFERENCES = "MyPrefs";
-    public static final String FullName = "fullname";
-    public static final String UserName = "username";
-    public static final String Phone = "phone";
-    public static final String Email = "email";
-    public static final String Password = "password";
-    public static final String Role = "role";
+    public static final String sharedUsername = "username";
+    public static final String sharedEmail = "email";
+    public static final String sharedPassword = "password";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), ForgetActivity.class));
+                finish();
             }
         });
 
@@ -74,6 +71,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
+                finish();
             }
         });
     }
@@ -92,8 +90,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        if (logAuth.getCurrentUser() != null) {
-            if (logAuth.getCurrentUser().isEmailVerified()) {
+        if (logUser != null) {
+            if (logUser.isEmailVerified()) {
                 checkRole();
             }
         }
@@ -101,20 +99,18 @@ public class LoginActivity extends AppCompatActivity {
 
     private void checkRole() {
 
-        sharedPreferences = getSharedPreferences(MyPREFERENCES,
-                Context.MODE_PRIVATE);
-
-        if (sharedPreferences.contains(UserName)) {
-            username = sharedPreferences.getString(UserName, "");
+        if (sharedPreferences.contains(sharedUsername)) {
+            myUsername = sharedPreferences.getString(sharedUsername, "");
         }
 
-        Query checkRole = FirebaseDatabase.getInstance().getReference("users").orderByChild("username").equalTo(username);
+        Query checkRole = FirebaseDatabase.getInstance().getReference("users").orderByChild("username").equalTo(myUsername);
         checkRole.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
 
-                    String databaseRole = snapshot.child(username).child("role").getValue(String.class);
+                    databaseRole = snapshot.child(myUsername).child("role").getValue(String.class);
+                    databaseEmail = snapshot.child(myUsername).child("email").getValue(String.class);
 
                     if (databaseRole.matches("Sales")) {
                         logProgress.setVisibility(View.GONE);
@@ -137,13 +133,14 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void loginUser() {
-        if (!validateUserName() | !validatePassword()) {
+
+        if (!validateUsername() | !validatePassword()) {
             logProgress.setVisibility(View.GONE);
             return;
         }
 
-        String username = usernameLog.getEditText().getText().toString().trim();
-        String password = passwordLog.getEditText().getText().toString().trim();
+        username = usernameLog.getEditText().getText().toString().trim();
+        password = passwordLog.getEditText().getText().toString().trim();
 
         Query checkUser = FirebaseDatabase.getInstance().getReference("users").orderByChild("username").equalTo(username);
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -154,24 +151,18 @@ public class LoginActivity extends AppCompatActivity {
                     usernameLog.setError(null);
                     usernameLog.setErrorEnabled(false);
 
-                    String databaseFullName = snapshot.child(username).child("fullname").getValue(String.class);
-                    String databaseUserName = snapshot.child(username).child("username").getValue(String.class);
-                    String databasePhone = snapshot.child(username).child("phone").getValue(String.class);
-                    String databaseRole = snapshot.child(username).child("role").getValue(String.class);
-                    email = logUser.getEmail();
+                    databaseRole = snapshot.child(username).child("role").getValue(String.class);
+                    databaseEmail = snapshot.child(username).child("email").getValue(String.class);
 
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString(FullName, databaseFullName);
-                    editor.putString(UserName, databaseUserName);
-                    editor.putString(Phone, databasePhone);
-                    editor.putString(Email, email);
-                    editor.putString(Role, databaseRole);
-                    editor.putString(Password, password);
-                    editor.apply();
-
-                    logAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    logAuth.signInWithEmailAndPassword(databaseEmail, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString(sharedUsername, username);
+                            editor.putString(sharedEmail, databaseEmail);
+                            editor.putString(sharedPassword, password);
+                            editor.apply();
+
                             if (logUser != null) {
                                 if (logUser.isEmailVerified()) {
                                     logProgress.setVisibility(View.GONE);
@@ -180,11 +171,10 @@ public class LoginActivity extends AppCompatActivity {
                                     } else {
                                         startActivity(new Intent(getApplicationContext(), DashboardCS.class));
                                     }
-
                                 } else {
                                     logProgress.setVisibility(View.GONE);
                                     Intent dataUser = new Intent(getApplicationContext(), EmailVerifyActivity.class);
-                                    dataUser.putExtra("username", databaseUserName);
+                                    dataUser.putExtra("username", username);
                                     startActivity(dataUser);
                                 }
                                 finish();
@@ -212,7 +202,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private Boolean validateUserName() {
+    private Boolean validateUsername() {
         String val = usernameLog.getEditText().getText().toString().trim();
 
         if (val.isEmpty()) {

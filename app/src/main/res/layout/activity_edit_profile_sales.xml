@@ -99,7 +99,7 @@
                 android:paddingStart="32dp"
                 android:paddingEnd="32dp"
                 android:text="@string/edit_profile"
-                android:textColor="#ff5669"
+                android:textColor="@color/sales_text"
                 android:textSize="20sp" />
 
             <RelativeLayout
@@ -243,9 +243,9 @@
                     android:fontFamily="@font/poppins_medium"
                     android:text="@string/cancel"
                     android:textAlignment="center"
-                    android:textColor="#ff5669"
+                    android:textColor="@color/sales_text"
                     android:textSize="16sp"
-                    app:backgroundTint="#ff5669" />
+                    app:backgroundTint="@color/sales_text" />
 
                 <Button
                     android:id="@+id/save_profile_sales"
@@ -260,7 +260,7 @@
                     android:textAlignment="center"
                     android:textColor="#fff"
                     android:textSize="16sp"
-                    app:backgroundTint="#ff5669" />
+                    app:backgroundTint="@color/sales_text" />
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -274,7 +274,7 @@
                         android:layout_width="150dp"
                         android:layout_height="50dp"
                         android:background="@drawable/round_shape_white"
-                        android:backgroundTint="#ff5669"
+                        android:backgroundTint="@color/sales_text"
                         android:indeterminate="true"
                         android:indeterminateTint="@color/white"
                         android:padding="8dp"

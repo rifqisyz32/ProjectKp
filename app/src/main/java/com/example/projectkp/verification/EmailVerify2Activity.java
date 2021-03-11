@@ -24,17 +24,10 @@ import com.google.firebase.database.ValueEventListener;
 
 public class EmailVerify2Activity extends AppCompatActivity {
 
-    ProgressBar verifyProgress;
-    SharedPreferences sharedPreferences;
-    public static final String MyPREFERENCES = "MyPrefs";
-    public static final String UserName = "username";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email_verif2);
-
-        verifyProgress = findViewById(R.id.reset_success_prog);
 
         findViewById(R.id.retry_verif).setOnClickListener(new View.OnClickListener() {
             @Override

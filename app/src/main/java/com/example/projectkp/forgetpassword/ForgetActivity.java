@@ -3,7 +3,6 @@ package com.example.projectkp.forgetpassword;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -19,9 +18,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class ForgetActivity extends AppCompatActivity {
 
-    Button reset, backLogin;
     TextInputLayout emailForget;
-    FirebaseAuth forgetAuth;
+    FirebaseAuth forgetAuth = FirebaseAuth.getInstance();
     ProgressBar forgetProgress;
 
     @Override
@@ -29,12 +27,10 @@ public class ForgetActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget);
 
-        reset = findViewById(R.id.reset);
-        backLogin = findViewById(R.id.go_back_forget);
         emailForget = findViewById(R.id.email_forget);
         forgetProgress = findViewById(R.id.forget_prog);
 
-        reset.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.reset).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 forgetProgress.setVisibility(View.VISIBLE);
@@ -44,7 +40,6 @@ public class ForgetActivity extends AppCompatActivity {
                 }
 
                 String email = emailForget.getEditText().getText().toString();
-                forgetAuth = FirebaseAuth.getInstance();
 
                 forgetAuth.sendPasswordResetEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -64,10 +59,11 @@ public class ForgetActivity extends AppCompatActivity {
             }
         });
 
-        backLogin.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.back_forget).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                finish();
             }
         });
     }
@@ -84,5 +80,4 @@ public class ForgetActivity extends AppCompatActivity {
             return true;
         }
     }
-
 }

@@ -16,14 +16,15 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/user_detail_photo_sales"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
                 android:clickable="true"
                 android:background="@drawable/user_photo_dashboard_sales"
                 android:src="@drawable/ic_baseline_account_circle_40"
@@ -80,13 +81,15 @@
             android:fontFamily="@font/poppins_bold"
             android:gravity="center"
             android:text="@string/app_name"
-            android:textColor="#ff5669"
+            android:textColor="@color/sales_text"
             android:textSize="24sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:gravity="center"
@@ -151,7 +154,7 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="16dp"
                         android:background="@drawable/dashboard_item_gr_sales"
-                        android:backgroundTint="#ff5669"
+                        android:backgroundTint="@color/sales_text"
                         android:elevation="8dp"
                         android:padding="16dp"
                         android:src="@drawable/ic_baseline_note_add_24" />
@@ -174,6 +177,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:gravity="center"
@@ -199,7 +204,7 @@
                         android:layout_height="64dp"
                         android:layout_marginTop="16dp"
                         android:background="@drawable/dashboard_item_gr_sales"
-                        android:backgroundTint="#ff3b65"
+                        android:backgroundTint="@color/sales_text"
                         android:elevation="8dp"
                         android:padding="16dp"
                         android:src="@drawable/ic_baseline_add_shopping_cart_24" />

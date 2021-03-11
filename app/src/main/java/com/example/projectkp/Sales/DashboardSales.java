@@ -1,10 +1,13 @@
 
 package com.example.projectkp.Sales;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,25 +19,34 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class DashboardSales extends AppCompatActivity {
 
-    FirebaseAuth userSalesAuth;
-    FirebaseUser userSalesId;
+    FirebaseAuth salesAuth = FirebaseAuth.getInstance();
+    FirebaseUser salesUser = salesAuth.getCurrentUser();
+    TextView hiUsername;
     ImageView userPhoto;
+
+    SharedPreferences sharedPreferences;
+    public static final String MyPREFERENCES = "MyPrefs";
+    public static final String sharedUsername = "username";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_sales);
 
-        userSalesAuth = FirebaseAuth.getInstance();
-        userSalesId = userSalesAuth.getCurrentUser();
         userPhoto = findViewById(R.id.user_detail_photo_sales);
-//        Glide.with(this).load(userSalesId.getPhotoUrl()).into(userPhoto);
+        hiUsername = findViewById(R.id.username_dashboard_sales);
+
+        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        if (sharedPreferences.contains(sharedUsername)) {
+            hiUsername.setText(sharedPreferences.getString(sharedUsername, ""));
+        }
+
         Glide.with(this)
                 .applyDefaultRequestOptions(
                         new RequestOptions()
                                 .placeholder(R.drawable.ic_baseline_account_circle_40)
                                 .error(R.drawable.ic_baseline_account_circle_40))
-                .load(userSalesId.getPhotoUrl())
+                .load(salesUser.getPhotoUrl())
                 .centerCrop()
                 .into(userPhoto);
 
@@ -53,5 +65,18 @@ public class DashboardSales extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Glide.with(this)
+                .applyDefaultRequestOptions(
+                        new RequestOptions()
+                                .placeholder(R.drawable.ic_baseline_account_circle_40)
+                                .error(R.drawable.ic_baseline_account_circle_40))
+                .load(salesUser.getPhotoUrl())
+                .centerCrop()
+                .into(userPhoto);
     }
 }

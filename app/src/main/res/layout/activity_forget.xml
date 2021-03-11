@@ -6,130 +6,119 @@
     android:layout_height="match_parent"
     tools:context=".forgetpassword.ForgetActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:padding="16dp">
 
-        <RelativeLayout
+        <ImageView
+            android:id="@+id/back_forget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="100dp"
+            android:background="@drawable/ic_baseline_arrow_back_ios_new_24"
+            android:backgroundTint="@color/black" />
+
+        <ImageView
+            android:id="@+id/forget_icon"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_below="@id/back_forget"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/forget_password_icon"
+            app:tint="@color/colorPrimary" />
+
+        <TextView
+            android:id="@+id/forget_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/forget_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/forget_password"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/forget_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/forget_title"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/poppins_light"
+            android:paddingStart="32dp"
+            android:paddingEnd="32dp"
+            android:text="@string/forget_desc"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_forget"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:layout_below="@id/forget_desc"
+            android:layout_gravity="center"
+            android:layout_margin="32dp"
+            android:hint="@string/email"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/colorSubtitle">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_baseline_arrow_back_ios_new_24"
-                android:backgroundTint="@color/black" />
-
-            <Button
-                android:id="@+id/go_back_forget"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginBottom="100dp"
-                android:background="#00000000" />
-
-            <ImageView
-                android:id="@+id/forget_icon"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_below="@id/go_back_forget"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/forget_password_icon"
-                app:tint="@color/colorPrimary" />
-
-            <TextView
-                android:id="@+id/forget_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/forget_icon"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="32dp"
-                android:fontFamily="@font/poppins_semibold"
-                android:text="@string/forget_password"
-                android:textColor="@color/black"
-                android:textSize="24sp" />
-
-            <TextView
-                android:id="@+id/forget_desc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/forget_title"
-                android:layout_centerHorizontal="true"
-                android:fontFamily="@font/poppins_light"
-                android:paddingStart="32dp"
-                android:paddingEnd="32dp"
-                android:text="@string/forget_desc"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/email_forget"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/forget_desc"
-                android:layout_gravity="center"
-                android:layout_marginTop="32dp"
-                android:hint="@string/email"
-                android:paddingStart="32dp"
-                android:paddingEnd="32dp"
-                app:endIconMode="clear_text"
-                app:endIconTint="@color/colorSubtitle">
+                android:layout_height="match_parent"
+                android:drawableStart="@drawable/ic_outline_email_24"
+                android:drawablePadding="8dp"
+                android:drawableTint="@color/colorSubtitle"
+                android:fontFamily="@font/poppins_light"
+                android:inputType="textEmailAddress"
+                android:textSize="12sp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:drawableStart="@drawable/ic_outline_email_24"
-                    android:drawablePadding="8dp"
-                    android:drawableTint="@color/colorSubtitle"
-                    android:fontFamily="@font/poppins_light"
-                    android:inputType="textEmailAddress"
-                    android:textSize="12sp" />
-            </com.google.android.material.textfield.TextInputLayout>
+        <Button
+            android:id="@+id/reset"
+            style="@style/SecondTheme"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/email_forget"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/round_shape_white"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/reset"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
 
-            <Button
-                android:id="@+id/reset"
-                style="@style/SecondTheme"
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/email_forget"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"
+            android:elevation="8dp">
+
+            <ProgressBar
+                android:id="@+id/forget_prog"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
-                android:layout_below="@id/email_forget"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
-                android:layout_marginTop="24dp"
+                android:layout_centerInParent="true"
                 android:background="@drawable/round_shape_white"
-                android:fontFamily="@font/poppins_semibold"
-                android:text="@string/reset"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/email_forget"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="24dp"
-                android:elevation="8dp">
-
-                <ProgressBar
-                    android:id="@+id/forget_prog"
-                    android:layout_width="150dp"
-                    android:layout_height="50dp"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/round_shape_gr_cs_16"
-                    android:backgroundTint="@color/colorPrimary"
-                    android:indeterminate="true"
-                    android:indeterminateTint="@color/white"
-                    android:padding="8dp"
-                    android:visibility="gone" />
-
-            </RelativeLayout>
+                android:backgroundTint="@color/colorPrimary"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/white"
+                android:padding="8dp"
+                android:visibility="gone" />
 
         </RelativeLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </ScrollView>

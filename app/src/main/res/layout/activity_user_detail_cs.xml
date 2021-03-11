@@ -41,73 +41,6 @@
                     android:background="@drawable/ic_baseline_account_circle_120"
                     android:elevation="8dp" />
 
-                <RelativeLayout
-                    android:id="@+id/update_img_cs"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/round_shape_gr_small"
-                    android:backgroundTint="@color/white"
-                    android:elevation="4dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:src="@drawable/ic_baseline_photo_camera_24"
-                        app:tint="@color/pick_photo_cs" />
-
-                    <Button
-                        android:id="@+id/update_img_button_cs"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_centerInParent="true"
-                        android:background="#00000000" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/img_updated_cs"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_above="@+id/update_img_cs"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/round_shape_gr_small"
-                    android:backgroundTint="@color/white"
-                    android:elevation="4dp"
-                    android:visibility="gone">
-
-                    <ImageView
-                        android:id="@+id/img_updated_bg_cs"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:src="@drawable/ic_baseline_check_24"
-                        app:tint="@color/pick_photo_cs" />
-
-                    <Button
-                        android:id="@+id/img_updated_button_cs"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_centerInParent="true"
-                        android:background="#00000000" />
-
-                    <ProgressBar
-                        android:id="@+id/img_updated_prog_cs"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:layout_centerInParent="true"
-                        android:indeterminate="true"
-                        android:indeterminateTint="@color/pick_photo_cs"
-                        android:padding="8dp"
-                        android:visibility="gone" />
-
-                </RelativeLayout>
-
             </RelativeLayout>
 
             <androidx.appcompat.widget.Toolbar
@@ -119,6 +52,7 @@
                 app:elevation="0dp"
                 app:layout_collapseMode="pin"
                 app:menu="@menu/menu_user_profile_cs"
+                app:title=" "
                 app:navigationIcon="@drawable/ic_baseline_arrow_back_ios_new_24"
                 app:popupTheme="@style/SecondTheme">
 
@@ -139,8 +73,7 @@
             android:id="@+id/acc_cs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:paddingTop="32dp"
+            android:paddingTop="16dp"
             android:paddingBottom="16dp">
 
             <TextView
@@ -151,8 +84,8 @@
                 android:paddingStart="32dp"
                 android:paddingEnd="32dp"
                 android:text="@string/account"
-                android:textColor="@color/action_temp"
-                android:textSize="18sp" />
+                android:textColor="@color/cs_text"
+                android:textSize="16sp" />
 
             <RelativeLayout
                 android:id="@+id/acc_desc_bg_cs"
@@ -181,9 +114,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/user_detail_fullname_cs"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="Fullname"
-                    android:textSize="16sp" />
+                    android:fontFamily="@font/poppins_medium"
+                    android:text=" "
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/user_detail_username_cs"
@@ -200,9 +133,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/user_detail_username_cs"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="Username"
-                    android:textSize="16sp" />
+                    android:fontFamily="@font/poppins_medium"
+                    android:text=" "
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/user_detail_email_cs"
@@ -219,9 +152,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/user_detail_email_cs"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="username@gmail.com"
-                    android:textSize="16sp" />
+                    android:fontFamily="@font/poppins_medium"
+                    android:text=" "
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/user_detail_number_cs"
@@ -238,9 +171,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/user_detail_number_cs"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="0123456789"
-                    android:textSize="16sp" />
+                    android:fontFamily="@font/poppins_medium"
+                    android:text=" "
+                    android:textSize="14sp" />
 
             </RelativeLayout>
 
@@ -254,8 +187,8 @@
                 android:paddingStart="32dp"
                 android:paddingEnd="32dp"
                 android:text="@string/theme"
-                android:textColor="@color/action_temp"
-                android:textSize="18sp" />
+                android:textColor="@color/cs_text"
+                android:textSize="16sp" />
 
             <RelativeLayout
                 android:id="@+id/theme_desc_bg_cs"
@@ -293,7 +226,7 @@
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
                     android:text="@string/light_mode"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/switch_theme_cs"
@@ -320,8 +253,8 @@
                 android:paddingStart="32dp"
                 android:paddingEnd="32dp"
                 android:text="@string/language"
-                android:textColor="@color/action_temp"
-                android:textSize="18sp" />
+                android:textColor="@color/cs_text"
+                android:textSize="16sp" />
 
             <RelativeLayout
                 android:id="@+id/language_desc_bg_cs"
@@ -357,7 +290,7 @@
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
                     android:text="@string/language"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
             </RelativeLayout>
 
@@ -375,7 +308,8 @@
                 android:text="@string/logout"
                 android:textAllCaps="false"
                 android:textColor="#fff"
-                app:backgroundTint="@color/button_temp"
+                android:textSize="16sp"
+                app:backgroundTint="@color/button_cs"
                 app:elevation="8dp" />
 
         </RelativeLayout>

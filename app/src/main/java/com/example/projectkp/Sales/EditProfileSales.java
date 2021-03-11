@@ -34,8 +34,12 @@ import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -50,21 +54,19 @@ public class EditProfileSales extends AppCompatActivity {
     Toolbar toolbar;
     ProgressBar saveDataProgress;
     TextInputLayout editFullname, editPhone, editEmail;
-    TextView usernameUser;
+    TextView usernameSales;
     ImageView userPhoto, updatePhoto;
     Uri userPhotoUri;
     Boolean updateImgButton = false;
-    String myUsername, myFullname, myPhone, myEmail, myPassword;
+    String myUsername, myEmail, myPassword, databaseEmail, databaseFullname, databasePhone;
     static int PReqCode = 1;
     static int REQUESTCODE = 1;
 
     SharedPreferences sharedPreferences;
     public static final String MyPREFERENCES = "MyPrefs";
-    public static final String FullName = "fullname";
-    public static final String UserName = "username";
-    public static final String Phone = "phone";
-    public static final String Email = "email";
-    public static final String Password = "password";
+    public static final String sharedUsername = "username";
+    public static final String sharedEmail = "email";
+    public static final String sharedPassword = "password";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +74,7 @@ public class EditProfileSales extends AppCompatActivity {
         setContentView(R.layout.activity_edit_profile_sales);
 
         storeId();
-        getUserDataPreferences();
+        getUserData();
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,13 +121,14 @@ public class EditProfileSales extends AppCompatActivity {
         saveDataProgress = findViewById(R.id.save_profile_sales_prog);
         userPhoto = findViewById(R.id.edit_user_photo_sales);
         updatePhoto = findViewById(R.id.edit_change_img_sales);
-        usernameUser = findViewById(R.id.edit_username_sales);
+        usernameSales = findViewById(R.id.edit_username_sales);
         editFullname = findViewById(R.id.edit_fullname_sales);
         editPhone = findViewById(R.id.edit_phone_sales);
         editEmail = findViewById(R.id.edit_email_sales);
+        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
     }
 
-    private void getUserDataPreferences() {
+    private void getUserData() {
 
         Glide.with(this)
                 .applyDefaultRequestOptions(
@@ -137,25 +140,44 @@ public class EditProfileSales extends AppCompatActivity {
                 .into(userPhoto);
 
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        if (sharedPreferences.contains(FullName)) {
-            myFullname = sharedPreferences.getString(FullName, "");
-            editFullname.getEditText().setHint(sharedPreferences.getString(FullName, ""));
+        if (sharedPreferences.contains(sharedUsername)) {
+            myUsername = sharedPreferences.getString(sharedUsername, "");
+            usernameSales.setText(sharedPreferences.getString(sharedUsername, ""));
         }
-        if (sharedPreferences.contains(UserName)) {
-            myUsername = sharedPreferences.getString(UserName, "");
-            usernameUser.setText(sharedPreferences.getString(UserName, ""));
+        
+        if (sharedPreferences.contains(sharedEmail)) {
+            myEmail = sharedPreferences.getString(sharedEmail, "");
+            editEmail.getEditText().setHint(myEmail);
         }
-        if (sharedPreferences.contains(Phone)) {
-            myPhone = sharedPreferences.getString(Phone, "");
-            editPhone.getEditText().setHint(sharedPreferences.getString(Phone, ""));
+
+        if (sharedPreferences.contains(sharedPassword)) {
+            myPassword = sharedPreferences.getString(sharedPassword, "");
         }
-        if (sharedPreferences.contains(Email)) {
-            myEmail = sharedPreferences.getString(Email, "");
-            editEmail.getEditText().setHint(sharedPreferences.getString(Email, ""));
-        }
-        if (sharedPreferences.contains(Password)) {
-            myPassword = sharedPreferences.getString(Email, "");
-        }
+
+        Query checkUser = reference.orderByChild("username").equalTo(myUsername);
+        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if (snapshot.exists()) {
+
+                    databaseFullname = snapshot.child(myUsername).child("fullname").getValue(String.class);
+                    databasePhone = snapshot.child(myUsername).child("phone").getValue(String.class);
+
+                    editPhone.getEditText().setHint(databasePhone);
+                    editFullname.getEditText().setHint(databaseFullname);
+
+                } else {
+                    Toast.makeText(getApplicationContext(), R.string.no_user, Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void checkAndRequestForPermission() {
@@ -226,29 +248,32 @@ public class EditProfileSales extends AppCompatActivity {
         String phone = editPhone.getEditText().getText().toString();
         String email = editEmail.getEditText().getText().toString();
 
-        saveDataProgress.setVisibility(View.GONE);
+        if (phone.isEmpty()) {
+            editPhone.getEditText().setText(databasePhone);
+        }
+        if (fullname.isEmpty()) {
+            editFullname.getEditText().setText(databaseFullname);
+        }
+
+        fullname = editFullname.getEditText().getText().toString();
+        phone = editPhone.getEditText().getText().toString();
+
         if (email.isEmpty()) {
-            if (validateData()) {
-                return;
-            }
 
             editEmail.getEditText().setText(myEmail);
+            email = editEmail.getEditText().getText().toString();
+
             reference.child(myUsername).child("fullname").setValue(fullname);
             reference.child(myUsername).child("phone").setValue(phone);
             reference.child(myUsername).child("email").setValue(email);
 
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString(FullName, fullname);
-            editor.putString(Phone, phone);
-            editor.putString(Email, email);
-            editor.apply();
-
+            saveDataProgress.setVisibility(View.GONE);
             Toast.makeText(getApplicationContext(), R.string.edit_success, Toast.LENGTH_SHORT).show();
             startActivity(new Intent(getApplicationContext(), UserDetailSales.class));
             finish();
 
         } else {
-            if (validateData()) {
+            if (!validateEmail()) {
                 return;
             }
             updateEmail(fullname, email, phone);
@@ -265,16 +290,16 @@ public class EditProfileSales extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
+
                             reference.child(myUsername).child("fullname").setValue(fullname);
                             reference.child(myUsername).child("phone").setValue(phone);
                             reference.child(myUsername).child("email").setValue(email);
 
                             SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString(FullName, fullname);
-                            editor.putString(Phone, phone);
-                            editor.putString(Email, email);
+                            editor.putString(sharedEmail, email);
                             editor.apply();
 
+                            saveDataProgress.setVisibility(View.GONE);
                             Toast.makeText(getApplicationContext(), R.string.edit_success, Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), UserDetailSales.class));
                             finish();
@@ -285,30 +310,23 @@ public class EditProfileSales extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                saveDataProgress.setVisibility(View.GONE);
                 Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private Boolean validateData() {
-        String checkFullname = editFullname.getEditText().getText().toString();
-        String checkPhone = editPhone.getEditText().getText().toString();
-        String checkEmail = editEmail.getEditText().getText().toString();
+    private Boolean validateEmail() {
+        String val = editEmail.getEditText().getText().toString();
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
-        if (checkFullname.isEmpty()) {
-            editFullname.getEditText().setText(myFullname);
-        } else if (checkPhone.isEmpty()) {
-            editPhone.getEditText().setText(myPhone);
-        } else if (!checkEmail.isEmpty()) {
-            if (!checkEmail.matches(emailPattern)) {
-                editEmail.setError(getString(R.string.invalid_email));
-                return false;
-            } else {
-                editEmail.setError(null);
-                editEmail.setErrorEnabled(false);
-            }
+        if (!val.matches(emailPattern)) {
+            editEmail.setError(getString(R.string.invalid_email));
+            return false;
+        } else {
+            editEmail.setError(null);
+            editEmail.setErrorEnabled(false);
+            return true;
         }
-        return true;
     }
 }

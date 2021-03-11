@@ -88,7 +88,7 @@ public class RegisterActivity extends AppCompatActivity {
         String roleCS = csReg.getText().toString();
         String roleSales = salesReg.getText().toString();
 
-        Query checkUser = rootNode.getReference("users").orderByChild("username").equalTo(username);
+        Query checkUser = reference.orderByChild("username").equalTo(username);
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

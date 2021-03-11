@@ -9,16 +9,18 @@
 
     <color name="user_detail_layout_cs">#FFFFFF</color>
     <color name="user_detail_layout_sales">#FFFFFF</color>
-    <color name="action_temp">#893abc</color>
+    <color name="cs_text">#893abc</color>
+    <color name="sales_text">#ff5669</color>
+    <color name="cs_temp">#9b6fee</color>
     <color name="status_bar_cs">#601880</color>
     <color name="pick_photo_cs">#893abc</color>
     <color name="pick_photo_sales">#ff5669</color>
     <color name="dark_mode_switch">#F0F0F0</color>
-    <color name="button_temp">#9744ff</color>
+    <color name="button_cs">#9744ff</color>
     <color name="shapeLogin">#F0F0F0</color>
     <color name="complete">#19C820</color>
-    <color name="yellow">#FFEB3B</color>
     <color name="white">#FFFFFF</color>
+    <color name="white_temp">#80FFFFFF</color>
     <color name="black">#000000</color>
-    <color name="colorOverlay">#ff0000ff</color>
+    <color name="black_temp">#80000000</color>
 </resources>

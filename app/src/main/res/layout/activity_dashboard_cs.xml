@@ -17,7 +17,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/user_detail_photo_cs"
@@ -25,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
+                android:clickable="true"
                 android:background="@drawable/user_photo_dashboard_cs"
                 android:src="@drawable/ic_baseline_account_circle_40"
                 android:padding="2dp"
@@ -54,9 +56,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@+id/hi_dashboard_cs"
-                    android:fontFamily="@font/poppins_medium"
+                    android:fontFamily="@font/poppins_light"
                     android:text="@string/username"
-                    android:textColor="#9b6fee"
+                    android:textColor="@color/cs_text"
                     android:textSize="24sp" />
 
                 <TextView
@@ -77,16 +79,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="32dp"
-            android:fontFamily="@font/poppins_bold"
+            android:fontFamily="@font/poppins_medium"
             android:gravity="center"
             android:text="@string/app_name"
-            android:textColor="#9b6fee"
+            android:textColor="@color/cs_text"
             android:textSize="24sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:gravity="center"
@@ -113,7 +117,7 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="16dp"
                         android:background="@drawable/dashboard_item_gr_cs"
-                        android:backgroundTint="#9b6fee"
+                        android:backgroundTint="@color/cs_temp"
                         android:elevation="8dp"
                         android:padding="16dp"
                         android:src="@drawable/ic_baseline_search_24" />
@@ -151,7 +155,7 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="16dp"
                         android:background="@drawable/dashboard_item_gr_cs"
-                        android:backgroundTint="#18b2de"
+                        android:backgroundTint="@color/cs_temp"
                         android:elevation="8dp"
                         android:padding="16dp"
                         android:src="@drawable/ic_baseline_note_add_24" />
@@ -174,6 +178,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:gravity="center"
@@ -183,7 +189,6 @@
                 android:id="@+id/to_product_cs"
                 android:layout_width="340dp"
                 android:layout_height="160dp"
-                android:layout_margin="16dp"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="4dp">
 
@@ -199,7 +204,7 @@
                         android:layout_height="64dp"
                         android:layout_marginTop="16dp"
                         android:background="@drawable/dashboard_item_gr_cs"
-                        android:backgroundTint="#fb37ff"
+                        android:backgroundTint="@color/cs_temp"
                         android:elevation="8dp"
                         android:padding="16dp"
                         android:src="@drawable/ic_baseline_add_shopping_cart_24" />
