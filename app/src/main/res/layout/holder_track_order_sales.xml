@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/round_shape_gr_red"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/myir_icon_track_sales"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="16dp"
+            android:background="@drawable/round_shape_white"
+            android:padding="8dp"
+            android:src="@drawable/ic_baseline_input_24" />
+
+        <TextView
+            android:id="@+id/myir_track_sales"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/myir_icon_track_sales"
+            android:fontFamily="@font/poppins_semibold"
+            android:paddingTop="24dp"
+            android:text="@string/minipack"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

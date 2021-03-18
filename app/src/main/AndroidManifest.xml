@@ -13,6 +13,12 @@
         android:roundIcon="@mipmap/app_logo_round"
         android:supportsRtl="true"
         android:theme="@style/SecondTheme">
+        <activity android:name=".CS.DetailSC"></activity>
+        <activity android:name=".CS.TrackOrderCS" />
+        <activity android:name=".Sales.TrackOrderSales" />
+        <activity android:name=".Sales.InputMyir" />
+        <activity android:name=".CS.MyirCS" />
+        <activity android:name=".Sales.MyirSales" />
         <activity android:name=".Sales.EditProfileSales" />
         <activity android:name=".CS.EditProfileCS" />
         <activity android:name=".Sales.ProductSales" />

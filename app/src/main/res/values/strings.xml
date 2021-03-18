@@ -71,6 +71,8 @@
     <string name="light_mode">Light Mode</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="english">English</string>
+    <string name="input_sc">Input SC</string>
+    <string name="input_detail_sc">Input Detail SC</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="delete_acc">Delete Account</string>
     <string name="save">Save</string>

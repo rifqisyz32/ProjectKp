@@ -65,6 +65,22 @@ public class DashboardSales extends AppCompatActivity {
                 finish();
             }
         });
+
+        findViewById(R.id.input_sc_sales).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MyirSales.class));
+                finish();
+            }
+        });
+
+        findViewById(R.id.track_order_sales).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), TrackOrderSales.class));
+                finish();
+            }
+        });
     }
 
     @Override

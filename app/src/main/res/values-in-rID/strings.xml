@@ -72,5 +72,6 @@
     <string name="light_mode">Light Mode</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="english">English</string>
-
+    <string name="input_sc">Masukkan SC</string>
+    <string name="input_detail_sc">Masukkan Detail SC</string>
 </resources>

@@ -73,6 +73,21 @@ public class DashboardCS extends AppCompatActivity {
                 finish();
             }
         });
+
+        findViewById(R.id.input_sc_cs).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MyirCS.class));
+                finish();
+            }
+        });
+        findViewById(R.id.track_order_cs).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), TrackOrderCS.class));
+                finish();
+            }
+        });
     }
 
     @Override
