@@ -49,12 +49,11 @@ public class UserDetailSales extends AppCompatActivity {
     SwitchCompat changeThemeSwitch;
     TextView fullNameSales, usernameSales, emailSales, phoneSales, changeThemeText;
     ImageView photoSales, changeThemeBG;
-    String myUsername, myEmail, databaseFullname, databasePhone;
+    String myUsername, dbEmail, dbFullname, dbPhone;
 
     SharedPreferences sharedPreferences;
     public static final String MyPREFERENCES = "MyPrefs";
     public static final String sharedUsername = "username";
-    public static final String sharedEmail = "email";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +69,7 @@ public class UserDetailSales extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), DashboardSales.class));
-                finish();
+                onBackPressed();
             }
         });
 
@@ -86,15 +84,10 @@ public class UserDetailSales extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        getUserData();
-        Glide.with(this).applyDefaultRequestOptions(new RequestOptions()
-                .placeholder(R.drawable.ic_baseline_account_circle_40)
-                .error(R.drawable.ic_baseline_account_circle_40))
-                .load(salesUser.getPhotoUrl())
-                .centerCrop()
-                .into(photoSales);
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(), DashboardSales.class));
+        finish();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -184,11 +177,6 @@ public class UserDetailSales extends AppCompatActivity {
             usernameSales.setText(sharedPreferences.getString(sharedUsername, ""));
         }
 
-        if (sharedPreferences.contains(sharedEmail)) {
-            myEmail = sharedPreferences.getString(sharedEmail, "");
-            emailSales.setText(sharedPreferences.getString(sharedEmail, ""));
-        }
-
         Query checkUser = reference.orderByChild("username").equalTo(myUsername);
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -196,10 +184,13 @@ public class UserDetailSales extends AppCompatActivity {
 
                 if (snapshot.exists()) {
 
-                    databaseFullname = snapshot.child(myUsername).child("fullname").getValue(String.class);
-                    databasePhone = snapshot.child(myUsername).child("phone").getValue(String.class);
-                    fullNameSales.setText(databaseFullname);
-                    phoneSales.setText(databasePhone);
+                    dbFullname = snapshot.child(myUsername).child("fullname").getValue(String.class);
+                    dbPhone = snapshot.child(myUsername).child("phone").getValue(String.class);
+                    dbEmail = snapshot.child(myUsername).child("email").getValue(String.class);
+
+                    emailSales.setText(dbEmail);
+                    fullNameSales.setText(dbFullname);
+                    phoneSales.setText(dbPhone);
 
                 } else {
                     Toast.makeText(getApplicationContext(), R.string.no_user, Toast.LENGTH_SHORT).show();
@@ -211,8 +202,5 @@ public class UserDetailSales extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
-        emailSales.setText(myEmail);
-        usernameSales.setText(myUsername);
     }
 }

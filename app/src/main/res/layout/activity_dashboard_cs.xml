@@ -58,7 +58,7 @@
                     android:layout_toEndOf="@+id/hi_dashboard_cs"
                     android:fontFamily="@font/poppins_light"
                     android:text="@string/username"
-                    android:textColor="@color/cs_text"
+                    android:textColor="@color/cs_temp"
                     android:textSize="24sp" />
 
                 <TextView
@@ -82,7 +82,7 @@
             android:fontFamily="@font/poppins_medium"
             android:gravity="center"
             android:text="@string/app_name"
-            android:textColor="@color/cs_text"
+            android:textColor="@color/cs_temp"
             android:textSize="24sp" />
 
         <LinearLayout
@@ -186,7 +186,7 @@
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/to_product_cs"
+                android:id="@+id/product_cs"
                 android:layout_width="340dp"
                 android:layout_height="160dp"
                 app:cardCornerRadius="24dp"

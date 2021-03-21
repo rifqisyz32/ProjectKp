@@ -66,7 +66,7 @@ public class DashboardCS extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.to_product_cs).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.product_cs).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), ProductCS.class));

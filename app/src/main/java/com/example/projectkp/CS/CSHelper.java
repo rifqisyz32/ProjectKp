@@ -1,29 +1,48 @@
 package com.example.projectkp.CS;
 
 public class CSHelper {
-    String JenisProduct, DeskripsiProduct;
 
-    CSHelper() {
+    String title, speed, device, price;
+
+    public CSHelper() {
     }
 
-    public CSHelper(String jenisProduct, String deskripsiProduct) {
-        JenisProduct = jenisProduct;
-        DeskripsiProduct = deskripsiProduct;
+    public CSHelper(String title, String speed, String device, String price) {
+        this.title = title;
+        this.speed = speed;
+        this.device = device;
+        this.price = price;
     }
 
-    public String getJenisProduct() {
-        return JenisProduct;
+    public String getTitle() {
+        return title;
     }
 
-    public void setJenisProduct(String jenisProduct) {
-        JenisProduct = jenisProduct;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getDeskripsiProduct() {
-        return DeskripsiProduct;
+    public String getSpeed() {
+        return speed;
     }
 
-    public void setDeskripsiProduct(String deskripsiProduct) {
-        DeskripsiProduct = deskripsiProduct;
+    public void setSpeed(String speed) {
+        this.speed = speed;
+    }
+
+    public String getDevice() {
+        return device;
+    }
+
+    public void setDevice(String device) {
+        this.device = device;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 }

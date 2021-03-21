@@ -58,7 +58,7 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:layout_marginTop="40dp"
-            android:background="@drawable/round_shape_white"
+            android:background="@drawable/shape_white"
             android:elevation="16dp"
             android:fontFamily="@font/poppins_semibold"
             android:text="@string/login_again"

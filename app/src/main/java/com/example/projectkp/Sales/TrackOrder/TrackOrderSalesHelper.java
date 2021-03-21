@@ -1,9 +1,9 @@
-package com.example.projectkp.Sales;
+package com.example.projectkp.Sales.TrackOrder;
 
 public class TrackOrderSalesHelper {
     String TrackOrder;
 
-    TrackOrderSalesHelper(){
+    public TrackOrderSalesHelper() {
     }
 
     public TrackOrderSalesHelper(String trackOrder) {

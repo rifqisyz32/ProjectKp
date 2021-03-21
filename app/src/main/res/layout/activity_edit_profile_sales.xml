@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/round_shape_user_profile_sales"
+    android:background="@drawable/shape_user_profile_sales"
     tools:context=".Sales.EditProfileSales">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -16,7 +16,7 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/round_shape_user_profile_sales"
+            android:background="@drawable/shape_user_profile_sales"
             android:fitsSystemWindows="true"
             app:collapsedTitleGravity="start"
             app:contentScrim="#CD4B4B"
@@ -64,7 +64,7 @@
                 android:id="@+id/edit_profile_toolbar_sales"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@drawable/round_shape_user_profile_sales"
+                android:background="@drawable/shape_user_profile_sales"
                 android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
                 app:elevation="0dp"
                 app:layout_collapseMode="pin"
@@ -254,7 +254,7 @@
                     android:layout_height="50dp"
                     android:layout_margin="8dp"
                     android:layout_toEndOf="@+id/cancel_edit_sales"
-                    android:background="@drawable/round_shape_white"
+                    android:background="@drawable/shape_white"
                     android:fontFamily="@font/poppins_medium"
                     android:text="@string/save"
                     android:textAlignment="center"
@@ -273,7 +273,7 @@
                         android:id="@+id/save_profile_sales_prog"
                         android:layout_width="150dp"
                         android:layout_height="50dp"
-                        android:background="@drawable/round_shape_white"
+                        android:background="@drawable/shape_white"
                         android:backgroundTint="@color/sales_text"
                         android:indeterminate="true"
                         android:indeterminateTint="@color/white"

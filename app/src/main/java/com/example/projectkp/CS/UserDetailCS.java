@@ -23,13 +23,9 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.projectkp.CS.DashboardCS;
 import com.example.projectkp.R;
+import com.example.projectkp.Sales.DashboardSales;
 import com.example.projectkp.loginregister.LoginActivity;
-import com.example.projectkp.verification.EmailVerifyActivity;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -78,8 +74,7 @@ public class UserDetailCS extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), DashboardCS.class));
-                finish();
+                onBackPressed();
             }
         });
 
@@ -94,15 +89,9 @@ public class UserDetailCS extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        getUserData();
-        Glide.with(this).applyDefaultRequestOptions(new RequestOptions()
-                .placeholder(R.drawable.ic_baseline_account_circle_40)
-                .error(R.drawable.ic_baseline_account_circle_40))
-                .load(csUser.getPhotoUrl())
-                .centerCrop()
-                .into(photoCS);
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(), DashboardCS.class));
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

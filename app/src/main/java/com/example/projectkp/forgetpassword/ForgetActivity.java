@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.projectkp.R;
 import com.example.projectkp.loginregister.LoginActivity;
@@ -18,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class ForgetActivity extends AppCompatActivity {
 
+    Toolbar toolbar;
     TextInputLayout emailForget;
     FirebaseAuth forgetAuth = FirebaseAuth.getInstance();
     ProgressBar forgetProgress;
@@ -29,6 +31,15 @@ public class ForgetActivity extends AppCompatActivity {
 
         emailForget = findViewById(R.id.email_forget);
         forgetProgress = findViewById(R.id.forget_prog);
+        toolbar = findViewById(R.id.forget_toolbar);
+
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         findViewById(R.id.reset).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,13 +70,13 @@ public class ForgetActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.back_forget).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                finish();
-            }
-        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        finish();
     }
 
     private Boolean validateEmail() {

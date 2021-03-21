@@ -5,13 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".loginregister.LoginActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:padding="16dp">
 
         <RelativeLayout
+            android:id="@+id/login_top_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="16dp"
@@ -51,10 +51,12 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/login_bottom_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/login_top_layout"
             android:layout_marginTop="40dp"
-            android:background="@drawable/round_shape_log"
+            android:background="@drawable/shape_log"
             android:padding="16dp">
 
             <TextView
@@ -159,7 +161,7 @@
                 android:layout_below="@id/forget_log"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/round_shape_white"
+                android:background="@drawable/shape_white"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="@string/login"
                 android:textAlignment="center"
@@ -196,7 +198,7 @@
                     android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:layout_centerInParent="true"
-                    android:background="@drawable/round_shape_white"
+                    android:background="@drawable/shape_white"
                     android:backgroundTint="@color/colorPrimary"
                     android:indeterminate="true"
                     android:indeterminateTint="@color/white"
@@ -207,6 +209,6 @@
 
         </RelativeLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </ScrollView>

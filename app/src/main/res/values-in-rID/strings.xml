@@ -72,6 +72,22 @@
     <string name="light_mode">Light Mode</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="english">English</string>
-    <string name="input_sc">Masukkan SC</string>
-    <string name="input_detail_sc">Masukkan Detail SC</string>
+    <string name="edit_profile">Ubah Profil</string>
+    <string name="delete_acc">Hapus Akun</string>
+    <string name="save">Simpan</string>
+    <string name="cancel">Batal</string>
+    <string name="edit_success">Profil Diubah</string>
+    <string name="update_photo_error">Terjadi Kesalahan Ketika Mengubah Foto Profil</string>
+    <string name="myir">myir</string>
+    <string name="edit_item">Ubah Item</string>
+    <string name="add_item">Tambah Item</string>
+    <string name="detail_product">Detail Produk</string>
+    <string name="product_name">Nama Produk</string>
+    <string name="price">Harga</string>
+    <string name="no_photo">Tidak Ada Foto Yang Dipilih</string>
+    <string name="wait">Tunggu Sebentar</string>
+    <string name="product_speed">Kecepatan</string>
+    <string name="product_price">Harga</string>
+    <string name="product_device">Perangkat</string>
+    <string name="product_title">Judul</string>
 </resources>

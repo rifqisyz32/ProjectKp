@@ -1,4 +1,4 @@
-package com.example.projectkp.Sales;
+package com.example.projectkp.Sales.MYIR;
 
 public class Myir {
     String InputMyir;

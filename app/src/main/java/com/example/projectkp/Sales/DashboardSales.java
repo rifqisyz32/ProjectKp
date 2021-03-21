@@ -14,6 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.projectkp.R;
+import com.example.projectkp.Sales.MYIR.MyirSales;
+import com.example.projectkp.Sales.Product.ProductListSales;
+import com.example.projectkp.Sales.TrackOrder.TrackOrderSales;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -42,10 +45,9 @@ public class DashboardSales extends AppCompatActivity {
         }
 
         Glide.with(this)
-                .applyDefaultRequestOptions(
-                        new RequestOptions()
-                                .placeholder(R.drawable.ic_baseline_account_circle_40)
-                                .error(R.drawable.ic_baseline_account_circle_40))
+                .applyDefaultRequestOptions(new RequestOptions()
+                        .placeholder(R.drawable.ic_baseline_account_circle_40)
+                        .error(R.drawable.ic_baseline_account_circle_40))
                 .load(salesUser.getPhotoUrl())
                 .centerCrop()
                 .into(userPhoto);
@@ -58,10 +60,10 @@ public class DashboardSales extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.to_product_sales).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.product_sales).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), ProductSales.class));
+                startActivity(new Intent(getApplicationContext(), ProductListSales.class));
                 finish();
             }
         });
@@ -81,18 +83,5 @@ public class DashboardSales extends AppCompatActivity {
                 finish();
             }
         });
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Glide.with(this)
-                .applyDefaultRequestOptions(
-                        new RequestOptions()
-                                .placeholder(R.drawable.ic_baseline_account_circle_40)
-                                .error(R.drawable.ic_baseline_account_circle_40))
-                .load(salesUser.getPhotoUrl())
-                .centerCrop()
-                .into(userPhoto);
     }
 }

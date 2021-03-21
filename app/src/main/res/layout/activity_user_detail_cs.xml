@@ -5,7 +5,7 @@
     style="CSTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/round_shape_user_profile_cs"
+    android:background="@drawable/shape_user_profile_cs"
     tools:context=".CS.UserDetailCS">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -19,7 +19,7 @@
             android:id="@+id/user_detail_collapsing_toolbar_cs"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/round_shape_user_profile_cs"
+            android:background="@drawable/shape_user_profile_cs"
             android:fitsSystemWindows="true"
             app:collapsedTitleGravity="start"
             app:contentScrim="#893abc"
@@ -47,7 +47,7 @@
                 android:id="@+id/user_detail_toolbar_cs"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@drawable/round_shape_user_profile_cs"
+                android:background="@drawable/shape_user_profile_cs"
                 android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
                 app:elevation="0dp"
                 app:layout_collapseMode="pin"
@@ -211,7 +211,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_centerInParent="true"
                     android:layout_margin="4dp"
-                    android:background="@drawable/round_shape_gr_small"
+                    android:background="@drawable/shape_gr_small"
                     android:padding="4dp"
                     android:src="@drawable/ic_baseline_light_mode_24" />
 
@@ -276,7 +276,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_margin="4dp"
-                    android:background="@drawable/round_shape_gr_small"
+                    android:background="@drawable/shape_gr_small"
                     android:padding="4dp"
                     android:src="@drawable/ic_baseline_g_translate_24" />
 
@@ -303,7 +303,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="32dp"
-                android:background="@drawable/round_shape_white"
+                android:background="@drawable/shape_white"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="@string/logout"
                 android:textAllCaps="false"

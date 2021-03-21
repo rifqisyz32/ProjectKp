@@ -11,13 +11,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projectkp.R;
-import com.example.projectkp.Sales.AdapterMyirSales;
-import com.example.projectkp.Sales.InputMyir;
-import com.example.projectkp.Sales.Myir;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;

@@ -32,8 +32,7 @@ public class EmailVerify2Activity extends AppCompatActivity {
         findViewById(R.id.retry_verif).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), EmailVerifyActivity.class));
-                finish();
+                onBackPressed();
             }
         });
 
@@ -44,6 +43,13 @@ public class EmailVerify2Activity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(), EmailVerifyActivity.class));
+        finish();
     }
 
 }

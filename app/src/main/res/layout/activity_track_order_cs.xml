@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cs_layout_bg"
+    tools:context=".CS.TrackOrderCS">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/track_order_toolbar_cs"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/cs_layout_bg"
+        app:elevation="0dp"
+        app:layout_collapseMode="pin"
+        app:menu="@menu/menu_track_order_cs"
+        app:title="@string/track_order"
+        app:titleTextColor="@color/black"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_ios_new_24_black">
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_edit_order_cs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="560dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/circle_shape_white"
+        app:backgroundTint="@color/button_cs"
+        android:src="@drawable/ic_baseline_edit_24"
+        android:layout_marginEnd="16dp"
+        android:layout_below="@+id/track_order_toolbar_cs"
+        android:layout_alignParentEnd="true" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/track_order_toolbar_cs"
+        android:padding="16dp">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_order_content_cs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

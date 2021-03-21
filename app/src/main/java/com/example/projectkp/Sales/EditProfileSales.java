@@ -1,6 +1,7 @@
 package com.example.projectkp.Sales;
 
 import android.Manifest;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,6 +10,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -22,8 +24,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.projectkp.R;
+import com.example.projectkp.loginregister.UserHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -42,6 +44,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
 public class EditProfileSales extends AppCompatActivity {
@@ -50,6 +53,8 @@ public class EditProfileSales extends AppCompatActivity {
     FirebaseUser editUser = editAuth.getCurrentUser();
     FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
     DatabaseReference reference = rootNode.getReference("users");
+    StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("sales_photo");
+    StorageTask imgTask;
 
     Toolbar toolbar;
     ProgressBar saveDataProgress;
@@ -58,14 +63,13 @@ public class EditProfileSales extends AppCompatActivity {
     ImageView userPhoto, updatePhoto;
     Uri userPhotoUri;
     Boolean updateImgButton = false;
-    String myUsername, myEmail, myPassword, databaseEmail, databaseFullname, databasePhone;
+    String myUsername, myPassword, databaseEmail, databaseFullname, databasePhone;
     static int PReqCode = 1;
     static int REQUESTCODE = 1;
 
     SharedPreferences sharedPreferences;
     public static final String MyPREFERENCES = "MyPrefs";
     public static final String sharedUsername = "username";
-    public static final String sharedEmail = "email";
     public static final String sharedPassword = "password";
 
     @Override
@@ -79,8 +83,7 @@ public class EditProfileSales extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), UserDetailSales.class));
-                finish();
+                onBackPressed();
             }
         });
 
@@ -99,8 +102,7 @@ public class EditProfileSales extends AppCompatActivity {
         findViewById(R.id.cancel_edit_sales).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), UserDetailSales.class));
-                finish();
+                onBackPressed();
             }
         });
 
@@ -109,11 +111,22 @@ public class EditProfileSales extends AppCompatActivity {
             public void onClick(View v) {
                 saveDataProgress.setVisibility(View.VISIBLE);
                 if (updateImgButton) {
-                    storePhotoDatabase(userPhotoUri, editUser);
+                    if (imgTask != null && imgTask.isInProgress()) {
+                        Toast.makeText(getApplicationContext(), R.string.wait, Toast.LENGTH_SHORT).show();
+                    } else {
+                        storePhotoDatabase(userPhotoUri, editUser);
+                    }
                 }
                 storeUserData();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(), UserDetailSales.class));
+        finish();
     }
 
     private void storeId() {
@@ -130,24 +143,14 @@ public class EditProfileSales extends AppCompatActivity {
 
     private void getUserData() {
 
-        Glide.with(this)
-                .applyDefaultRequestOptions(
-                        new RequestOptions()
-                                .placeholder(R.drawable.ic_baseline_account_circle_120)
-                                .error(R.drawable.ic_baseline_account_circle_120))
-                .load(editUser.getPhotoUrl())
-                .centerCrop()
-                .into(userPhoto);
+        if (editUser.getPhotoUrl() != null) {
+            Glide.with(this).load(editUser.getPhotoUrl()).centerCrop().into(userPhoto);
+        }
 
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         if (sharedPreferences.contains(sharedUsername)) {
             myUsername = sharedPreferences.getString(sharedUsername, "");
             usernameSales.setText(sharedPreferences.getString(sharedUsername, ""));
-        }
-        
-        if (sharedPreferences.contains(sharedEmail)) {
-            myEmail = sharedPreferences.getString(sharedEmail, "");
-            editEmail.getEditText().setHint(myEmail);
         }
 
         if (sharedPreferences.contains(sharedPassword)) {
@@ -163,13 +166,14 @@ public class EditProfileSales extends AppCompatActivity {
 
                     databaseFullname = snapshot.child(myUsername).child("fullname").getValue(String.class);
                     databasePhone = snapshot.child(myUsername).child("phone").getValue(String.class);
+                    databaseEmail = snapshot.child(myUsername).child("email").getValue(String.class);
 
-                    editPhone.getEditText().setHint(databasePhone);
-                    editFullname.getEditText().setHint(databaseFullname);
+                    editFullname.getEditText().setText(databaseFullname);
+                    editPhone.getEditText().setText(databasePhone);
+                    editEmail.getEditText().setText(databaseEmail);
 
                 } else {
                     Toast.makeText(getApplicationContext(), R.string.no_user, Toast.LENGTH_SHORT).show();
-
                 }
             }
 
@@ -202,44 +206,59 @@ public class EditProfileSales extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == REQUESTCODE && data != null) {
             userPhotoUri = data.getData();
-            userPhoto.setImageURI(userPhotoUri);
+            Glide.with(this).load(userPhotoUri).centerCrop().into(userPhoto);
         }
+    }
+
+    private String getFileExtension(Uri uri) {
+        ContentResolver fileExtension = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(fileExtension.getType(uri));
     }
 
     private void storePhotoDatabase(Uri userPhotoUri, FirebaseUser currentUser) {
 
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("sales_photo").child(myUsername);
-        StorageReference imgPath = storageReference.child(userPhotoUri.getLastPathSegment());
+        if (userPhotoUri != null) {
+            StorageReference imgReference = storageReference.child("user_photo." + getFileExtension(userPhotoUri));
 
-        imgPath.putFile(userPhotoUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                imgPath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder()
-                                .setDisplayName(myUsername)
-                                .setPhotoUri(uri)
-                                .build();
+            imgTask = imgReference.putFile(userPhotoUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                        currentUser.updateProfile(profileUpdate)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (!task.isSuccessful()) {
-                                            Toast.makeText(EditProfileSales.this, R.string.update_photo_error, Toast.LENGTH_SHORT).show();
+                    imgReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(myUsername)
+                                    .setPhotoUri(uri)
+                                    .build();
+
+                            currentUser.updateProfile(profileUpdate)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (!task.isSuccessful()) {
+                                                Toast.makeText(EditProfileSales.this, R.string.update_photo_error, Toast.LENGTH_SHORT).show();
+                                            }
                                         }
-                                    }
-                                });
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
+                                    });
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            Toast.makeText(getApplicationContext(), R.string.no_photo, Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void storeUserData() {
@@ -260,7 +279,7 @@ public class EditProfileSales extends AppCompatActivity {
 
         if (email.isEmpty()) {
 
-            editEmail.getEditText().setText(myEmail);
+            editEmail.getEditText().setText(databaseEmail);
             email = editEmail.getEditText().getText().toString();
 
             reference.child(myUsername).child("fullname").setValue(fullname);
@@ -282,7 +301,7 @@ public class EditProfileSales extends AppCompatActivity {
 
     private void updateEmail(String fullname, String email, String phone) {
 
-        AuthCredential credential = EmailAuthProvider.getCredential(myEmail, myPassword);
+        AuthCredential credential = EmailAuthProvider.getCredential(databaseEmail, myPassword);
         editUser.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -294,10 +313,6 @@ public class EditProfileSales extends AppCompatActivity {
                             reference.child(myUsername).child("fullname").setValue(fullname);
                             reference.child(myUsername).child("phone").setValue(phone);
                             reference.child(myUsername).child("email").setValue(email);
-
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString(sharedEmail, email);
-                            editor.apply();
 
                             saveDataProgress.setVisibility(View.GONE);
                             Toast.makeText(getApplicationContext(), R.string.edit_success, Toast.LENGTH_SHORT).show();

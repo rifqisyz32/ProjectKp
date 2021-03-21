@@ -6,12 +6,18 @@
     <color name="colorSubtitle">#757575</color>
     <color name="cs_layout_bg">#f0f0f0</color>
     <color name="sales_layout_bg">#f0f0f0</color>
+    <color name="sales_product_bg">#f0f0f0</color>
 
     <color name="user_detail_layout_cs">#FFFFFF</color>
     <color name="user_detail_layout_sales">#FFFFFF</color>
     <color name="cs_text">#893abc</color>
     <color name="sales_text">#ff5669</color>
+    <color name="cs_rv">#9b6fee</color>
+    <color name="sales_rv">#ff5669</color>
+    <color name="cs_rv_item">#fff</color>
+    <color name="sales_rv_item">#fff</color>
     <color name="cs_temp">#9b6fee</color>
+    <color name="sales_temp">#ff5669</color>
     <color name="status_bar_cs">#601880</color>
     <color name="pick_photo_cs">#893abc</color>
     <color name="pick_photo_sales">#ff5669</color>

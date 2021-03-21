@@ -1,4 +1,4 @@
-package com.example.projectkp.Sales;
+package com.example.projectkp.Sales.TrackOrder;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,29 +12,29 @@ import com.example.projectkp.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
-public class AdapterMyirSales extends FirebaseRecyclerAdapter<MyirSalesHelper, AdapterMyirSales.myviewholder> {
-    public AdapterMyirSales(@NonNull FirebaseRecyclerOptions<MyirSalesHelper> options) {
+public class AdapterTrackOrderSales extends FirebaseRecyclerAdapter<TrackOrderSalesHelper, AdapterTrackOrderSales.myviewholder> {
+
+    public AdapterTrackOrderSales(@NonNull FirebaseRecyclerOptions<TrackOrderSalesHelper> options) {
         super(options);
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull myviewholder holder, int position, @NonNull MyirSalesHelper model) {
-        holder.inputmyir.setText(model.getInputMyir());
+    protected void onBindViewHolder(@NonNull myviewholder holder, int position, @NonNull TrackOrderSalesHelper model) {
+        holder.trackorder.setText(model.getTrackOrder());
     }
 
     @NonNull
     @Override
     public myviewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.holder_myir_sales,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.holder_track_order_sales,parent,false);
         return new myviewholder(view);
     }
 
-
     class myviewholder extends RecyclerView.ViewHolder{
-        TextView inputmyir;
+        TextView trackorder;
         public myviewholder(@NonNull View itemView){
             super(itemView);
-            inputmyir=(TextView)itemView.findViewById(R.id.myir_sales);
+            trackorder=(TextView)itemView.findViewById(R.id.myir_track_sales);
         }
     }
 }

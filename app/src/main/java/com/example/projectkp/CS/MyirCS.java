@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
@@ -12,9 +11,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.projectkp.R;
-import com.example.projectkp.Sales.AdapterMyirSales;
-import com.example.projectkp.Sales.DashboardSales;
-import com.example.projectkp.Sales.MyirSalesHelper;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
 

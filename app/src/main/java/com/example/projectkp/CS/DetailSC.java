@@ -10,10 +10,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.projectkp.R;
-import com.example.projectkp.Sales.InputMyir;
-import com.example.projectkp.Sales.Myir;
-import com.example.projectkp.Sales.MyirSales;
-import com.example.projectkp.Sales.TrackOrder;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -37,7 +33,7 @@ public class DetailSC extends AppCompatActivity {
 
         detail_sc=(EditText)findViewById(R.id.input_sc_text);
         button_save=(Button)findViewById(R.id.button_save_input_sc);
-        kode_referal= FirebaseDatabase.getInstance().getReference().getRoot("trackOrder").child();
+        kode_referal= FirebaseDatabase.getInstance().getReference().child("track_order");
         input = new InputDetailSC();
 
         button_save.setOnClickListener(new View.OnClickListener() {

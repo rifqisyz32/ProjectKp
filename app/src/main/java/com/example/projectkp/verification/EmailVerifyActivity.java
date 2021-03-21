@@ -10,8 +10,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.projectkp.R;
+import com.example.projectkp.Sales.DashboardSales;
 import com.example.projectkp.loginregister.LoginActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -25,6 +27,7 @@ public class EmailVerifyActivity extends AppCompatActivity {
     TextView myEmail;
     Button changeAcc, verifyEmail;
     ProgressBar verifyProgress;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +39,12 @@ public class EmailVerifyActivity extends AppCompatActivity {
         String username = getIntent().getStringExtra("username");
         myEmail.setText(username);
 
-        findViewById(R.id.back_email_verify).setOnClickListener(new View.OnClickListener() {
+        toolbar = findViewById(R.id.email_verify_toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                finish();
+                onBackPressed();
             }
         });
 
@@ -71,10 +75,16 @@ public class EmailVerifyActivity extends AppCompatActivity {
         changeAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                finish();
+                onBackPressed();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        finish();
     }
 
     private void storeId() {

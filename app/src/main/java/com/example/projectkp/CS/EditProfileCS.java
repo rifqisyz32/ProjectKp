@@ -1,6 +1,7 @@
 package com.example.projectkp.CS;
 
 import android.Manifest;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -43,6 +45,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
 public class EditProfileCS extends AppCompatActivity {
@@ -51,6 +54,8 @@ public class EditProfileCS extends AppCompatActivity {
     FirebaseUser editUser = editAuth.getCurrentUser();
     FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
     DatabaseReference reference = rootNode.getReference("users");
+    StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("cs_photo");
+    StorageTask imgTask;
 
     Window window;
     Toolbar toolbar;
@@ -60,7 +65,11 @@ public class EditProfileCS extends AppCompatActivity {
     ImageView userPhoto, updatePhoto;
     Uri userPhotoUri;
     Boolean updateImgButton = false;
-    String myUsername, myEmail, myPassword, databaseEmail, databaseFullname, databasePhone;
+    String myUsername;
+    String myEmail;
+    String myPassword;
+    String databaseFullname;
+    String databasePhone;
     static int PReqCode = 1;
     static int REQUESTCODE = 1;
 
@@ -116,11 +125,29 @@ public class EditProfileCS extends AppCompatActivity {
             public void onClick(View v) {
                 saveDataProgress.setVisibility(View.VISIBLE);
                 if (updateImgButton) {
-                    storePhotoDatabase(userPhotoUri, editUser);
+                    if (imgTask != null && imgTask.isInProgress()) {
+                        Toast.makeText(getApplicationContext(), R.string.wait, Toast.LENGTH_SHORT).show();
+                    } else {
+                        storePhotoDatabase(userPhotoUri, editUser);
+                    }
                 }
                 storeUserData();
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Glide.with(this)
+                .applyDefaultRequestOptions(
+                        new RequestOptions()
+                                .placeholder(R.drawable.ic_baseline_account_circle_120)
+                                .error(R.drawable.ic_baseline_account_circle_120))
+                .load(editUser.getPhotoUrl())
+                .centerCrop()
+                .into(userPhoto);
     }
 
     private void storeId() {
@@ -136,15 +163,6 @@ public class EditProfileCS extends AppCompatActivity {
     }
 
     private void getUserData() {
-
-        Glide.with(this)
-                .applyDefaultRequestOptions(
-                        new RequestOptions()
-                                .placeholder(R.drawable.ic_baseline_account_circle_120)
-                                .error(R.drawable.ic_baseline_account_circle_120))
-                .load(editUser.getPhotoUrl())
-                .centerCrop()
-                .into(userPhoto);
 
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         if (sharedPreferences.contains(sharedUsername)) {
@@ -209,44 +227,60 @@ public class EditProfileCS extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == REQUESTCODE && data != null) {
             userPhotoUri = data.getData();
-            userPhoto.setImageURI(userPhotoUri);
+            Glide.with(this).load(userPhotoUri).centerCrop().into(userPhoto);
         }
+    }
+
+    private String getFileExtension(Uri uri) {
+        ContentResolver fileExtension = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(fileExtension.getType(uri));
     }
 
     private void storePhotoDatabase(Uri userPhotoUri, FirebaseUser currentUser) {
 
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("cs_photo").child(myUsername);
-        StorageReference imgPath = storageReference.child(userPhotoUri.getLastPathSegment());
+        if (userPhotoUri != null) {
+            StorageReference imgReference = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(userPhotoUri));
 
-        imgPath.putFile(userPhotoUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                imgPath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder()
-                                .setDisplayName(myUsername)
-                                .setPhotoUri(uri)
-                                .build();
+            imgTask = imgReference.putFile(userPhotoUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                        currentUser.updateProfile(profileUpdate)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (!task.isSuccessful()) {
-                                            Toast.makeText(EditProfileCS.this, R.string.update_photo_error, Toast.LENGTH_SHORT).show();
+                    imgReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(myUsername)
+                                    .setPhotoUri(uri)
+                                    .build();
+
+                            currentUser.updateProfile(profileUpdate)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (!task.isSuccessful()) {
+                                                Toast.makeText(EditProfileCS.this, R.string.update_photo_error, Toast.LENGTH_SHORT).show();
+                                            }
                                         }
-                                    }
-                                });
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
+                                    });
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            Toast.makeText(getApplicationContext(), R.string.no_photo, Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private void storeUserData() {

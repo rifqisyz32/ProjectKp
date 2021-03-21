@@ -1,4 +1,4 @@
-package com.example.projectkp.Sales;
+package com.example.projectkp.Sales.MYIR;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,8 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.projectkp.CS.DashboardCS;
 import com.example.projectkp.R;
+import com.example.projectkp.Sales.TrackOrder.TrackOrderSalesHelper;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -20,7 +20,7 @@ public class InputMyir extends AppCompatActivity {
     DatabaseReference kode_referal;
     DatabaseReference track;
     Myir myir;
-    TrackOrder trackorder;
+    TrackOrderSalesHelper trackorder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class InputMyir extends AppCompatActivity {
         kode_referal= FirebaseDatabase.getInstance().getReference().child("Myir");
         track = FirebaseDatabase.getInstance().getReference().child("TrackOrder");
         myir=new Myir();
-        trackorder=new TrackOrder();
+        trackorder=new TrackOrderSalesHelper();
 
         button_save.setOnClickListener(new View.OnClickListener() {
             @Override

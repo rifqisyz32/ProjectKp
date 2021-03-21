@@ -1,84 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/cs_layout_bg"
     tools:context=".CS.ProductCS">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recview_cs"
-        android:layout_width="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_product_cs" />
-
-    <RelativeLayout
-        android:id="@+id/back_product_cs"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/product_toolbar_cs"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        tools:ignore="MissingConstraints">
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/cs_layout_bg"
+        app:elevation="0dp"
+        app:layout_collapseMode="pin"
+        app:title="@string/product"
+        app:titleTextColor="@color/black"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_ios_new_24_black">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:background="@drawable/ic_baseline_arrow_back_ios_new_24"
-            android:backgroundTint="@color/black" />
+    </androidx.appcompat.widget.Toolbar>
 
-        <Button
-            android:id="@+id/go_back_product_cs"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_centerVertical="true"
-            android:layout_marginBottom="100dp"
-            android:background="#00000000" />
-
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/round_shape_gr_small"
-            android:elevation="8dp"
-            android:padding="8dp"
-            android:src="@drawable/ic_baseline_edit_24" />
-
-        <Button
-            android:id="@+id/edit_product_cs"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginBottom="100dp"
-            android:background="#00000000" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/text_product_cs"
-        android:layout_width="match_parent"
+    <ProgressBar
+        android:id="@+id/loadRV_prog"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/back_product_cs"
-        tools:ignore="MissingConstraints">
+        android:indeterminateTint="@color/cs_temp"
+        android:layout_centerInParent="true"/>
 
-        <TextView
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/product_toolbar_cs"
+        android:padding="8dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recview_product_cs"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_semibold"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:text="@string/product"
-            android:textColor="@color/black"
-            android:textSize="24sp" />
+            android:layout_height="wrap_content" />
+
     </RelativeLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

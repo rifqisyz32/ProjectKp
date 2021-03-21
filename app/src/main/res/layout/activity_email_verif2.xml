@@ -63,7 +63,7 @@
                 android:layout_height="50dp"
                 android:layout_margin="8dp"
                 android:layout_toEndOf="@+id/retry_verif"
-                android:background="@drawable/round_shape_white"
+                android:background="@drawable/shape_white"
                 android:fontFamily="@font/poppins_medium"
                 android:text="@string/login"
                 android:textAlignment="center"

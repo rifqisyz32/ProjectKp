@@ -50,10 +50,16 @@ public class RegisterActivity extends AppCompatActivity {
         loginAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                finish();
+                onBackPressed();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        finish();
     }
 
     private void storeId() {
@@ -99,12 +105,11 @@ public class RegisterActivity extends AppCompatActivity {
                     regAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
-                            UserHelper storeData = new UserHelper(fullname, username, phone, email,roleCS);
+                            UserHelper storeData = new UserHelper(fullname, username, phone, email, roleCS);
 
-                            if(csReg.isChecked()){
+                            if (csReg.isChecked()) {
                                 storeData.setRole(roleCS);
-                            }
-                            else{
+                            } else {
                                 storeData.setRole(roleSales);
                             }
 

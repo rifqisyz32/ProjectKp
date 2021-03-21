@@ -5,7 +5,8 @@
     <color name="colorAccent">#303030</color>
     <color name="colorSubtitle">#757575</color>
     <color name="cs_layout_bg">#20062e</color>
-    <color name="sales_layout_bg">#300614</color>
+    <color name="sales_layout_bg">#25040F</color>
+    <color name="sales_product_bg">#303030</color>
 
     <color name="user_detail_layout_cs">#20062e</color>
     <color name="user_detail_layout_sales">#200610</color>
@@ -15,6 +16,10 @@
     <color name="pick_photo_sales">#F0F0F0</color>
     <color name="dark_mode_switch">#ff5669</color>
     <color name="complete">#03DAC5</color>
+    <color name="cs_rv">#fff</color>
+    <color name="sales_rv">#fff</color>
+    <color name="cs_rv_item">#9b6fee</color>
+    <color name="sales_rv_item">#ff5669</color>
     <color name="black">#FFFFFF</color>
     <color name="black_temp">#80FFFFFF</color>
     <color name="white">#000000</color>

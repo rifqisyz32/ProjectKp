@@ -1,18 +1,27 @@
-package com.example.projectkp.Sales;
+package com.example.projectkp.Sales.MYIR;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.example.projectkp.R;
+import com.example.projectkp.Sales.DashboardSales;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class MyirSales extends AppCompatActivity {
+
+    Toolbar toolbar;
+    ProgressBar loadRV;
+    FloatingActionButton inputMYIR;
+
     RecyclerView recview;
     AdapterMyirSales adapter;
     @Override
@@ -20,15 +29,19 @@ public class MyirSales extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_myir_sales);
 
-        findViewById(R.id.go_back_myir_sales).setOnClickListener(new View.OnClickListener() {
+        toolbar = findViewById(R.id.inputMYIR_toolbar_sales);
+        loadRV = findViewById(R.id.loadRV_input_MYIR);
+        inputMYIR = findViewById(R.id.input_MYIR);
+
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), DashboardSales.class));
-                finish();
+                onBackPressed();
             }
         });
 
-        findViewById(R.id.input_myir).setOnClickListener(new View.OnClickListener() {
+        inputMYIR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), InputMyir.class));
@@ -45,7 +58,16 @@ public class MyirSales extends AppCompatActivity {
                         .build();
         adapter = new AdapterMyirSales(options);
         recview.setAdapter(adapter);
+        loadRV.setVisibility(View.INVISIBLE);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(), DashboardSales.class));
+        finish();
+    }
+
     @Override
     protected void onStart() {
         super.onStart();

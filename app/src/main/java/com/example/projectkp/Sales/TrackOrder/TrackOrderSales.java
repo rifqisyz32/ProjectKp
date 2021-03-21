@@ -1,27 +1,27 @@
-package com.example.projectkp.Sales;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
+package com.example.projectkp.Sales.TrackOrder;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+
 import com.example.projectkp.R;
+import com.example.projectkp.Sales.DashboardSales;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class ProductSales extends AppCompatActivity {
+public class TrackOrderSales extends AppCompatActivity {
     RecyclerView recview;
-    AdapterProduct adapter;
-
+    AdapterTrackOrderSales adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_sales);
+        setContentView(R.layout.activity_track_order_sales);
 
-        findViewById(R.id.go_back_product_sales).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.go_back_track_sales).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), DashboardSales.class));
@@ -29,17 +29,16 @@ public class ProductSales extends AppCompatActivity {
             }
         });
 
-        recview = findViewById(R.id.recview_sales);
+        recview = findViewById(R.id.recview_track_sales);
         recview.setLayoutManager(new LinearLayoutManager(this));
 
-        FirebaseRecyclerOptions<SalesHelper> options =
-                new FirebaseRecyclerOptions.Builder<SalesHelper>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Product"), SalesHelper.class)
+        FirebaseRecyclerOptions<TrackOrderSalesHelper> options =
+                new FirebaseRecyclerOptions.Builder<TrackOrderSalesHelper>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("TrackOrder"), TrackOrderSalesHelper.class)
                         .build();
-        adapter = new AdapterProduct(options);
+        adapter = new AdapterTrackOrderSales(options);
         recview.setAdapter(adapter);
-    }
-
+}
     @Override
     protected void onStart() {
         super.onStart();

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Project KP</string>
     <string name="main_name">Temp App</string>
@@ -71,14 +72,31 @@
     <string name="light_mode">Light Mode</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="english">English</string>
-    <string name="input_sc">Input SC</string>
-    <string name="input_detail_sc">Input Detail SC</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="delete_acc">Delete Account</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="edit_success">Profile Updated</string>
     <string name="update_photo_error">Error when updating photo profile</string>
+    <string name="myir">myir</string>
+    <string name="edit_item">Edit Item</string>
+    <string name="add_item">Add item</string>
+    <string name="detail_product">Detail Product</string>
+    <string name="product_name">Product Name</string>
+    <string name="price">Price</string>
+    <string name="no_photo">No photo selected</string>
+    <string name="wait">Please wait</string>
+    <string name="product_speed">Speed</string>
+    <string name="product_price">Price</string>
+    <string name="product_device">Device</string>
+    <string name="product_title">Title</string>
+    <string name="internet_phone">2P\n(Internet + Phone)</string>
+    <string name="internet_tv">2P\n(Internet + TV)</string>
+    <string name="internet_phone_tv">3P\n(Internet + Phone + TV)</string>
+    <string name="orbit">Telkomsel Orbit</string>
+    <string name="guru_pelajar">Guru dan Pelajar</string>
+    <string name="input_sc">Input SC</string>
+    <string name="input_detail_sc">Input Detail</string>
 
 
 </resources>

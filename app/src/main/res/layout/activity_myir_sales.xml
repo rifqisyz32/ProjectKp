@@ -1,68 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Sales.MyirSales">
+    android:background="@color/sales_product_bg"
+    tools:context=".Sales.Product.ThreePSales">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recview_myir_sales"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/back_myir_sales" />
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/inputMYIR_toolbar_sales"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/sales_product_bg"
+        app:elevation="0dp"
+        app:layout_collapseMode="pin"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_ios_new_24_black"
+        app:title="@string/product"
+        app:titleTextColor="@color/black" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/input_MYIR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_baseline_add_24"
+        app:backgroundTint="@color/sales_temp"
+        app:tint="#fff" />
+
+    <ProgressBar
+        android:id="@+id/loadRV_input_MYIR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminateTint="@color/sales_temp" />
 
     <RelativeLayout
-        android:id="@+id/back_myir_sales"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        tools:ignore="MissingConstraints">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/inputMYIR_toolbar_sales">
 
-        <ImageView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recview_myir_sales"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:background="@drawable/ic_baseline_arrow_back_ios_new_24"
-            android:backgroundTint="@color/black" />
+            android:layout_height="wrap_content" />
 
-        <Button
-            android:id="@+id/go_back_myir_sales"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_centerVertical="true"
-            android:layout_marginBottom="100dp"
-            android:background="#00000000" />
     </RelativeLayout>
 
-    <ImageView
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        tools:ignore="MissingConstraints"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/round_shape_gr_red_small"
-        android:src="@drawable/ic_baseline_add_24"/>
-    <Button
-        android:id="@+id/input_myir"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        tools:ignore="MissingConstraints"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="#00000000"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
