@@ -4,9 +4,9 @@
     <color name="colorPrimaryDark">#202020</color>
     <color name="colorAccent">#303030</color>
     <color name="colorSubtitle">#757575</color>
+    <color name="product_bg">#303030</color>
     <color name="cs_layout_bg">#20062e</color>
     <color name="sales_layout_bg">#25040F</color>
-    <color name="sales_product_bg">#303030</color>
 
     <color name="user_detail_layout_cs">#20062e</color>
     <color name="user_detail_layout_sales">#200610</color>

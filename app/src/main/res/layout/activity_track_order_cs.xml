@@ -21,28 +21,24 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_edit_order_cs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="560dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginStart="16dp"
-        android:background="@drawable/circle_shape_white"
-        app:backgroundTint="@color/button_cs"
-        android:src="@drawable/ic_baseline_edit_24"
-        android:layout_marginEnd="16dp"
-        android:layout_below="@+id/track_order_toolbar_cs"
-        android:layout_alignParentEnd="true" />
-
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/track_order_toolbar_cs"
-        android:padding="16dp">
+        android:layout_below="@+id/track_order_toolbar_cs">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/track_order_add_cs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/track_order_rv_cs"
+            app:backgroundTint="@color/button_cs"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_baseline_edit_24"
+            app:tint="#fff"
+            android:layout_alignParentEnd="true" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_order_content_cs"
+        android:id="@+id/track_order_rv_cs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

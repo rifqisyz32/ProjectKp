@@ -13,7 +13,7 @@
         android:padding="16dp">
 
         <ImageView
-            android:id="@+id/reset_icon"
+            android:id="@+id/forget_icon2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -22,10 +22,10 @@
             app:tint="#03DAC5" />
 
         <TextView
-            android:id="@+id/reset_title"
+            android:id="@+id/forget_title2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/reset_icon"
+            android:layout_below="@id/forget_icon2"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="32dp"
             android:fontFamily="@font/poppins_semibold"
@@ -34,10 +34,10 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/reset_desc"
+            android:id="@+id/forget_desc2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/reset_title"
+            android:layout_below="@id/forget_title2"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
@@ -49,11 +49,11 @@
             android:textSize="14sp" />
 
         <Button
-            android:id="@+id/reset_success_login"
+            android:id="@+id/forget_success_login"
             style="@style/SecondTheme"
             android:layout_width="150dp"
             android:layout_height="50dp"
-            android:layout_below="@id/reset_desc"
+            android:layout_below="@id/forget_desc2"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
@@ -65,30 +65,6 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="16sp" />
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/reset_desc"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="10dp"
-            android:elevation="16dp">
-
-            <ProgressBar
-                android:id="@+id/forget2_prog"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:layout_centerInParent="true"
-                android:background="@drawable/round_shape_gr_cs_16"
-                android:backgroundTint="@color/colorPrimary"
-                android:indeterminate="true"
-                android:indeterminateTint="@color/white"
-                android:padding="8dp"
-                android:visibility="gone" />
-
-        </RelativeLayout>
 
     </RelativeLayout>
 

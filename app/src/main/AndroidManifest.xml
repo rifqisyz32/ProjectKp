@@ -13,25 +13,34 @@
         android:roundIcon="@mipmap/app_logo_round"
         android:supportsRtl="true"
         android:theme="@style/SecondTheme">
-        <activity android:name=".Sales.Product.MiniPack"
-            android:launchMode="singleTop"
-            android:parentActivityName=".Sales.Product.ProductListSales"/>
-        <activity android:name=".Sales.Product.InternetTV"
-            android:launchMode="singleTop"
-            android:parentActivityName=".Sales.Product.ProductListSales"/>
-        <activity android:name=".Sales.Product.InternetPhone"
-            android:launchMode="singleTop"
-            android:parentActivityName=".Sales.Product.ProductListSales"/>
+
         <activity
-            android:name=".Sales.Product.AddProductSales"
-            android:parentActivityName=".Sales.Product.ThreePSales" />
+            android:name=".Sales.Product.Orbit"
+            android:launchMode="singleTop"
+            android:parentActivityName=".Sales.Product.ProductListSales" />
         <activity
-            android:name=".Sales.Product.ThreePSales"
+            android:name=".Sales.Product.MiniPack"
+            android:launchMode="singleTop"
+            android:parentActivityName=".Sales.Product.ProductListSales" />
+        <activity
+            android:name=".Sales.Product.InternetTV"
+            android:launchMode="singleTop"
+            android:parentActivityName=".Sales.Product.ProductListSales" />
+        <activity
+            android:name=".Sales.Product.InternetPhone"
+            android:launchMode="singleTop"
+            android:parentActivityName=".Sales.Product.ProductListSales" />
+        <activity
+            android:name=".Sales.Product.InternetPhoneTV"
             android:launchMode="singleTop"
             android:parentActivityName=".Sales.Product.ProductListSales" />
         <activity
             android:name=".Sales.Product.ProductListSales"
             android:parentActivityName=".Sales.DashboardSales" />
+
+        <activity
+            android:name=".Sales.DashboardSales"
+            android:launchMode="singleTop" />
 
         <activity
             android:name=".Sales.EditProfileSales"
@@ -51,23 +60,43 @@
             android:parentActivityName=".Sales.DashboardSales" />
 
         <activity
-            android:name=".Sales.DashboardSales"
+            android:name=".CS.Product.Orbit"
+            android:launchMode="singleTop"
+            android:parentActivityName=".CS.Product.ProductListCS" />
+        <activity
+            android:name=".CS.Product.MiniPack"
+            android:launchMode="singleTop"
+            android:parentActivityName=".CS.Product.ProductListCS" />
+        <activity
+            android:name=".CS.Product.InternetTV"
+            android:launchMode="singleTop"
+            android:parentActivityName=".CS.Product.ProductListCS" />
+        <activity
+            android:name=".CS.Product.InternetPhone"
+            android:launchMode="singleTop"
+            android:parentActivityName=".CS.Product.ProductListCS" />
+        <activity
+            android:name=".CS.Product.InternetPhoneTV"
+            android:launchMode="singleTop"
+            android:parentActivityName=".CS.Product.ProductListCS" />
+        <activity
+            android:name=".CS.Product.ProductListCS"
+            android:parentActivityName=".CS.DashboardCS" />
+
+        <activity
+            android:name=".CS.DashboardCS"
             android:launchMode="singleTop" />
 
         <activity android:name=".CS.MyirCS" />
-        <activity android:name=".CS.ProductDetailCS" />
-        <activity android:name=".CS.EditProductCS" />
         <activity android:name=".CS.TrackOrderCS" />
         <activity android:name=".CS.EditProfileCS" />
-        <activity android:name=".CS.ProductCS" />
         <activity android:name=".CS.UserDetailCS" />
-        <activity android:name=".CS.DashboardCS" />
         <activity
             android:name=".verification.EmailVerify2Activity"
             android:parentActivityName=".verification.EmailVerifyActivity" />
         <activity
             android:name=".verification.EmailVerifyActivity"
-            android:parentActivityName=".loginregister.LoginActivity" />
+            android:parentActivityName=".loginregister.RegisterActivity" />
         <activity android:name=".forgetpassword.Forget2Activity" />
         <activity
             android:name=".forgetpassword.ForgetActivity"

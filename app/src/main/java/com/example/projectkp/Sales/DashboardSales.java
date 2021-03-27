@@ -17,6 +17,7 @@ import com.example.projectkp.R;
 import com.example.projectkp.Sales.MYIR.MyirSales;
 import com.example.projectkp.Sales.Product.ProductListSales;
 import com.example.projectkp.Sales.TrackOrder.TrackOrderSales;
+import com.example.projectkp.verification.EmailVerifyActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -25,6 +26,7 @@ public class DashboardSales extends AppCompatActivity {
     FirebaseAuth salesAuth = FirebaseAuth.getInstance();
     FirebaseUser salesUser = salesAuth.getCurrentUser();
     TextView hiUsername;
+    String myUsername;
     ImageView userPhoto;
 
     SharedPreferences sharedPreferences;
@@ -41,6 +43,7 @@ public class DashboardSales extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         if (sharedPreferences.contains(sharedUsername)) {
+            myUsername = sharedPreferences.getString(sharedUsername,"");
             hiUsername.setText(sharedPreferences.getString(sharedUsername, ""));
         }
 
@@ -83,5 +86,34 @@ public class DashboardSales extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        if (sharedPreferences.contains(sharedUsername)) {
+            myUsername = sharedPreferences.getString(sharedUsername,"");
+            hiUsername.setText(sharedPreferences.getString(sharedUsername, ""));
+        }
+
+        if (salesUser != null) {
+            if (!salesUser.isEmailVerified()) {
+                Intent dataUser = new Intent(getApplicationContext(), EmailVerifyActivity.class);
+                dataUser.putExtra("username", myUsername);
+                startActivity(dataUser);
+                finish();
+            }
+        }
+
+        Glide.with(this)
+                .applyDefaultRequestOptions(
+                        new RequestOptions()
+                                .placeholder(R.drawable.ic_baseline_account_circle_40)
+                                .error(R.drawable.ic_baseline_account_circle_40))
+                .load(salesUser.getPhotoUrl())
+                .centerCrop()
+                .into(userPhoto);
     }
 }

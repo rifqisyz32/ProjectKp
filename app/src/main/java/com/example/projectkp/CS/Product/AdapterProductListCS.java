@@ -1,4 +1,4 @@
-package com.example.projectkp.Sales.Product;
+package com.example.projectkp.CS.Product;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,17 +15,17 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.projectkp.Helper.ProductListHelper;
 import com.example.projectkp.R;
+import com.example.projectkp.Helper.ProductListHelper;
 
 import java.util.List;
 
-public class AdapterProductListSales extends RecyclerView.Adapter<AdapterProductListSales.productViewHolder> {
+public class AdapterProductListCS extends RecyclerView.Adapter<AdapterProductListCS.productViewHolder> {
 
     Context mContext;
     List<ProductListHelper> list;
 
-    public AdapterProductListSales(Context mContext, List<ProductListHelper> list) {
+    public AdapterProductListCS(Context mContext, List<ProductListHelper> list) {
         this.mContext = mContext;
         this.list = list;
     }
@@ -92,12 +93,15 @@ public class AdapterProductListSales extends RecyclerView.Adapter<AdapterProduct
     public class productViewHolder extends RecyclerView.ViewHolder {
 
         private CardView listProductItem;
+        private LinearLayout listProductbBG;
         private ImageView listProductImage;
         private TextView listProductText;
 
         public productViewHolder(@NonNull View itemView) {
             super(itemView);
             listProductItem = itemView.findViewById(R.id.list_product_item_card);
+            listProductbBG = itemView.findViewById(R.id.list_product_item_bg);
+            listProductbBG.setBackground(mContext.getResources().getDrawable(R.drawable.round_shape_gr_cs_16));
             listProductImage = itemView.findViewById(R.id.list_product_item_img);
             listProductText = itemView.findViewById(R.id.list_product_item_text);
         }

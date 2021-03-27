@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.projectkp.R;
-import com.example.projectkp.Sales.DashboardSales;
 import com.example.projectkp.loginregister.LoginActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -39,7 +38,6 @@ public class EmailVerifyActivity extends AppCompatActivity {
         String username = getIntent().getStringExtra("username");
         myEmail.setText(username);
 
-        toolbar = findViewById(R.id.email_verify_toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,21 +86,10 @@ public class EmailVerifyActivity extends AppCompatActivity {
     }
 
     private void storeId() {
-        verifyEmail = findViewById(R.id.verify_email);
-        changeAcc = findViewById(R.id.change_account);
-        myEmail = findViewById(R.id.email_verify_username);
-        verifyProgress = findViewById(R.id.email_verify_prog);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        if (verifyUser != null) {
-            if (verifyUser.isEmailVerified()) {
-                startActivity(new Intent(getApplicationContext(), EmailVerify2Activity.class));
-                finish();
-            }
-        }
+        toolbar = findViewById(R.id.verify_email_toolbar);
+        verifyEmail = findViewById(R.id.verify_email_button);
+        changeAcc = findViewById(R.id.verify_email_change_account);
+        myEmail = findViewById(R.id.verify_email_username);
+        verifyProgress = findViewById(R.id.verify_email_prog);
     }
 }

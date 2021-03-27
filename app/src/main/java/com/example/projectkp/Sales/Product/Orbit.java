@@ -17,11 +17,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MiniPack extends AppCompatActivity {
+public class Orbit extends AppCompatActivity {
 
     private final FirebaseDatabase db = FirebaseDatabase.getInstance();
     private final DatabaseReference Product = db.getReference("Product");
-    private AdapterMinipackSales productAdapter;
+    private AdapterOrbitSales productAdapter;
 
     Toolbar toolbar;
     RecyclerView productRV;
@@ -29,13 +29,13 @@ public class MiniPack extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sub_product);
+        setContentView(R.layout.activity_orbit);
 
-        toolbar = findViewById(R.id.sub_product_toolbar);
-        productRV = findViewById(R.id.sub_product_rv);
+        toolbar = findViewById(R.id.orbit_toolbar);
+        productRV = findViewById(R.id.orbit_rv);
 
         setSupportActionBar(toolbar);
-        toolbar.setTitle("MiniPack");
+        toolbar.setTitle("Orbit");
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,14 +55,14 @@ public class MiniPack extends AppCompatActivity {
 
     private void setUpRecyclerView() {
         FirebaseRecyclerOptions<ProductHelper> options = new FirebaseRecyclerOptions.Builder<ProductHelper>()
-                .setQuery(Product.child("Mini_Pack"), ProductHelper.class)
+                .setQuery(Product.child("Orbit"), ProductHelper.class)
                 .build();
 
-        productAdapter = new AdapterMinipackSales(options);
+        productAdapter = new AdapterOrbitSales(options);
         productRV.setLayoutManager(new LinearLayoutManager(this));
         productRV.setAdapter(productAdapter);
 
-        productAdapter.setOnItemClickListener(new AdapterMinipackSales.OnItemClickListener() {
+        productAdapter.setOnItemClickListener(new AdapterOrbitSales.OnItemClickListener() {
             @Override
             public void onItemClick(DataSnapshot dataSnapshot, int position) {
                 String myKey = dataSnapshot.getKey();

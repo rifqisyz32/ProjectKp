@@ -1,8 +1,10 @@
-package com.example.projectkp.Sales.Product;
+package com.example.projectkp.CS.Product;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,25 +19,31 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MiniPack extends AppCompatActivity {
+public class Orbit extends AppCompatActivity {
 
     private final FirebaseDatabase db = FirebaseDatabase.getInstance();
     private final DatabaseReference Product = db.getReference("Product");
-    private AdapterMinipackSales productAdapter;
+    private AdapterOrbitCS productAdapter;
 
+    Window window;
     Toolbar toolbar;
     RecyclerView productRV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sub_product);
+        setContentView(R.layout.activity_orbit);
 
-        toolbar = findViewById(R.id.sub_product_toolbar);
-        productRV = findViewById(R.id.sub_product_rv);
+        toolbar = findViewById(R.id.orbit_toolbar);
+        productRV = findViewById(R.id.orbit_rv);
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            window = this.getWindow();
+            window.setStatusBarColor(this.getResources().getColor(R.color.status_bar_cs));
+        }
 
         setSupportActionBar(toolbar);
-        toolbar.setTitle("MiniPack");
+        toolbar.setTitle("Orbit");
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,20 +57,20 @@ public class MiniPack extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(getApplicationContext(), ProductListSales.class));
+        startActivity(new Intent(getApplicationContext(), ProductListCS.class));
         finish();
     }
 
     private void setUpRecyclerView() {
         FirebaseRecyclerOptions<ProductHelper> options = new FirebaseRecyclerOptions.Builder<ProductHelper>()
-                .setQuery(Product.child("Mini_Pack"), ProductHelper.class)
+                .setQuery(Product.child("Orbit"), ProductHelper.class)
                 .build();
 
-        productAdapter = new AdapterMinipackSales(options);
+        productAdapter = new AdapterOrbitCS(options);
         productRV.setLayoutManager(new LinearLayoutManager(this));
         productRV.setAdapter(productAdapter);
 
-        productAdapter.setOnItemClickListener(new AdapterMinipackSales.OnItemClickListener() {
+        productAdapter.setOnItemClickListener(new AdapterOrbitCS.OnItemClickListener() {
             @Override
             public void onItemClick(DataSnapshot dataSnapshot, int position) {
                 String myKey = dataSnapshot.getKey();

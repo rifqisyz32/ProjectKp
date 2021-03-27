@@ -1,6 +1,7 @@
 package com.example.projectkp.Sales;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SwitchCompat;
@@ -76,7 +78,7 @@ public class UserDetailSales extends AppCompatActivity {
         logoutSales.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
+                salesAuth.signOut();
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 finish();
             }
@@ -109,6 +111,24 @@ public class UserDetailSales extends AppCompatActivity {
                 break;
 
             case R.id.delete_acc_sales:
+                AlertDialog alertDialog = new AlertDialog.Builder(this)
+                        .setIcon(android.R.drawable.ic_menu_delete)
+                        .setTitle(R.string.delete_acc)
+                        .setMessage(R.string.delete_acc_alert)
+                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                deleteMyAcc();
+                                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                                finish();
+                            }
+                        })
+                        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        }).show();
                 break;
         }
     }
@@ -125,6 +145,40 @@ public class UserDetailSales extends AppCompatActivity {
         changeThemeBG = findViewById(R.id.light_mode_icon_sales);
         changeThemeText = findViewById(R.id.theme_light_desc_sales);
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+    }
+
+    private void deleteMyAcc(){
+
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle(R.string.delete_acc)
+                .setMessage(R.string.delete_acc_alert)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                })
+                .show();
+
+        salesUser.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                reference.child(myUsername).getRef().removeValue();
+                Toast.makeText(getApplicationContext(), R.string.acc_delete, Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void changeMyTheme() {

@@ -1,8 +1,10 @@
-package com.example.projectkp.Sales.Product;
+package com.example.projectkp.CS.Product;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,8 +23,9 @@ public class MiniPack extends AppCompatActivity {
 
     private final FirebaseDatabase db = FirebaseDatabase.getInstance();
     private final DatabaseReference Product = db.getReference("Product");
-    private AdapterMinipackSales productAdapter;
+    private AdapterMinipackCS productAdapter;
 
+    Window window;
     Toolbar toolbar;
     RecyclerView productRV;
 
@@ -33,6 +36,11 @@ public class MiniPack extends AppCompatActivity {
 
         toolbar = findViewById(R.id.sub_product_toolbar);
         productRV = findViewById(R.id.sub_product_rv);
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            window = this.getWindow();
+            window.setStatusBarColor(this.getResources().getColor(R.color.status_bar_cs));
+        }
 
         setSupportActionBar(toolbar);
         toolbar.setTitle("MiniPack");
@@ -49,7 +57,7 @@ public class MiniPack extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(getApplicationContext(), ProductListSales.class));
+        startActivity(new Intent(getApplicationContext(), ProductListCS.class));
         finish();
     }
 
@@ -58,11 +66,11 @@ public class MiniPack extends AppCompatActivity {
                 .setQuery(Product.child("Mini_Pack"), ProductHelper.class)
                 .build();
 
-        productAdapter = new AdapterMinipackSales(options);
+        productAdapter = new AdapterMinipackCS(options);
         productRV.setLayoutManager(new LinearLayoutManager(this));
         productRV.setAdapter(productAdapter);
 
-        productAdapter.setOnItemClickListener(new AdapterMinipackSales.OnItemClickListener() {
+        productAdapter.setOnItemClickListener(new AdapterMinipackCS.OnItemClickListener() {
             @Override
             public void onItemClick(DataSnapshot dataSnapshot, int position) {
                 String myKey = dataSnapshot.getKey();

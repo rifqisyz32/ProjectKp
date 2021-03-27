@@ -1,4 +1,4 @@
-package com.example.projectkp.Sales.Product;
+package com.example.projectkp.CS.Product;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,8 +8,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.example.projectkp.R;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 /*
 public class AddProductSales extends AppCompatActivity {

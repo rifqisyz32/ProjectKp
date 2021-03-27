@@ -1,6 +1,7 @@
 package com.example.projectkp.CS;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,25 +10,31 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.projectkp.R;
+import com.example.projectkp.Sales.DashboardSales;
+import com.example.projectkp.Sales.Product.ProductListSales;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class TrackOrderCS extends AppCompatActivity {
+
+    Toolbar toolbar;
     RecyclerView recview;
     AdapterTrackOrderCS adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_track_order_c_s);
+        setContentView(R.layout.activity_track_order_cs);
 
-        findViewById(R.id.go_back_track_cs).setOnClickListener(new View.OnClickListener() {
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), DashboardCS.class));
-                finish();
+                onBackPressed();
             }
         });
-        recview = findViewById(R.id.recview_track_cs);
+
+        recview = findViewById(R.id.track_order_rv_cs);
         recview.setLayoutManager(new LinearLayoutManager(this));
 
         FirebaseRecyclerOptions<TrackOrderCSHelper> options =
@@ -37,6 +44,14 @@ public class TrackOrderCS extends AppCompatActivity {
         adapter = new AdapterTrackOrderCS(options);
         recview.setAdapter(adapter);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(), DashboardCS.class));
+        finish();
+    }
+
     @Override
     protected void onStart() {
         super.onStart();

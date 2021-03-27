@@ -41,7 +41,7 @@ public class ForgetActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.reset).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.forget_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 forgetProgress.setVisibility(View.VISIBLE);

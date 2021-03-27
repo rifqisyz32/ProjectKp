@@ -20,7 +20,7 @@ public class MyirCS extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_myir_c_s);
+        setContentView(R.layout.activity_myir_cs);
         findViewById(R.id.go_back_myir_cs).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

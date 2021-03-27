@@ -1,4 +1,4 @@
-package com.example.projectkp.Sales.Product;
+package com.example.projectkp.Helper;
 
 public class ProductListHelper {
     private String title;

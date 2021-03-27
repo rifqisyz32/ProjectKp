@@ -31,7 +31,7 @@
     <string name="email_verify_desc">Silakan verifikasi alamat email Anda dengan menekan tombol dibawah.</string>
     <string name="verify">Verifikasi</string>
     <string name="email_verified">Email Terverifikasi!</string>
-    <string name="change_acc">Ubah Akun</string>
+    <string name="change_acc">Ganti Akun</string>
     <string name="reset_sent">Kata sandi baru sudah terkirim</string>
     <string name="email_verify_sent">Email verifikasi sudah terkirim</string>
     <string name="email_verify_not_sent">Silahkan periksa email Anda untuk verifikasi</string>
@@ -88,6 +88,6 @@
     <string name="wait">Tunggu Sebentar</string>
     <string name="product_speed">Kecepatan</string>
     <string name="product_price">Harga</string>
-    <string name="product_device">Perangkat</string>
+    <string name="product_device">Perangkat:</string>
     <string name="product_title">Judul</string>
 </resources>

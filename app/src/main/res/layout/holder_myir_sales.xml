@@ -4,10 +4,10 @@
     android:id="@+id/product_layout_sales"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/sales_product_bg"
+    android:background="@color/product_bg"
     android:paddingStart="8dp"
-    android:paddingEnd="8dp"
     android:paddingTop="4dp"
+    android:paddingEnd="8dp"
     android:paddingBottom="4dp">
 
     <RelativeLayout

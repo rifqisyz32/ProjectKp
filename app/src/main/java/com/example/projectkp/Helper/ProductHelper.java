@@ -1,17 +1,17 @@
-package com.example.projectkp.Sales.Product;
+package com.example.projectkp.Helper;
 
-public class SalesHelper {
+public class ProductHelper {
 
-    private String title, speed, device, price;
+    private String title, speed, price, device;
 
-    public SalesHelper() {
+    public ProductHelper() {
     }
 
-    public SalesHelper(String title, String speed, String device, String price) {
+    public ProductHelper(String title, String speed, String price, String device) {
         this.title = title;
         this.speed = speed;
-        this.device = device;
         this.price = price;
+        this.device = device;
     }
 
     public String getTitle() {

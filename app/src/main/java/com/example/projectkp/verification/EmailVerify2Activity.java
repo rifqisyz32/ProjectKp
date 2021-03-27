@@ -29,14 +29,7 @@ public class EmailVerify2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email_verif2);
 
-        findViewById(R.id.retry_verif).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-
-        findViewById(R.id.reset_success_login).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.verify_email_success_login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
@@ -48,7 +41,7 @@ public class EmailVerify2Activity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(getApplicationContext(), EmailVerifyActivity.class));
+        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
         finish();
     }
 

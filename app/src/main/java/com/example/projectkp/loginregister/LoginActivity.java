@@ -16,7 +16,6 @@ import com.example.projectkp.CS.DashboardCS;
 import com.example.projectkp.R;
 import com.example.projectkp.Sales.DashboardSales;
 import com.example.projectkp.forgetpassword.ForgetActivity;
-import com.example.projectkp.verification.EmailVerifyActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputLayout;
@@ -97,6 +96,8 @@ public class LoginActivity extends AppCompatActivity {
             if (logUser.isEmailVerified()) {
                 checkRole();
             }
+        } else {
+            loginUser();
         }
     }
 
@@ -160,23 +161,15 @@ public class LoginActivity extends AppCompatActivity {
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString(sharedUsername, username);
                             editor.putString(sharedPassword, password);
+                            editor.apply();
 
-                            if (logUser != null) {
-                                if (logUser.isEmailVerified()) {
-                                    logProgress.setVisibility(View.GONE);
-                                    if (dbRole.matches("Sales")) {
-                                        startActivity(new Intent(getApplicationContext(), DashboardSales.class));
-                                    } else {
-                                        startActivity(new Intent(getApplicationContext(), DashboardCS.class));
-                                    }
-                                } else {
-                                    logProgress.setVisibility(View.GONE);
-                                    Intent dataUser = new Intent(getApplicationContext(), EmailVerifyActivity.class);
-                                    dataUser.putExtra("username", username);
-                                    startActivity(dataUser);
-                                }
-                                finish();
+                            logProgress.setVisibility(View.GONE);
+                            if (dbRole.matches("Sales")) {
+                                startActivity(new Intent(getApplicationContext(), DashboardSales.class));
+                            } else {
+                                startActivity(new Intent(getApplicationContext(), DashboardCS.class));
                             }
+                            finish();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -226,4 +219,5 @@ public class LoginActivity extends AppCompatActivity {
             return true;
         }
     }
+
 }

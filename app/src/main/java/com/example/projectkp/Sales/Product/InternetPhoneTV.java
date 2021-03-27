@@ -11,37 +11,32 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.projectkp.Helper.ProductHelper;
 import com.example.projectkp.R;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-public class ThreePSales extends AppCompatActivity {
+public class InternetPhoneTV extends AppCompatActivity {
 
-    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private final CollectionReference threeP = db.collection("3P (Internet + TV + Phone)");
-    private AdapterThreePSales productAdapter;
+    private final FirebaseDatabase db = FirebaseDatabase.getInstance();
+    private final DatabaseReference Product = db.getReference("Product");
+    private AdapterPSales productAdapter;
 
     Toolbar toolbar;
-    ProgressBar loadRV;
     RecyclerView productRV;
-    FloatingActionButton addProduct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sub_product_sales);
+        setContentView(R.layout.activity_sub_product);
 
-        toolbar = findViewById(R.id.sub_product_toolbar_sales);
-        loadRV = findViewById(R.id.sub_product_prog_sales);
-        productRV = findViewById(R.id.sub_product_recview_sales);
-        addProduct = findViewById(R.id.add_product_sales);
+        toolbar = findViewById(R.id.sub_product_toolbar);
+        productRV = findViewById(R.id.sub_product_rv);
 
         setSupportActionBar(toolbar);
-        toolbar.setTitle("3P Internet + TV + Phone");
+        toolbar.setTitle("3P (Internet + Phone + TV)");
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,15 +62,13 @@ public class ThreePSales extends AppCompatActivity {
     }
 
     private void setUpRecyclerView() {
-        Query query = threeP.orderBy("speed", Query.Direction.ASCENDING);
-        FirestoreRecyclerOptions<SalesHelper> options = new FirestoreRecyclerOptions.Builder<SalesHelper>()
-                .setQuery(query, SalesHelper.class)
+        FirebaseRecyclerOptions<ProductHelper> options = new FirebaseRecyclerOptions.Builder<ProductHelper>()
+                .setQuery(Product.child("Internet_Phone_TV"), ProductHelper.class)
                 .build();
 
-        productAdapter = new AdapterThreePSales(options);
+        productAdapter = new AdapterPSales(options);
         productRV.setLayoutManager(new LinearLayoutManager(this));
         productRV.setAdapter(productAdapter);
-        loadRV.setVisibility(View.INVISIBLE);
 
         /*new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -90,13 +83,11 @@ public class ThreePSales extends AppCompatActivity {
             }
         }).attachToRecyclerView(productRV);*/
 
-        productAdapter.setOnItemClickListener(new AdapterThreePSales.OnItemClickListener() {
+        productAdapter.setOnItemClickListener(new AdapterPSales.OnItemClickListener() {
             @Override
-            public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
-                SalesHelper note = documentSnapshot.toObject(SalesHelper.class);
-                String id = documentSnapshot.getId();
-                String path = documentSnapshot.getReference().getPath();
-                Toast.makeText(getApplicationContext(), "Position: " + position + " ID: " + id, Toast.LENGTH_SHORT).show();
+            public void onItemClick(DataSnapshot dataSnapshot, int position) {
+                String myKey = dataSnapshot.getKey();
+                Toast.makeText(getApplicationContext(), "Position: " + position + " ID: " + myKey, Toast.LENGTH_SHORT).show();
             }
         });
     }

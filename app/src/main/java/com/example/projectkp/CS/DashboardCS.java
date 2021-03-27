@@ -15,7 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.projectkp.CS.Product.ProductListCS;
 import com.example.projectkp.R;
+import com.example.projectkp.verification.EmailVerifyActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -25,6 +27,7 @@ public class DashboardCS extends AppCompatActivity {
     FirebaseAuth csAuth = FirebaseAuth.getInstance();
     FirebaseUser csUser = csAuth.getCurrentUser();
     TextView hiUsername;
+    String myUsername;
     ImageView userPhoto;
 
     SharedPreferences sharedPreferences;
@@ -46,6 +49,7 @@ public class DashboardCS extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         if (sharedPreferences.contains(sharedUsername)) {
+            myUsername = sharedPreferences.getString(sharedUsername,"");
             hiUsername.setText(sharedPreferences.getString(sharedUsername, ""));
         }
 
@@ -69,7 +73,7 @@ public class DashboardCS extends AppCompatActivity {
         findViewById(R.id.product_cs).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), ProductCS.class));
+                startActivity(new Intent(getApplicationContext(), ProductListCS.class));
                 finish();
             }
         });
@@ -93,6 +97,22 @@ public class DashboardCS extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        if (sharedPreferences.contains(sharedUsername)) {
+            myUsername = sharedPreferences.getString(sharedUsername,"");
+            hiUsername.setText(sharedPreferences.getString(sharedUsername, ""));
+        }
+
+        if (csUser != null) {
+            if (!csUser.isEmailVerified()) {
+                Intent dataUser = new Intent(getApplicationContext(), EmailVerifyActivity.class);
+                dataUser.putExtra("username", myUsername);
+                startActivity(dataUser);
+                finish();
+            }
+        }
+
         Glide.with(this)
                 .applyDefaultRequestOptions(
                         new RequestOptions()
