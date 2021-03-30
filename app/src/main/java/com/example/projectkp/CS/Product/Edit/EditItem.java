@@ -130,54 +130,30 @@ public class EditItem extends AppCompatActivity {
 
     private void storeUserData() {
 
-        Query checkProduct = Product.orderByChild("child").equalTo(myKey);
-        checkProduct.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (!snapshot.exists()) {
+        myDevice = editDevice.getEditText().getText().toString().trim();
+        myPrice = editPrice.getEditText().getText().toString().trim();
+        mySpeed = editSpeed.getEditText().getText().toString().trim();
 
-                    dbDevice = snapshot.child(myKey).child(myRef).child("device").getValue(String.class);
-                    dbPrice = snapshot.child(myKey).child(myRef).child("price").getValue(String.class);
-                    dbSpeed = snapshot.child(myKey).child(myRef).child("speed").getValue(String.class);
+        if (myDevice.isEmpty()) {
+            editDevice.getEditText().setText(dbDevice);
+        }
+        if (myPrice.isEmpty()) {
+            editPrice.getEditText().setText(dbPrice);
+        }
+        if (mySpeed.isEmpty()) {
+            editSpeed.getEditText().setText(dbSpeed);
+        }
 
-                    myDevice = editDevice.getEditText().getText().toString().trim();
-                    myPrice = editPrice.getEditText().getText().toString().trim();
-                    mySpeed = editSpeed.getEditText().getText().toString().trim();
+        myDevice = editDevice.getEditText().getText().toString().trim();
+        myPrice = editPrice.getEditText().getText().toString().trim();
+        mySpeed = editSpeed.getEditText().getText().toString().trim();
 
-                    if (myDevice.isEmpty()) {
-                        editDevice.getEditText().setText(dbDevice);
-                    }
-                    if (myPrice.isEmpty()) {
-                        editPrice.getEditText().setText(dbPrice);
-                    }
-                    if (mySpeed.isEmpty()) {
-                        editSpeed.getEditText().setText(dbSpeed);
-                    }
+        ProductHelper storeData = new ProductHelper(myTitle, mySpeed, myPrice, myDevice);
+        Product.child(myKey).child(myRef).setValue(storeData);
 
-                    myDevice = editDevice.getEditText().getText().toString().trim();
-                    myPrice = editPrice.getEditText().getText().toString().trim();
-                    mySpeed = editSpeed.getEditText().getText().toString().trim();
-
-                    ProductHelper storeData = new ProductHelper(myTitle, mySpeed, myPrice, myDevice);
-                    Product.child(myKey).child(myRef).setValue(storeData);
-
-                    editProgress.setVisibility(View.GONE);
-                    save.setVisibility(View.VISIBLE);
-                    Toast.makeText(getApplicationContext(), R.string.edit_item_success, Toast.LENGTH_SHORT).show();
-                } else {
-                    editProgress.setVisibility(View.GONE);
-                    save.setVisibility(View.VISIBLE);
-                    Toast.makeText(getApplicationContext(), "Something went wrong\nPlease contact us to fix this", Toast.LENGTH_SHORT).show();
-                }
-                onBackPressed();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                editProgress.setVisibility(View.GONE);
-                save.setVisibility(View.VISIBLE);
-                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        editProgress.setVisibility(View.GONE);
+        save.setVisibility(View.VISIBLE);
+        Toast.makeText(getApplicationContext(), R.string.edit_item_success, Toast.LENGTH_SHORT).show();
+        onBackPressed();
     }
 }
