@@ -88,6 +88,6 @@
     <string name="wait">Tunggu Sebentar</string>
     <string name="product_speed">Kecepatan</string>
     <string name="product_price">Harga</string>
-    <string name="product_device">Perangkat:</string>
+    <string name="deviceTV">Perangkat:</string>
     <string name="product_title">Judul</string>
 </resources>

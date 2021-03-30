@@ -2,11 +2,10 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="CSTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/shape_user_profile_cs"
-    tools:context=".CS.UserDetailCS">
+    tools:context=".CS.User.UserDetailCS">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/user_detail_appbar_cs"
@@ -22,7 +21,7 @@
             android:background="@drawable/shape_user_profile_cs"
             android:fitsSystemWindows="true"
             app:collapsedTitleGravity="start"
-            app:contentScrim="#893abc"
+            app:contentScrim="@color/cs_temp"
             app:elevation="0dp"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
 
@@ -52,9 +51,9 @@
                 app:elevation="0dp"
                 app:layout_collapseMode="pin"
                 app:menu="@menu/menu_user_profile_cs"
-                app:title=" "
                 app:navigationIcon="@drawable/ic_baseline_arrow_back_ios_new_24"
-                app:popupTheme="@style/SecondTheme">
+                app:popupTheme="@style/SecondTheme"
+                app:title=" ">
 
             </androidx.appcompat.widget.Toolbar>
 
@@ -66,15 +65,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/user_detail_layout_bg"
-        android:padding="16dp"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <RelativeLayout
             android:id="@+id/acc_cs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp">
+            android:background="@drawable/user_detail_layout_bg"
+            android:paddingStart="16dp"
+            android:paddingTop="32dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="32dp">
 
             <TextView
                 android:id="@+id/account_title_cs"
@@ -84,7 +85,7 @@
                 android:paddingStart="32dp"
                 android:paddingEnd="32dp"
                 android:text="@string/account"
-                android:textColor="@color/cs_text"
+                android:textColor="@color/cs_temp"
                 android:textSize="16sp" />
 
             <RelativeLayout
@@ -102,28 +103,9 @@
                 android:padding="16dp">
 
                 <TextView
-                    android:id="@+id/user_detail_fullname_cs"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/poppins_light"
-                    android:text="@string/fullname"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/user_detail_fullname_field_cs"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/user_detail_fullname_cs"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text=" "
-                    android:textSize="14sp" />
-
-                <TextView
                     android:id="@+id/user_detail_username_cs"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@+id/user_detail_fullname_field_cs"
-                    android:layout_marginTop="16dp"
                     android:fontFamily="@font/poppins_light"
                     android:text="@string/username"
                     android:textSize="12sp" />
@@ -138,10 +120,29 @@
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/user_detail_email_cs"
+                    android:id="@+id/user_detail_fullname_cs"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/user_detail_username_field_cs"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:text="@string/fullname"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/user_detail_fullname_field_cs"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/user_detail_fullname_cs"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text=" "
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/user_detail_email_cs"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/user_detail_fullname_field_cs"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/poppins_light"
                     android:text="@string/email"
@@ -187,7 +188,7 @@
                 android:paddingStart="32dp"
                 android:paddingEnd="32dp"
                 android:text="@string/theme"
-                android:textColor="@color/cs_text"
+                android:textColor="@color/cs_temp"
                 android:textSize="16sp" />
 
             <RelativeLayout
@@ -253,7 +254,7 @@
                 android:paddingStart="32dp"
                 android:paddingEnd="32dp"
                 android:text="@string/language"
-                android:textColor="@color/cs_text"
+                android:textColor="@color/cs_temp"
                 android:textSize="16sp" />
 
             <RelativeLayout
@@ -309,7 +310,7 @@
                 android:textAllCaps="false"
                 android:textColor="#fff"
                 android:textSize="16sp"
-                app:backgroundTint="@color/button_cs"
+                app:backgroundTint="@color/cs_temp"
                 app:elevation="8dp" />
 
         </RelativeLayout>

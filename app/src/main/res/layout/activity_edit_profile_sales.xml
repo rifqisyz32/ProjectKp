@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/shape_user_profile_sales"
-    tools:context=".Sales.EditProfileSales">
+    tools:context=".Sales.User.EditProfileSales">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -81,14 +81,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/user_detail_layout_bg"
-        android:padding="16dp"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp">
+            android:background="@drawable/user_detail_layout_bg"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="32dp"
+            android:paddingBottom="32dp">
 
             <TextView
                 android:id="@+id/edit_title_sales"

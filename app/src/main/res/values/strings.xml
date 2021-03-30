@@ -88,8 +88,9 @@
     <string name="wait">Please wait</string>
     <string name="product_speed">Speed</string>
     <string name="product_price">Price</string>
-    <string name="product_device">Device:</string>
+    <string name="deviceTV">Device:</string>
     <string name="product_title">Title</string>
+    <string name="delete_item">Delete Product</string>
     <string name="internet_phone">2P\n(Internet + Phone)</string>
     <string name="internet_tv">2P\n(Internet + TV)</string>
     <string name="internet_phone_tv">3P\n(Internet + Phone + TV)</string>
@@ -99,10 +100,24 @@
     <string name="input_detail_sc">Input Detail</string>
     <string name="acc_delete">Account deleted</string>
     <string name="delete_acc_alert">Are you sure you want to delete your account?</string>
+    <string name="delete_item_alert">Are you sure you want to delete this product?</string>
     <string name="yes">Yes</string>
     <string name="period">/month</string>
-    <string name="period_time">Period:</string>
-    <string name="channel">Channel:</string>
+    <string name="periodTV">Period:</string>
+    <string name="channelTV">Channel:</string>
+    <string name="add_product">Add Product</string>
+    <string name="add_product_desc">Please fill data below to add new product</string>
+    <string name="edit_product_desc">Please fill data below to edit product</string>
+    <string name="data_not_found">Data Not Found!</string>
+    <string name="add_item_success">Item Added Success</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="edit_product">Edit Product</string>
+    <string name="edit_item_success">Item Edited</string>
+    <string name="device">Device</string>
+    <string name="channel">Channel</string>
+    <string name="periodTime">Period</string>
+    <string name="productTV">Product: </string>
 
 
 </resources>

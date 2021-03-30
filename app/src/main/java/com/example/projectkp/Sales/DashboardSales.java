@@ -17,6 +17,7 @@ import com.example.projectkp.R;
 import com.example.projectkp.Sales.MYIR.MyirSales;
 import com.example.projectkp.Sales.Product.ProductListSales;
 import com.example.projectkp.Sales.TrackOrder.TrackOrderSales;
+import com.example.projectkp.Sales.User.UserDetailSales;
 import com.example.projectkp.verification.EmailVerifyActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

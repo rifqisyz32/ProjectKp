@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/product_bg"
-    tools:context=".Sales.Product.InternetPhoneTV">
+    tools:context=".Sales.Product.Item.InternetPhoneTV">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/inputMYIR_toolbar_sales"

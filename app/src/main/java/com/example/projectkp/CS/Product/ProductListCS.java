@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.projectkp.CS.DashboardCS;
+import com.example.projectkp.CS.Product.Adapter.AdapterProductListCS;
 import com.example.projectkp.R;
 import com.example.projectkp.Helper.ProductListHelper;
 

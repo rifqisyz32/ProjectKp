@@ -15,23 +15,23 @@
         android:theme="@style/SecondTheme">
 
         <activity
-            android:name=".Sales.Product.Orbit"
+            android:name=".Sales.Product.Item.Orbit"
             android:launchMode="singleTop"
             android:parentActivityName=".Sales.Product.ProductListSales" />
         <activity
-            android:name=".Sales.Product.MiniPack"
+            android:name=".Sales.Product.Item.MiniPack"
             android:launchMode="singleTop"
             android:parentActivityName=".Sales.Product.ProductListSales" />
         <activity
-            android:name=".Sales.Product.InternetTV"
+            android:name=".Sales.Product.Item.InternetTV"
             android:launchMode="singleTop"
             android:parentActivityName=".Sales.Product.ProductListSales" />
         <activity
-            android:name=".Sales.Product.InternetPhone"
+            android:name=".Sales.Product.Item.InternetPhone"
             android:launchMode="singleTop"
             android:parentActivityName=".Sales.Product.ProductListSales" />
         <activity
-            android:name=".Sales.Product.InternetPhoneTV"
+            android:name=".Sales.Product.Item.InternetPhoneTV"
             android:launchMode="singleTop"
             android:parentActivityName=".Sales.Product.ProductListSales" />
         <activity
@@ -43,10 +43,10 @@
             android:launchMode="singleTop" />
 
         <activity
-            android:name=".Sales.EditProfileSales"
-            android:parentActivityName=".Sales.UserDetailSales" />
+            android:name=".Sales.User.EditProfileSales"
+            android:parentActivityName=".Sales.User.UserDetailSales" />
         <activity
-            android:name=".Sales.UserDetailSales"
+            android:name=".Sales.User.UserDetailSales"
             android:parentActivityName=".Sales.DashboardSales" />
 
         <activity
@@ -59,24 +59,27 @@
             android:name=".Sales.MYIR.MyirSales"
             android:parentActivityName=".Sales.DashboardSales" />
 
+        <activity android:name=".CS.Product.Edit.AddItem" />
+        <activity android:name=".CS.Product.Edit.EditItem" />
+
         <activity
-            android:name=".CS.Product.Orbit"
+            android:name=".CS.Product.Item.Orbit"
             android:launchMode="singleTop"
             android:parentActivityName=".CS.Product.ProductListCS" />
         <activity
-            android:name=".CS.Product.MiniPack"
+            android:name=".CS.Product.Item.MiniPack"
             android:launchMode="singleTop"
             android:parentActivityName=".CS.Product.ProductListCS" />
         <activity
-            android:name=".CS.Product.InternetTV"
+            android:name=".CS.Product.Item.InternetTV"
             android:launchMode="singleTop"
             android:parentActivityName=".CS.Product.ProductListCS" />
         <activity
-            android:name=".CS.Product.InternetPhone"
+            android:name=".CS.Product.Item.InternetPhone"
             android:launchMode="singleTop"
             android:parentActivityName=".CS.Product.ProductListCS" />
         <activity
-            android:name=".CS.Product.InternetPhoneTV"
+            android:name=".CS.Product.Item.InternetPhoneTV"
             android:launchMode="singleTop"
             android:parentActivityName=".CS.Product.ProductListCS" />
         <activity
@@ -89,8 +92,8 @@
 
         <activity android:name=".CS.MyirCS" />
         <activity android:name=".CS.TrackOrderCS" />
-        <activity android:name=".CS.EditProfileCS" />
-        <activity android:name=".CS.UserDetailCS" />
+        <activity android:name=".CS.User.EditProfileCS" />
+        <activity android:name=".CS.User.UserDetailCS" />
         <activity
             android:name=".verification.EmailVerify2Activity"
             android:parentActivityName=".verification.EmailVerifyActivity" />

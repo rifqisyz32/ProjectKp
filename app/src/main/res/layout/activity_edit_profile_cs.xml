@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/shape_user_profile_cs"
-    tools:context=".CS.EditProfileCS">
+    tools:context=".CS.User.EditProfileCS">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -81,14 +81,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/user_detail_layout_bg"
-        android:padding="16dp"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp">
+            android:background="@drawable/user_detail_layout_bg"
+            android:paddingStart="16dp"
+            android:paddingEnd ="16dp"
+            android:paddingTop="32dp"
+            android:paddingBottom="32dp">
 
             <TextView
                 android:id="@+id/edit_title_cs"
@@ -99,7 +101,7 @@
                 android:paddingStart="32dp"
                 android:paddingEnd="32dp"
                 android:text="@string/edit_profile"
-                android:textColor="@color/cs_text"
+                android:textColor="@color/cs_temp"
                 android:textSize="20sp" />
 
             <RelativeLayout
@@ -140,6 +142,7 @@
                     android:layout_below="@+id/edit_role_cs"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp"
+                    android:hint="@string/fullname"
                     app:boxCornerRadiusBottomEnd="12dp"
                     app:boxCornerRadiusBottomStart="12dp"
                     app:boxCornerRadiusTopEnd="12dp"
@@ -170,6 +173,7 @@
                     android:layout_below="@+id/edit_fullname_cs"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp"
+                    android:hint="@string/phone"
                     app:boxCornerRadiusBottomEnd="12dp"
                     app:boxCornerRadiusBottomStart="12dp"
                     app:boxCornerRadiusTopEnd="12dp"
@@ -200,6 +204,7 @@
                     android:layout_below="@+id/edit_phone_cs"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp"
+                    android:hint="@string/email"
                     app:boxCornerRadiusBottomEnd="12dp"
                     app:boxCornerRadiusBottomStart="12dp"
                     app:boxCornerRadiusTopEnd="12dp"
@@ -243,9 +248,9 @@
                     android:fontFamily="@font/poppins_medium"
                     android:text="@string/cancel"
                     android:textAlignment="center"
-                    android:textColor="@color/button_cs"
+                    android:textColor="@color/cs_temp"
                     android:textSize="16sp"
-                    app:backgroundTint="@color/button_cs" />
+                    app:backgroundTint="@color/cs_temp" />
 
                 <Button
                     android:id="@+id/save_profile_cs"
@@ -260,7 +265,7 @@
                     android:textAlignment="center"
                     android:textColor="#fff"
                     android:textSize="16sp"
-                    app:backgroundTint="@color/button_cs" />
+                    app:backgroundTint="@color/cs_temp" />
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -274,7 +279,7 @@
                         android:layout_width="150dp"
                         android:layout_height="50dp"
                         android:background="@drawable/shape_white"
-                        android:backgroundTint="@color/button_cs"
+                        android:backgroundTint="@color/cs_temp"
                         android:indeterminate="true"
                         android:indeterminateTint="@color/white"
                         android:padding="8dp"

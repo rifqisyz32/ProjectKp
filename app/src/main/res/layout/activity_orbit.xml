@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/product_bg"
-    tools:context=".Sales.Product.Orbit">
+    android:background="@color/product_bg">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/orbit_appbar"
@@ -69,24 +67,12 @@
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/orbit_rv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/orbit_add"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/orbit_rv"
-                android:layout_alignParentEnd="true"
-                android:layout_margin="16dp"
-                android:src="@drawable/ic_baseline_add_24"
-                app:backgroundTint="@color/cs_temp"
-                app:tint="#fff" 
-                android:visibility="gone"/>
 
             <!--<RelativeLayout
                 android:layout_width="wrap_content"
@@ -103,7 +89,25 @@
             </RelativeLayout>-->
 
         </RelativeLayout>
-        
+
     </androidx.core.widget.NestedScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/orbit_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_baseline_add_24"
+            android:visibility="gone"
+            app:backgroundTint="@color/cs_temp"
+            app:tint="#fff" />
+
+    </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
