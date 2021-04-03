@@ -32,50 +32,37 @@ public class Orbit extends AppCompatActivity implements AdapterProductCS.OnItemC
     private final DatabaseReference Product = db.getReference("Product");
     private AdapterProductCS productAdapter;
 
-    Window window;
-    Toolbar toolbar;
-    RecyclerView productRV;
-    FloatingActionButton addButton;
-    String deviceText,
-            myKey = "Orbit";
+    private RecyclerView productRV;
+    private String deviceText;
+    private final String myKey = "Orbit";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orbit);
 
-        toolbar = findViewById(R.id.orbit_toolbar);
+        Toolbar toolbar = findViewById(R.id.orbit_toolbar);
         productRV = findViewById(R.id.orbit_rv);
-        addButton = findViewById(R.id.orbit_add);
+        FloatingActionButton addButton = findViewById(R.id.orbit_add);
         deviceText = getApplicationContext().getResources().getString(R.string.periodTime);
 
         if (Build.VERSION.SDK_INT >= 21) {
-            window = this.getWindow();
+            Window window = this.getWindow();
             window.setStatusBarColor(this.getResources().getColor(R.color.status_bar_cs));
         }
 
         setSupportActionBar(toolbar);
-        toolbar.setTitle(myKey);
-        toolbar.setTitleTextColor(getApplicationContext().getResources().getColor(R.color.black));
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         addButton.setVisibility(View.VISIBLE);
         setUpRecyclerView();
 
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent dataUser = new Intent(getApplicationContext(), AddItem.class);
-                dataUser.putExtra("myKey", myKey);
-                dataUser.putExtra("myTitle", myKey);
-                dataUser.putExtra("device", deviceText);
-                startActivity(dataUser);
-            }
+        addButton.setOnClickListener(v -> {
+            Intent dataUser = new Intent(getApplicationContext(), AddItem.class);
+            dataUser.putExtra("myKey", myKey);
+            dataUser.putExtra("myTitle", myKey);
+            dataUser.putExtra("device", deviceText);
+            startActivity(dataUser);
         });
     }
 
@@ -114,26 +101,20 @@ public class Orbit extends AppCompatActivity implements AdapterProductCS.OnItemC
     @Override
     public void onItemClick(DataSnapshot dataSnapshot, int position) {
         String myKey = dataSnapshot.getKey();
-        Toast.makeText(getApplicationContext(), getString(R.string.productTV) + myKey, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), getString(R.string.productTV) + " " + myKey, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void deleteItem(DataSnapshot dataSnapshot, int position) {
         AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setIcon(R.drawable.ic_baseline_delete_outline_24)
-                .setTitle(R.string.delete_acc)
-                .setMessage(R.string.delete_acc_alert)
-                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dataSnapshot.getRef().removeValue();
-                        Toast.makeText(getApplicationContext(), R.string.delete, Toast.LENGTH_SHORT).show();
-                    }
+                .setTitle(R.string.delete_item)
+                .setMessage(R.string.delete_item_alert)
+                .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
+                    dataSnapshot.getRef().removeValue();
+                    Toast.makeText(getApplicationContext(), R.string.delete_success, Toast.LENGTH_SHORT).show();
                 })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                    }
+                .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {
                 }).show();
     }
 

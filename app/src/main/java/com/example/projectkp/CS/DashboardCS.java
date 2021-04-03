@@ -54,14 +54,9 @@ public class DashboardCS extends AppCompatActivity {
             hiUsername.setText(sharedPreferences.getString(sharedUsername, ""));
         }
 
-        Glide.with(this)
-                .applyDefaultRequestOptions(
-                        new RequestOptions()
-                                .placeholder(R.drawable.ic_baseline_account_circle_40)
-                                .error(R.drawable.ic_baseline_account_circle_40))
-                .load(csUser.getPhotoUrl())
-                .centerCrop()
-                .into(userPhoto);
+        if (csUser.getPhotoUrl() != null) {
+            Glide.with(this).load(csUser.getPhotoUrl()).centerCrop().into(userPhoto);
+        }
 
         userPhoto.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -3,7 +3,6 @@ package com.example.projectkp.loginregister;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -28,7 +27,6 @@ import com.google.firebase.database.ValueEventListener;
 
 public class RegisterActivity extends AppCompatActivity {
     TextInputLayout fullnameReg, usernameReg, phoneReg, emailReg, passwordReg;
-    Button signUp, loginAgain;
     FirebaseAuth regAuth;
     ProgressBar regProgress;
     AppCompatRadioButton csReg, salesReg;
@@ -40,7 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         storeId();
 
-        signUp.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.sign_up).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 regProgress.setVisibility(View.VISIBLE);
@@ -48,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        loginAgain.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.login_again).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
@@ -71,8 +69,6 @@ public class RegisterActivity extends AppCompatActivity {
         emailReg = findViewById(R.id.email_reg);
         passwordReg = findViewById(R.id.password_reg);
         regProgress = findViewById(R.id.reg_prog);
-        loginAgain = findViewById(R.id.login_again);
-        signUp = findViewById(R.id.sign_up);
         csReg = findViewById(R.id.cs_reg);
         salesReg = findViewById(R.id.sales_reg);
     }
@@ -99,8 +95,8 @@ public class RegisterActivity extends AppCompatActivity {
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                 if (!snapshot.exists()) {
+                    usernameReg.setError(null);
                     usernameReg.setErrorEnabled(false);
 
                     regAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
@@ -154,7 +150,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private Boolean validateFullName() {
-        String val = fullnameReg.getEditText().getText().toString();
+        String val = fullnameReg.getEditText().getText().toString().trim();
 
         if (val.isEmpty()) {
             fullnameReg.setError(getString(R.string.cant_empty));
@@ -167,7 +163,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private Boolean validateUserName() {
-        String val = usernameReg.getEditText().getText().toString();
+        String val = usernameReg.getEditText().getText().toString().trim();
         String alphanum = "\\A\\w{4,12}\\z";
 
         if (val.isEmpty()) {
@@ -190,7 +186,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private Boolean validateEmail() {
-        String val = emailReg.getEditText().getText().toString();
+        String val = emailReg.getEditText().getText().toString().trim();
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
         if (val.isEmpty()) {
@@ -207,7 +203,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private Boolean validatePhone() {
-        String val = phoneReg.getEditText().getText().toString();
+        String val = phoneReg.getEditText().getText().toString().trim();
 
         if (val.isEmpty()) {
             phoneReg.setError(getString(R.string.cant_empty));
@@ -220,7 +216,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private Boolean validatePassword() {
-        String val = passwordReg.getEditText().getText().toString();
+        String val = passwordReg.getEditText().getText().toString().trim();
         String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$";
 
         if (val.isEmpty()) {
@@ -235,6 +231,5 @@ public class RegisterActivity extends AppCompatActivity {
             return true;
         }
     }
-
 }
 

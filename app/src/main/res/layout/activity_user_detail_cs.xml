@@ -21,7 +21,7 @@
             android:background="@drawable/shape_user_profile_cs"
             android:fitsSystemWindows="true"
             app:collapsedTitleGravity="start"
-            app:contentScrim="@color/cs_temp"
+            app:contentScrim="#893abc"
             app:elevation="0dp"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
 
@@ -211,10 +211,14 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_centerInParent="true"
-                    android:layout_margin="4dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="4dp"
                     android:background="@drawable/shape_gr_small"
-                    android:padding="4dp"
-                    android:src="@drawable/ic_baseline_light_mode_24" />
+                    android:padding="6dp"
+                    android:src="@drawable/ic_baseline_light_mode_24"
+                    app:tint="@color/cs_temp" />
 
                 <TextView
                     android:id="@+id/theme_light_desc_cs"
@@ -278,8 +282,9 @@
                     android:layout_alignParentStart="true"
                     android:layout_margin="4dp"
                     android:background="@drawable/shape_gr_small"
-                    android:padding="4dp"
-                    android:src="@drawable/ic_baseline_g_translate_24" />
+                    android:padding="8dp"
+                    android:src="@drawable/ic_baseline_g_translate_24"
+                    app:tint="@color/cs_temp" />
 
                 <TextView
                     android:id="@+id/language_icon_desc_cs"
@@ -290,8 +295,22 @@
                     android:fontFamily="@font/poppins_medium"
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
-                    android:text="@string/language"
+                    android:text="@string/english"
                     android:textSize="12sp" />
+
+                <ImageView
+                    android:id="@+id/language_set_cs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/circle_shape_white"
+                    android:backgroundTint="@color/pick_photo_cs"
+                    android:elevation="2dp"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_baseline_settings_30"
+                    app:tint="@color/cs_rv_item" />
 
             </RelativeLayout>
 
@@ -310,7 +329,7 @@
                 android:textAllCaps="false"
                 android:textColor="#fff"
                 android:textSize="16sp"
-                app:backgroundTint="@color/cs_temp"
+                app:backgroundTint="@color/button_cs"
                 app:elevation="8dp" />
 
         </RelativeLayout>

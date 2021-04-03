@@ -148,7 +148,7 @@ public class UserDetailSales extends AppCompatActivity {
 
     private void deleteMyAcc() {
 
-        storageReference.child(myUsername).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+        storageReference.child(myUsername).child("user_photo").delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 reference.child(myUsername).getRef().removeValue();

@@ -38,9 +38,7 @@
             android:name=".Sales.Product.ProductListSales"
             android:parentActivityName=".Sales.DashboardSales" />
 
-        <activity
-            android:name=".Sales.DashboardSales"
-            android:launchMode="singleTop" />
+        <activity android:name=".Sales.DashboardSales" />
 
         <activity
             android:name=".Sales.User.EditProfileSales"
@@ -84,16 +82,23 @@
             android:parentActivityName=".CS.Product.ProductListCS" />
         <activity
             android:name=".CS.Product.ProductListCS"
+            android:launchMode="singleTop"
             android:parentActivityName=".CS.DashboardCS" />
 
-        <activity
-            android:name=".CS.DashboardCS"
-            android:launchMode="singleTop" />
+        <activity android:name=".CS.DashboardCS" />
 
-        <activity android:name=".CS.MyirCS" />
-        <activity android:name=".CS.TrackOrderCS" />
-        <activity android:name=".CS.User.EditProfileCS" />
-        <activity android:name=".CS.User.UserDetailCS" />
+        <activity
+            android:name=".CS.MyirCS"
+            android:parentActivityName=".CS.DashboardCS" />
+        <activity
+            android:name=".CS.TrackOrderCS"
+            android:parentActivityName=".CS.DashboardCS" />
+        <activity
+            android:name=".CS.User.EditProfileCS"
+            android:parentActivityName=".CS.User.UserDetailCS" />
+        <activity
+            android:name=".CS.User.UserDetailCS"
+            android:parentActivityName=".CS.DashboardCS" />
         <activity
             android:name=".verification.EmailVerify2Activity"
             android:parentActivityName=".verification.EmailVerifyActivity" />

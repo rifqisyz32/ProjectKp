@@ -112,30 +112,27 @@ public class AddItem extends AppCompatActivity {
         String myPrice = addPrice.getEditText().getText().toString().trim();
         String mySpeed = addSpeed.getEditText().getText().toString().trim();
 
-        Query checkProduct = Product.orderByChild("child").equalTo(myKey);
+        Query checkProduct = Product.child(myKey).orderByChild("speed").equalTo(mySpeed);
         checkProduct.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                if (!snapshot.exists()) {
+                if (snapshot.exists()) {
+                    Toast.makeText(getApplicationContext(), R.string.product_exist, Toast.LENGTH_SHORT).show();
+                    addProgress.setVisibility(View.GONE);
+                    save.setVisibility(View.VISIBLE);
+                } else {
                     ProductHelper storeData = new ProductHelper(myTitle, mySpeed, myPrice, myDevice);
                     Product.child(myKey).child(mySpeed).setValue(storeData);
 
                     addProgress.setVisibility(View.GONE);
                     save.setVisibility(View.VISIBLE);
                     Toast.makeText(getApplicationContext(), R.string.add_item_success, Toast.LENGTH_SHORT).show();
-                } else {
-                    addProgress.setVisibility(View.GONE);
-                    save.setVisibility(View.VISIBLE);
-                    Toast.makeText(getApplicationContext(), "Something went wrong\nPlease contact us to fix this", Toast.LENGTH_SHORT).show();
+                    onBackPressed();
                 }
-                onBackPressed();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                addProgress.setVisibility(View.GONE);
-                save.setVisibility(View.VISIBLE);
                 Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

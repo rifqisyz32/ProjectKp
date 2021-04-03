@@ -84,7 +84,19 @@
                     android:layout_marginStart="4dp"
                     android:layout_toEndOf="@id/product_device"
                     android:fontFamily="@font/poppins_light"
-                    android:text="@string/deviceTV"
+                    android:text=" "
+                    android:textColor="@color/black"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/product_device_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="4dp"
+                    android:layout_toEndOf="@id/product_device_db"
+                    android:fontFamily="@font/poppins_light"
+                    android:text="@string/days"
                     android:textColor="@color/black"
                     android:textSize="10sp" />
 

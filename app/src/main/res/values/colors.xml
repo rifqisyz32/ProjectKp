@@ -17,6 +17,7 @@
     <color name="cs_rv_item">#fff</color>
     <color name="sales_rv_item">#fff</color>
     <color name="cs_temp">#9b6fee</color>
+    <color name="set_temp">#9744ff</color>
     <color name="sales_temp">#ff5669</color>
     <color name="status_bar_cs">#601880</color>
     <color name="pick_photo_cs">#9b6fee</color>

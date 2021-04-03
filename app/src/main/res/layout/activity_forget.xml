@@ -72,6 +72,10 @@
                 android:layout_gravity="center"
                 android:layout_margin="32dp"
                 android:hint="@string/email"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
                 app:endIconMode="clear_text"
                 app:endIconTint="@color/colorSubtitle">
 

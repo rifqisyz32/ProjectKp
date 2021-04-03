@@ -21,20 +21,17 @@ import java.util.List;
 
 public class ProductListCS extends AppCompatActivity {
 
-    Window window;
-    Toolbar toolbar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_product);
 
         if (Build.VERSION.SDK_INT >= 21) {
-            window = this.getWindow();
+            Window window = this.getWindow();
             window.setStatusBarColor(this.getResources().getColor(R.color.status_bar_cs));
         }
 
-        toolbar = findViewById(R.id.list_product_toolbar);
+        Toolbar toolbar = findViewById(R.id.list_product_toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

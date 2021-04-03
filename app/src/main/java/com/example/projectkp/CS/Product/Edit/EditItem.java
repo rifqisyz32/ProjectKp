@@ -23,9 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-
 public class EditItem extends AppCompatActivity {
-
     private final FirebaseDatabase db = FirebaseDatabase.getInstance();
     private final DatabaseReference Product = db.getReference("Product");
 
@@ -104,9 +102,7 @@ public class EditItem extends AppCompatActivity {
         checkProduct.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                 if (snapshot.exists()) {
-
                     dbDevice = snapshot.child(myRef).child("device").getValue(String.class);
                     dbPrice = snapshot.child(myRef).child("price").getValue(String.class);
                     dbSpeed = snapshot.child(myRef).child("speed").getValue(String.class);
@@ -114,7 +110,6 @@ public class EditItem extends AppCompatActivity {
                     editDevice.getEditText().setText(dbDevice);
                     editPrice.getEditText().setText(dbPrice);
                     editSpeed.getEditText().setText(dbSpeed);
-
                 } else {
                     Toast.makeText(getApplicationContext(), R.string.data_not_found, Toast.LENGTH_SHORT).show();
                 }
@@ -148,12 +143,40 @@ public class EditItem extends AppCompatActivity {
         myPrice = editPrice.getEditText().getText().toString().trim();
         mySpeed = editSpeed.getEditText().getText().toString().trim();
 
-        ProductHelper storeData = new ProductHelper(myTitle, mySpeed, myPrice, myDevice);
-        Product.child(myKey).child(myRef).setValue(storeData);
+        if (mySpeed.matches(myRef)) {
+            ProductHelper storeData = new ProductHelper(myTitle, mySpeed, myPrice, myDevice);
+            Product.child(myKey).child(mySpeed).setValue(storeData);
 
-        editProgress.setVisibility(View.GONE);
-        save.setVisibility(View.VISIBLE);
-        Toast.makeText(getApplicationContext(), R.string.edit_item_success, Toast.LENGTH_SHORT).show();
-        onBackPressed();
+            editProgress.setVisibility(View.GONE);
+            save.setVisibility(View.VISIBLE);
+            Toast.makeText(getApplicationContext(), R.string.edit_item_success, Toast.LENGTH_SHORT).show();
+            onBackPressed();
+        } else {
+            Query checkProduct = Product.child(myKey).orderByChild("speed").equalTo(mySpeed);
+            checkProduct.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        Toast.makeText(getApplicationContext(), R.string.product_exist, Toast.LENGTH_SHORT).show();
+                        editProgress.setVisibility(View.GONE);
+                        save.setVisibility(View.VISIBLE);
+                    } else {
+                        ProductHelper storeData = new ProductHelper(myTitle, mySpeed, myPrice, myDevice);
+                        Product.child(myKey).child(mySpeed).setValue(storeData);
+                        Product.child(myKey).child(myRef).removeValue();
+
+                        editProgress.setVisibility(View.GONE);
+                        save.setVisibility(View.VISIBLE);
+                        Toast.makeText(getApplicationContext(), R.string.edit_item_success, Toast.LENGTH_SHORT).show();
+                        onBackPressed();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 }

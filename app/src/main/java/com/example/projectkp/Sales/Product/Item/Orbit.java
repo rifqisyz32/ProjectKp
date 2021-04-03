@@ -24,16 +24,14 @@ public class Orbit extends AppCompatActivity {
     private final FirebaseDatabase db = FirebaseDatabase.getInstance();
     private final DatabaseReference Product = db.getReference("Product");
     private AdapterProductSales productAdapter;
-
-    Toolbar toolbar;
-    RecyclerView productRV;
+    private RecyclerView productRV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orbit);
 
-        toolbar = findViewById(R.id.orbit_toolbar);
+        Toolbar toolbar = findViewById(R.id.orbit_toolbar);
         productRV = findViewById(R.id.orbit_rv);
 
         setSupportActionBar(toolbar);
@@ -71,7 +69,7 @@ public class Orbit extends AppCompatActivity {
             @Override
             public void onItemClick(DataSnapshot dataSnapshot) {
                 String myKey = dataSnapshot.getKey();
-                Toast.makeText(getApplicationContext(), getString(R.string.productTV) + myKey, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.productTV) + " " + myKey, Toast.LENGTH_SHORT).show();
             }
         });
     }

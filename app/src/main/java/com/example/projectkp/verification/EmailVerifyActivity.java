@@ -21,12 +21,12 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class EmailVerifyActivity extends AppCompatActivity {
 
-    FirebaseAuth verifyAuth = FirebaseAuth.getInstance();
-    FirebaseUser verifyUser = verifyAuth.getCurrentUser();
-    TextView myEmail;
-    Button changeAcc, verifyEmail;
-    ProgressBar verifyProgress;
-    Toolbar toolbar;
+    private final FirebaseAuth verifyAuth = FirebaseAuth.getInstance();
+    private final FirebaseUser verifyUser = verifyAuth.getCurrentUser();
+    private TextView myEmail;
+    private Button changeAcc, verifyEmail;
+    private ProgressBar verifyProgress;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,42 +39,30 @@ public class EmailVerifyActivity extends AppCompatActivity {
         myEmail.setText(username);
 
         setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
-        verifyEmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        changeAcc.setOnClickListener(v -> onBackPressed());
 
-                verifyProgress.setVisibility(View.VISIBLE);
-                verifyUser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        verifyProgress.setVisibility(View.GONE);
-                        startActivity(new Intent(getApplicationContext(), EmailVerify2Activity.class));
-                        finish();
-                    }
-                });
+        verifyEmail.setOnClickListener(v -> {
 
-                verifyUser.sendEmailVerification().addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        verifyProgress.setVisibility(View.GONE);
-                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
-
-        changeAcc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
+            verifyEmail.setVisibility(View.GONE);
+            verifyProgress.setVisibility(View.VISIBLE);
+            verifyUser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    verifyProgress.setVisibility(View.GONE);
+                    verifyEmail.setVisibility(View.VISIBLE);
+                    startActivity(new Intent(getApplicationContext(), EmailVerify2Activity.class));
+                    finish();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    verifyProgress.setVisibility(View.GONE);
+                    verifyEmail.setVisibility(View.VISIBLE);
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
         });
     }
 

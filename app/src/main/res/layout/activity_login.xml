@@ -100,7 +100,7 @@
                     android:drawableTint="@color/colorSubtitle"
                     android:fontFamily="@font/poppins_light"
                     android:includeFontPadding="false"
-                    android:inputType="textEmailAddress"
+                    android:inputType="textNoSuggestions"
                     android:textColor="@color/colorSubtitle"
                     android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -206,6 +206,17 @@
                     android:visibility="gone" />
 
             </RelativeLayout>
+
+            <ProgressBar
+                android:id="@+id/log_auth_prog"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/circle_shape_white"
+                android:backgroundTint="@color/colorPrimary"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/white"
+                android:padding="8dp" />
 
         </RelativeLayout>
 

@@ -2,7 +2,6 @@ package com.example.projectkp.Sales.Product.Item;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +14,6 @@ import com.example.projectkp.R;
 import com.example.projectkp.Sales.Product.Adapter.AdapterProductSales;
 import com.example.projectkp.Sales.Product.ProductListSales;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -24,26 +22,19 @@ public class InternetPhoneTV extends AppCompatActivity {
     private final FirebaseDatabase db = FirebaseDatabase.getInstance();
     private final DatabaseReference Product = db.getReference("Product");
     private AdapterProductSales productAdapter;
-
-    Toolbar toolbar;
-    RecyclerView productRV;
+    private RecyclerView productRV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub_product);
 
-        toolbar = findViewById(R.id.sub_product_toolbar);
+        Toolbar toolbar = findViewById(R.id.sub_product_toolbar);
         productRV = findViewById(R.id.sub_product_rv);
 
         setSupportActionBar(toolbar);
         toolbar.setTitle("3P (Internet + Phone + TV)");
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         setUpRecyclerView();
     }
@@ -66,12 +57,9 @@ public class InternetPhoneTV extends AppCompatActivity {
         productAdapter.changeDeviceText(getString(R.string.deviceTV));
         productAdapter.changePriceText(getString(R.string.period));
 
-        productAdapter.setOnItemClickListener(new AdapterProductSales.OnItemClickListener() {
-            @Override
-            public void onItemClick(DataSnapshot dataSnapshot) {
-                String myKey = dataSnapshot.getKey();
-                Toast.makeText(getApplicationContext(), getString(R.string.productTV) + myKey, Toast.LENGTH_SHORT).show();
-            }
+        productAdapter.setOnItemClickListener(dataSnapshot -> {
+            String myKey = dataSnapshot.getKey();
+            Toast.makeText(getApplicationContext(), getString(R.string.productTV) + " " + myKey, Toast.LENGTH_SHORT).show();
         });
     }
 

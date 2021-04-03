@@ -52,24 +52,22 @@ import com.google.firebase.storage.UploadTask;
 
 public class EditProfileCS extends AppCompatActivity {
 
-    FirebaseAuth editAuth = FirebaseAuth.getInstance();
-    FirebaseUser editUser = editAuth.getCurrentUser();
-    FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
-    DatabaseReference reference = rootNode.getReference("users");
-    StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("cs_photo");
-    StorageTask imgTask;
+    private final FirebaseAuth editAuth = FirebaseAuth.getInstance();
+    private final FirebaseUser editUser = editAuth.getCurrentUser();
+    private final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+    private final StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("cs_photo");
+    private StorageTask imgTask;
 
-    Window window;
-    Toolbar toolbar;
-    ProgressBar saveDataProgress;
-    TextInputLayout editFullname, editPhone, editEmail;
-    TextView usernameCS;
-    ImageView userPhoto, updatePhoto;
-    Uri userPhotoUri;
-    Boolean updateImgButton = false;
-    String myUsername, myPassword, databaseEmail, databaseFullname, databasePhone;
-    static int PReqCode = 1;
-    static int REQUESTCODE = 1;
+    private Toolbar toolbar;
+    private ProgressBar saveDataProgress;
+    private TextInputLayout editFullname, editPhone, editEmail;
+    private TextView usernameCS;
+    private ImageView userPhoto, updatePhoto;
+    private Uri userPhotoUri;
+    private Boolean updateImgButton = false;
+    private String myUsername, myPassword, databaseEmail, databaseFullname, databasePhone;
+    private static final int PReqCode = 1;
+    private static final int REQUESTCODE = 1;
 
     SharedPreferences sharedPreferences;
     public static final String MyPREFERENCES = "MyPrefs";
@@ -82,55 +80,48 @@ public class EditProfileCS extends AppCompatActivity {
         setContentView(R.layout.activity_edit_profile_cs);
 
         if (Build.VERSION.SDK_INT >= 21) {
-            window = this.getWindow();
+            Window window = this.getWindow();
             window.setStatusBarColor(this.getResources().getColor(R.color.status_bar_cs));
         }
 
         storeId();
         getUserData();
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), UserDetailCS.class));
-                finish();
+        toolbar.setNavigationOnClickListener(v -> {
+            onBackPressed();
+        });
+
+        updatePhoto.setOnClickListener(v -> {
+            updateImgButton = true;
+            if (Build.VERSION.SDK_INT >= 22) {
+                checkAndRequestForPermission();
+            } else {
+                openGallery();
             }
         });
 
-        updatePhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateImgButton = true;
-                if (Build.VERSION.SDK_INT >= 22) {
-                    checkAndRequestForPermission();
+        findViewById(R.id.cancel_edit_cs).setOnClickListener(v -> {
+            onBackPressed();
+        });
+
+        findViewById(R.id.save_profile_cs).setOnClickListener(v -> {
+            saveDataProgress.setVisibility(View.VISIBLE);
+            if (updateImgButton) {
+                if (imgTask != null && imgTask.isInProgress()) {
+                    Toast.makeText(getApplicationContext(), R.string.wait, Toast.LENGTH_SHORT).show();
                 } else {
-                    openGallery();
+                    storePhotoDatabase(userPhotoUri, editUser);
                 }
             }
+            storeUserData();
         });
+    }
 
-        findViewById(R.id.cancel_edit_cs).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), UserDetailCS.class));
-                finish();
-            }
-        });
-
-        findViewById(R.id.save_profile_cs).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveDataProgress.setVisibility(View.VISIBLE);
-                if (updateImgButton) {
-                    if (imgTask != null && imgTask.isInProgress()) {
-                        Toast.makeText(getApplicationContext(), R.string.wait, Toast.LENGTH_SHORT).show();
-                    } else {
-                        storePhotoDatabase(userPhotoUri, editUser);
-                    }
-                }
-                storeUserData();
-            }
-        });
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(), UserDetailCS.class));
+        finish();
     }
 
     private void storeId() {
@@ -146,7 +137,6 @@ public class EditProfileCS extends AppCompatActivity {
     }
 
     private void getUserData() {
-
         if (editUser.getPhotoUrl() != null) {
             Glide.with(this).load(editUser.getPhotoUrl()).centerCrop().into(userPhoto);
         }
@@ -293,8 +283,7 @@ public class EditProfileCS extends AppCompatActivity {
 
             saveDataProgress.setVisibility(View.GONE);
             Toast.makeText(getApplicationContext(), R.string.edit_success, Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(getApplicationContext(), UserDetailCS.class));
-            finish();
+            onBackPressed();
 
         } else {
             if (!validateEmail()) {

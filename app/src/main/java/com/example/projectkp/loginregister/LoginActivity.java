@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     TextInputLayout logUsername, logPassword;
     Button login, forget, signUp;
     String username, password, myUsername, dbEmail, dbRole;
-    ProgressBar logProgress;
+    ProgressBar logProgress, logAuthProgress;
 
     SharedPreferences sharedPreferences;
     public static final String MyPREFERENCES = "MyPrefs";
@@ -87,18 +87,16 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        logAuthProgress = findViewById(R.id.log_auth_prog);
 
         if (sharedPreferences.contains(sharedUsername)) {
             myUsername = sharedPreferences.getString(sharedUsername, "");
         }
 
-        if (logUser != null) {
-            if (logUser.isEmailVerified()) {
-                checkRole();
-            }
-        } else {
-            loginUser();
+        if (logUser != null && logUser.isEmailVerified()) {
+            checkRole();
         }
+        logAuthProgress.setVisibility(View.GONE);
     }
 
     private void checkRole() {
@@ -113,10 +111,12 @@ public class LoginActivity extends AppCompatActivity {
 
                     if (dbRole.matches("Sales")) {
                         logProgress.setVisibility(View.GONE);
+                        logAuthProgress.setVisibility(View.GONE);
                         startActivity(new Intent(getApplicationContext(), DashboardSales.class));
                         finish();
                     } else {
                         logProgress.setVisibility(View.GONE);
+                        logAuthProgress.setVisibility(View.GONE);
                         startActivity(new Intent(getApplicationContext(), DashboardCS.class));
                         finish();
                     }
@@ -181,7 +181,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 } else {
                     logProgress.setVisibility(View.GONE);
-                    Toast.makeText(getApplicationContext(), R.string.no_user, Toast.LENGTH_SHORT).show();
+                    logUsername.setError(getString(R.string.no_user));
                 }
             }
 

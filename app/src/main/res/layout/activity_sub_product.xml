@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/product_bg">
@@ -40,28 +39,57 @@
         app:backgroundTint="@color/sales_temp"
         app:tint="#fff" />
 
-    <!--<RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
-
-        <ProgressBar
-            android:id="@+id/sub_product_prog"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminateTint="@color/sales_temp" />
-
-    </RelativeLayout>-->
-
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/sub_product_toolbar">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/search_minipack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:drawableStart="@drawable/ic_baseline_search_24"
+            android:drawableTint="@color/cs_rv"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/poppins_light"
+            android:textColor="@color/colorSubtitle"
+            android:textSize="16sp"
+            android:background="@drawable/switch_cs_off"
+            android:hint="@string/search_here"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:textColorHint="@color/colorSubtitle"
+
+            />
+
+        <ImageView
+            android:id="@+id/search_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/circle_shape_white"
+            android:backgroundTint="@color/cs_rv"
+            android:padding="8dp"
+            android:src="@drawable/ic_baseline_search_24"
+            app:tint="@color/cs_rv_item"
+            android:visibility="gone"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/sub_product_rv"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/search_minipack" />
 
     </RelativeLayout>
 

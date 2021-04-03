@@ -100,20 +100,6 @@
                 android:padding="8dp">
 
                 <Button
-                    android:id="@+id/verify_email_button"
-                    style="@style/SecondTheme"
-                    android:layout_width="150dp"
-                    android:layout_height="50dp"
-                    android:layout_margin="8dp"
-                    android:layout_toEndOf="@+id/verify_email_change_account"
-                    android:background="@drawable/shape_white"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="@string/verify"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
-
-                <Button
                     android:id="@+id/verify_email_change_account"
                     style="@style/SecondTheme"
                     android:layout_width="150dp"
@@ -127,24 +113,32 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="12sp" />
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ProgressBar
+                    android:id="@+id/verify_email_prog"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
                     android:layout_margin="8dp"
-                    android:layout_toEndOf="@id/verify_email_change_account">
+                    android:layout_toEndOf="@id/verify_email_change_account"
+                    android:background="@drawable/shape_white"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/white"
+                    android:padding="8dp"
+                    android:visibility="gone"/>
 
-                    <ProgressBar
-                        android:id="@+id/verify_email_prog"
-                        android:layout_width="150dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/shape_white"
-                        android:backgroundTint="@color/colorPrimary"
-                        android:indeterminate="true"
-                        android:indeterminateTint="@color/white"
-                        android:padding="8dp"
-                        android:visibility="gone" />
-
-                </RelativeLayout>
+                <Button
+                    android:id="@+id/verify_email_button"
+                    style="@style/SecondTheme"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="8dp"
+                    android:layout_toEndOf="@+id/verify_email_change_account"
+                    android:background="@drawable/shape_white"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/verify"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
 
             </RelativeLayout>
 

@@ -1,15 +1,14 @@
 package com.example.projectkp.CS.User;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -24,7 +23,6 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.projectkp.CS.DashboardCS;
 import com.example.projectkp.R;
 import com.example.projectkp.loginregister.LoginActivity;
@@ -43,19 +41,17 @@ import com.google.firebase.storage.StorageReference;
 
 public class UserDetailCS extends AppCompatActivity {
 
-    FirebaseAuth csAuth = FirebaseAuth.getInstance();
-    FirebaseUser csUser = csAuth.getCurrentUser();
-    FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
-    DatabaseReference reference = rootNode.getReference("users");
-    StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("cs_photo");
+    private final FirebaseAuth csAuth = FirebaseAuth.getInstance();
+    private final FirebaseUser csUser = csAuth.getCurrentUser();
+    private final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+    private final StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("cs_photo");
 
-    Window window;
-    Toolbar toolbar;
-    Button logoutCS;
-    SwitchCompat changeThemeSwitch;
-    TextView fullNameCS, usernameCS, emailCS, phoneCS, changeThemeText;
-    ImageView photoCS, changeThemeBG;
-    String myUsername, dbEmail, dbFullname, dbPhone;
+    private Toolbar toolbar;
+    private Button logoutCS;
+    private SwitchCompat changeThemeSwitch;
+    private TextView fullNameCS, usernameCS, emailCS, phoneCS, changeThemeText;
+    private ImageView photoCS, changeThemeBG;
+    private String myUsername, dbEmail, dbFullname, dbPhone;
 
     SharedPreferences sharedPreferences;
     public static final String MyPREFERENCES = "MyPrefs";
@@ -68,7 +64,7 @@ public class UserDetailCS extends AppCompatActivity {
         setContentView(R.layout.activity_user_detail_cs);
 
         if (Build.VERSION.SDK_INT >= 21) {
-            window = this.getWindow();
+            Window window = this.getWindow();
             window.setStatusBarColor(this.getResources().getColor(R.color.status_bar_cs));
         }
 
@@ -77,20 +73,15 @@ public class UserDetailCS extends AppCompatActivity {
         changeMyTheme();
 
         setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
+
+        findViewById(R.id.language_set_cs).setOnClickListener(v -> {
+            startActivity(new Intent(Settings.ACTION_LOCALE_SETTINGS));
         });
 
-        logoutCS.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                finish();
-            }
+        logoutCS.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+            onBackPressed();
         });
     }
 
@@ -98,6 +89,7 @@ public class UserDetailCS extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         startActivity(new Intent(getApplicationContext(), DashboardCS.class));
+        finish();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -123,17 +115,8 @@ public class UserDetailCS extends AppCompatActivity {
                         .setIcon(R.drawable.ic_baseline_delete_outline_24)
                         .setTitle(R.string.delete_acc)
                         .setMessage(R.string.delete_acc_alert)
-                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                deleteMyAcc();
-                            }
-                        })
-                        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-
-                            }
+                        .setPositiveButton(R.string.yes, (dialogInterface, i) -> deleteMyAcc())
+                        .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {
                         }).show();
                 break;
         }
@@ -155,21 +138,17 @@ public class UserDetailCS extends AppCompatActivity {
 
     private void deleteMyAcc() {
 
-        storageReference.child(myUsername).child("user_photo").delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+        csUser.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 reference.child(myUsername).getRef().removeValue();
-                csUser.delete();
+
+                storageReference.child(myUsername).child("user_photo").delete();
                 Toast.makeText(getApplicationContext(), R.string.acc_delete, Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 finish();
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        }).addOnFailureListener(e -> Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 
     private void changeMyTheme() {
@@ -192,28 +171,19 @@ public class UserDetailCS extends AppCompatActivity {
                 break;
         }
 
-        changeThemeSwitch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (changeThemeSwitch.isChecked()) {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                } else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                }
+        changeThemeSwitch.setOnClickListener(v -> {
+            if (changeThemeSwitch.isChecked()) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             }
         });
     }
 
     private void getUserData() {
-
-        Glide.with(this)
-                .applyDefaultRequestOptions(
-                        new RequestOptions()
-                                .placeholder(R.drawable.ic_baseline_account_circle_120)
-                                .error(R.drawable.ic_baseline_account_circle_120))
-                .load(csUser.getPhotoUrl())
-                .centerCrop()
-                .into(photoCS);
+        if (csUser.getPhotoUrl() != null) {
+            Glide.with(this).load(csUser.getPhotoUrl()).centerCrop().into(photoCS);
+        }
 
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 

@@ -45,7 +45,7 @@
     <string name="no_user">User Not Found!</string>
     <string name="logout">Logout</string>
     <string name="sent_verify_email">Email verification sent!</string>
-    <string name="user_exist">This username is already taken</string>
+    <string name="user_exist">This username is already used</string>
     <string name="register_success">Sign Up Successfully</string>
     <string name="track_order">Track Order</string>
     <string name="input_myir">Input MYIR</string>
@@ -109,15 +109,19 @@
     <string name="add_product_desc">Please fill data below to add new product</string>
     <string name="edit_product_desc">Please fill data below to edit product</string>
     <string name="data_not_found">Data Not Found!</string>
-    <string name="add_item_success">Item Added Success</string>
+    <string name="add_item_success">Product Added</string>
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
     <string name="edit_product">Edit Product</string>
-    <string name="edit_item_success">Item Edited</string>
+    <string name="edit_item_success">Product Edited</string>
     <string name="device">Device</string>
     <string name="channel">Channel</string>
     <string name="periodTime">Period</string>
     <string name="productTV">Product: </string>
+    <string name="days">days</string>
+    <string name="product_exist">This Product is already exist</string>
+    <string name="delete_success">Product Deleted</string>
+    <string name="search_here">Search Here</string>
 
 
 </resources>

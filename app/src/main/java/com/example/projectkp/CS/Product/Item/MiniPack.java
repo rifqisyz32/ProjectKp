@@ -1,84 +1,100 @@
 package com.example.projectkp.CS.Product.Item;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.projectkp.CS.Product.Adapter.AdapterProductCS;
+import com.example.projectkp.CS.Product.Adapter.MiniPackTestAdapter;
 import com.example.projectkp.CS.Product.Edit.AddItem;
 import com.example.projectkp.CS.Product.Edit.EditItem;
 import com.example.projectkp.CS.Product.ProductListCS;
 import com.example.projectkp.Helper.ProductHelper;
 import com.example.projectkp.R;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-public class MiniPack extends AppCompatActivity implements AdapterProductCS.OnItemClickListener {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
-    private final FirebaseDatabase db = FirebaseDatabase.getInstance();
-    private final DatabaseReference Product = db.getReference("Product");
-    private AdapterProductCS productAdapter;
+public class MiniPack extends AppCompatActivity implements MiniPackTestAdapter.OnItemClickListener {
 
-    Window window;
-    Toolbar toolbar;
-    RecyclerView productRV;
-    FloatingActionButton addButton, bonusButton;
-    String deviceText,
-            myKey = "Mini_Pack",
-            myTitle = "MiniPack";
+    private final DatabaseReference Product = FirebaseDatabase.getInstance().getReference("Product");
+    private MiniPackTestAdapter productAdapter;
+
+    private RecyclerView productRV;
+    private List<ProductHelper> productList;
+    private String deviceText, dbPosition;
+    private final String myKey = "Mini_Pack";
+    private final String myTitle = "MiniPack";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub_product);
 
-        toolbar = findViewById(R.id.sub_product_toolbar);
+        Toolbar toolbar = findViewById(R.id.sub_product_toolbar);
         productRV = findViewById(R.id.sub_product_rv);
-        addButton = findViewById(R.id.sub_product_add);
-        bonusButton = findViewById(R.id.sub_product_bonus);
+        FloatingActionButton addButton = findViewById(R.id.sub_product_add);
+        FloatingActionButton bonusButton = findViewById(R.id.sub_product_bonus);
+        TextInputEditText searchItem = findViewById(R.id.search_minipack);
+        ImageView searchButton = findViewById(R.id.search_btn);
         deviceText = getApplicationContext().getResources().getString(R.string.channel);
 
         if (Build.VERSION.SDK_INT >= 21) {
-            window = this.getWindow();
+            Window window = this.getWindow();
             window.setStatusBarColor(this.getResources().getColor(R.color.status_bar_cs));
         }
 
         setSupportActionBar(toolbar);
-        toolbar.setTitle("MiniPack");
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        toolbar.setTitle(myTitle);
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         bonusButton.setVisibility(View.GONE);
         addButton.setVisibility(View.VISIBLE);
-        setUpRecyclerView();
 
-        addButton.setOnClickListener(new View.OnClickListener() {
+        searchItem.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v) {
-                Intent dataUser = new Intent(getApplicationContext(), AddItem.class);
-                dataUser.putExtra("myKey", myKey);
-                dataUser.putExtra("myTitle", myTitle);
-                dataUser.putExtra("device", deviceText);
-                startActivity(dataUser);
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                productAdapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
             }
         });
+
+        addButton.setOnClickListener(v -> {
+            Intent dataUser = new Intent(getApplicationContext(), AddItem.class);
+            dataUser.putExtra("myKey", myKey);
+            dataUser.putExtra("myTitle", myTitle);
+            dataUser.putExtra("device", deviceText);
+            startActivity(dataUser);
+        });
+        testUpRecyclerView();
     }
 
     @Override
@@ -88,19 +104,98 @@ public class MiniPack extends AppCompatActivity implements AdapterProductCS.OnIt
         finish();
     }
 
+    /*
     private void setUpRecyclerView() {
         FirebaseRecyclerOptions<ProductHelper> options = new FirebaseRecyclerOptions.Builder<ProductHelper>()
                 .setQuery(Product.child(myKey), ProductHelper.class)
                 .build();
 
-        productAdapter = new AdapterProductCS(options);
+        productAdapter = new MiniPackTestAdapter(options);
         productRV.setLayoutManager(new LinearLayoutManager(this));
         productRV.setAdapter(productAdapter);
         productAdapter.setOnItemClickListener(MiniPack.this);
         productAdapter.changeDeviceText(getString(R.string.channelTV));
         productAdapter.changePriceText(getString(R.string.period));
     }
+    */
 
+    private void testUpRecyclerView() {
+
+        productRV.setLayoutManager(new LinearLayoutManager(this));
+        productList = new ArrayList<>();
+
+        Product.child(myKey).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                productList.clear();
+                for (DataSnapshot productSnapshot : snapshot.getChildren()) {
+                    ProductHelper productHelper = productSnapshot.getValue(ProductHelper.class);
+                    productList.add(productHelper);
+                }
+                productAdapter = new MiniPackTestAdapter(getApplicationContext(), productList);
+                productRV.setAdapter(productAdapter);
+                productAdapter.setOnItemClickListener(MiniPack.this);
+                productAdapter.changeDeviceText(getString(R.string.channelTV));
+                productAdapter.changePriceText(getString(R.string.period));
+                sortArrayList();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void sortArrayList() {
+        Collections.sort(productList, new Comparator<ProductHelper>() {
+            @Override
+            public int compare(ProductHelper o1, ProductHelper o2) {
+                return extractInt(o1.getSpeed()) - extractInt(o2.getSpeed());
+            }
+
+            int extractInt(String s) {
+                String num = s.replaceAll("\\D", "");
+                return num.isEmpty() ? 0 : Integer.parseInt(num);
+            }
+
+        });
+        productAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        dbPosition = productList.get(position).getSpeed();
+        Toast.makeText(getApplicationContext(), getString(R.string.productTV) + " " + dbPosition, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void deleteItem(int position) {
+        dbPosition = productList.get(position).getSpeed();
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setIcon(R.drawable.ic_baseline_delete_outline_24)
+                .setTitle(R.string.delete_item)
+                .setMessage(R.string.delete_item_alert)
+                .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
+                    Product.child(myKey).child(dbPosition).getRef().removeValue();
+                    Toast.makeText(getApplicationContext(), R.string.delete_success, Toast.LENGTH_SHORT).show();
+                })
+                .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {
+                }).show();
+    }
+
+    @Override
+    public void editItem(int position) {
+        dbPosition = productList.get(position).getSpeed();
+        Intent dataUser = new Intent(getApplicationContext(), EditItem.class);
+        dataUser.putExtra("myKey", myKey);
+        dataUser.putExtra("myTitle", myTitle);
+        dataUser.putExtra("device", deviceText);
+        dataUser.putExtra("myRef", dbPosition);
+        startActivity(dataUser);
+    }
+
+    /*
     @Override
     protected void onStart() {
         super.onStart();
@@ -112,42 +207,5 @@ public class MiniPack extends AppCompatActivity implements AdapterProductCS.OnIt
         super.onStop();
         productAdapter.stopListening();
     }
-
-    @Override
-    public void onItemClick(DataSnapshot dataSnapshot, int position) {
-        String myKey = dataSnapshot.getKey();
-        Toast.makeText(getApplicationContext(), getString(R.string.productTV) + myKey, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void deleteItem(DataSnapshot dataSnapshot, int position) {
-        AlertDialog alertDialog = new AlertDialog.Builder(this)
-                .setIcon(R.drawable.ic_baseline_delete_outline_24)
-                .setTitle(R.string.delete_item)
-                .setMessage(R.string.delete_item_alert)
-                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dataSnapshot.getRef().removeValue();
-                        Toast.makeText(getApplicationContext(), R.string.delete, Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                }).show();
-    }
-
-    @Override
-    public void editItem(DataSnapshot dataSnapshot, int position) {
-        String myRef = dataSnapshot.getKey();
-        Intent dataUser = new Intent(getApplicationContext(), EditItem.class);
-        dataUser.putExtra("myKey", myKey);
-        dataUser.putExtra("myTitle", myTitle);
-        dataUser.putExtra("device", deviceText);
-        dataUser.putExtra("myRef", myRef);
-        startActivity(dataUser);
-    }
+    */
 }

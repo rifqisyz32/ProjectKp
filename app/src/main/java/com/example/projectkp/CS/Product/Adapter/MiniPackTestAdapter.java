@@ -8,6 +8,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,34 +22,86 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 
-public class AdapterProductCS extends FirebaseRecyclerAdapter<ProductHelper, AdapterProductCS.productViewHolder> {
+import java.util.ArrayList;
+import java.util.List;
+
+public class MiniPackTestAdapter extends RecyclerView.Adapter<MiniPackTestAdapter.productViewHolder> implements Filterable {
 
     private OnItemClickListener listener;
     private String deviceTV, priceTV;
     private Context myContext;
+    private List<ProductHelper> myList;
+    private List<ProductHelper> myListFiltered;
 
-    public AdapterProductCS(@NonNull FirebaseRecyclerOptions<ProductHelper> options) {
-        super(options);
+    public MiniPackTestAdapter(Context context, List<ProductHelper> list) {
+        myContext = context;
+        myList = list;
+        myListFiltered = list;
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull productViewHolder holder, int position, @NonNull ProductHelper model) {
+    public void onBindViewHolder(productViewHolder holder, int position) {
+        ProductHelper helper = myListFiltered.get(position);
+
         holder.layer.setAnimation(AnimationUtils.loadAnimation(myContext, R.anim.fade_scale_animation));
         holder.speed.setAnimation(AnimationUtils.loadAnimation(myContext, R.anim.fade_transition_animation));
         holder.price.setAnimation(AnimationUtils.loadAnimation(myContext, R.anim.fade_transition_animation));
 
-        holder.title.setText(model.getTitle());
-        holder.speed.setText(model.getSpeed());
-        holder.deviceDB.setText(model.getDevice());
-        holder.priceDB.setText(model.getPrice());
+        holder.title.setText(helper.getTitle());
+        holder.speed.setText(helper.getSpeed());
+        holder.deviceDB.setText(helper.getDevice());
+        holder.priceDB.setText(helper.getPrice());
     }
 
     @NonNull
     @Override
     public productViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.holder_product_item, parent, false);
-        myContext = parent.getContext();
+        View v = LayoutInflater.from(myContext).inflate(R.layout.holder_product_item, parent, false);
+//        context = parent.getContext();
         return new productViewHolder(v);
+    }
+
+    @Override
+    public int getItemCount() {
+        return myListFiltered.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+
+                String Key = constraint.toString();
+                if (Key.isEmpty()) {
+
+                    myListFiltered = myList ;
+
+                }
+                else {
+                    List<ProductHelper> listFiltered = new ArrayList<>();
+                    for (ProductHelper row : myList) {
+
+                        if (row.getSpeed().toLowerCase().contains(Key.toLowerCase())){
+                            listFiltered.add(row);
+                        }
+                    }
+                    myListFiltered = listFiltered;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values= myListFiltered;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+
+                myListFiltered = (List<ProductHelper>) results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     class productViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
@@ -76,7 +130,7 @@ public class AdapterProductCS extends FirebaseRecyclerAdapter<ProductHelper, Ada
         public void onClick(View v) {
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION && listener != null) {
-                listener.onItemClick(getSnapshots().getSnapshot(position), position);
+                listener.onItemClick(position);
             }
         }
 
@@ -96,10 +150,10 @@ public class AdapterProductCS extends FirebaseRecyclerAdapter<ProductHelper, Ada
             if (position != RecyclerView.NO_POSITION && listener != null) {
                 switch (item.getItemId()) {
                     case 1:
-                        listener.editItem(getSnapshots().getSnapshot(position), position);
+                        listener.editItem(position);
                         return true;
                     case 2:
-                        listener.deleteItem(getSnapshots().getSnapshot(position), position);
+                        listener.deleteItem(position);
                         return true;
                 }
             }
@@ -108,11 +162,11 @@ public class AdapterProductCS extends FirebaseRecyclerAdapter<ProductHelper, Ada
     }
 
     public interface OnItemClickListener {
-        void onItemClick(DataSnapshot dataSnapshot, int position);
+        void onItemClick(int position);
 
-        void deleteItem(DataSnapshot dataSnapshot, int position);
+        void deleteItem(int position);
 
-        void editItem(DataSnapshot dataSnapshot, int position);
+        void editItem(int position);
     }
 
     public String changeDeviceText(String device) {

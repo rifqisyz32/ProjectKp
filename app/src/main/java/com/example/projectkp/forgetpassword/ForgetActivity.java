@@ -19,10 +19,10 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class ForgetActivity extends AppCompatActivity {
 
-    Toolbar toolbar;
-    TextInputLayout emailForget;
-    FirebaseAuth forgetAuth = FirebaseAuth.getInstance();
-    ProgressBar forgetProgress;
+    private final FirebaseAuth forgetAuth = FirebaseAuth.getInstance();
+
+    private TextInputLayout emailForget;
+    private ProgressBar forgetProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,15 +31,10 @@ public class ForgetActivity extends AppCompatActivity {
 
         emailForget = findViewById(R.id.email_forget);
         forgetProgress = findViewById(R.id.forget_prog);
-        toolbar = findViewById(R.id.forget_toolbar);
+        Toolbar toolbar = findViewById(R.id.forget_toolbar);
 
         setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         findViewById(R.id.forget_button).setOnClickListener(new View.OnClickListener() {
             @Override

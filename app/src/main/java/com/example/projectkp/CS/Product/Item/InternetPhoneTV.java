@@ -32,13 +32,10 @@ public class InternetPhoneTV extends AppCompatActivity implements AdapterProduct
     private final DatabaseReference Product = db.getReference("Product");
     private AdapterProductCS productAdapter;
 
-    Window window;
-    Toolbar toolbar;
-    RecyclerView productRV;
-    FloatingActionButton addButton, bonusButton;
-    String deviceText,
-            myKey = "Internet_Phone_TV",
-            myTitle = "3P (Internet + Phone + TV)";
+    private RecyclerView productRV;
+    private String deviceText;
+    private final String myKey = "Internet_Phone_TV";
+    private final String myTitle = "3P (Internet + Phone + TV)";
 
 
     @Override
@@ -46,39 +43,31 @@ public class InternetPhoneTV extends AppCompatActivity implements AdapterProduct
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub_product);
 
-        toolbar = findViewById(R.id.sub_product_toolbar);
+        Toolbar toolbar = findViewById(R.id.sub_product_toolbar);
         productRV = findViewById(R.id.sub_product_rv);
-        addButton = findViewById(R.id.sub_product_add);
-        bonusButton = findViewById(R.id.sub_product_bonus);
+        FloatingActionButton addButton = findViewById(R.id.sub_product_add);
+        FloatingActionButton bonusButton = findViewById(R.id.sub_product_bonus);
         deviceText = getApplicationContext().getResources().getString(R.string.device);
 
         if (Build.VERSION.SDK_INT >= 21) {
-            window = this.getWindow();
+            Window window = this.getWindow();
             window.setStatusBarColor(this.getResources().getColor(R.color.status_bar_cs));
         }
 
         setSupportActionBar(toolbar);
         toolbar.setTitle(myTitle);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         bonusButton.setVisibility(View.GONE);
         addButton.setVisibility(View.VISIBLE);
         setUpRecyclerView();
 
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent dataUser = new Intent(getApplicationContext(), AddItem.class);
-                dataUser.putExtra("myKey", myKey);
-                dataUser.putExtra("myTitle", myTitle);
-                dataUser.putExtra("device", deviceText);
-                startActivity(dataUser);
-            }
+        addButton.setOnClickListener(v -> {
+            Intent dataUser = new Intent(getApplicationContext(), AddItem.class);
+            dataUser.putExtra("myKey", myKey);
+            dataUser.putExtra("myTitle", myTitle);
+            dataUser.putExtra("device", deviceText);
+            startActivity(dataUser);
         });
     }
 
@@ -117,7 +106,7 @@ public class InternetPhoneTV extends AppCompatActivity implements AdapterProduct
     @Override
     public void onItemClick(DataSnapshot dataSnapshot, int position) {
         String myKey = dataSnapshot.getKey();
-        Toast.makeText(getApplicationContext(), getString(R.string.productTV) + myKey, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), getString(R.string.productTV) + " " + myKey, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -126,18 +115,12 @@ public class InternetPhoneTV extends AppCompatActivity implements AdapterProduct
                 .setIcon(R.drawable.ic_baseline_delete_outline_24)
                 .setTitle(R.string.delete_item)
                 .setMessage(R.string.delete_item_alert)
-                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dataSnapshot.getRef().removeValue();
-                        Toast.makeText(getApplicationContext(), R.string.delete, Toast.LENGTH_SHORT).show();
-                    }
+                .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
+                    dataSnapshot.getRef().removeValue();
+                    Toast.makeText(getApplicationContext(), R.string.delete_success, Toast.LENGTH_SHORT).show();
                 })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+                .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {
 
-                    }
                 }).show();
     }
 
