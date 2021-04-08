@@ -116,7 +116,7 @@
                     android:layout_height="match_parent"
                     android:layout_below="@+id/user_detail_username_cs"
                     android:fontFamily="@font/poppins_medium"
-                    android:text=" "
+                    android:text="@string/not_found"
                     android:textSize="14sp" />
 
                 <TextView
@@ -135,7 +135,7 @@
                     android:layout_height="match_parent"
                     android:layout_below="@+id/user_detail_fullname_cs"
                     android:fontFamily="@font/poppins_medium"
-                    android:text=" "
+                    android:text="@string/not_found"
                     android:textSize="14sp" />
 
                 <TextView
@@ -154,7 +154,7 @@
                     android:layout_height="match_parent"
                     android:layout_below="@+id/user_detail_email_cs"
                     android:fontFamily="@font/poppins_medium"
-                    android:text=" "
+                    android:text="@string/not_found"
                     android:textSize="14sp" />
 
                 <TextView
@@ -173,7 +173,7 @@
                     android:layout_height="match_parent"
                     android:layout_below="@+id/user_detail_number_cs"
                     android:fontFamily="@font/poppins_medium"
-                    android:text=" "
+                    android:text="@string/not_found"
                     android:textSize="14sp" />
 
             </RelativeLayout>
@@ -305,12 +305,10 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_margin="4dp"
-                    android:background="@drawable/circle_shape_white"
-                    android:backgroundTint="@color/pick_photo_cs"
                     android:elevation="2dp"
                     android:padding="4dp"
                     android:src="@drawable/ic_baseline_settings_30"
-                    app:tint="@color/cs_rv_item" />
+                    app:tint="@color/cs_rv" />
 
             </RelativeLayout>
 

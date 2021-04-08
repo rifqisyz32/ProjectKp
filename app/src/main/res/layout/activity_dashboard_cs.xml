@@ -57,7 +57,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@+id/hi_dashboard_cs"
                     android:fontFamily="@font/poppins_light"
-                    android:text="@string/username"
+                    android:text="@string/user"
                     android:textColor="@color/cs_temp"
                     android:textSize="24sp" />
 

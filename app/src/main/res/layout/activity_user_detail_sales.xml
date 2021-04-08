@@ -21,7 +21,7 @@
             android:background="@drawable/shape_user_profile_sales"
             android:fitsSystemWindows="true"
             app:collapsedTitleGravity="start"
-            app:contentScrim="#CD4B4B"
+            app:contentScrim="#e83259"
             app:elevation="0dp"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
 
@@ -116,7 +116,7 @@
                     android:layout_height="match_parent"
                     android:layout_below="@+id/user_detail_username_sales"
                     android:fontFamily="@font/poppins_medium"
-                    android:text=" "
+                    android:text="@string/not_found"
                     android:textSize="14sp" />
 
                 <TextView
@@ -135,7 +135,7 @@
                     android:layout_height="match_parent"
                     android:layout_below="@+id/user_detail_fullname_sales"
                     android:fontFamily="@font/poppins_medium"
-                    android:text=" "
+                    android:text="@string/not_found"
                     android:textSize="14sp" />
 
                 <TextView
@@ -154,7 +154,7 @@
                     android:layout_height="match_parent"
                     android:layout_below="@+id/user_detail_email_sales"
                     android:fontFamily="@font/poppins_medium"
-                    android:text=" "
+                    android:text="@string/not_found"
                     android:textSize="14sp" />
 
                 <TextView
@@ -173,7 +173,7 @@
                     android:layout_height="match_parent"
                     android:layout_below="@+id/user_detail_number_sales"
                     android:fontFamily="@font/poppins_medium"
-                    android:text=" "
+                    android:text="@string/not_found"
                     android:textSize="14sp" />
 
             </RelativeLayout>
@@ -211,10 +211,15 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_centerInParent="true"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/round_shape_gr_red_small"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/shape_gr_small"
+                    android:backgroundTint="@color/sales_temp"
                     android:padding="6dp"
-                    android:src="@drawable/ic_baseline_light_mode_24" />
+                    android:src="@drawable/ic_baseline_light_mode_24"
+                    app:tint="@color/sales_temp" />
 
                 <TextView
                     android:id="@+id/theme_light_desc_sales"
@@ -277,9 +282,11 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_margin="4dp"
-                    android:background="@drawable/round_shape_gr_red_small"
+                    android:background="@drawable/shape_gr_small"
+                    android:backgroundTint="@color/sales_temp"
                     android:padding="8dp"
-                    android:src="@drawable/ic_baseline_g_translate_24" />
+                    android:src="@drawable/ic_baseline_g_translate_24"
+                    app:tint="@color/sales_temp" />
 
                 <TextView
                     android:id="@+id/language_icon_desc_sales"
@@ -292,6 +299,18 @@
                     android:paddingEnd="8dp"
                     android:text="@string/english"
                     android:textSize="12sp" />
+
+                <ImageView
+                    android:id="@+id/language_set_sales"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="4dp"
+                    android:elevation="2dp"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_baseline_settings_30"
+                    app:tint="@color/sales_rv" />
 
             </RelativeLayout>
 

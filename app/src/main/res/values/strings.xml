@@ -103,7 +103,7 @@
     <string name="delete_item_alert">Are you sure you want to delete this product?</string>
     <string name="yes">Yes</string>
     <string name="period">/month</string>
-    <string name="periodTV">Period:</string>
+    <string name="periodTV">Period (days):</string>
     <string name="channelTV">Channel:</string>
     <string name="add_product">Add Product</string>
     <string name="add_product_desc">Please fill data below to add new product</string>
@@ -122,6 +122,14 @@
     <string name="product_exist">This Product is already exist</string>
     <string name="delete_success">Product Deleted</string>
     <string name="search_here">Search Here</string>
-
-
+    <string name="add">Add</string>
+    <string name="not_found">Not Found</string>
+    <string name="user">User</string>
+    <string name="bonus_product">Product Bonus</string>
+    <string name="tv_bonus">110 Channel\n(91 SD + 19 HD)</string>
+    <string name="useetv_bonus">Free Access\nUsee TV Go</string>
+    <string name="bonus_included">Package already included:</string>
+    <string name="phone_bonus">Free 300 Minutes\nLocale/Inter Locale</string>
+    <string name="free_to_choose">Free to Choose bonus below</string>
+    <string name="kids">Kids</string>
 </resources>

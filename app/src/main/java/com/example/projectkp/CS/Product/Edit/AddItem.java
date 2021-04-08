@@ -29,13 +29,13 @@ public class AddItem extends AppCompatActivity {
     private final FirebaseDatabase db = FirebaseDatabase.getInstance();
     private final DatabaseReference Product = db.getReference("Product");
 
-    Window window;
-    Toolbar toolbar;
-    ProgressBar addProgress;
-    TextInputLayout addSpeed, addDevice, addPrice;
-    TextView addTitle;
-    String myKey, myTitle, deviceText;
-    Button save, cancel;
+    private Toolbar toolbar;
+    private ProgressBar addProgress;
+    private TextInputLayout addSpeed, addDevice, addPrice;
+    private TextView addTitle;
+    private String myKey;
+    private String myTitle;
+    private Button save, cancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,7 @@ public class AddItem extends AppCompatActivity {
         getData();
 
         if (Build.VERSION.SDK_INT >= 21) {
-            window = this.getWindow();
+            Window window = this.getWindow();
             window.setStatusBarColor(this.getResources().getColor(R.color.status_bar_cs));
         }
 
@@ -95,7 +95,7 @@ public class AddItem extends AppCompatActivity {
     private void getData() {
         myKey = getIntent().getStringExtra("myKey");
         myTitle = getIntent().getStringExtra("myTitle");
-        deviceText = getIntent().getStringExtra("device");
+        String deviceText = getIntent().getStringExtra("device");
         addTitle.setText(myTitle);
         addDevice.setHint(deviceText);
     }

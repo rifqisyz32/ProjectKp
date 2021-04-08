@@ -26,7 +26,6 @@ import com.bumptech.glide.Glide;
 import com.example.projectkp.CS.DashboardCS;
 import com.example.projectkp.R;
 import com.example.projectkp.loginregister.LoginActivity;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -81,7 +80,8 @@ public class UserDetailCS extends AppCompatActivity {
 
         logoutCS.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
-            onBackPressed();
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            finish();
         });
     }
 
@@ -142,7 +142,6 @@ public class UserDetailCS extends AppCompatActivity {
             @Override
             public void onSuccess(Void aVoid) {
                 reference.child(myUsername).getRef().removeValue();
-
                 storageReference.child(myUsername).child("user_photo").delete();
                 Toast.makeText(getApplicationContext(), R.string.acc_delete, Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));

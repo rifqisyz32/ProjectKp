@@ -18,14 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projectkp.Helper.ProductHelper;
 import com.example.projectkp.R;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MiniPackTestAdapter extends RecyclerView.Adapter<MiniPackTestAdapter.productViewHolder> implements Filterable {
+public class AdapterProductItem extends RecyclerView.Adapter<AdapterProductItem.productViewHolder> implements Filterable {
 
     private OnItemClickListener listener;
     private String deviceTV, priceTV;
@@ -33,7 +30,7 @@ public class MiniPackTestAdapter extends RecyclerView.Adapter<MiniPackTestAdapte
     private List<ProductHelper> myList;
     private List<ProductHelper> myListFiltered;
 
-    public MiniPackTestAdapter(Context context, List<ProductHelper> list) {
+    public AdapterProductItem(Context context, List<ProductHelper> list) {
         myContext = context;
         myList = list;
         myListFiltered = list;
@@ -57,7 +54,6 @@ public class MiniPackTestAdapter extends RecyclerView.Adapter<MiniPackTestAdapte
     @Override
     public productViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(myContext).inflate(R.layout.holder_product_item, parent, false);
-//        context = parent.getContext();
         return new productViewHolder(v);
     }
 
@@ -76,14 +72,13 @@ public class MiniPackTestAdapter extends RecyclerView.Adapter<MiniPackTestAdapte
                 String Key = constraint.toString();
                 if (Key.isEmpty()) {
 
-                    myListFiltered = myList ;
+                    myListFiltered = myList;
 
-                }
-                else {
+                } else {
                     List<ProductHelper> listFiltered = new ArrayList<>();
                     for (ProductHelper row : myList) {
 
-                        if (row.getSpeed().toLowerCase().contains(Key.toLowerCase())){
+                        if (row.getSpeed().toLowerCase().contains(Key.toLowerCase())) {
                             listFiltered.add(row);
                         }
                     }
@@ -91,7 +86,7 @@ public class MiniPackTestAdapter extends RecyclerView.Adapter<MiniPackTestAdapte
                 }
 
                 FilterResults filterResults = new FilterResults();
-                filterResults.values= myListFiltered;
+                filterResults.values = myListFiltered;
                 return filterResults;
             }
 

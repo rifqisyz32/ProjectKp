@@ -40,7 +40,7 @@
                     android:layout_marginEnd="32dp"
                     android:layout_toStartOf="@+id/product_title"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="@string/product_speed"
+                    android:text="@string/not_found"
                     android:textColor="@color/sales_temp"
                     android:textSize="20sp" />
 
@@ -51,7 +51,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:fontFamily="@font/poppins_light"
-                    android:text="@string/product_title"
+                    android:text="@string/not_found"
                     android:textColor="@color/black"
                     android:textSize="10sp"
                     android:textStyle="italic" />
@@ -84,7 +84,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_toEndOf="@id/product_device"
                     android:fontFamily="@font/poppins_light"
-                    android:text=" "
+                    android:text="@string/not_found"
                     android:textColor="@color/black"
                     android:textSize="10sp" />
 
@@ -98,7 +98,8 @@
                     android:fontFamily="@font/poppins_light"
                     android:text="@string/days"
                     android:textColor="@color/black"
-                    android:textSize="10sp" />
+                    android:textSize="10sp"
+                    android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/product_price_db"
@@ -108,7 +109,7 @@
                     android:layout_marginEnd="4dp"
                     android:layout_toStartOf="@id/product_price"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="@string/product_price"
+                    android:text="@string/not_found"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 

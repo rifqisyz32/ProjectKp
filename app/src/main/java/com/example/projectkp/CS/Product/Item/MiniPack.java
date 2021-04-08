@@ -7,7 +7,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
-import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,7 +17,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.projectkp.CS.Product.Adapter.MiniPackTestAdapter;
+import com.example.projectkp.CS.Product.Adapter.AdapterProductItem;
 import com.example.projectkp.CS.Product.Edit.AddItem;
 import com.example.projectkp.CS.Product.Edit.EditItem;
 import com.example.projectkp.CS.Product.ProductListCS;
@@ -36,13 +36,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class MiniPack extends AppCompatActivity implements MiniPackTestAdapter.OnItemClickListener {
+public class MiniPack extends AppCompatActivity implements AdapterProductItem.OnItemClickListener {
 
     private final DatabaseReference Product = FirebaseDatabase.getInstance().getReference("Product");
-    private MiniPackTestAdapter productAdapter;
-
+    private AdapterProductItem productAdapter;
     private RecyclerView productRV;
     private List<ProductHelper> productList;
+    private ProgressBar loadItem;
     private String deviceText, dbPosition;
     private final String myKey = "Mini_Pack";
     private final String myTitle = "MiniPack";
@@ -52,12 +52,6 @@ public class MiniPack extends AppCompatActivity implements MiniPackTestAdapter.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub_product);
 
-        Toolbar toolbar = findViewById(R.id.sub_product_toolbar);
-        productRV = findViewById(R.id.sub_product_rv);
-        FloatingActionButton addButton = findViewById(R.id.sub_product_add);
-        FloatingActionButton bonusButton = findViewById(R.id.sub_product_bonus);
-        TextInputEditText searchItem = findViewById(R.id.search_minipack);
-        ImageView searchButton = findViewById(R.id.search_btn);
         deviceText = getApplicationContext().getResources().getString(R.string.channel);
 
         if (Build.VERSION.SDK_INT >= 21) {
@@ -65,13 +59,12 @@ public class MiniPack extends AppCompatActivity implements MiniPackTestAdapter.O
             window.setStatusBarColor(this.getResources().getColor(R.color.status_bar_cs));
         }
 
+        Toolbar toolbar = findViewById(R.id.sub_product_toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(myTitle);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
-        bonusButton.setVisibility(View.GONE);
-        addButton.setVisibility(View.VISIBLE);
-
+        TextInputEditText searchItem = findViewById(R.id.search_product_item);
         searchItem.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -87,6 +80,12 @@ public class MiniPack extends AppCompatActivity implements MiniPackTestAdapter.O
             }
         });
 
+        FloatingActionButton bonusButton = findViewById(R.id.sub_product_bonus);
+        bonusButton.setVisibility(View.GONE);
+
+        FloatingActionButton addButton = findViewById(R.id.sub_product_add);
+        addButton.setVisibility(View.VISIBLE);
+
         addButton.setOnClickListener(v -> {
             Intent dataUser = new Intent(getApplicationContext(), AddItem.class);
             dataUser.putExtra("myKey", myKey);
@@ -94,6 +93,9 @@ public class MiniPack extends AppCompatActivity implements MiniPackTestAdapter.O
             dataUser.putExtra("device", deviceText);
             startActivity(dataUser);
         });
+
+        loadItem = findViewById(R.id.sub_product_prog);
+        productRV = findViewById(R.id.sub_product_rv);
         testUpRecyclerView();
     }
 
@@ -119,9 +121,51 @@ public class MiniPack extends AppCompatActivity implements MiniPackTestAdapter.O
     }
     */
 
+    /*
+    private void testAddDialog() {
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setTitle(R.string.add_product);
+        LinearLayout linearLayout = new LinearLayout(this);
+
+        TextInputEditText addItem = new TextInputEditText(this);
+        addItem.setMinEms(32);
+        addItem.setHint(R.string.add_product);
+        addItem.setInputType(InputType.TYPE_CLASS_NUMBER);
+        addItem.setTextColor(getResources().getColor(R.color.colorSubtitle));
+        linearLayout.addView(addItem);
+        linearLayout.setPadding(16, 16, 16, 16);
+        alertDialog.setView(linearLayout);
+
+        alertDialog.setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (!validateDialogText(addItem)) {
+                    return;
+                }
+                ;
+
+                String addItemText = addItem.getText().toString().trim();
+
+                Intent dataUser = new Intent(getApplicationContext(), AddItem.class);
+                dataUser.putExtra("myKey", myKey);
+                dataUser.putExtra("myTitle", addItemText);
+                dataUser.putExtra("device", deviceText);
+                startActivity(dataUser);
+            }
+        }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        alertDialog.create().show();
+    }
+    */
+
     private void testUpRecyclerView() {
 
-        productRV.setLayoutManager(new LinearLayoutManager(this));
+        productRV.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         productList = new ArrayList<>();
 
         Product.child(myKey).addValueEventListener(new ValueEventListener() {
@@ -132,12 +176,14 @@ public class MiniPack extends AppCompatActivity implements MiniPackTestAdapter.O
                     ProductHelper productHelper = productSnapshot.getValue(ProductHelper.class);
                     productList.add(productHelper);
                 }
-                productAdapter = new MiniPackTestAdapter(getApplicationContext(), productList);
+
+                productAdapter = new AdapterProductItem(getApplicationContext(), productList);
                 productRV.setAdapter(productAdapter);
                 productAdapter.setOnItemClickListener(MiniPack.this);
                 productAdapter.changeDeviceText(getString(R.string.channelTV));
                 productAdapter.changePriceText(getString(R.string.period));
                 sortArrayList();
+                loadItem.setVisibility(View.GONE);
             }
 
             @Override
@@ -194,18 +240,4 @@ public class MiniPack extends AppCompatActivity implements MiniPackTestAdapter.O
         dataUser.putExtra("myRef", dbPosition);
         startActivity(dataUser);
     }
-
-    /*
-    @Override
-    protected void onStart() {
-        super.onStart();
-        productAdapter.startListening();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        productAdapter.stopListening();
-    }
-    */
 }

@@ -64,24 +64,42 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/search_product_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/switch_cs_off"
+                android:backgroundTint="@color/colorSubtitle"
+                android:drawableStart="@drawable/ic_baseline_search_24"
+                android:drawablePadding="8dp"
+                android:drawableTint="@color/colorSubtitle"
+                android:fontFamily="@font/poppins_light"
+                android:hint="@string/search_here"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp"
+                android:textColor="@color/colorSubtitle"
+                android:textColorHint="@color/colorSubtitle"
+                android:textSize="16sp" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/orbit_rv"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/search_product_item" />
 
-            <!--<RelativeLayout
+            <ProgressBar
+                android:id="@+id/orbit_prog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:layout_marginTop="320dp">
-
-                <ProgressBar
-                    android:id="@+id/orbit_prog"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:indeterminateTint="@color/sales_temp" />
-
-            </RelativeLayout>-->
+                android:indeterminateTint="@color/colorSubtitle" />
 
         </RelativeLayout>
 

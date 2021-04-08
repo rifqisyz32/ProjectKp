@@ -13,7 +13,12 @@
         android:roundIcon="@mipmap/app_logo_round"
         android:supportsRtl="true"
         android:theme="@style/SecondTheme">
-
+        <activity
+            android:name=".Sales.Product.Bonus.InternetPhoneTV" />
+        <activity
+            android:name=".Sales.Product.Bonus.InternetTV" />
+        <activity
+            android:name=".Sales.Product.Bonus.InternetPhone" />
         <activity
             android:name=".Sales.Product.Item.Orbit"
             android:launchMode="singleTop"
@@ -37,16 +42,13 @@
         <activity
             android:name=".Sales.Product.ProductListSales"
             android:parentActivityName=".Sales.DashboardSales" />
-
         <activity android:name=".Sales.DashboardSales" />
-
         <activity
             android:name=".Sales.User.EditProfileSales"
             android:parentActivityName=".Sales.User.UserDetailSales" />
         <activity
             android:name=".Sales.User.UserDetailSales"
             android:parentActivityName=".Sales.DashboardSales" />
-
         <activity
             android:name=".Sales.TrackOrder.TrackOrderSales"
             android:parentActivityName=".Sales.DashboardSales" />
@@ -56,10 +58,8 @@
         <activity
             android:name=".Sales.MYIR.MyirSales"
             android:parentActivityName=".Sales.DashboardSales" />
-
         <activity android:name=".CS.Product.Edit.AddItem" />
         <activity android:name=".CS.Product.Edit.EditItem" />
-
         <activity
             android:name=".CS.Product.Item.Orbit"
             android:launchMode="singleTop"
@@ -84,9 +84,7 @@
             android:name=".CS.Product.ProductListCS"
             android:launchMode="singleTop"
             android:parentActivityName=".CS.DashboardCS" />
-
         <activity android:name=".CS.DashboardCS" />
-
         <activity
             android:name=".CS.MyirCS"
             android:parentActivityName=".CS.DashboardCS" />

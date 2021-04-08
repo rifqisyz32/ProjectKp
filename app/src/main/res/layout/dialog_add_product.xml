@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/round_shape_gr_red"
+    android:backgroundTint="@color/cs_rv_item"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/dialog_add_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/add_product"
+        android:textColor="@color/cs_rv"
+        android:textSize="18sp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dialog_add_item_input"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dialog_add_item_title"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/switch_cs_off"
+        android:backgroundTint="@color/cs_rv"
+        android:hint="@string/username"
+        android:padding="4dp"
+        android:textColorHint="@color/colorSubtitle"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusTopStart="12dp"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/colorSubtitle"
+        app:hintTextColor="@color/colorSubtitle">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableStart="@drawable/ic_baseline_edit_24"
+            android:drawablePadding="8dp"
+            android:drawableTint="@color/cs_rv"
+            android:fontFamily="@font/poppins_light"
+            android:inputType="number"
+            android:padding="8dp"
+            android:textSize="14sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/dialog_add_item_yes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_add_item_input"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/round_shape_gr_red_small"
+        android:clickable="true"
+        android:fontFamily="@font/poppins_semibold"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="8dp"
+        android:text="@string/add"
+        android:textColor="@color/cs_rv_item"
+        android:textSize="14sp"
+        app:backgroundTint="@color/cs_rv" />
+
+    <TextView
+        android:id="@+id/dialog_add_item_no"
+        style="@style/SecondTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_add_item_input"
+        android:layout_marginStart="8dp"
+        android:layout_toStartOf="@id/dialog_add_item_yes"
+        android:clickable="true"
+        android:fontFamily="@font/poppins_semibold"
+        android:padding="8dp"
+        android:text="@string/cancel"
+        android:textColor="@color/cs_rv"
+        android:textSize="14sp"
+        app:backgroundTint="@color/cs_rv" />
+
+
+</RelativeLayout>

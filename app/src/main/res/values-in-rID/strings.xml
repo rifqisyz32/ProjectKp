@@ -90,4 +90,6 @@
     <string name="product_price">Harga</string>
     <string name="deviceTV">Perangkat:</string>
     <string name="product_title">Judul</string>
+    <string name="bonus_included">Paket sudah termasuk:</string>
+    <string name="phone_bonus">Bebas 300 Menit\nLokal/Interlokal</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.projectkp.Sales.Product.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -56,22 +57,27 @@ public class AdapterProductListSales extends RecyclerView.Adapter<AdapterProduct
         switch (position) {
             case 0:
                 mContext.startActivity(new Intent(mContext, InternetPhone.class));
+                ((Activity) mContext).finish();
                 break;
             
             case 1:
                 mContext.startActivity(new Intent(mContext, InternetTV.class));
+                ((Activity) mContext).finish();
                 break;
                 
             case 2:
                 mContext.startActivity(new Intent(mContext, InternetPhoneTV.class));
+                ((Activity) mContext).finish();
                 break;
 
             case 3:
                 mContext.startActivity(new Intent(mContext, MiniPack.class));
+                ((Activity) mContext).finish();
                 break;
 
             case 4:
                 mContext.startActivity(new Intent(mContext, Orbit.class));
+                ((Activity) mContext).finish();
                 break;
 
             default:

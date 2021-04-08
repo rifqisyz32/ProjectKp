@@ -4,5 +4,5 @@
     <corners android:radius="12dp" />
     <stroke
         android:width="1dp"
-        android:color="@color/pick_photo_cs" />
+        android:color="@color/cs_temp" />
 </shape>

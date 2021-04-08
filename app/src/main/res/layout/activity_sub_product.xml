@@ -24,7 +24,6 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="16dp"
         android:src="@drawable/ic_baseline_add_24"
-        android:visibility="gone"
         app:backgroundTint="@color/cs_temp"
         app:tint="#fff" />
 
@@ -32,9 +31,23 @@
         android:id="@+id/sub_product_bonus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/sub_product_add"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_baseline_card_giftcard_24"
+        app:backgroundTint="@color/sales_temp"
+        app:tint="#fff" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/sub_product_bonus_sales"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="16dp"
+        android:visibility="gone"
         android:src="@drawable/ic_baseline_card_giftcard_24"
         app:backgroundTint="@color/sales_temp"
         app:tint="#fff" />
@@ -45,7 +58,7 @@
         android:layout_below="@+id/sub_product_toolbar">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/search_minipack"
+            android:id="@+id/search_product_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -53,19 +66,20 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
-            android:drawableStart="@drawable/ic_baseline_search_24"
-            android:drawableTint="@color/cs_rv"
-            android:drawablePadding="8dp"
-            android:fontFamily="@font/poppins_light"
-            android:textColor="@color/colorSubtitle"
-            android:textSize="16sp"
             android:background="@drawable/switch_cs_off"
+            android:backgroundTint="@color/colorSubtitle"
+            android:drawableStart="@drawable/ic_baseline_search_24"
+            android:drawablePadding="8dp"
+            android:drawableTint="@color/colorSubtitle"
+            android:fontFamily="@font/poppins_light"
             android:hint="@string/search_here"
             android:paddingStart="16dp"
-            android:paddingEnd="16dp"
             android:paddingTop="8dp"
+            android:paddingEnd="16dp"
             android:paddingBottom="8dp"
+            android:textColor="@color/colorSubtitle"
             android:textColorHint="@color/colorSubtitle"
+            android:textSize="16sp"
 
             />
 
@@ -82,14 +96,51 @@
             android:backgroundTint="@color/cs_rv"
             android:padding="8dp"
             android:src="@drawable/ic_baseline_search_24"
-            app:tint="@color/cs_rv_item"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            app:tint="@color/cs_rv_item" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/sub_product_rv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/search_minipack" />
+            android:layout_below="@+id/search_product_item" />
+
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/sub_product_prog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminateTint="@color/colorSubtitle" />
+
+    <RelativeLayout
+        android:id="@+id/sub_product_not_found"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/sub_product_404"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="-16dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="404"
+            android:textColor="@color/colorSubtitle"
+            android:textSize="64sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sub_product_404"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/poppins_light"
+            android:text="@string/not_found"
+            android:textColor="@color/colorSubtitle"
+            android:textSize="24sp" />
 
     </RelativeLayout>
 
