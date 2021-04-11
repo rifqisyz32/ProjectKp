@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/sales_layout_bg"
-    tools:context=".Sales.DashboardSales">
+    tools:context=".Sales.Dashboard">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,9 +54,10 @@
                     android:id="@+id/username_dashboard_sales"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
                     android:layout_toEndOf="@+id/hi_dashboard_sales"
                     android:fontFamily="@font/poppins_light"
-                    android:text="@string/username"
+                    android:text="@string/user"
                     android:textColor="@color/sales_temp"
                     android:textSize="24sp" />
 
@@ -78,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="32dp"
-            android:fontFamily="@font/poppins_semibold"
+            android:fontFamily="@font/poppins_medium"
             android:gravity="center"
             android:text="@string/app_name"
             android:textColor="@color/sales_temp"
@@ -119,14 +120,14 @@
                         android:backgroundTint="@color/sales_temp"
                         android:elevation="8dp"
                         android:padding="16dp"
-                        android:src="@drawable/ic_baseline_search_24" />
+                        android:src="@drawable/ic_baseline_post_add_24" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="@string/search_myir"
+                        android:text="@string/input_order"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -157,7 +158,7 @@
                         android:backgroundTint="@color/sales_temp"
                         android:elevation="8dp"
                         android:padding="16dp"
-                        android:src="@drawable/ic_baseline_note_add_24" />
+                        android:src="@drawable/ic_baseline_search_24" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -207,7 +208,7 @@
                         android:backgroundTint="@color/sales_temp"
                         android:elevation="8dp"
                         android:padding="16dp"
-                        android:src="@drawable/ic_baseline_add_shopping_cart_24" />
+                        android:src="@drawable/ic_outline_shopping_cart_24" />
 
                     <TextView
                         android:layout_width="wrap_content"

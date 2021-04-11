@@ -50,8 +50,9 @@ public class AdapterProductItem extends RecyclerView.Adapter<AdapterProductItem.
     @NonNull
     @Override
     public AdapterProductItem.productViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        myContext = parent.getContext();
         View v = LayoutInflater.from(myContext).inflate(R.layout.holder_product_item, parent, false);
-        return new com.example.projectkp.Sales.Product.Adapter.AdapterProductItem.productViewHolder(v);
+        return new AdapterProductItem.productViewHolder(v);
     }
 
     @Override

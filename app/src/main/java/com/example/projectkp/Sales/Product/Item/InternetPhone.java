@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.projectkp.Helper.ProductHelper;
 import com.example.projectkp.R;
 import com.example.projectkp.Sales.Product.Adapter.AdapterProductItem;
-import com.example.projectkp.Sales.Product.ProductListSales;
+import com.example.projectkp.Sales.Product.ProductList;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
@@ -31,7 +31,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class InternetPhone extends AppCompatActivity implements com.example.projectkp.Sales.Product.Adapter.AdapterProductItem.OnItemClickListener {
+public class InternetPhone extends AppCompatActivity {
 
     private final DatabaseReference Product = FirebaseDatabase.getInstance().getReference("Product");
     private AdapterProductItem productAdapter;
@@ -83,7 +83,7 @@ public class InternetPhone extends AppCompatActivity implements com.example.proj
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(getApplicationContext(), ProductListSales.class));
+        startActivity(new Intent(getApplicationContext(), ProductList.class));
         finish();
     }
 
@@ -102,7 +102,6 @@ public class InternetPhone extends AppCompatActivity implements com.example.proj
 
                 productAdapter = new com.example.projectkp.Sales.Product.Adapter.AdapterProductItem(getApplicationContext(), productList);
                 productRV.setAdapter(productAdapter);
-                productAdapter.setOnItemClickListener(InternetPhone.this);
                 productAdapter.changeDeviceText(getString(R.string.deviceTV));
                 productAdapter.changePriceText(getString(R.string.period));
                 sortArrayList();
@@ -130,11 +129,5 @@ public class InternetPhone extends AppCompatActivity implements com.example.proj
 
         });
         productAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onItemClick(int position) {
-        String dbPosition = productList.get(position).getSpeed();
-        Toast.makeText(getApplicationContext(), getString(R.string.productTV) + " " + dbPosition, Toast.LENGTH_SHORT).show();
     }
 }

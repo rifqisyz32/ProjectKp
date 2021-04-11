@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/shape_user_profile_sales"
-    tools:context=".Sales.User.EditProfileSales">
+    tools:context=".Sales.User.EditProfile">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"

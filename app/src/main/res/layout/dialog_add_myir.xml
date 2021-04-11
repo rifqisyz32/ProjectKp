@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/round_shape_gr_red"
-    android:backgroundTint="@color/cs_rv_item"
+    android:backgroundTint="@color/white"
     android:padding="16dp">
 
     <TextView
@@ -14,8 +14,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/poppins_medium"
-        android:text="@string/add_product"
-        android:textColor="@color/cs_rv"
+        android:text="@string/add_myir"
+        android:textColor="@color/sales_temp"
         android:textSize="18sp" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -24,11 +24,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/dialog_add_item_title"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/switch_cs_off"
-        android:backgroundTint="@color/cs_rv"
-        android:hint="@string/username"
-        android:padding="4dp"
+        android:layout_marginBottom="32dp"
+        android:hint="@string/add_myir_input"
         android:textColorHint="@color/colorSubtitle"
         app:boxCornerRadiusBottomEnd="12dp"
         app:boxCornerRadiusBottomStart="12dp"
@@ -41,19 +38,18 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
             android:drawableStart="@drawable/ic_baseline_edit_24"
             android:drawablePadding="8dp"
-            android:drawableTint="@color/cs_rv"
+            android:drawableTint="@color/colorSubtitle"
             android:fontFamily="@font/poppins_light"
             android:inputType="number"
-            android:padding="8dp"
+            android:textColor="@color/colorSubtitle"
             android:textSize="14sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/dialog_add_item_yes"
+        android:id="@+id/dialog_add_item_yes_sales"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/dialog_add_item_input"
@@ -61,15 +57,35 @@
         android:layout_marginStart="8dp"
         android:background="@drawable/round_shape_gr_red_small"
         android:clickable="true"
-        android:fontFamily="@font/poppins_semibold"
+        android:fontFamily="@font/poppins_medium"
         android:paddingStart="16dp"
         android:paddingTop="8dp"
         android:paddingEnd="16dp"
         android:paddingBottom="8dp"
-        android:text="@string/add"
-        android:textColor="@color/cs_rv_item"
+        android:text="@string/submit"
+        android:textColor="#FFF"
         android:textSize="14sp"
-        app:backgroundTint="@color/cs_rv" />
+        app:backgroundTint="@color/sales_temp" />
+
+    <TextView
+        android:id="@+id/dialog_add_item_yes_cs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_add_item_input"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/round_shape_gr_red_small"
+        android:clickable="true"
+        android:fontFamily="@font/poppins_medium"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="8dp"
+        android:text="@string/submit"
+        android:textColor="#FFF"
+        android:textSize="14sp"
+        android:visibility="gone"
+        app:backgroundTint="@color/cs_temp" />
 
     <TextView
         android:id="@+id/dialog_add_item_no"
@@ -78,14 +94,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/dialog_add_item_input"
         android:layout_marginStart="8dp"
-        android:layout_toStartOf="@id/dialog_add_item_yes"
+        android:layout_toStartOf="@id/dialog_add_item_yes_sales"
         android:clickable="true"
-        android:fontFamily="@font/poppins_semibold"
+        android:fontFamily="@font/poppins_medium"
         android:padding="8dp"
         android:text="@string/cancel"
-        android:textColor="@color/cs_rv"
+        android:textColor="@color/sales_temp"
         android:textSize="14sp"
-        app:backgroundTint="@color/cs_rv" />
-
+        app:backgroundTint="@color/sales_temp" />
 
 </RelativeLayout>

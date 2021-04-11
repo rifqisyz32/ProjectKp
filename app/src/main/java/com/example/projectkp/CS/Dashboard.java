@@ -1,11 +1,13 @@
 
-package com.example.projectkp.Sales;
+package com.example.projectkp.CS;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,19 +15,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.projectkp.CS.NewMYIR.InputMYIR;
+import com.example.projectkp.CS.Product.ProductListCS;
+import com.example.projectkp.CS.User.UserDetailCS;
 import com.example.projectkp.R;
-import com.example.projectkp.Sales.MYIR.MyirSales;
-import com.example.projectkp.Sales.Product.ProductListSales;
-import com.example.projectkp.Sales.TrackOrder.TrackOrderSales;
-import com.example.projectkp.Sales.User.UserDetailSales;
 import com.example.projectkp.verification.EmailVerifyActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class DashboardSales extends AppCompatActivity {
+public class Dashboard extends AppCompatActivity {
 
-    FirebaseAuth salesAuth = FirebaseAuth.getInstance();
-    FirebaseUser salesUser = salesAuth.getCurrentUser();
+    Window window;
+    FirebaseAuth csAuth = FirebaseAuth.getInstance();
+    FirebaseUser csUser = csAuth.getCurrentUser();
     TextView hiUsername;
     String myUsername;
     ImageView userPhoto;
@@ -37,53 +39,50 @@ public class DashboardSales extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard_sales);
+        setContentView(R.layout.activity_dashboard_cs);
 
-        userPhoto = findViewById(R.id.user_detail_photo_sales);
-        hiUsername = findViewById(R.id.username_dashboard_sales);
+        if (Build.VERSION.SDK_INT >= 21) {
+            window = this.getWindow();
+            window.setStatusBarColor(this.getResources().getColor(R.color.status_bar_cs));
+        }
+
+        userPhoto = findViewById(R.id.user_detail_photo_cs);
+        hiUsername = findViewById(R.id.username_dashboard_cs);
 
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         if (sharedPreferences.contains(sharedUsername)) {
-            myUsername = sharedPreferences.getString(sharedUsername,"");
+            myUsername = sharedPreferences.getString(sharedUsername, "");
             hiUsername.setText(sharedPreferences.getString(sharedUsername, ""));
         }
 
-        Glide.with(this)
-                .applyDefaultRequestOptions(new RequestOptions()
-                        .placeholder(R.drawable.ic_baseline_account_circle_40)
-                        .error(R.drawable.ic_baseline_account_circle_40))
-                .load(salesUser.getPhotoUrl())
-                .centerCrop()
-                .into(userPhoto);
+        if (csUser.getPhotoUrl() != null) {
+            Glide.with(this).load(csUser.getPhotoUrl()).centerCrop().into(userPhoto);
+        }
 
-        userPhoto.setOnClickListener(new View.OnClickListener() {
+        userPhoto.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), UserDetailCS.class));
+            finish();
+        });
+
+        findViewById(R.id.product_cs).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), UserDetailSales.class));
+                startActivity(new Intent(getApplicationContext(), ProductListCS.class));
                 finish();
             }
         });
 
-        findViewById(R.id.product_sales).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.input_sc_cs).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), ProductListSales.class));
+                startActivity(new Intent(getApplicationContext(), InputMYIR.class));
                 finish();
             }
         });
-
-        findViewById(R.id.input_sc_sales).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.track_order_cs).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), MyirSales.class));
-                finish();
-            }
-        });
-
-        findViewById(R.id.track_order_sales).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), TrackOrderSales.class));
+                startActivity(new Intent(getApplicationContext(), TrackOrderCS.class));
                 finish();
             }
         });
@@ -95,12 +94,12 @@ public class DashboardSales extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         if (sharedPreferences.contains(sharedUsername)) {
-            myUsername = sharedPreferences.getString(sharedUsername,"");
+            myUsername = sharedPreferences.getString(sharedUsername, "");
             hiUsername.setText(sharedPreferences.getString(sharedUsername, ""));
         }
 
-        if (salesUser != null) {
-            if (!salesUser.isEmailVerified()) {
+        if (csUser != null) {
+            if (!csUser.isEmailVerified()) {
                 Intent dataUser = new Intent(getApplicationContext(), EmailVerifyActivity.class);
                 dataUser.putExtra("username", myUsername);
                 startActivity(dataUser);
@@ -113,7 +112,7 @@ public class DashboardSales extends AppCompatActivity {
                         new RequestOptions()
                                 .placeholder(R.drawable.ic_baseline_account_circle_40)
                                 .error(R.drawable.ic_baseline_account_circle_40))
-                .load(salesUser.getPhotoUrl())
+                .load(csUser.getPhotoUrl())
                 .centerCrop()
                 .into(userPhoto);
     }

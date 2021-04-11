@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/cs_layout_bg"
-    tools:context=".CS.DashboardCS">
+    tools:context=".CS.Dashboard">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -127,7 +127,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="@string/search_myir"
+                        android:text="@string/follow_up"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
                 </LinearLayout>

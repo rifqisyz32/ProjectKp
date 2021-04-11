@@ -11,8 +11,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.example.projectkp.CS.DashboardCS;
-import com.example.projectkp.CS.Product.Adapter.AdapterProductListCS;
+import com.example.projectkp.CS.Dashboard;
+import com.example.projectkp.CS.Product.Adapter.AdapterProductList;
 import com.example.projectkp.R;
 import com.example.projectkp.Helper.ProductListHelper;
 
@@ -51,14 +51,14 @@ public class ProductListCS extends AppCompatActivity {
         list.add(new ProductListHelper(getString(R.string.minipack), R.drawable.minipack));
         list.add(new ProductListHelper(getString(R.string.orbit), R.drawable.orbit));
 
-        AdapterProductListCS staggeredProductListHelperAdapter = new AdapterProductListCS(this, list);
+        AdapterProductList staggeredProductListHelperAdapter = new AdapterProductList(this, list);
         rvStaggered.setAdapter(staggeredProductListHelperAdapter);
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(getApplicationContext(), DashboardCS.class));
+        startActivity(new Intent(getApplicationContext(), Dashboard.class));
         finish();
     }
 }

@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.example.projectkp.R;
-import com.example.projectkp.Sales.DashboardSales;
+import com.example.projectkp.Sales.Dashboard;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.FirebaseDatabase;
@@ -64,7 +64,7 @@ public class MyirSales extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(getApplicationContext(), DashboardSales.class));
+        startActivity(new Intent(getApplicationContext(), Dashboard.class));
         finish();
     }
 

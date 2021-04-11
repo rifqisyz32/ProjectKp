@@ -121,48 +121,6 @@ public class MiniPack extends AppCompatActivity implements AdapterProductItem.On
     }
     */
 
-    /*
-    private void testAddDialog() {
-
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        alertDialog.setTitle(R.string.add_product);
-        LinearLayout linearLayout = new LinearLayout(this);
-
-        TextInputEditText addItem = new TextInputEditText(this);
-        addItem.setMinEms(32);
-        addItem.setHint(R.string.add_product);
-        addItem.setInputType(InputType.TYPE_CLASS_NUMBER);
-        addItem.setTextColor(getResources().getColor(R.color.colorSubtitle));
-        linearLayout.addView(addItem);
-        linearLayout.setPadding(16, 16, 16, 16);
-        alertDialog.setView(linearLayout);
-
-        alertDialog.setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (!validateDialogText(addItem)) {
-                    return;
-                }
-                ;
-
-                String addItemText = addItem.getText().toString().trim();
-
-                Intent dataUser = new Intent(getApplicationContext(), AddItem.class);
-                dataUser.putExtra("myKey", myKey);
-                dataUser.putExtra("myTitle", addItemText);
-                dataUser.putExtra("device", deviceText);
-                startActivity(dataUser);
-            }
-        }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        alertDialog.create().show();
-    }
-    */
-
     private void testUpRecyclerView() {
 
         productRV.setLayoutManager(new LinearLayoutManager(getApplicationContext()));

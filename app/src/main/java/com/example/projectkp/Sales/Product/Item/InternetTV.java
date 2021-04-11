@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.projectkp.Helper.ProductHelper;
 import com.example.projectkp.R;
 import com.example.projectkp.Sales.Product.Adapter.AdapterProductItem;
-import com.example.projectkp.Sales.Product.ProductListSales;
+import com.example.projectkp.Sales.Product.ProductList;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
@@ -83,7 +83,7 @@ public class InternetTV extends AppCompatActivity implements com.example.project
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(getApplicationContext(), ProductListSales.class));
+        startActivity(new Intent(getApplicationContext(), ProductList.class));
         finish();
     }
 

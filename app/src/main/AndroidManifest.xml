@@ -13,51 +13,59 @@
         android:roundIcon="@mipmap/app_logo_round"
         android:supportsRtl="true"
         android:theme="@style/SecondTheme">
+
         <activity
-            android:name=".Sales.Product.Bonus.InternetPhoneTV" />
+            android:name=".CS.NewMYIR.InputMYIR"
+            android:launchMode="singleTop"
+            android:parentActivityName=".CS.Dashboard" />
+
         <activity
-            android:name=".Sales.Product.Bonus.InternetTV" />
-        <activity
-            android:name=".Sales.Product.Bonus.InternetPhone" />
+            android:name=".Sales.NewMYIR.InputMYIR"
+            android:launchMode="singleTop"
+            android:parentActivityName=".Sales.Dashboard" />
+
+        <activity android:name=".Sales.Product.Bonus.InternetPhoneTV" />
+        <activity android:name=".Sales.Product.Bonus.InternetTV" />
+        <activity android:name=".Sales.Product.Bonus.InternetPhone" />
         <activity
             android:name=".Sales.Product.Item.Orbit"
             android:launchMode="singleTop"
-            android:parentActivityName=".Sales.Product.ProductListSales" />
+            android:parentActivityName=".Sales.Product.ProductList" />
         <activity
             android:name=".Sales.Product.Item.MiniPack"
             android:launchMode="singleTop"
-            android:parentActivityName=".Sales.Product.ProductListSales" />
+            android:parentActivityName=".Sales.Product.ProductList" />
         <activity
             android:name=".Sales.Product.Item.InternetTV"
             android:launchMode="singleTop"
-            android:parentActivityName=".Sales.Product.ProductListSales" />
+            android:parentActivityName=".Sales.Product.ProductList" />
         <activity
             android:name=".Sales.Product.Item.InternetPhone"
             android:launchMode="singleTop"
-            android:parentActivityName=".Sales.Product.ProductListSales" />
+            android:parentActivityName=".Sales.Product.ProductList" />
         <activity
             android:name=".Sales.Product.Item.InternetPhoneTV"
             android:launchMode="singleTop"
-            android:parentActivityName=".Sales.Product.ProductListSales" />
+            android:parentActivityName=".Sales.Product.ProductList" />
         <activity
-            android:name=".Sales.Product.ProductListSales"
-            android:parentActivityName=".Sales.DashboardSales" />
-        <activity android:name=".Sales.DashboardSales" />
+            android:name=".Sales.Product.ProductList"
+            android:parentActivityName=".Sales.Dashboard" />
+        <activity android:name=".Sales.Dashboard" />
         <activity
-            android:name=".Sales.User.EditProfileSales"
-            android:parentActivityName=".Sales.User.UserDetailSales" />
+            android:name=".Sales.User.EditProfile"
+            android:parentActivityName=".Sales.User.UserDetail" />
         <activity
-            android:name=".Sales.User.UserDetailSales"
-            android:parentActivityName=".Sales.DashboardSales" />
+            android:name=".Sales.User.UserDetail"
+            android:parentActivityName=".Sales.Dashboard" />
         <activity
             android:name=".Sales.TrackOrder.TrackOrderSales"
-            android:parentActivityName=".Sales.DashboardSales" />
+            android:parentActivityName=".Sales.Dashboard" />
         <activity
             android:name=".Sales.MYIR.InputMyir"
             android:parentActivityName=".Sales.MYIR.MyirSales" />
         <activity
             android:name=".Sales.MYIR.MyirSales"
-            android:parentActivityName=".Sales.DashboardSales" />
+            android:parentActivityName=".Sales.Dashboard" />
         <activity android:name=".CS.Product.Edit.AddItem" />
         <activity android:name=".CS.Product.Edit.EditItem" />
         <activity
@@ -83,20 +91,20 @@
         <activity
             android:name=".CS.Product.ProductListCS"
             android:launchMode="singleTop"
-            android:parentActivityName=".CS.DashboardCS" />
-        <activity android:name=".CS.DashboardCS" />
+            android:parentActivityName=".CS.Dashboard" />
+        <activity android:name=".CS.Dashboard" />
         <activity
             android:name=".CS.MyirCS"
-            android:parentActivityName=".CS.DashboardCS" />
+            android:parentActivityName=".CS.Dashboard" />
         <activity
             android:name=".CS.TrackOrderCS"
-            android:parentActivityName=".CS.DashboardCS" />
+            android:parentActivityName=".CS.Dashboard" />
         <activity
             android:name=".CS.User.EditProfileCS"
             android:parentActivityName=".CS.User.UserDetailCS" />
         <activity
             android:name=".CS.User.UserDetailCS"
-            android:parentActivityName=".CS.DashboardCS" />
+            android:parentActivityName=".CS.Dashboard" />
         <activity
             android:name=".verification.EmailVerify2Activity"
             android:parentActivityName=".verification.EmailVerifyActivity" />

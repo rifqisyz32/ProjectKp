@@ -1,4 +1,4 @@
-package com.example.projectkp.CS.Product.Adapter;
+package com.example.projectkp.CS.NewMYIR;
 
 import android.content.Context;
 import android.view.ContextMenu;
@@ -10,52 +10,54 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.projectkp.Helper.ProductHelper;
+import com.example.projectkp.Helper.MYIRHelper;
 import com.example.projectkp.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterProductItem extends RecyclerView.Adapter<AdapterProductItem.productViewHolder> implements Filterable {
+public class AdapterMYIRItem extends RecyclerView.Adapter<AdapterMYIRItem.myirViewHolder> implements Filterable {
 
     private OnItemClickListener listener;
-    private String deviceTV, priceTV;
+    private String colorTV;
     private Context myContext;
-    private List<ProductHelper> myList;
-    private List<ProductHelper> myListFiltered;
+    private List<MYIRHelper> myList;
+    private List<MYIRHelper> myListFiltered;
 
-    public AdapterProductItem(Context context, List<ProductHelper> list) {
+    public AdapterMYIRItem(Context context, List<MYIRHelper> list) {
         myContext = context;
         myList = list;
         myListFiltered = list;
     }
 
     @Override
-    public void onBindViewHolder(productViewHolder holder, int position) {
-        ProductHelper helper = myListFiltered.get(position);
+    public void onBindViewHolder(myirViewHolder holder, int position) {
+        MYIRHelper helper = myListFiltered.get(position);
 
         holder.layer.setAnimation(AnimationUtils.loadAnimation(myContext, R.anim.fade_scale_animation));
-        holder.speed.setAnimation(AnimationUtils.loadAnimation(myContext, R.anim.fade_transition_animation));
-        holder.price.setAnimation(AnimationUtils.loadAnimation(myContext, R.anim.fade_transition_animation));
+        holder.title.setAnimation(AnimationUtils.loadAnimation(myContext, R.anim.fade_transition_animation));
+        holder.user.setAnimation(AnimationUtils.loadAnimation(myContext, R.anim.fade_transition_animation));
+        holder.time.setAnimation(AnimationUtils.loadAnimation(myContext, R.anim.fade_transition_animation));
+
 
         holder.title.setText(helper.getTitle());
-        holder.speed.setText(helper.getSpeed());
-        holder.deviceDB.setText(helper.getDevice());
-        holder.priceDB.setText(helper.getPrice());
+        holder.user.setText(helper.getUser());
+        holder.time.setText(helper.getTime());
     }
 
     @NonNull
     @Override
-    public productViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public myirViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         myContext = parent.getContext();
-        View v = LayoutInflater.from(myContext).inflate(R.layout.holder_product_item, parent, false);
-        return new productViewHolder(v);
+        View v = LayoutInflater.from(myContext).inflate(R.layout.holder_myir_item, parent, false);
+        return new myirViewHolder(v);
     }
 
     @Override
@@ -76,10 +78,10 @@ public class AdapterProductItem extends RecyclerView.Adapter<AdapterProductItem.
                     myListFiltered = myList;
 
                 } else {
-                    List<ProductHelper> listFiltered = new ArrayList<>();
-                    for (ProductHelper row : myList) {
+                    List<MYIRHelper> listFiltered = new ArrayList<>();
+                    for (MYIRHelper row : myList) {
 
-                        if (row.getSpeed().toLowerCase().contains(Key.toLowerCase())) {
+                        if (row.getTitle().toLowerCase().contains(Key.toLowerCase())) {
                             listFiltered.add(row);
                         }
                     }
@@ -94,30 +96,27 @@ public class AdapterProductItem extends RecyclerView.Adapter<AdapterProductItem.
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
 
-                myListFiltered = (List<ProductHelper>) results.values;
+                myListFiltered = (List<MYIRHelper>) results.values;
                 notifyDataSetChanged();
             }
         };
     }
 
-    class productViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
-        ConstraintLayout layer;
-        TextView title, speed, device, deviceDB, price, priceDB;
+    class myirViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
+        RelativeLayout layer;
+        TextView title, user, time;
 
-        public productViewHolder(View itemView) {
+        public myirViewHolder(View itemView) {
             super(itemView);
 
-            layer = itemView.findViewById(R.id.product_layout);
-            title = itemView.findViewById(R.id.product_title);
-            speed = itemView.findViewById(R.id.product_speed);
-            device = itemView.findViewById(R.id.product_device);
-            deviceDB = itemView.findViewById(R.id.product_device_db);
-            price = itemView.findViewById(R.id.product_price);
-            priceDB = itemView.findViewById(R.id.product_price_db);
+            layer = itemView.findViewById(R.id.myir_layout);
+            title = itemView.findViewById(R.id.myir_title);
+            user = itemView.findViewById(R.id.myir_user);
+            time = itemView.findViewById(R.id.myir_time);
 
-            device.setText(changeDeviceText(deviceTV));
-            price.setText(changePriceText(priceTV));
-            speed.setTextColor(myContext.getResources().getColor(R.color.cs_temp));
+            if (colorTV.equals("CS")) {
+                title.setTextColor(myContext.getResources().getColor(R.color.cs_temp));
+            }
             itemView.setOnClickListener(this);
             itemView.setOnCreateContextMenuListener(this);
         }
@@ -165,15 +164,16 @@ public class AdapterProductItem extends RecyclerView.Adapter<AdapterProductItem.
         void editItem(int position);
     }
 
-    public String changeDeviceText(String device) {
-        this.deviceTV = device;
-        return device;
+    public String changeColor(String color) {
+        this.colorTV = color;
+        return color;
     }
 
+    /*
     public String changePriceText(String price) {
         this.priceTV = price;
         return price;
-    }
+    }*/
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;

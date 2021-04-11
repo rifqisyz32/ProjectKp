@@ -12,9 +12,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.projectkp.CS.DashboardCS;
+import com.example.projectkp.CS.Dashboard;
 import com.example.projectkp.R;
-import com.example.projectkp.Sales.DashboardSales;
 import com.example.projectkp.forgetpassword.ForgetActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -112,12 +111,12 @@ public class LoginActivity extends AppCompatActivity {
                     if (dbRole.matches("Sales")) {
                         logProgress.setVisibility(View.GONE);
                         logAuthProgress.setVisibility(View.GONE);
-                        startActivity(new Intent(getApplicationContext(), DashboardSales.class));
+                        startActivity(new Intent(getApplicationContext(), com.example.projectkp.Sales.Dashboard.class));
                         finish();
                     } else {
                         logProgress.setVisibility(View.GONE);
                         logAuthProgress.setVisibility(View.GONE);
-                        startActivity(new Intent(getApplicationContext(), DashboardCS.class));
+                        startActivity(new Intent(getApplicationContext(), Dashboard.class));
                         finish();
                     }
                 }
@@ -165,9 +164,9 @@ public class LoginActivity extends AppCompatActivity {
 
                             logProgress.setVisibility(View.GONE);
                             if (dbRole.matches("Sales")) {
-                                startActivity(new Intent(getApplicationContext(), DashboardSales.class));
+                                startActivity(new Intent(getApplicationContext(), com.example.projectkp.Sales.Dashboard.class));
                             } else {
-                                startActivity(new Intent(getApplicationContext(), DashboardCS.class));
+                                startActivity(new Intent(getApplicationContext(), Dashboard.class));
                             }
                             finish();
                         }

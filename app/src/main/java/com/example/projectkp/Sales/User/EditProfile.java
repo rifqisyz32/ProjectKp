@@ -46,7 +46,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
-public class EditProfileSales extends AppCompatActivity {
+public class EditProfile extends AppCompatActivity {
 
     FirebaseAuth editAuth = FirebaseAuth.getInstance();
     FirebaseUser editUser = editAuth.getCurrentUser();
@@ -124,7 +124,7 @@ public class EditProfileSales extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(getApplicationContext(), UserDetailSales.class));
+        startActivity(new Intent(getApplicationContext(), UserDetail.class));
         finish();
     }
 
@@ -190,11 +190,11 @@ public class EditProfileSales extends AppCompatActivity {
     }
 
     private void checkAndRequestForPermission() {
-        if (ContextCompat.checkSelfPermission(EditProfileSales.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(EditProfileSales.this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+        if (ContextCompat.checkSelfPermission(EditProfile.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(EditProfile.this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
                 Toast.makeText(getApplicationContext(), R.string.acc_permission, Toast.LENGTH_SHORT).show();
             } else {
-                ActivityCompat.requestPermissions(EditProfileSales.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PReqCode);
+                ActivityCompat.requestPermissions(EditProfile.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PReqCode);
             }
         } else
             openGallery();
@@ -243,7 +243,7 @@ public class EditProfileSales extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (!task.isSuccessful()) {
-                                                Toast.makeText(EditProfileSales.this, R.string.update_photo_error, Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(EditProfile.this, R.string.update_photo_error, Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     });
@@ -293,7 +293,7 @@ public class EditProfileSales extends AppCompatActivity {
 
             saveDataProgress.setVisibility(View.GONE);
             Toast.makeText(getApplicationContext(), R.string.edit_success, Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(getApplicationContext(), UserDetailSales.class));
+            startActivity(new Intent(getApplicationContext(), UserDetail.class));
             finish();
 
         } else {
@@ -321,7 +321,7 @@ public class EditProfileSales extends AppCompatActivity {
 
                             saveDataProgress.setVisibility(View.GONE);
                             Toast.makeText(getApplicationContext(), R.string.edit_success, Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), UserDetailSales.class));
+                            startActivity(new Intent(getApplicationContext(), UserDetail.class));
                             finish();
                         }
                     }

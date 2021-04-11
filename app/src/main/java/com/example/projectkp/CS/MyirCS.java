@@ -25,7 +25,7 @@ public class MyirCS extends AppCompatActivity {
         findViewById(R.id.go_back_myir_cs).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), DashboardCS.class));
+                startActivity(new Intent(getApplicationContext(), Dashboard.class));
                 finish();
             }
         });

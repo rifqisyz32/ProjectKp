@@ -24,7 +24,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.example.projectkp.R;
-import com.example.projectkp.Sales.DashboardSales;
+import com.example.projectkp.Sales.Dashboard;
 import com.example.projectkp.loginregister.LoginActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -39,7 +39,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-public class UserDetailSales extends AppCompatActivity {
+public class UserDetail extends AppCompatActivity {
 
     private final FirebaseAuth salesAuth = FirebaseAuth.getInstance();
     private final FirebaseUser salesUser = salesAuth.getCurrentUser();
@@ -84,7 +84,7 @@ public class UserDetailSales extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(getApplicationContext(), DashboardSales.class));
+        startActivity(new Intent(getApplicationContext(), Dashboard.class));
         finish();
     }
 
@@ -102,7 +102,7 @@ public class UserDetailSales extends AppCompatActivity {
     public void setMode(int selectedMode) {
         switch (selectedMode) {
             case R.id.edit_profile_sales:
-                startActivity(new Intent(getApplicationContext(), EditProfileSales.class));
+                startActivity(new Intent(getApplicationContext(), EditProfile.class));
                 finish();
                 break;
 

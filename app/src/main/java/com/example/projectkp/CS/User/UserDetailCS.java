@@ -23,7 +23,7 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
-import com.example.projectkp.CS.DashboardCS;
+import com.example.projectkp.CS.Dashboard;
 import com.example.projectkp.R;
 import com.example.projectkp.loginregister.LoginActivity;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -88,7 +88,7 @@ public class UserDetailCS extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(getApplicationContext(), DashboardCS.class));
+        startActivity(new Intent(getApplicationContext(), Dashboard.class));
         finish();
     }
 

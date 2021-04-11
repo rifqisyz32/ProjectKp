@@ -132,4 +132,17 @@
     <string name="phone_bonus">Free 300 Minutes\nLocale/Inter Locale</string>
     <string name="free_to_choose">Free to Choose bonus below</string>
     <string name="kids">Kids</string>
+    <string name="inputer">by:</string>
+    <string name="myirTV">MYIR-</string>
+    <string name="add_myir">Add MYIR</string>
+    <string name="add_myir_input">Type MYIR Here</string>
+    <string name="submit">Submit</string>
+    <string name="myir_exist">MYIR already exist</string>
+    <string name="add_myir_success">MYIR added to the list</string>
+    <string name="edit_myir">Edit MYIR</string>
+    <string name="myir_edited">MYIR edited</string>
+    <string name="myir_not_found">MYIR not Found</string>
+    <string name="cant_edit_item">You can\'t edit this item</string>
+    <string name="input_order">Input Order</string>
+    <string name="follow_up">Follow Up Order</string>
 </resources>

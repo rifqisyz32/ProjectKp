@@ -49,8 +49,8 @@ public class InputMyir extends AppCompatActivity {
                 trackorder.setTrackOrder(input_myir.getText().toString().trim());
                 kode_referal.child(String.valueOf(myir.getInputMyir())).setValue(myir);
                 track.child(trackorder.getTrackOrder()).setValue(trackorder);
+                Toast.makeText(InputMyir.this, "Input Successfully", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getApplicationContext(), MyirSales.class));
-                Toast.makeText(InputMyir.this, "Input Sucessfully", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });

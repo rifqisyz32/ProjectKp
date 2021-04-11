@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.projectkp.R;
-import com.example.projectkp.Sales.DashboardSales;
+import com.example.projectkp.Sales.Dashboard;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -24,7 +24,7 @@ public class TrackOrderSales extends AppCompatActivity {
         findViewById(R.id.go_back_track_sales).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), DashboardSales.class));
+                startActivity(new Intent(getApplicationContext(), Dashboard.class));
                 finish();
             }
         });

@@ -17,14 +17,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.projectkp.CS.Product.Adapter.AdapterProductCS;
 import com.example.projectkp.CS.Product.Adapter.AdapterProductItem;
 import com.example.projectkp.CS.Product.Edit.AddItem;
 import com.example.projectkp.CS.Product.Edit.EditItem;
 import com.example.projectkp.CS.Product.ProductListCS;
 import com.example.projectkp.Helper.ProductHelper;
 import com.example.projectkp.R;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
