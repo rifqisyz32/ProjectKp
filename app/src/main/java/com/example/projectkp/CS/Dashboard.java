@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.projectkp.CS.FollowUp.FollUpOrder;
 import com.example.projectkp.CS.NewMYIR.InputMYIR;
 import com.example.projectkp.CS.Product.ProductListCS;
 import com.example.projectkp.CS.User.UserDetailCS;
@@ -82,7 +83,7 @@ public class Dashboard extends AppCompatActivity {
         findViewById(R.id.track_order_cs).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), TrackOrderCS.class));
+                startActivity(new Intent(getApplicationContext(), FollUpOrder.class));
                 finish();
             }
         });

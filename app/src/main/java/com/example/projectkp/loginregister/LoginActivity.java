@@ -29,12 +29,12 @@ import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
-    FirebaseAuth logAuth = FirebaseAuth.getInstance();
-    FirebaseUser logUser = logAuth.getCurrentUser();
-    TextInputLayout logUsername, logPassword;
-    Button login, forget, signUp;
-    String username, password, myUsername, dbEmail, dbRole;
-    ProgressBar logProgress, logAuthProgress;
+    private final FirebaseAuth logAuth = FirebaseAuth.getInstance();
+    private final FirebaseUser logUser = logAuth.getCurrentUser();
+    private TextInputLayout logUsername, logPassword;
+    private Button login, forget, signUp;
+    private String username, password, myUsername, dbEmail, dbRole;
+    private ProgressBar logProgress, logAuthProgress;
 
     SharedPreferences sharedPreferences;
     public static final String MyPREFERENCES = "MyPrefs";

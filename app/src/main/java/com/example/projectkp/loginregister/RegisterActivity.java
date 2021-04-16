@@ -26,10 +26,10 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class RegisterActivity extends AppCompatActivity {
-    TextInputLayout fullnameReg, usernameReg, phoneReg, emailReg, passwordReg;
-    FirebaseAuth regAuth;
-    ProgressBar regProgress;
-    AppCompatRadioButton csReg, salesReg;
+    private TextInputLayout fullnameReg, usernameReg, phoneReg, emailReg, passwordReg;
+    private FirebaseAuth regAuth;
+    private ProgressBar regProgress;
+    private AppCompatRadioButton csReg, salesReg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

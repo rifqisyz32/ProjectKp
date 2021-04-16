@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dialog_follup_item_bg"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/round_shape_gr_red"
+    android:backgroundTint="@color/white">
+
+    <TextView
+        android:id="@+id/dialog_follup_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/order_detail"
+        android:textColor="@color/cs_temp"
+        android:textSize="18sp" />
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_follup_item_title">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/dialog_follup_item_myirTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/poppins_light"
+                android:text="@string/myirTV"
+                android:textColor="@color/colorSubtitle"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/dialog_follup_item_myirDB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/dialog_follup_item_myirTV"
+                android:fontFamily="@font/poppins_light"
+                android:text="@string/not_found"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/dialog_follup_item_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/poppins_light"
+                android:text="@string/not_found"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/dialog_follup_item_salesID_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/dialog_follup_item_myirTV"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="@string/sales_idTV"
+                android:textColor="@color/colorSubtitle"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/dialog_follup_item_salesID_DB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/dialog_follup_item_myirTV"
+                android:layout_marginTop="8dp"
+                android:layout_toEndOf="@id/dialog_follup_item_salesID_TV"
+                android:fontFamily="@font/poppins_light"
+                android:paddingStart="4dp"
+                android:text="@string/not_found"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/dialog_follup_item_statusDB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/dialog_follup_item_time"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="@string/not_found"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/dialog_follup_item_sc_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/dialog_follup_item_salesID_TV"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/poppins_light"
+                android:text="@string/sc_resultTV"
+                android:textColor="@color/colorSubtitle"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/dialog_follup_item_sc_resultDB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/dialog_follup_item_sc_result"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/poppins_light"
+                android:padding="8dp"
+                android:text="@string/lorem"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/dialog_follup_item_yes_sales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/dialog_follup_item_sc_resultDB"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/round_shape_gr_red_small"
+                android:clickable="true"
+                android:fontFamily="@font/poppins_medium"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp"
+                android:visibility="gone"
+                android:text="@string/copy"
+                android:textColor="#FFF"
+                android:textSize="14sp"
+                app:backgroundTint="@color/sales_temp" />
+
+            <TextView
+                android:id="@+id/dialog_follup_item_yes_cs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/dialog_follup_item_sc_resultDB"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/round_shape_gr_red_small"
+                android:clickable="true"
+                android:fontFamily="@font/poppins_medium"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp"
+                android:text="@string/copy"
+                android:textColor="#FFF"
+                android:textSize="14sp"
+                app:backgroundTint="@color/cs_temp" />
+
+            <TextView
+                android:id="@+id/dialog_follup_item_no"
+                style="@style/SecondTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/dialog_follup_item_sc_resultDB"
+                android:layout_marginStart="8dp"
+                android:layout_toStartOf="@id/dialog_follup_item_yes_cs"
+                android:clickable="true"
+                android:fontFamily="@font/poppins_medium"
+                android:padding="8dp"
+                android:text="@string/close"
+                android:textColor="@color/cs_temp"
+                android:textSize="14sp"
+                app:backgroundTint="@color/sales_temp" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

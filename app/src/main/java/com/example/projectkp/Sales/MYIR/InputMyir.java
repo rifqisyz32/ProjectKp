@@ -27,12 +27,9 @@ public class InputMyir extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_myir);
 
-        findViewById(R.id.go_back_input_myir_sales).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), MyirSales.class));
-                finish();
-            }
+        findViewById(R.id.go_back_input_myir_sales).setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), MyirSales.class));
+            finish();
         });
 
         input_myir=(EditText)findViewById(R.id.input_myir_text);
@@ -42,17 +39,14 @@ public class InputMyir extends AppCompatActivity {
         myir=new Myir();
         trackorder=new TrackOrderSalesHelper();
 
-        button_save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myir.setInputMyir(input_myir.getText().toString().trim());
-                trackorder.setTrackOrder(input_myir.getText().toString().trim());
-                kode_referal.child(String.valueOf(myir.getInputMyir())).setValue(myir);
-                track.child(trackorder.getTrackOrder()).setValue(trackorder);
-                Toast.makeText(InputMyir.this, "Input Successfully", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(), MyirSales.class));
-                finish();
-            }
+        button_save.setOnClickListener(v -> {
+            myir.setInputMyir(input_myir.getText().toString().trim());
+            trackorder.setTrackOrder(input_myir.getText().toString().trim());
+            kode_referal.child(String.valueOf(myir.getInputMyir())).setValue(myir);
+            track.child(trackorder.getTrackOrder()).setValue(trackorder);
+            Toast.makeText(InputMyir.this, "Input Successfully", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getApplicationContext(), MyirSales.class));
+            finish();
         });
     }
 }

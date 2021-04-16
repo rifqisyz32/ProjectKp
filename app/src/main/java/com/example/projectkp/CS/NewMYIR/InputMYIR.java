@@ -1,6 +1,9 @@
 package com.example.projectkp.CS.NewMYIR;
 
 import android.app.Dialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -22,11 +25,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projectkp.CS.Dashboard;
+import com.example.projectkp.CS.FollowUp.AddOrder;
 import com.example.projectkp.Helper.MYIRHelper;
 import com.example.projectkp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -47,13 +50,13 @@ import java.util.List;
 
 public class InputMYIR extends AppCompatActivity implements AdapterMYIRItem.OnItemClickListener {
 
-    private final DatabaseReference MYIR = FirebaseDatabase.getInstance().getReference("MYIR");
+    private final DatabaseReference Order = FirebaseDatabase.getInstance().getReference("Order");
     private AdapterMYIRItem myirAdapter;
     private RecyclerView myirRV;
     private List<MYIRHelper> myirList;
     private ProgressBar loadItem;
     private String dbPosition;
-    private final String myKey = "MYIR_List";
+    private final String myKey = "MYIR";
     private Dialog addDialog;
     private TextInputLayout addInput;
     private TextView addCancel, addSubmit;
@@ -105,7 +108,7 @@ public class InputMYIR extends AppCompatActivity implements AdapterMYIRItem.OnIt
         myirRV.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         myirList = new ArrayList<>();
 
-        MYIR.child(myKey).addValueEventListener(new ValueEventListener() {
+        Order.child(myKey).addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -144,13 +147,27 @@ public class InputMYIR extends AppCompatActivity implements AdapterMYIRItem.OnIt
     @Override
     public void onItemClick(int position) {
         dbPosition = myirList.get(position).getTitle();
-        Toast.makeText(getApplicationContext(), getString(R.string.myirTV) + dbPosition, Toast.LENGTH_SHORT).show();
+        ClipboardManager clipboard = (ClipboardManager) getApplicationContext().getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("label", dbPosition);
+
+        if (clipboard == null || clip == null)
+            return;
+        clipboard.setPrimaryClip(clip);
+        Toast.makeText(getApplicationContext(), getString(R.string.myirTV) + dbPosition + " " + getString(R.string.copas), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void follUpItem(int position) {
+        dbPosition = myirList.get(position).getTitle();
+        Intent order = new Intent(getApplicationContext(), AddOrder.class);
+        order.putExtra("myir", dbPosition);
+        startActivity(order);
+        finish();
     }
 
     @Override
     public void editItem(int position) {
         dbPosition = myirList.get(position).getTitle();
-
         addDialog = new Dialog(this);
         addDialog.setContentView(R.layout.dialog_add_myir);
         addDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -202,7 +219,7 @@ public class InputMYIR extends AppCompatActivity implements AdapterMYIRItem.OnIt
         String myUser = currentUser.getDisplayName();
         String myTime = currentTime.toString();
 
-        Query checkMYIR = MYIR.child(myKey).orderByChild("title").equalTo(myTitle);
+        Query checkMYIR = Order.child(myKey).orderByChild("title").equalTo(myTitle);
         checkMYIR.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -210,8 +227,8 @@ public class InputMYIR extends AppCompatActivity implements AdapterMYIRItem.OnIt
                     Toast.makeText(getApplicationContext(), R.string.myir_exist, Toast.LENGTH_SHORT).show();
                 } else {
                     MYIRHelper storeData = new MYIRHelper(myTitle, myUser, myTime);
-                    MYIR.child(myKey).child(myTitle).setValue(storeData);
-                    MYIR.child(myKey).child(position).removeValue();
+                    Order.child(myKey).child(myTitle).setValue(storeData);
+                    Order.child(myKey).child(position).removeValue();
                     addDialog.dismiss();
                 }
             }
@@ -228,13 +245,13 @@ public class InputMYIR extends AppCompatActivity implements AdapterMYIRItem.OnIt
         dbPosition = myirList.get(position).getTitle();
         AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setIcon(R.drawable.ic_baseline_delete_outline_24)
-                .setTitle(R.string.delete_item)
+                .setTitle(R.string.delete_myir)
                 .setMessage(R.string.delete_item_alert)
                 .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
-                    MYIR.child(myKey).child(dbPosition).getRef().removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    Order.child(myKey).child(dbPosition).getRef().removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Toast.makeText(getApplicationContext(), R.string.delete_success, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), R.string.delete_myir_success, Toast.LENGTH_SHORT).show();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override

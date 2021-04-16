@@ -1,4 +1,4 @@
-package com.example.projectkp.CS.NewMYIR;
+package com.example.projectkp.Sales.NewMYIR;
 
 import android.content.Context;
 import android.view.ContextMenu;
@@ -25,7 +25,6 @@ import java.util.List;
 public class AdapterMYIRItem extends RecyclerView.Adapter<AdapterMYIRItem.myirViewHolder> implements Filterable {
 
     private OnItemClickListener listener;
-    private String colorTV;
     private Context myContext;
     private List<MYIRHelper> myList;
     private List<MYIRHelper> myListFiltered;
@@ -112,9 +111,6 @@ public class AdapterMYIRItem extends RecyclerView.Adapter<AdapterMYIRItem.myirVi
             user = itemView.findViewById(R.id.myir_user);
             time = itemView.findViewById(R.id.myir_time);
 
-            if (colorTV.equals("CS")) {
-                title.setTextColor(myContext.getResources().getColor(R.color.cs_temp));
-            }
             itemView.setOnClickListener(this);
             itemView.setOnCreateContextMenuListener(this);
         }
@@ -130,11 +126,10 @@ public class AdapterMYIRItem extends RecyclerView.Adapter<AdapterMYIRItem.myirVi
         @Override
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
             menu.clearHeader();
-            MenuItem follUpMenu = menu.add(Menu.NONE, 1, 1, R.string.foll_up);
-            MenuItem editMenu = menu.add(Menu.NONE, 2, 2, R.string.edit);
-            MenuItem deleteMenu = menu.add(Menu.NONE, 3, 3, R.string.delete);
 
-            follUpMenu.setOnMenuItemClickListener(this);
+            MenuItem editMenu = menu.add(Menu.NONE, 1, 1, R.string.edit);
+            MenuItem deleteMenu = menu.add(Menu.NONE, 2, 2, R.string.delete);
+
             editMenu.setOnMenuItemClickListener(this);
             deleteMenu.setOnMenuItemClickListener(this);
         }
@@ -145,12 +140,9 @@ public class AdapterMYIRItem extends RecyclerView.Adapter<AdapterMYIRItem.myirVi
             if (position != RecyclerView.NO_POSITION && listener != null) {
                 switch (item.getItemId()) {
                     case 1:
-                        listener.follUpItem(position);
-                        return true;
-                    case 2:
                         listener.editItem(position);
                         return true;
-                    case 3:
+                    case 2:
                         listener.deleteItem(position);
                         return true;
                 }
@@ -162,16 +154,9 @@ public class AdapterMYIRItem extends RecyclerView.Adapter<AdapterMYIRItem.myirVi
     public interface OnItemClickListener {
         void onItemClick(int position);
 
-        void follUpItem(int position);
-
         void editItem(int position);
 
         void deleteItem(int position);
-    }
-
-    public String changeColor(String color) {
-        this.colorTV = color;
-        return color;
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {

@@ -182,7 +182,7 @@ public class MiniPack extends AppCompatActivity implements AdapterProductItem.On
                 .setMessage(R.string.delete_item_alert)
                 .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
                     Product.child(myKey).child(dbPosition).getRef().removeValue();
-                    Toast.makeText(getApplicationContext(), R.string.delete_success, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.delete_product_success, Toast.LENGTH_SHORT).show();
                 })
                 .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {
                 }).show();

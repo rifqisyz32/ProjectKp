@@ -1,6 +1,7 @@
-package com.example.projectkp.CS.NewMYIR;
+package com.example.projectkp.CS.FollowUp;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,46 +17,49 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.projectkp.Helper.MYIRHelper;
+import com.example.projectkp.Helper.FollUpHelper;
 import com.example.projectkp.R;
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterMYIRItem extends RecyclerView.Adapter<AdapterMYIRItem.myirViewHolder> implements Filterable {
+public class AdapterFollUpItem extends RecyclerView.Adapter<AdapterFollUpItem.follupViewHolder> implements Filterable {
 
     private OnItemClickListener listener;
     private String colorTV;
     private Context myContext;
-    private List<MYIRHelper> myList;
-    private List<MYIRHelper> myListFiltered;
+    private List<FollUpHelper> myList;
+    private List<FollUpHelper> myListFiltered;
 
-    public AdapterMYIRItem(Context context, List<MYIRHelper> list) {
+    public AdapterFollUpItem(Context context, List<FollUpHelper> list) {
         myContext = context;
         myList = list;
         myListFiltered = list;
     }
 
     @Override
-    public void onBindViewHolder(myirViewHolder holder, int position) {
-        MYIRHelper helper = myListFiltered.get(position);
+    public void onBindViewHolder(follupViewHolder holder, int position) {
+        FollUpHelper helper = myListFiltered.get(position);
 
         holder.layer.setAnimation(AnimationUtils.loadAnimation(myContext, R.anim.fade_scale_animation));
         holder.title.setAnimation(AnimationUtils.loadAnimation(myContext, R.anim.fade_transition_animation));
         holder.user.setAnimation(AnimationUtils.loadAnimation(myContext, R.anim.fade_transition_animation));
         holder.time.setAnimation(AnimationUtils.loadAnimation(myContext, R.anim.fade_transition_animation));
+        holder.status.setAnimation(AnimationUtils.loadAnimation(myContext, R.anim.fade_transition_animation));
 
         holder.title.setText(helper.getTitle());
-        holder.user.setText(helper.getUser());
+        holder.user.setText(helper.getSalesID());
         holder.time.setText(helper.getTime());
+        holder.status.setText(helper.getStatus());
     }
 
     @NonNull
     @Override
-    public myirViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public follupViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         myContext = parent.getContext();
-        View v = LayoutInflater.from(myContext).inflate(R.layout.holder_myir_item, parent, false);
-        return new myirViewHolder(v);
+        View v = LayoutInflater.from(myContext).inflate(R.layout.holder_follup_item, parent, false);
+        return new follupViewHolder(v);
     }
 
     @Override
@@ -76,8 +80,8 @@ public class AdapterMYIRItem extends RecyclerView.Adapter<AdapterMYIRItem.myirVi
                     myListFiltered = myList;
 
                 } else {
-                    List<MYIRHelper> listFiltered = new ArrayList<>();
-                    for (MYIRHelper row : myList) {
+                    List<FollUpHelper> listFiltered = new ArrayList<>();
+                    for (FollUpHelper row : myList) {
 
                         if (row.getTitle().toLowerCase().contains(Key.toLowerCase())) {
                             listFiltered.add(row);
@@ -94,26 +98,29 @@ public class AdapterMYIRItem extends RecyclerView.Adapter<AdapterMYIRItem.myirVi
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
 
-                myListFiltered = (List<MYIRHelper>) results.values;
+                myListFiltered = (List<FollUpHelper>) results.values;
                 notifyDataSetChanged();
             }
         };
     }
 
-    class myirViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
+    class follupViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
         RelativeLayout layer;
-        TextView title, user, time;
+        MaterialCardView cardBG;
+        TextView title, user, time, status;
 
-        public myirViewHolder(View itemView) {
+        public follupViewHolder(View itemView) {
             super(itemView);
 
-            layer = itemView.findViewById(R.id.myir_layout);
-            title = itemView.findViewById(R.id.myir_title);
-            user = itemView.findViewById(R.id.myir_user);
-            time = itemView.findViewById(R.id.myir_time);
+            cardBG = itemView.findViewById(R.id.follup_card);
+            layer = itemView.findViewById(R.id.follup_layout);
+            title = itemView.findViewById(R.id.follup_title);
+            user = itemView.findViewById(R.id.follup_user);
+            time = itemView.findViewById(R.id.follup_time);
+            status = itemView.findViewById(R.id.follup_stat);
 
-            if (colorTV.equals("CS")) {
-                title.setTextColor(myContext.getResources().getColor(R.color.cs_temp));
+            if (colorTV.equals("CS")){
+                cardBG.setCardBackgroundColor(myContext.getResources().getColor(R.color.cs_temp));
             }
             itemView.setOnClickListener(this);
             itemView.setOnCreateContextMenuListener(this);
@@ -130,11 +137,9 @@ public class AdapterMYIRItem extends RecyclerView.Adapter<AdapterMYIRItem.myirVi
         @Override
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
             menu.clearHeader();
-            MenuItem follUpMenu = menu.add(Menu.NONE, 1, 1, R.string.foll_up);
-            MenuItem editMenu = menu.add(Menu.NONE, 2, 2, R.string.edit);
-            MenuItem deleteMenu = menu.add(Menu.NONE, 3, 3, R.string.delete);
+            MenuItem editMenu = menu.add(Menu.NONE, 1, 1, R.string.edit);
+            MenuItem deleteMenu = menu.add(Menu.NONE, 2, 2, R.string.delete);
 
-            follUpMenu.setOnMenuItemClickListener(this);
             editMenu.setOnMenuItemClickListener(this);
             deleteMenu.setOnMenuItemClickListener(this);
         }
@@ -145,12 +150,9 @@ public class AdapterMYIRItem extends RecyclerView.Adapter<AdapterMYIRItem.myirVi
             if (position != RecyclerView.NO_POSITION && listener != null) {
                 switch (item.getItemId()) {
                     case 1:
-                        listener.follUpItem(position);
-                        return true;
-                    case 2:
                         listener.editItem(position);
                         return true;
-                    case 3:
+                    case 2:
                         listener.deleteItem(position);
                         return true;
                 }
@@ -162,11 +164,9 @@ public class AdapterMYIRItem extends RecyclerView.Adapter<AdapterMYIRItem.myirVi
     public interface OnItemClickListener {
         void onItemClick(int position);
 
-        void follUpItem(int position);
+        void deleteItem(int position);
 
         void editItem(int position);
-
-        void deleteItem(int position);
     }
 
     public String changeColor(String color) {
