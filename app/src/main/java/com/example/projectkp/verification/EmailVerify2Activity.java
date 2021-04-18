@@ -6,7 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.projectkp.R;
-import com.example.projectkp.loginregister.LoginActivity;
+import com.example.projectkp.LoginRegister.LoginActivity;
 
 public class EmailVerify2Activity extends AppCompatActivity {
 

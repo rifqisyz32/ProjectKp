@@ -1,4 +1,4 @@
-package com.example.projectkp.CS.NewMYIR;
+package com.example.projectkp.CS.MYIR;
 
 import android.content.Context;
 import android.view.ContextMenu;

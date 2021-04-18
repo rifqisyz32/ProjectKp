@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.projectkp.CS.FollowUp.FollUpOrder;
-import com.example.projectkp.CS.NewMYIR.InputMYIR;
+import com.example.projectkp.CS.MYIR.InputMYIR;
 import com.example.projectkp.CS.Product.ProductListCS;
 import com.example.projectkp.CS.User.UserDetailCS;
 import com.example.projectkp.R;

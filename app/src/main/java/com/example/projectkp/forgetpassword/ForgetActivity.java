@@ -1,4 +1,4 @@
-package com.example.projectkp.forgetpassword;
+package com.example.projectkp.ForgetPassword;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.projectkp.R;
-import com.example.projectkp.loginregister.LoginActivity;
+import com.example.projectkp.LoginRegister.LoginActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputLayout;

@@ -1,4 +1,4 @@
-package com.example.projectkp.forgetpassword;
+package com.example.projectkp.ForgetPassword;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,7 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.projectkp.R;
-import com.example.projectkp.loginregister.LoginActivity;
+import com.example.projectkp.LoginRegister.LoginActivity;
 
 public class Forget2Activity extends AppCompatActivity {
 

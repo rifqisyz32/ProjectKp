@@ -64,7 +64,7 @@
                 android:button="@android:color/transparent"
                 android:fontFamily="@font/poppins_medium"
                 android:gravity="center"
-                android:text="@string/all"
+                android:text="@string/new_radio"
                 android:textColor="@drawable/text_color_selector_cs" />
 
             <androidx.appcompat.widget.AppCompatRadioButton

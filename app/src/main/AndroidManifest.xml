@@ -15,43 +15,13 @@
         android:theme="@style/SecondTheme">
 
         <activity
-            android:name=".CS.FollowUp.FollUpOrderComplete"
-            android:launchMode="singleTop"
-            android:parentActivityName=".CS.Dashboard" />
-
-        <activity
-            android:name=".CS.FollowUp.FollUpOrder"
-            android:launchMode="singleTop"
-            android:parentActivityName=".CS.Dashboard" />
-
-        <activity
-            android:name=".CS.FollowUp.EditOrder"
-            android:parentActivityName=".CS.FollowUp.FollUpOrder" />
-
-        <activity
-            android:name=".CS.FollowUp.AddOrder"
-            android:parentActivityName=".CS.NewMYIR.InputMYIR" />
-
-        <activity
-            android:name=".CS.NewMYIR.InputMYIR"
-            android:launchMode="singleTop"
-            android:parentActivityName=".CS.Dashboard" />
-
-        <activity
-            android:name=".Sales.FollowUp.FollUpOrderComplete"
-            android:launchMode="singleTop"
-            android:parentActivityName=".Sales.Dashboard" />
-
-        <activity
             android:name=".Sales.FollowUp.FollUpOrder"
             android:launchMode="singleTop"
             android:parentActivityName=".Sales.Dashboard" />
-
         <activity
-            android:name=".Sales.NewMYIR.InputMYIR"
+            android:name=".Sales.MYIR.InputMYIR"
             android:launchMode="singleTop"
             android:parentActivityName=".Sales.Dashboard" />
-
         <activity android:name=".Sales.Product.Bonus.InternetPhoneTV" />
         <activity android:name=".Sales.Product.Bonus.InternetTV" />
         <activity android:name=".Sales.Product.Bonus.InternetPhone" />
@@ -85,16 +55,21 @@
         <activity
             android:name=".Sales.User.UserDetail"
             android:parentActivityName=".Sales.Dashboard" />
-        <activity
-            android:name=".Sales.TrackOrder.TrackOrderSales"
-            android:parentActivityName=".Sales.Dashboard" />
-        <activity
-            android:name=".Sales.MYIR.InputMyir"
-            android:parentActivityName=".Sales.MYIR.MyirSales" />
-        <activity
-            android:name=".Sales.MYIR.MyirSales"
-            android:parentActivityName=".Sales.Dashboard" />
 
+        <activity
+            android:name=".CS.FollowUp.FollUpOrder"
+            android:launchMode="singleTop"
+            android:parentActivityName=".CS.Dashboard" />
+        <activity
+            android:name=".CS.FollowUp.EditOrder"
+            android:parentActivityName=".CS.FollowUp.FollUpOrder" />
+        <activity
+            android:name=".CS.FollowUp.AddOrder"
+            android:parentActivityName=".CS.MYIR.InputMYIR" />
+        <activity
+            android:name=".CS.MYIR.InputMYIR"
+            android:launchMode="singleTop"
+            android:parentActivityName=".CS.Dashboard" />
         <activity android:name=".CS.Product.Edit.AddItem" />
         <activity android:name=".CS.Product.Edit.EditItem" />
         <activity
@@ -123,12 +98,6 @@
             android:parentActivityName=".CS.Dashboard" />
         <activity android:name=".CS.Dashboard" />
         <activity
-            android:name=".CS.MyirCS"
-            android:parentActivityName=".CS.Dashboard" />
-        <activity
-            android:name=".CS.TrackOrderCS"
-            android:parentActivityName=".CS.Dashboard" />
-        <activity
             android:name=".CS.User.EditProfileCS"
             android:parentActivityName=".CS.User.UserDetailCS" />
         <activity
@@ -139,15 +108,15 @@
             android:parentActivityName=".verification.EmailVerifyActivity" />
         <activity
             android:name=".verification.EmailVerifyActivity"
-            android:parentActivityName=".loginregister.RegisterActivity" />
-        <activity android:name=".forgetpassword.Forget2Activity" />
+            android:parentActivityName=".LoginRegister.RegisterActivity" />
+        <activity android:name=".ForgetPassword.Forget2Activity" />
         <activity
-            android:name=".forgetpassword.ForgetActivity"
-            android:parentActivityName=".loginregister.LoginActivity" />
+            android:name=".ForgetPassword.ForgetActivity"
+            android:parentActivityName=".LoginRegister.LoginActivity" />
         <activity
-            android:name=".loginregister.RegisterActivity"
-            android:parentActivityName=".loginregister.LoginActivity" />
-        <activity android:name=".loginregister.LoginActivity" />
+            android:name=".LoginRegister.RegisterActivity"
+            android:parentActivityName=".LoginRegister.LoginActivity" />
+        <activity android:name=".LoginRegister.LoginActivity" />
         <activity
             android:name=".SplashScreen"
             android:screenOrientation="portrait">

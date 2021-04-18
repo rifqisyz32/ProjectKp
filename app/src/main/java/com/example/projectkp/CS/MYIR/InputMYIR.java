@@ -1,4 +1,4 @@
-package com.example.projectkp.CS.NewMYIR;
+package com.example.projectkp.CS.MYIR;
 
 import android.app.Dialog;
 import android.content.ClipData;
@@ -64,7 +64,7 @@ public class InputMYIR extends AppCompatActivity implements AdapterMYIRItem.OnIt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_input_myir_new);
+        setContentView(R.layout.activity_input_myir);
 
         if (Build.VERSION.SDK_INT >= 21) {
             Window window = this.getWindow();
@@ -108,7 +108,7 @@ public class InputMYIR extends AppCompatActivity implements AdapterMYIRItem.OnIt
         myirRV.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         myirList = new ArrayList<>();
 
-        Order.child(myKey).addValueEventListener(new ValueEventListener() {
+        Order.child(myKey).child("all").addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -219,7 +219,7 @@ public class InputMYIR extends AppCompatActivity implements AdapterMYIRItem.OnIt
         String myUser = currentUser.getDisplayName();
         String myTime = currentTime.toString();
 
-        Query checkMYIR = Order.child(myKey).orderByChild("title").equalTo(myTitle);
+        Query checkMYIR = Order.child(myKey).child("all").orderByChild("title").equalTo(myTitle);
         checkMYIR.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -227,8 +227,8 @@ public class InputMYIR extends AppCompatActivity implements AdapterMYIRItem.OnIt
                     Toast.makeText(getApplicationContext(), R.string.myir_exist, Toast.LENGTH_SHORT).show();
                 } else {
                     MYIRHelper storeData = new MYIRHelper(myTitle, myUser, myTime);
-                    Order.child(myKey).child(myTitle).setValue(storeData);
-                    Order.child(myKey).child(position).removeValue();
+                    snapshot.child(myTitle).getRef().setValue(storeData);
+                    snapshot.child(position).getRef().removeValue();
                     addDialog.dismiss();
                 }
             }
@@ -248,7 +248,7 @@ public class InputMYIR extends AppCompatActivity implements AdapterMYIRItem.OnIt
                 .setTitle(R.string.delete_myir)
                 .setMessage(R.string.delete_item_alert)
                 .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
-                    Order.child(myKey).child(dbPosition).getRef().removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    Order.child(myKey).child("all").child(dbPosition).getRef().removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
                             Toast.makeText(getApplicationContext(), R.string.delete_myir_success, Toast.LENGTH_SHORT).show();

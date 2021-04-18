@@ -1,4 +1,4 @@
-package com.example.projectkp.loginregister;
+package com.example.projectkp.LoginRegister;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.projectkp.CS.Dashboard;
 import com.example.projectkp.R;
-import com.example.projectkp.forgetpassword.ForgetActivity;
+import com.example.projectkp.ForgetPassword.ForgetActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputLayout;
@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputLayout logUsername, logPassword;
     private Button login, forget, signUp;
     private String username, password, myUsername, dbEmail, dbRole;
-    private ProgressBar logProgress, logAuthProgress;
+    private ProgressBar logProgress;
 
     SharedPreferences sharedPreferences;
     public static final String MyPREFERENCES = "MyPrefs";
@@ -86,7 +86,6 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        logAuthProgress = findViewById(R.id.log_auth_prog);
 
         if (sharedPreferences.contains(sharedUsername)) {
             myUsername = sharedPreferences.getString(sharedUsername, "");
@@ -95,7 +94,6 @@ public class LoginActivity extends AppCompatActivity {
         if (logUser != null && logUser.isEmailVerified()) {
             checkRole();
         }
-        logAuthProgress.setVisibility(View.GONE);
     }
 
     private void checkRole() {
@@ -110,12 +108,10 @@ public class LoginActivity extends AppCompatActivity {
 
                     if (dbRole.matches("Sales")) {
                         logProgress.setVisibility(View.GONE);
-                        logAuthProgress.setVisibility(View.GONE);
                         startActivity(new Intent(getApplicationContext(), com.example.projectkp.Sales.Dashboard.class));
                         finish();
                     } else {
                         logProgress.setVisibility(View.GONE);
-                        logAuthProgress.setVisibility(View.GONE);
                         startActivity(new Intent(getApplicationContext(), Dashboard.class));
                         finish();
                     }

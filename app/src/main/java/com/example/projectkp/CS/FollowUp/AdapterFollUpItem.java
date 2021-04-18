@@ -1,11 +1,7 @@
 package com.example.projectkp.CS.FollowUp;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
@@ -104,7 +100,7 @@ public class AdapterFollUpItem extends RecyclerView.Adapter<AdapterFollUpItem.fo
         };
     }
 
-    class follupViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
+    class follupViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         RelativeLayout layer;
         MaterialCardView cardBG;
         TextView title, user, time, status;
@@ -119,11 +115,10 @@ public class AdapterFollUpItem extends RecyclerView.Adapter<AdapterFollUpItem.fo
             time = itemView.findViewById(R.id.follup_time);
             status = itemView.findViewById(R.id.follup_stat);
 
-            if (colorTV.equals("CS")){
+            if (colorTV.equals("CS")) {
                 cardBG.setCardBackgroundColor(myContext.getResources().getColor(R.color.cs_temp));
             }
             itemView.setOnClickListener(this);
-            itemView.setOnCreateContextMenuListener(this);
         }
 
         @Override
@@ -133,40 +128,10 @@ public class AdapterFollUpItem extends RecyclerView.Adapter<AdapterFollUpItem.fo
                 listener.onItemClick(position);
             }
         }
-
-        @Override
-        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-            menu.clearHeader();
-            MenuItem editMenu = menu.add(Menu.NONE, 1, 1, R.string.edit);
-            MenuItem deleteMenu = menu.add(Menu.NONE, 2, 2, R.string.delete);
-
-            editMenu.setOnMenuItemClickListener(this);
-            deleteMenu.setOnMenuItemClickListener(this);
-        }
-
-        @Override
-        public boolean onMenuItemClick(MenuItem item) {
-            int position = getAdapterPosition();
-            if (position != RecyclerView.NO_POSITION && listener != null) {
-                switch (item.getItemId()) {
-                    case 1:
-                        listener.editItem(position);
-                        return true;
-                    case 2:
-                        listener.deleteItem(position);
-                        return true;
-                }
-            }
-            return false;
-        }
     }
 
     public interface OnItemClickListener {
         void onItemClick(int position);
-
-        void deleteItem(int position);
-
-        void editItem(int position);
     }
 
     public String changeColor(String color) {

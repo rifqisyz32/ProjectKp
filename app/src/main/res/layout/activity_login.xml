@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".loginregister.LoginActivity">
+    tools:context=".LoginRegister.LoginActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -148,7 +148,7 @@
                 android:background="#00000000"
                 android:elevation="0dp"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="@string/forget"
+                android:text="@string/forget_password"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
@@ -180,7 +180,7 @@
                 android:background="#00000000"
                 android:elevation="0dp"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="@string/signmeup"
+                android:text="@string/sign_up_here"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
@@ -206,17 +206,6 @@
                     android:visibility="gone" />
 
             </RelativeLayout>
-
-            <ProgressBar
-                android:id="@+id/log_auth_prog"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_centerInParent="true"
-                android:background="@drawable/circle_shape_white"
-                android:backgroundTint="@color/colorPrimary"
-                android:indeterminate="true"
-                android:indeterminateTint="@color/white"
-                android:padding="8dp" />
 
         </RelativeLayout>
 

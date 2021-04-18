@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.projectkp.loginregister.LoginActivity;
+import com.example.projectkp.LoginRegister.LoginActivity;
 
 public class SplashScreen extends AppCompatActivity {
     public static int SPLASH_SCREEN = 3000;

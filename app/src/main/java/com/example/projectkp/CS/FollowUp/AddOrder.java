@@ -14,9 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.projectkp.CS.Dashboard;
-import com.example.projectkp.CS.NewMYIR.InputMYIR;
+import com.example.projectkp.CS.MYIR.InputMYIR;
 import com.example.projectkp.Helper.FollUpHelper;
+import com.example.projectkp.Helper.MYIRHelper;
 import com.example.projectkp.R;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -115,11 +115,33 @@ public class AddOrder extends AppCompatActivity {
                     String myTime = currentTime.toString();
                     FollUpHelper storeData = new FollUpHelper(myTitle, myTime, mySalesID, myStatus, myResult);
                     Order.child(myKey).child("all").child(myTitle).setValue(storeData);
+                    moveMYIR(myTitle);
 
                     addProgress.setVisibility(View.GONE);
                     save.setVisibility(View.VISIBLE);
                     Toast.makeText(getApplicationContext(), R.string.foll_up_success, Toast.LENGTH_SHORT).show();
                     onBackPressed();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void moveMYIR(String title) {
+        Query checkFollowUp = Order.child("MYIR").child("all").orderByChild("title").equalTo(title);
+        checkFollowUp.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    String timeMYIR = snapshot.child(title).child("time").getValue().toString();
+                    String userMYIR = snapshot.child(title).child("user").getValue().toString();
+                    MYIRHelper moveMYIR = new MYIRHelper(title, timeMYIR, userMYIR);
+                    Order.child("MYIR").child("Completed").child(title).setValue(moveMYIR);
+                    snapshot.child(title).getRef().removeValue();
                 }
             }
 

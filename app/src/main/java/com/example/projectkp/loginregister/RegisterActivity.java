@@ -1,4 +1,4 @@
-package com.example.projectkp.loginregister;
+package com.example.projectkp.LoginRegister;
 
 import android.content.Intent;
 import android.os.Bundle;

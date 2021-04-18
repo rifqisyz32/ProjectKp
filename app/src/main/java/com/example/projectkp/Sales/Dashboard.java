@@ -15,10 +15,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.projectkp.R;
 import com.example.projectkp.Sales.FollowUp.FollUpOrder;
-import com.example.projectkp.Sales.MYIR.MyirSales;
-import com.example.projectkp.Sales.NewMYIR.InputMYIR;
+import com.example.projectkp.Sales.MYIR.InputMYIR;
 import com.example.projectkp.Sales.Product.ProductList;
-import com.example.projectkp.Sales.TrackOrder.TrackOrderSales;
 import com.example.projectkp.Sales.User.UserDetail;
 import com.example.projectkp.verification.EmailVerifyActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -46,7 +44,7 @@ public class Dashboard extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         if (sharedPreferences.contains(sharedUsername)) {
-            myUsername = sharedPreferences.getString(sharedUsername,"");
+            myUsername = sharedPreferences.getString(sharedUsername, "");
             hiUsername.setText(sharedPreferences.getString(sharedUsername, ""));
         }
 
@@ -97,7 +95,7 @@ public class Dashboard extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         if (sharedPreferences.contains(sharedUsername)) {
-            myUsername = sharedPreferences.getString(sharedUsername,"");
+            myUsername = sharedPreferences.getString(sharedUsername, "");
             hiUsername.setText(sharedPreferences.getString(sharedUsername, ""));
         }
 

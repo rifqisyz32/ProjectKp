@@ -14,6 +14,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -29,6 +30,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projectkp.CS.Dashboard;
 import com.example.projectkp.Helper.FollUpHelper;
+import com.example.projectkp.Helper.MYIRHelper;
 import com.example.projectkp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -49,6 +51,7 @@ public class FollUpOrder extends AppCompatActivity implements AdapterFollUpItem.
 
     private final DatabaseReference Order = FirebaseDatabase.getInstance().getReference("Order");
     private final String myKey = "Follow Up";
+    private String myRef = "all";
     private AdapterFollUpItem follUpAdapter;
     private RecyclerView follUpRV;
     private List<FollUpHelper> follUpList;
@@ -79,6 +82,11 @@ public class FollUpOrder extends AppCompatActivity implements AdapterFollUpItem.
             @Override
             public void onClick(View v) {
                 allOrder.setTextColor(getResources().getColor(R.color.white));
+                completeOrder.setTextColor(getResources().getColor(R.color.cs_temp));
+
+                myRef = "all";
+                loadItem.setVisibility(View.VISIBLE);
+                setUpRecyclerView(myRef);
             }
         });
 
@@ -87,10 +95,17 @@ public class FollUpOrder extends AppCompatActivity implements AdapterFollUpItem.
             @Override
             public void onClick(View v) {
                 completeOrder.setTextColor(getResources().getColor(R.color.white));
-                startActivity(new Intent(getApplicationContext(), FollUpOrderComplete.class));
-                finish();
+                allOrder.setTextColor(getResources().getColor(R.color.cs_temp));
+
+                myRef = "Completed";
+                loadItem.setVisibility(View.VISIBLE);
+                setUpRecyclerView(myRef);
             }
         });
+
+        loadItem = findViewById(R.id.follup_order_prog);
+        follUpRV = findViewById(R.id.follup_order_rv);
+        setUpRecyclerView(myRef);
 
         TextInputEditText searchItem = findViewById(R.id.search_order_item);
         searchItem.addTextChangedListener(new TextWatcher() {
@@ -107,10 +122,6 @@ public class FollUpOrder extends AppCompatActivity implements AdapterFollUpItem.
             public void afterTextChanged(Editable s) {
             }
         });
-
-        loadItem = findViewById(R.id.follup_order_prog);
-        follUpRV = findViewById(R.id.follup_order_rv);
-        setUpRecyclerView();
     }
 
     @Override
@@ -120,11 +131,11 @@ public class FollUpOrder extends AppCompatActivity implements AdapterFollUpItem.
         finish();
     }
 
-    private void setUpRecyclerView() {
+    private void setUpRecyclerView(String ref) {
         follUpRV.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         follUpList = new ArrayList<>();
 
-        Order.child(myKey).child("all").addValueEventListener(new ValueEventListener() {
+        Order.child(myKey).child(ref).addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -170,6 +181,8 @@ public class FollUpOrder extends AppCompatActivity implements AdapterFollUpItem.
         RelativeLayout dialogBG = resultDialog.findViewById(R.id.dialog_follup_item_bg);
         dialogBG.setAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_scale_animation));
 
+        ImageView resultEdit = resultDialog.findViewById(R.id.dialog_follup_item_edit);
+        ImageView resultsDelete = resultDialog.findViewById(R.id.dialog_follup_item_delete);
         TextView resultMYIR = resultDialog.findViewById(R.id.dialog_follup_item_myirDB);
         TextView resultSalesID = resultDialog.findViewById(R.id.dialog_follup_item_salesID_DB);
         TextView resultTime = resultDialog.findViewById(R.id.dialog_follup_item_time);
@@ -178,7 +191,7 @@ public class FollUpOrder extends AppCompatActivity implements AdapterFollUpItem.
         TextView resultCopy = resultDialog.findViewById(R.id.dialog_follup_item_yes_cs);
         TextView resultClose = resultDialog.findViewById(R.id.dialog_follup_item_no);
 
-        Query checkFollowUp = Order.child(myKey).child("all").orderByChild("title").equalTo(dbPosition);
+        Query checkFollowUp = Order.child(myKey).child(myRef).orderByChild("title").equalTo(dbPosition);
         checkFollowUp.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -205,6 +218,27 @@ public class FollUpOrder extends AppCompatActivity implements AdapterFollUpItem.
             }
         });
 
+        if (myRef.matches("Completed")) {
+            resultEdit.setVisibility(View.GONE);
+        }
+        resultEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent order = new Intent(getApplicationContext(), EditOrder.class);
+                order.putExtra("myir", dbPosition);
+                startActivity(order);
+                finish();
+            }
+        });
+
+        resultsDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteOrder(dbPosition);
+                resultDialog.dismiss();
+            }
+        });
+
         resultCopy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -215,6 +249,7 @@ public class FollUpOrder extends AppCompatActivity implements AdapterFollUpItem.
                     return;
                 clipboard.setPrimaryClip(clip);
                 Toast.makeText(getApplicationContext(), getString(R.string.sc_copied), Toast.LENGTH_SHORT).show();
+                resultDialog.dismiss();
             }
         });
 
@@ -222,26 +257,20 @@ public class FollUpOrder extends AppCompatActivity implements AdapterFollUpItem.
         resultDialog.show();
     }
 
-    @Override
-    public void editItem(int position) {
-        dbPosition = follUpList.get(position).getTitle();
-        Intent order = new Intent(getApplicationContext(), EditOrder.class);
-        order.putExtra("myir", dbPosition);
-        startActivity(order);
-        finish();
-    }
-
-    @Override
-    public void deleteItem(int position) {
-        dbPosition = follUpList.get(position).getTitle();
+    private void deleteOrder(String position) {
         AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setIcon(R.drawable.ic_baseline_delete_outline_24)
                 .setTitle(R.string.delete_order_item)
                 .setMessage(R.string.delete_order_item_alert)
                 .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
-                    Order.child(myKey).child("all").child(dbPosition).getRef().removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    Order.child(myKey).child(myRef).child(position).getRef().removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
+                            if (myRef.matches("Completed")) {
+                                Order.child("MYIR").child("Completed").child(position).getRef().removeValue();
+                            } else {
+                                getOrderMYIR(position);
+                            }
                             Toast.makeText(getApplicationContext(), R.string.delete_order_success, Toast.LENGTH_SHORT).show();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -254,5 +283,26 @@ public class FollUpOrder extends AppCompatActivity implements AdapterFollUpItem.
                 })
                 .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {
                 }).show();
+    }
+
+    private void getOrderMYIR(String title) {
+        Query checkFollowUp = Order.child("MYIR").child("Completed").orderByChild("title").equalTo(title);
+        checkFollowUp.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    String timeMYIR = snapshot.child(title).child("time").getValue().toString();
+                    String userMYIR = snapshot.child(title).child("user").getValue().toString();
+                    MYIRHelper moveMYIR = new MYIRHelper(title, timeMYIR, userMYIR);
+                    Order.child("MYIR").child("all").child(title).setValue(moveMYIR);
+                    snapshot.child(title).getRef().removeValue();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
