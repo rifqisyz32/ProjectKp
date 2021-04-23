@@ -41,11 +41,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
 public class InputMYIR extends AppCompatActivity implements AdapterMYIRItem.OnItemClickListener {
@@ -214,10 +214,10 @@ public class InputMYIR extends AppCompatActivity implements AdapterMYIRItem.OnIt
 
     private void editMYIR(String myTitle, String position) {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        Date currentTime = Calendar.getInstance().getTime();
-
         String myUser = currentUser.getDisplayName();
-        String myTime = currentTime.toString();
+        Calendar currentTime = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("HH:mm a");
+        String myTime = df.format(currentTime.getTime());
 
         Query checkMYIR = Order.child(myKey).child("all").orderByChild("title").equalTo(myTitle);
         checkMYIR.addListenerForSingleValueEvent(new ValueEventListener() {

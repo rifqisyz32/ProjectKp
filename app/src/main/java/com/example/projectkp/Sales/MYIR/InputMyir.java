@@ -38,11 +38,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
 public class InputMYIR extends AppCompatActivity implements AdapterMYIRItem.OnItemClickListener {
@@ -50,12 +50,12 @@ public class InputMYIR extends AppCompatActivity implements AdapterMYIRItem.OnIt
     private final DatabaseReference Order = FirebaseDatabase.getInstance().getReference("Order");
     private final FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
     private final String myUser = currentUser.getDisplayName();
-    private com.example.projectkp.Sales.MYIR.AdapterMYIRItem myirAdapter;
+    private final String myKey = "MYIR";
+    private AdapterMYIRItem myirAdapter;
     private RecyclerView myirRV;
     private List<MYIRHelper> myirList;
     private ProgressBar loadItem;
     private String dbPosition;
-    private final String myKey = "MYIR";
     private Dialog addDialog;
     private TextInputLayout addInput;
     private TextView addCancel, addSubmit;
@@ -113,7 +113,7 @@ public class InputMYIR extends AppCompatActivity implements AdapterMYIRItem.OnIt
                     myirList.add(myirHelper);
                 }
 
-                myirAdapter = new com.example.projectkp.Sales.MYIR.AdapterMYIRItem(getApplicationContext(), myirList);
+                myirAdapter = new AdapterMYIRItem(getApplicationContext(), myirList);
                 myirRV.setAdapter(myirAdapter);
                 myirAdapter.setOnItemClickListener(InputMYIR.this);
                 sortArrayList();
@@ -176,8 +176,9 @@ public class InputMYIR extends AppCompatActivity implements AdapterMYIRItem.OnIt
     }
 
     private void saveMYIR(String myTitle) {
-        Date currentTime = Calendar.getInstance().getTime();
-        String myTime = currentTime.toString();
+        Calendar currentTime = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("HH:mm a");
+        String myTime = df.format(currentTime.getTime());
 
         Query checkMYIR = Order.child(myKey).child("all").orderByChild("title").equalTo(myTitle);
         checkMYIR.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -253,8 +254,9 @@ public class InputMYIR extends AppCompatActivity implements AdapterMYIRItem.OnIt
     }
 
     private void editMYIR(String myTitle, String position) {
-        Date currentTime = Calendar.getInstance().getTime();
-        String myTime = currentTime.toString();
+        Calendar currentTime = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("HH:mm a");
+        String myTime = df.format(currentTime.getTime());
 
         Query checkMYIR = Order.child(myKey).child("all").orderByChild("title").equalTo(myTitle);
         checkMYIR.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -281,8 +283,8 @@ public class InputMYIR extends AppCompatActivity implements AdapterMYIRItem.OnIt
     @Override
     public void deleteItem(int position) {
         dbPosition = myirList.get(position).getTitle();
-        Query checkMYIR = Order.child(myKey).child("all").orderByChild("title").equalTo(dbPosition);
-        checkMYIR.addListenerForSingleValueEvent(new ValueEventListener() {
+        Query checkUser = Order.child(myKey).child("all").orderByChild("title").equalTo(dbPosition);
+        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {

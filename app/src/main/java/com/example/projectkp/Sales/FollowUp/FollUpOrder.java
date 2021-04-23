@@ -12,13 +12,13 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.animation.AnimationUtils;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatRadioButton;
 import androidx.appcompat.widget.Toolbar;
@@ -29,7 +29,11 @@ import com.example.projectkp.CS.FollowUp.AdapterFollUpItem;
 import com.example.projectkp.Helper.FollUpHelper;
 import com.example.projectkp.R;
 import com.example.projectkp.Sales.Dashboard;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,11 +41,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
 public class FollUpOrder extends AppCompatActivity implements com.example.projectkp.CS.FollowUp.AdapterFollUpItem.OnItemClickListener {
@@ -175,9 +179,10 @@ public class FollUpOrder extends AppCompatActivity implements com.example.projec
         resultDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         RelativeLayout dialogBG = resultDialog.findViewById(R.id.dialog_follup_item_bg);
-        LinearLayout edLayout = resultDialog.findViewById(R.id.dialog_follup_item_ed_layout);
         TextView resultTitleCS = resultDialog.findViewById(R.id.dialog_follup_item_title);
         TextView resultTitle = resultDialog.findViewById(R.id.dialog_follup_item_title_sales);
+        TextView resultEdit = resultDialog.findViewById(R.id.dialog_follup_item_edit);
+        TextView resultDelete = resultDialog.findViewById(R.id.dialog_follup_item_delete);
         TextView resultCopyCS = resultDialog.findViewById(R.id.dialog_follup_item_yes_cs);
         TextView resultMYIR = resultDialog.findViewById(R.id.dialog_follup_item_myirDB);
         TextView resultSalesID = resultDialog.findViewById(R.id.dialog_follup_item_salesID_DB);
@@ -190,8 +195,11 @@ public class FollUpOrder extends AppCompatActivity implements com.example.projec
         dialogBG.setAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_scale_animation));
         resultTitleCS.setVisibility(View.GONE);
         resultTitle.setVisibility(View.VISIBLE);
-        edLayout.setVisibility(View.GONE);
+        resultEdit.setVisibility(View.GONE);
         resultCopyCS.setVisibility(View.GONE);
+        if (myRef.matches("all")) {
+            resultDelete.setVisibility(View.GONE);
+        }
 
         Query checkFollowUp = Order.child(myKey).child(myRef).orderByChild("title").equalTo(dbPosition);
         checkFollowUp.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -238,8 +246,9 @@ public class FollUpOrder extends AppCompatActivity implements com.example.projec
                         if (!snapshot.exists()) {
                             Toast.makeText(getApplicationContext(), R.string.order_not_found, Toast.LENGTH_SHORT).show();
                         } else {
-                            Date currentTime = Calendar.getInstance().getTime();
-                            String myTime = currentTime.toString();
+                            Calendar currentTime = Calendar.getInstance();
+                            SimpleDateFormat df = new SimpleDateFormat("HH:mm a");
+                            String myTime = df.format(currentTime.getTime());
                             FollUpHelper moveData = new FollUpHelper(dbMYIR, myTime, dbSalesID, dbStatus, dbResult);
                             Order.child(myKey).child("Completed").child(dbPosition).setValue(moveData);
                             snapshot.child(dbPosition).getRef().removeValue();
@@ -255,8 +264,66 @@ public class FollUpOrder extends AppCompatActivity implements com.example.projec
             resultDialog.dismiss();
         });
 
+        resultDelete.setTextColor(getResources().getColor(R.color.sales_temp));
+        resultDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Query checkUser = Order.child("MYIR").child("Completed").orderByChild("title").equalTo(dbPosition);
+                checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            String deleteUserDB = snapshot.child(dbPosition).child("user").getValue(String.class);
+                            deleteOrder(dbPosition, deleteUserDB);
+                        } else {
+                            Toast.makeText(getApplicationContext(), R.string.myir_not_found, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+                resultDialog.dismiss();
+            }
+        });
+
         resultClose.setTextColor(this.getResources().getColor(R.color.sales_temp));
         resultClose.setOnClickListener(v -> resultDialog.dismiss());
         resultDialog.show();
     }
+
+    private void deleteOrder(String position, String user) {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String myUser = currentUser.getDisplayName();
+        if (myUser.equals(user)) {
+            AlertDialog alertDialog = new AlertDialog.Builder(this)
+                    .setIcon(R.drawable.ic_baseline_delete_outline_24)
+                    .setTitle(R.string.delete_order_item)
+                    .setMessage(R.string.delete_order_item_alert)
+                    .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
+                        Order.child(myKey).child(myRef).child(position).getRef().removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                if (myRef.matches("Completed")) {
+                                    Order.child("MYIR").child("Completed").child(position).getRef().removeValue();
+                                }
+                                Toast.makeText(getApplicationContext(), R.string.delete_order_success, Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                    })
+                    .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {
+                    }).show();
+        } else {
+            Toast.makeText(getApplicationContext(), R.string.cant_delete_item, Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }

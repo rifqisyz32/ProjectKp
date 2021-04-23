@@ -24,8 +24,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 
 public class EditOrder extends AppCompatActivity {
@@ -35,7 +35,7 @@ public class EditOrder extends AppCompatActivity {
     private ProgressBar editProgress;
     private TextInputLayout editSalesId, editStatus, editResult;
     private TextView editTitle;
-    private String myTitle, myTime, myStatus, mySalesID, myResult;
+    private String myTitle, myStatus, mySalesID, myResult;
     private final String myKey = "Follow Up";
     private Button save, cancel;
 
@@ -131,8 +131,9 @@ public class EditOrder extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                Date currentTime = Calendar.getInstance().getTime();
-                myTime = currentTime.toString();
+                Calendar currentTime = Calendar.getInstance();
+                SimpleDateFormat df = new SimpleDateFormat("HH:mm a");
+                String myTime = df.format(currentTime.getTime());
                 FollUpHelper storeData = new FollUpHelper(myTitle, myTime, mySalesID, myStatus, myResult);
                 Order.child(myKey).child("all").child(myTitle).setValue(storeData);
 

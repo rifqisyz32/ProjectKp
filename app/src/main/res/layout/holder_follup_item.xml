@@ -93,10 +93,17 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/shape_white"
+                    android:backgroundTint="#30FFFFFF"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
                     android:fontFamily="@font/poppins_light"
                     android:text="@string/not_found"
-                    android:textColor="#fff"
-                    android:textSize="12sp" />
+                    android:textColor="#FFF"
+                    android:textSize="10sp" />
 
             </RelativeLayout>
 

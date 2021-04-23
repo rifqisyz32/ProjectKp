@@ -26,8 +26,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 
 public class AddOrder extends AppCompatActivity {
@@ -111,8 +111,9 @@ public class AddOrder extends AppCompatActivity {
                     addProgress.setVisibility(View.GONE);
                     save.setVisibility(View.VISIBLE);
                 } else {
-                    Date currentTime = Calendar.getInstance().getTime();
-                    String myTime = currentTime.toString();
+                    Calendar currentTime = Calendar.getInstance();
+                    SimpleDateFormat df = new SimpleDateFormat("HH:mm a");
+                    String myTime = df.format(currentTime.getTime());
                     FollUpHelper storeData = new FollUpHelper(myTitle, myTime, mySalesID, myStatus, myResult);
                     Order.child(myKey).child("all").child(myTitle).setValue(storeData);
                     moveMYIR(myTitle);
@@ -139,7 +140,7 @@ public class AddOrder extends AppCompatActivity {
                 if (snapshot.exists()) {
                     String timeMYIR = snapshot.child(title).child("time").getValue().toString();
                     String userMYIR = snapshot.child(title).child("user").getValue().toString();
-                    MYIRHelper moveMYIR = new MYIRHelper(title, timeMYIR, userMYIR);
+                    MYIRHelper moveMYIR = new MYIRHelper(title, userMYIR, timeMYIR);
                     Order.child("MYIR").child("Completed").child(title).setValue(moveMYIR);
                     snapshot.child(title).getRef().removeValue();
                 }

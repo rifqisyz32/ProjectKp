@@ -106,21 +106,6 @@ public class MiniPack extends AppCompatActivity implements AdapterProductItem.On
         finish();
     }
 
-    /*
-    private void setUpRecyclerView() {
-        FirebaseRecyclerOptions<ProductHelper> options = new FirebaseRecyclerOptions.Builder<ProductHelper>()
-                .setQuery(Product.child(myKey), ProductHelper.class)
-                .build();
-
-        productAdapter = new MiniPackTestAdapter(options);
-        productRV.setLayoutManager(new LinearLayoutManager(this));
-        productRV.setAdapter(productAdapter);
-        productAdapter.setOnItemClickListener(MiniPack.this);
-        productAdapter.changeDeviceText(getString(R.string.channelTV));
-        productAdapter.changePriceText(getString(R.string.period));
-    }
-    */
-
     private void testUpRecyclerView() {
 
         productRV.setLayoutManager(new LinearLayoutManager(getApplicationContext()));

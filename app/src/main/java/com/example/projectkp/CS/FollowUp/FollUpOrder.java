@@ -14,7 +14,6 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -181,8 +180,8 @@ public class FollUpOrder extends AppCompatActivity implements AdapterFollUpItem.
         RelativeLayout dialogBG = resultDialog.findViewById(R.id.dialog_follup_item_bg);
         dialogBG.setAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_scale_animation));
 
-        ImageView resultEdit = resultDialog.findViewById(R.id.dialog_follup_item_edit);
-        ImageView resultsDelete = resultDialog.findViewById(R.id.dialog_follup_item_delete);
+        TextView resultEdit = resultDialog.findViewById(R.id.dialog_follup_item_edit);
+        TextView resultsDelete = resultDialog.findViewById(R.id.dialog_follup_item_delete);
         TextView resultMYIR = resultDialog.findViewById(R.id.dialog_follup_item_myirDB);
         TextView resultSalesID = resultDialog.findViewById(R.id.dialog_follup_item_salesID_DB);
         TextView resultTime = resultDialog.findViewById(R.id.dialog_follup_item_time);
