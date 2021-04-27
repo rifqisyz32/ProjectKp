@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Project KP</string>
-    <string name="main_name">Temp App</string>
-    <string name="second_name">Aplikasi Project KP</string>
+    <string name="app_name">myOrder Helper</string>
+    <string name="main_name">myOrder Helper</string>
+    <string name="second_name">Rekam Order dan Daftar Produk Telkom</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="phone">Phone Number</string>
@@ -155,7 +155,7 @@
     <string name="result">Result</string>
     <string name="statusTV">Status:</string>
     <string name="order_detail">Order Detail</string>
-    <string name="sales_idTV">Sales Code:</string>
+    <string name="cs_idTV">CS Code:</string>
     <string name="copy">Copy</string>
     <string name="close">Close</string>
     <string name="order_not_found">Order Not Found</string>

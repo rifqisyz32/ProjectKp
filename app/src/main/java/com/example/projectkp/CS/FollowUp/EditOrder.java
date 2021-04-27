@@ -33,7 +33,7 @@ public class EditOrder extends AppCompatActivity {
     private final DatabaseReference Order = FirebaseDatabase.getInstance().getReference("Order");
     private Toolbar toolbar;
     private ProgressBar editProgress;
-    private TextInputLayout editSalesId, editStatus, editResult;
+    private TextInputLayout editcsID, editStatus, editResult;
     private TextView editTitle;
     private String myTitle, myStatus, mySalesID, myResult;
     private final String myKey = "Follow Up";
@@ -80,7 +80,7 @@ public class EditOrder extends AppCompatActivity {
         editProgress = findViewById(R.id.add_follup_prog);
         editTitle = findViewById(R.id.add_follup_title);
         editStatus = findViewById(R.id.add_follup_status);
-        editSalesId = findViewById(R.id.add_follup_sales_id);
+        editcsID = findViewById(R.id.add_follup_sales_id);
         editResult = findViewById(R.id.add_follup_result);
         save = findViewById(R.id.add_follup_button);
         cancel = findViewById(R.id.add_follup_cancel);
@@ -99,7 +99,7 @@ public class EditOrder extends AppCompatActivity {
                     myResult = snapshot.child(myTitle).child("result").getValue().toString();
 
                     editTitle.setText(myTitle);
-                    editSalesId.getEditText().setText(mySalesID);
+                    editcsID.getEditText().setText(mySalesID);
                     editStatus.getEditText().setText(myStatus);
                     editResult.getEditText().setText(myResult);
                 } else {
@@ -124,7 +124,7 @@ public class EditOrder extends AppCompatActivity {
 
         myStatus = editStatus.getEditText().getText().toString().trim();
         myResult = editResult.getEditText().getText().toString().trim();
-        mySalesID = editSalesId.getEditText().getText().toString().trim();
+        mySalesID = editcsID.getEditText().getText().toString().trim();
 
         Query checkFollowUp = Order.child(myKey).child("all").orderByChild("title").equalTo(myTitle);
         checkFollowUp.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -132,7 +132,7 @@ public class EditOrder extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 Calendar currentTime = Calendar.getInstance();
-                SimpleDateFormat df = new SimpleDateFormat("HH:mm a");
+                SimpleDateFormat df = new SimpleDateFormat("HH:mm");
                 String myTime = df.format(currentTime.getTime());
                 FollUpHelper storeData = new FollUpHelper(myTitle, myTime, mySalesID, myStatus, myResult);
                 Order.child(myKey).child("all").child(myTitle).setValue(storeData);
@@ -152,7 +152,7 @@ public class EditOrder extends AppCompatActivity {
     }
 
     private Boolean validateStatus() {
-        String val = editStatus.getEditText().getText().toString();
+        String val = editStatus.getEditText().getText().toString().trim();
 
         if (val.isEmpty()) {
             editStatus.setError(getString(R.string.cant_empty));
@@ -165,7 +165,7 @@ public class EditOrder extends AppCompatActivity {
     }
 
     private Boolean validateResult() {
-        String val = editResult.getEditText().getText().toString();
+        String val = editResult.getEditText().getText().toString().trim();
 
         if (val.isEmpty()) {
             editResult.setError(getString(R.string.cant_empty));
@@ -178,14 +178,14 @@ public class EditOrder extends AppCompatActivity {
     }
 
     private Boolean validateSalesID() {
-        String val = editSalesId.getEditText().getText().toString();
+        String val = editcsID.getEditText().getText().toString().trim();
 
         if (val.isEmpty()) {
-            editSalesId.setError(getString(R.string.cant_empty));
+            editcsID.setError(getString(R.string.cant_empty));
             return false;
         } else {
-            editSalesId.setError(null);
-            editSalesId.setErrorEnabled(false);
+            editcsID.setError(null);
+            editcsID.setErrorEnabled(false);
             return true;
         }
     }

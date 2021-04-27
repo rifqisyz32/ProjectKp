@@ -67,6 +67,7 @@ public class InputMYIR extends AppCompatActivity implements AdapterMYIRItem.OnIt
 
         Toolbar toolbar = findViewById(R.id.input_myir_new_toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitle(R.string.input_order);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         TextInputEditText searchItem = findViewById(R.id.search_myir_item);
@@ -177,7 +178,7 @@ public class InputMYIR extends AppCompatActivity implements AdapterMYIRItem.OnIt
 
     private void saveMYIR(String myTitle) {
         Calendar currentTime = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("HH:mm a");
+        SimpleDateFormat df = new SimpleDateFormat("HH:mm");
         String myTime = df.format(currentTime.getTime());
 
         Query checkMYIR = Order.child(myKey).child("all").orderByChild("title").equalTo(myTitle);
@@ -255,7 +256,7 @@ public class InputMYIR extends AppCompatActivity implements AdapterMYIRItem.OnIt
 
     private void editMYIR(String myTitle, String position) {
         Calendar currentTime = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("HH:mm a");
+        SimpleDateFormat df = new SimpleDateFormat("HH:mm");
         String myTime = df.format(currentTime.getTime());
 
         Query checkMYIR = Order.child(myKey).child("all").orderByChild("title").equalTo(myTitle);

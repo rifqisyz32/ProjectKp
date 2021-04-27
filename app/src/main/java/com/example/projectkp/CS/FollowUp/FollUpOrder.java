@@ -55,7 +55,7 @@ public class FollUpOrder extends AppCompatActivity implements AdapterFollUpItem.
     private RecyclerView follUpRV;
     private List<FollUpHelper> follUpList;
     private ProgressBar loadItem;
-    private String dbPosition, dbMYIR, dbStatus, dbSalesID, dbTime, dbResult;
+    private String dbPosition, dbMYIR, dbStatus, dbcsID, dbTime, dbResult;
     private Dialog resultDialog;
     private AppCompatRadioButton allOrder, completeOrder;
 
@@ -71,7 +71,7 @@ public class FollUpOrder extends AppCompatActivity implements AdapterFollUpItem.
 
         Toolbar toolbar = findViewById(R.id.follup_order_toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle(R.string.follow_up);
+        toolbar.setTitle(R.string.track_order);
         toolbar.setNavigationOnClickListener(v -> {
             onBackPressed();
         });
@@ -183,7 +183,7 @@ public class FollUpOrder extends AppCompatActivity implements AdapterFollUpItem.
         TextView resultEdit = resultDialog.findViewById(R.id.dialog_follup_item_edit);
         TextView resultsDelete = resultDialog.findViewById(R.id.dialog_follup_item_delete);
         TextView resultMYIR = resultDialog.findViewById(R.id.dialog_follup_item_myirDB);
-        TextView resultSalesID = resultDialog.findViewById(R.id.dialog_follup_item_salesID_DB);
+        TextView resultcsID = resultDialog.findViewById(R.id.dialog_follup_item_csID_DB);
         TextView resultTime = resultDialog.findViewById(R.id.dialog_follup_item_time);
         TextView resultStatus = resultDialog.findViewById(R.id.dialog_follup_item_statusDB);
         TextView resultValue = resultDialog.findViewById(R.id.dialog_follup_item_sc_resultDB);
@@ -198,13 +198,13 @@ public class FollUpOrder extends AppCompatActivity implements AdapterFollUpItem.
                     Toast.makeText(getApplicationContext(), R.string.order_not_found, Toast.LENGTH_SHORT).show();
                 } else {
                     dbMYIR = snapshot.child(dbPosition).child("title").getValue().toString();
-                    dbSalesID = snapshot.child(dbPosition).child("salesID").getValue().toString();
+                    dbcsID = snapshot.child(dbPosition).child("salesID").getValue().toString();
                     dbStatus = snapshot.child(dbPosition).child("status").getValue().toString();
                     dbTime = snapshot.child(dbPosition).child("time").getValue().toString();
                     dbResult = snapshot.child(dbPosition).child("result").getValue().toString();
 
                     resultMYIR.setText(dbMYIR);
-                    resultSalesID.setText(dbSalesID);
+                    resultcsID.setText(dbcsID);
                     resultStatus.setText(dbStatus);
                     resultTime.setText(dbTime);
                     resultValue.setText(dbResult);
@@ -292,7 +292,7 @@ public class FollUpOrder extends AppCompatActivity implements AdapterFollUpItem.
                 if (snapshot.exists()) {
                     String timeMYIR = snapshot.child(title).child("time").getValue().toString();
                     String userMYIR = snapshot.child(title).child("user").getValue().toString();
-                    MYIRHelper moveMYIR = new MYIRHelper(title, timeMYIR, userMYIR);
+                    MYIRHelper moveMYIR = new MYIRHelper(title, userMYIR, timeMYIR);
                     Order.child("MYIR").child("all").child(title).setValue(moveMYIR);
                     snapshot.child(title).getRef().removeValue();
                 }

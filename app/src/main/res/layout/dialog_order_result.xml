@@ -89,23 +89,23 @@
                 android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/dialog_follup_item_salesID_TV"
+                android:id="@+id/dialog_follup_item_csID_TV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/dialog_follup_item_myirTV"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_light"
-                android:text="@string/sales_idTV"
+                android:text="@string/cs_idTV"
                 android:textColor="@color/colorSubtitle"
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/dialog_follup_item_salesID_DB"
+                android:id="@+id/dialog_follup_item_csID_DB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/dialog_follup_item_myirTV"
                 android:layout_marginTop="8dp"
-                android:layout_toEndOf="@id/dialog_follup_item_salesID_TV"
+                android:layout_toEndOf="@id/dialog_follup_item_csID_TV"
                 android:fontFamily="@font/poppins_light"
                 android:paddingStart="4dp"
                 android:text="@string/not_found"
@@ -128,7 +128,7 @@
                 android:id="@+id/dialog_follup_item_sc_result"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/dialog_follup_item_salesID_TV"
+                android:layout_below="@id/dialog_follup_item_csID_TV"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/poppins_light"
                 android:text="@string/sc_resultTV"

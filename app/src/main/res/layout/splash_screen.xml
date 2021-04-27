@@ -37,7 +37,7 @@
             android:text="@string/main_name"
             android:textAlignment="center"
             android:textColor="#fff"
-            android:textSize="48sp"
+            android:textSize="30sp"
             android:transitionName="main_title" />
 
         <TextView
@@ -50,7 +50,7 @@
             android:text="@string/second_name"
             android:textAlignment="center"
             android:textColor="#fff"
-            android:textSize="18sp"
+            android:textSize="12sp"
             android:transitionName="second_title" />
 
     </RelativeLayout>

@@ -35,7 +35,7 @@ public class AddOrder extends AppCompatActivity {
     private final DatabaseReference Order = FirebaseDatabase.getInstance().getReference("Order");
     private Toolbar toolbar;
     private ProgressBar addProgress;
-    private TextInputLayout addSalesId, addStatus, addResult;
+    private TextInputLayout addcsID, addStatus, addResult;
     private TextView addTitle;
     private String myTitle;
     private final String myKey = "Follow Up";
@@ -84,7 +84,7 @@ public class AddOrder extends AppCompatActivity {
         addProgress = findViewById(R.id.add_follup_prog);
         addTitle = findViewById(R.id.add_follup_title);
         addStatus = findViewById(R.id.add_follup_status);
-        addSalesId = findViewById(R.id.add_follup_sales_id);
+        addcsID = findViewById(R.id.add_follup_sales_id);
         addResult = findViewById(R.id.add_follup_result);
         save = findViewById(R.id.add_follup_button);
         cancel = findViewById(R.id.add_follup_cancel);
@@ -100,7 +100,7 @@ public class AddOrder extends AppCompatActivity {
 
         String myStatus = addStatus.getEditText().getText().toString().trim();
         String myResult = addResult.getEditText().getText().toString().trim();
-        String mySalesID = addSalesId.getEditText().getText().toString().trim();
+        String mySalesID = addcsID.getEditText().getText().toString().trim();
 
         Query checkFollowUp = Order.child(myKey).child("all").orderByChild("title").equalTo(myTitle);
         checkFollowUp.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -112,7 +112,7 @@ public class AddOrder extends AppCompatActivity {
                     save.setVisibility(View.VISIBLE);
                 } else {
                     Calendar currentTime = Calendar.getInstance();
-                    SimpleDateFormat df = new SimpleDateFormat("HH:mm a");
+                    SimpleDateFormat df = new SimpleDateFormat("HH:mm");
                     String myTime = df.format(currentTime.getTime());
                     FollUpHelper storeData = new FollUpHelper(myTitle, myTime, mySalesID, myStatus, myResult);
                     Order.child(myKey).child("all").child(myTitle).setValue(storeData);
@@ -154,7 +154,7 @@ public class AddOrder extends AppCompatActivity {
     }
 
     private Boolean validateStatus() {
-        String val = addStatus.getEditText().getText().toString();
+        String val = addStatus.getEditText().getText().toString().trim();
 
         if (val.isEmpty()) {
             addStatus.setError(getString(R.string.cant_empty));
@@ -167,7 +167,7 @@ public class AddOrder extends AppCompatActivity {
     }
 
     private Boolean validateResult() {
-        String val = addResult.getEditText().getText().toString();
+        String val = addResult.getEditText().getText().toString().trim();
 
         if (val.isEmpty()) {
             addResult.setError(getString(R.string.cant_empty));
@@ -180,14 +180,14 @@ public class AddOrder extends AppCompatActivity {
     }
 
     private Boolean validateSalesID() {
-        String val = addSalesId.getEditText().getText().toString();
+        String val = addcsID.getEditText().getText().toString().trim();
 
         if (val.isEmpty()) {
-            addSalesId.setError(getString(R.string.cant_empty));
+            addcsID.setError(getString(R.string.cant_empty));
             return false;
         } else {
-            addSalesId.setError(null);
-            addSalesId.setErrorEnabled(false);
+            addcsID.setError(null);
+            addcsID.setErrorEnabled(false);
             return true;
         }
     }

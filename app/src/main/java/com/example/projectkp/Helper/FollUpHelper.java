@@ -2,16 +2,16 @@ package com.example.projectkp.Helper;
 
 public class FollUpHelper {
 
-    private String title, time, salesID, status, result;
+    private String title, time, csID, status, result;
 
     public FollUpHelper() {
     }
 
-    public FollUpHelper(String title, String time, String salesID, String status, String result) {
+    public FollUpHelper(String title, String time, String csID, String status, String result) {
         this.title = title;
         this.time = time;
         this.status = status;
-        this.salesID = salesID;
+        this.csID = csID;
         this.result = result;
     }
 
@@ -32,11 +32,11 @@ public class FollUpHelper {
     }
 
     public String getSalesID() {
-        return salesID;
+        return csID;
     }
 
-    public void setSalesID(String salesID) {
-        this.salesID = salesID;
+    public void setSalesID(String csID) {
+        this.csID = csID;
     }
 
     public String getStatus() {

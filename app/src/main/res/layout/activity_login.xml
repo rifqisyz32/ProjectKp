@@ -30,11 +30,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/main_logo_log"
+                android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_bold"
                 android:includeFontPadding="false"
                 android:text="@string/main_name"
                 android:textColor="@color/colorPrimary"
-                android:textSize="30sp"
+                android:textSize="24sp"
                 android:transitionName="main_title" />
 
             <TextView
@@ -42,10 +43,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/main_title_log"
-                android:fontFamily="@font/poppins_medium"
+                android:fontFamily="@font/poppins_light"
                 android:text="@string/second_name"
                 android:textColor="@color/black"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:transitionName="second_title" />
 
         </RelativeLayout>
